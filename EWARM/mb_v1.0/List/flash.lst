@@ -1,0 +1,488 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  09:12:46 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\Src\flash.c     #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\Src\flash.c"   #
+#                    -D USE_FULL_LL_DRIVER -D USE_HAL_DRIVER -D STM32F103xB   #
+#                    -lC "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM\mb_v1.0/List\" -o                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    Obj\" --no_cse --no_unroll --no_inline --no_code_motion  #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files\IAR Systems\Embedded     #
+#                    Workbench 6.0\arm\INC\c\DLib_Config_Full.h" -I           #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\flash.lst                                            #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\flash.o                                               #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\Src\flash.c
+      1          #include "flash.h"
+
+  /**
+    ^
+"D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_adc.h",1  Warning[Pa050]: 
+          non-native end of line sequence detected (this diagnostic is only
+          issued once)
+      2          #include "hw_config.h"
+      3          #include "stm32f1xx_hal_flash_ex.h"
+      4          
+      5          
+      6          /*******************************************************************************
+      7          ***              Проверка на защиту от записи и ее отключение                ***   
+      8          ***                         0    ошибка                                      ***
+      9          ***                         1    нет защиты                                  ***
+     10          ***                         перезагрузка прибора - была защита               ***
+     11          *******************************************************************************/
+     12          /*uint32_t FLASH_DisableWriteProtectionPages(uint32_t UserMemoryMask)
+     13          {
+     14            uint32_t useroptionbyte = 0, WRPR = 0;
+     15            uint8_t userconfig;
+     16            HAL_StatusTypeDef status = HAL_BUSY;
+     17          
+     18             userconfig = OB_IWDG_SW | OB_STOP_NO_RST | OB_STDBY_NO_RST; 
+     19             
+     20             //читаем  Write Protection Option Byte
+     21             WRPR = FLASH->WRPR;
+     22          
+     23            // Test if user memory is write protected 
+     24            if ((WRPR & UserMemoryMask) != UserMemoryMask)
+     25            {
+     26              //читаем User Option Byte и сдвигаем для удобства
+     27              useroptionbyte = (FLASH->OBR >> 2);
+     28          
+     29              UserMemoryMask |= WRPR;
+     30          
+     31              if(HAL_FLASHEx_OBErase()!= HAL_OK)
+     32                                         return 0;
+     33          
+     34              if (UserMemoryMask != 0xFFFFFFFF)
+     35              {
+     36                status = FLASH_OB_EnableWRP((uint32_t)~UserMemoryMask);
+     37              }
+     38          
+     39              // Test if user Option Bytes are programmed 
+     40              if ((useroptionbyte & 0x07) != 0x07)
+     41              { 
+     42                // Restore user Option Bytes 
+     43                if ((useroptionbyte & 0x01) == 0x0)
+     44                {
+     45                  userconfig = OB_IWDG_HW;
+     46                }
+     47                if ((useroptionbyte & 0x02) == 0x0)
+     48                {
+     49                  userconfig = userconfig | OB_STOP_RST;
+     50                }
+     51                if ((useroptionbyte & 0x04) == 0x0)
+     52                {
+     53                  userconfig = userconfig | OB_STDBY_RST;
+     54                }
+     55                //сдвигаем согласно расположению в регистре
+     56                userconfig = (userconfig << 2);      
+     57                FLASH_OB_UserConfig(userconfig);
+     58              }
+     59          
+     60              if (status == HAL_OK)
+     61              {
+     62                // Generate System Reset to load the new option byte values 
+     63                NVIC_SystemReset();
+     64              }
+     65              else  return 0;
+     66            }
+     67            else  return 1;
+     68           return 0;
+     69          }
+     70          */
+     71          /*******************************************************************************
+     72          ***                         Custom YS                                        ***
+     73          ***           Чтение данных из флэш памяти по 4 байта                        ***                 
+     74          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     75          uint32_t FLASH_read(uint32_t address)
+     76          {
+     77            return (*(__IO uint32_t*) address);
+   \                     FLASH_read:
+   \   00000000   0x6800             LDR      R0,[R0, #+0]
+   \   00000002   0x4770             BX       LR               ;; return
+     78          }
+     79          
+     80          
+     81          /*******************************************************************************
+     82                                   
+     83          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     84          uint32_t GetMemoryMask(uint32_t FlashDestination)
+     85          {
+     86            uint32_t BlockNbr = 0;
+   \                     GetMemoryMask:
+   \   00000000   0x2100             MOVS     R1,#+0
+     87            /* Get the number of block (4 or 2 pages) from where the user program will be loaded */
+     88            BlockNbr = (FlashDestination - 0x08000000) >> 12;
+   \   00000002   0xF1B0 0x6000      SUBS     R0,R0,#+134217728
+   \   00000006   0x0B00             LSRS     R0,R0,#+12
+   \   00000008   0x0001             MOVS     R1,R0
+     89            /* Compute the mask to test if the Flash memory, where the user program will be
+     90            loaded, is write protected */
+     91            uint32_t UserMemoryMask = ((uint32_t)~((1 << BlockNbr) - 1));
+   \   0000000A   0x2001             MOVS     R0,#+1
+   \   0000000C   0x4088             LSLS     R0,R0,R1
+   \   0000000E   0x1E40             SUBS     R0,R0,#+1
+   \   00000010   0x43C0             MVNS     R0,R0
+     92            if (BlockNbr < 62)
+   \   00000012   0x293E             CMP      R1,#+62
+   \   00000014   0xD204             BCS.N    ??GetMemoryMask_0
+     93            {
+     94             UserMemoryMask = ((uint32_t)~((1 << BlockNbr) - 1));
+   \   00000016   0x2001             MOVS     R0,#+1
+   \   00000018   0x4088             LSLS     R0,R0,R1
+   \   0000001A   0x1E40             SUBS     R0,R0,#+1
+   \   0000001C   0x43C0             MVNS     R0,R0
+   \   0000001E   0xE001             B.N      ??GetMemoryMask_1
+     95            }
+     96            else
+     97            {
+     98             UserMemoryMask = ((uint32_t)0x80000000);
+   \                     ??GetMemoryMask_0:
+   \   00000020   0xF05F 0x4000      MOVS     R0,#-2147483648
+     99            }
+    100            return UserMemoryMask;
+   \                     ??GetMemoryMask_1:
+   \   00000024   0x4770             BX       LR               ;; return
+    101          }
+    102          
+    103          /*******************************************************************************
+    104                           считаем количество страниц Flash памяти для стирания
+    105          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    106          uint32_t FLASH_PagesMask(__IO uint32_t Size)
+    107          {
+   \                     FLASH_PagesMask:
+   \   00000000   0xB401             PUSH     {R0}
+    108            uint32_t pagenumber = 0x0;
+   \   00000002   0x2000             MOVS     R0,#+0
+    109            uint32_t size = Size;
+   \   00000004   0x9900             LDR      R1,[SP, #+0]
+    110          
+    111            if ((size % flPageSize) != 0)
+   \   00000006   0xF44F 0x6280      MOV      R2,#+1024
+   \   0000000A   0xFBB1 0xF3F2      UDIV     R3,R1,R2
+   \   0000000E   0xFB03 0x1312      MLS      R3,R3,R2,R1
+   \   00000012   0x2B00             CMP      R3,#+0
+   \   00000014   0xD002             BEQ.N    ??FLASH_PagesMask_0
+    112            {
+    113              pagenumber = (size / flPageSize) + 1;
+   \   00000016   0x0A88             LSRS     R0,R1,#+10
+   \   00000018   0x1C40             ADDS     R0,R0,#+1
+   \   0000001A   0xE000             B.N      ??FLASH_PagesMask_1
+    114            }
+    115            else
+    116            {
+    117              pagenumber = size / flPageSize;
+   \                     ??FLASH_PagesMask_0:
+   \   0000001C   0x0A88             LSRS     R0,R1,#+10
+    118            }
+    119            return pagenumber;
+   \                     ??FLASH_PagesMask_1:
+   \   0000001E   0xB001             ADD      SP,SP,#+4
+   \   00000020   0x4770             BX       LR               ;; return
+    120          }
+    121          
+    122          
+    123          /*******************************************************************************
+    124                          Удаляем нужное количество станиц Flash памяти
+    125          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    126          void Erase_Memory(uint32_t FlashDestination, uint32_t NbrOfPage)
+    127          {
+   \                     Erase_Memory:
+   \   00000000   0xB5F8             PUSH     {R3-R7,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+    128            uint32_t PageSize = flPageSize;
+   \   00000006   0xF44F 0x6680      MOV      R6,#+1024
+    129          
+    130            /* Erase the FLASH pages */
+    131            for (uint32_t EraseCounter = 0; (EraseCounter < NbrOfPage); EraseCounter++)
+   \   0000000A   0x2700             MOVS     R7,#+0
+   \   0000000C   0xE004             B.N      ??Erase_Memory_0
+    132             {
+    133               FLASH_PageErase(FlashDestination + (PageSize * EraseCounter));
+                      ^
+Warning[Pe223]: function "FLASH_PageErase" declared implicitly
+   \                     ??Erase_Memory_1:
+   \   0000000E   0xFB07 0x4006      MLA      R0,R7,R6,R4
+   \   00000012   0x.... 0x....      BL       FLASH_PageErase
+    134             }
+   \   00000016   0x1C7F             ADDS     R7,R7,#+1
+   \                     ??Erase_Memory_0:
+   \   00000018   0x42AF             CMP      R7,R5
+   \   0000001A   0xD3F8             BCC.N    ??Erase_Memory_1
+    135          }
+   \   0000001C   0xBDF1             POP      {R0,R4-R7,PC}    ;; return
+    136          
+    137          
+    138          /*******************************************************************************
+    139                                   пишем во Flash
+    140          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    141          uint32_t WriteFlash(void * buf, uint32_t length, uint32_t PageAddr)
+    142          {
+   \                     WriteFlash:
+   \   00000000   0xB5F0             PUSH     {R4-R7,LR}
+   \   00000002   0xB08D             SUB      SP,SP,#+52
+   \   00000004   0x0005             MOVS     R5,R0
+   \   00000006   0x000C             MOVS     R4,R1
+   \   00000008   0x0016             MOVS     R6,R2
+    143           uint32_t isOK  = 0;
+   \   0000000A   0x2700             MOVS     R7,#+0
+    144           uint32_t RamSource;
+    145           FLASH_OBProgramInitTypeDef flash_ob = {OPTIONBYTE_WRP,0,PageAddr,0,0,0,0,0};
+   \   0000000C   0xA805             ADD      R0,SP,#+20
+   \   0000000E   0x....             LDR.N    R1,??DataTable1
+   \   00000010   0x221C             MOVS     R2,#+28
+   \   00000012   0x.... 0x....      BL       __aeabi_memcpy4
+   \   00000016   0x9607             STR      R6,[SP, #+28]
+    146           FLASH_EraseInitTypeDef flash_er = {FLASH_TYPEERASE_PAGES,0,PageAddr,0};
+   \   00000018   0xA801             ADD      R0,SP,#+4
+   \   0000001A   0x2110             MOVS     R1,#+16
+   \   0000001C   0x.... 0x....      BL       __aeabi_memclr4
+   \   00000020   0x9603             STR      R6,[SP, #+12]
+    147           
+    148            HAL_FLASH_Unlock();
+   \   00000022   0x.... 0x....      BL       HAL_FLASH_Unlock
+    149            if(HAL_FLASHEx_OBProgram(&flash_ob) != HAL_OK) return FALSE;
+   \   00000026   0xA805             ADD      R0,SP,#+20
+   \   00000028   0x.... 0x....      BL       HAL_FLASHEx_OBProgram
+   \   0000002C   0x2800             CMP      R0,#+0
+   \   0000002E   0xD001             BEQ.N    ??WriteFlash_0
+   \   00000030   0x2000             MOVS     R0,#+0
+   \   00000032   0xE02A             B.N      ??WriteFlash_1
+    150                        
+    151            //определяем количество страниц памяти
+    152             flash_er.NbPages = FLASH_PagesMask(length);  
+   \                     ??WriteFlash_0:
+   \   00000034   0x0020             MOVS     R0,R4
+   \   00000036   0x.... 0x....      BL       FLASH_PagesMask
+   \   0000003A   0x9004             STR      R0,[SP, #+16]
+    153             //очищаем нужное кол-во страниц памяти
+    154             if(HAL_FLASHEx_Erase(&flash_er, &RamSource)!= HAL_OK) return FALSE;
+   \   0000003C   0xA900             ADD      R1,SP,#+0
+   \   0000003E   0xA801             ADD      R0,SP,#+4
+   \   00000040   0x.... 0x....      BL       HAL_FLASHEx_Erase
+   \   00000044   0x2800             CMP      R0,#+0
+   \   00000046   0xD001             BEQ.N    ??WriteFlash_2
+   \   00000048   0x2000             MOVS     R0,#+0
+   \   0000004A   0xE01E             B.N      ??WriteFlash_1
+    155             if(RamSource!=0xFFFFFFFFU) return FALSE;
+   \                     ??WriteFlash_2:
+   \   0000004C   0x9800             LDR      R0,[SP, #+0]
+   \   0000004E   0xF110 0x0F01      CMN      R0,#+1
+   \   00000052   0xD001             BEQ.N    ??WriteFlash_3
+   \   00000054   0x2000             MOVS     R0,#+0
+   \   00000056   0xE018             B.N      ??WriteFlash_1
+    156          
+    157             RamSource = (uint32_t)(buf);
+   \                     ??WriteFlash_3:
+   \   00000058   0x9500             STR      R5,[SP, #+0]
+    158                               
+    159             for (uint32_t j = 0;(j < length) && (PageAddr <  flLastPageAddress); j += 4)
+   \   0000005A   0x2500             MOVS     R5,#+0
+   \   0000005C   0xE004             B.N      ??WriteFlash_4
+    160             {
+    161              /* Program the data received into STM32F10x Flash */
+    162              isOK = HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, PageAddr, RamSource);
+    163              if(isOK != HAL_OK)
+    164                                    return 0;
+    165          /*    if (*(uint32_t*)PageAddr != *(uint32_t*)RamSource)
+    166               {
+    167                  // End session 
+    168                  isOK = FALSE;
+    169                  break;
+    170               }*/
+    171              PageAddr += 4;
+   \                     ??WriteFlash_5:
+   \   0000005E   0x1D36             ADDS     R6,R6,#+4
+    172              RamSource += 4;
+   \   00000060   0x9800             LDR      R0,[SP, #+0]
+   \   00000062   0x1D00             ADDS     R0,R0,#+4
+   \   00000064   0x9000             STR      R0,[SP, #+0]
+   \   00000066   0x1D2D             ADDS     R5,R5,#+4
+   \                     ??WriteFlash_4:
+   \   00000068   0x42A5             CMP      R5,R4
+   \   0000006A   0xD20D             BCS.N    ??WriteFlash_6
+   \   0000006C   0x....             LDR.N    R0,??DataTable1_1  ;; 0x8010000
+   \   0000006E   0x4286             CMP      R6,R0
+   \   00000070   0xD20A             BCS.N    ??WriteFlash_6
+   \   00000072   0x9A00             LDR      R2,[SP, #+0]
+   \   00000074   0x2300             MOVS     R3,#+0
+   \   00000076   0x0031             MOVS     R1,R6
+   \   00000078   0x2002             MOVS     R0,#+2
+   \   0000007A   0x.... 0x....      BL       HAL_FLASH_Program
+   \   0000007E   0x0007             MOVS     R7,R0
+   \   00000080   0x2F00             CMP      R7,#+0
+   \   00000082   0xD0EC             BEQ.N    ??WriteFlash_5
+   \   00000084   0x2000             MOVS     R0,#+0
+   \   00000086   0xE000             B.N      ??WriteFlash_1
+    173             }
+    174             return 1;
+   \                     ??WriteFlash_6:
+   \   00000088   0x2001             MOVS     R0,#+1
+   \                     ??WriteFlash_1:
+   \   0000008A   0xB00D             ADD      SP,SP,#+52
+   \   0000008C   0xBDF0             POP      {R4-R7,PC}       ;; return
+    175          }
+    176          
+    177          
+    178          /*******************************************************************************
+    179                                  читаем Flash память
+    180          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    181          uint32_t ReadFlash(void * buf, uint32_t length, uint32_t PageAddr)
+    182          {
+   \                     ReadFlash:
+   \   00000000   0xB5F8             PUSH     {R3-R7,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+   \   00000006   0x0016             MOVS     R6,R2
+    183           uint32_t * RamSource = (uint32_t *)buf;
+    184            
+    185             for(uint32_t j = 0; (j < length) && (PageAddr <  flLastPageAddress); j += 4)
+   \   00000008   0x2700             MOVS     R7,#+0
+   \   0000000A   0xE006             B.N      ??ReadFlash_0
+    186             {
+    187              *RamSource = FLASH_read(PageAddr);
+   \                     ??ReadFlash_1:
+   \   0000000C   0x0030             MOVS     R0,R6
+   \   0000000E   0x.... 0x....      BL       FLASH_read
+   \   00000012   0x6020             STR      R0,[R4, #+0]
+    188              PageAddr += 4;
+   \   00000014   0x1D36             ADDS     R6,R6,#+4
+    189              RamSource ++;
+   \   00000016   0x1D24             ADDS     R4,R4,#+4
+    190             }
+   \   00000018   0x1D3F             ADDS     R7,R7,#+4
+   \                     ??ReadFlash_0:
+   \   0000001A   0x42AF             CMP      R7,R5
+   \   0000001C   0xD202             BCS.N    ??ReadFlash_2
+   \   0000001E   0x....             LDR.N    R0,??DataTable1_1  ;; 0x8010000
+   \   00000020   0x4286             CMP      R6,R0
+   \   00000022   0xD3F3             BCC.N    ??ReadFlash_1
+    191             return 1;
+   \                     ??ReadFlash_2:
+   \   00000024   0x2001             MOVS     R0,#+1
+   \   00000026   0xBDF2             POP      {R1,R4-R7,PC}    ;; return
+    192          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1:
+   \   00000000   0x........         DC32     `?<Constant {1, 0, 0, 0, 0, 0, 0, 0}>`
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_1:
+   \   00000000   0x08010000         DC32     0x8010000
+
+   \                                 In section .rodata, align 4
+   \                     `?<Constant {1, 0, 0, 0, 0, 0, 0, 0}>`:
+   \   00000000   0x00000001         DC32 1, 0, 0, 0
+   \              0x00000000   
+   \              0x00000000   
+   \              0x00000000   
+   \   00000010   0x00 0x00          DC8 0, 0, 0, 0
+   \              0x00 0x00    
+   \   00000014   0x00000000         DC32 0
+   \   00000018   0x00 0x00          DC8 0, 0, 0, 0
+   \              0x00 0x00    
+
+   \                                 In section .rodata, align 4
+   \   00000000   0x00000000         DC32 0, 0, 0, 0
+   \              0x00000000   
+   \              0x00000000   
+   \              0x00000000   
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       24  Erase_Memory
+             24 -> FLASH_PageErase
+        4  FLASH_PagesMask
+        0  FLASH_read
+        0  GetMemoryMask
+       24  ReadFlash
+             24 -> FLASH_read
+       72  WriteFlash
+             72 -> FLASH_PagesMask
+             72 -> HAL_FLASHEx_Erase
+             72 -> HAL_FLASHEx_OBProgram
+             72 -> HAL_FLASH_Program
+             72 -> HAL_FLASH_Unlock
+             72 -> __aeabi_memclr4
+             72 -> __aeabi_memcpy4
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      16  ?<Constant {0, 0, 0, 0}>
+      28  ?<Constant {1, 0, 0, 0, 0, 0, 0, 0}>
+       4  ??DataTable1
+       4  ??DataTable1_1
+      30  Erase_Memory
+      34  FLASH_PagesMask
+       4  FLASH_read
+      38  GetMemoryMask
+      40  ReadFlash
+     142  WriteFlash
+
+ 
+  44 bytes in section .rodata
+ 296 bytes in section .text
+ 
+ 296 bytes of CODE  memory
+  44 bytes of CONST memory
+
+Errors: none
+Warnings: 2

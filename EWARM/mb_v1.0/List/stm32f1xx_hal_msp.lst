@@ -1,0 +1,257 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  06:16:05 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\Src\stm32f1xx_h #
+#                    al_msp.c                                                 #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\Src\stm32f1xx_ #
+#                    hal_msp.c" -D USE_FULL_LL_DRIVER -D USE_HAL_DRIVER -D    #
+#                    STM32F103xB -lC "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM\mb_v1.0/List\" -o                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    Obj\" --no_cse --no_unroll --no_inline --no_code_motion  #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files\IAR Systems\Embedded     #
+#                    Workbench 6.0\arm\INC\c\DLib_Config_Full.h" -I           #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\stm32f1xx_hal_msp.lst                                #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\stm32f1xx_hal_msp.o                                   #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\Src\stm32f1xx_hal_msp.c
+      1          /**
+      2            ******************************************************************************
+      3            * File Name          : stm32f1xx_hal_msp.c
+      4            * Description        : This file provides code for the MSP Initialization 
+      5            *                      and de-Initialization codes.
+      6            ******************************************************************************
+      7            * This notice applies to any and all portions of this file
+      8            * that are not between comment pairs USER CODE BEGIN and
+      9            * USER CODE END. Other portions of this file, whether 
+     10            * inserted by the user or by software development tools
+     11            * are owned by their respective copyright owners.
+     12            *
+     13            * Copyright (c) 2018 STMicroelectronics International N.V. 
+     14            * All rights reserved.
+     15            *
+     16            * Redistribution and use in source and binary forms, with or without 
+     17            * modification, are permitted, provided that the following conditions are met:
+     18            *
+     19            * 1. Redistribution of source code must retain the above copyright notice, 
+     20            *    this list of conditions and the following disclaimer.
+     21            * 2. Redistributions in binary form must reproduce the above copyright notice,
+     22            *    this list of conditions and the following disclaimer in the documentation
+     23            *    and/or other materials provided with the distribution.
+     24            * 3. Neither the name of STMicroelectronics nor the names of other 
+     25            *    contributors to this software may be used to endorse or promote products 
+     26            *    derived from this software without specific written permission.
+     27            * 4. This software, including modifications and/or derivative works of this 
+     28            *    software, must execute solely and exclusively on microcontroller or
+     29            *    microprocessor devices manufactured by or for STMicroelectronics.
+     30            * 5. Redistribution and use of this software other than as permitted under 
+     31            *    this license is void and will automatically terminate your rights under 
+     32            *    this license. 
+     33            *
+     34            * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+     35            * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+     36            * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+     37            * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+     38            * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+     39            * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+     40            * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+     41            * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+     42            * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+     43            * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+     44            * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+     45            * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     46            *
+     47            ******************************************************************************
+     48            */
+     49          /* Includes ------------------------------------------------------------------*/
+     50          #include "stm32f1xx_hal.h"
+
+  /**
+    ^
+"D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h",1  Warning[Pa050]: 
+          non-native end of line sequence detected (this diagnostic is only
+          issued once)
+     51          
+     52          extern void _Error_Handler(char *, int);
+     53          /* USER CODE BEGIN 0 */
+     54          
+     55          /* USER CODE END 0 */
+     56          /**
+     57            * Initializes the Global MSP.
+     58            */
+
+   \                                 In section .text, align 4, keep-with-next
+     59          void HAL_MspInit(void)
+     60          {
+   \                     HAL_MspInit:
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+     61            /* USER CODE BEGIN MspInit 0 */
+     62          
+     63            /* USER CODE END MspInit 0 */
+     64          
+     65            __HAL_RCC_AFIO_CLK_ENABLE();
+   \   00000002   0x4826             LDR.N    R0,??HAL_MspInit_0  ;; 0x40021018
+   \   00000004   0x6800             LDR      R0,[R0, #+0]
+   \   00000006   0xF050 0x0001      ORRS     R0,R0,#0x1
+   \   0000000A   0x4924             LDR.N    R1,??HAL_MspInit_0  ;; 0x40021018
+   \   0000000C   0x6008             STR      R0,[R1, #+0]
+   \   0000000E   0x4823             LDR.N    R0,??HAL_MspInit_0  ;; 0x40021018
+   \   00000010   0x6800             LDR      R0,[R0, #+0]
+   \   00000012   0xF010 0x0001      ANDS     R0,R0,#0x1
+   \   00000016   0x9000             STR      R0,[SP, #+0]
+   \   00000018   0x9C00             LDR      R4,[SP, #+0]
+     66            __HAL_RCC_PWR_CLK_ENABLE();
+   \   0000001A   0x4821             LDR.N    R0,??HAL_MspInit_0+0x4  ;; 0x4002101c
+   \   0000001C   0x6800             LDR      R0,[R0, #+0]
+   \   0000001E   0xF050 0x5080      ORRS     R0,R0,#0x10000000
+   \   00000022   0x491F             LDR.N    R1,??HAL_MspInit_0+0x4  ;; 0x4002101c
+   \   00000024   0x6008             STR      R0,[R1, #+0]
+   \   00000026   0x481E             LDR.N    R0,??HAL_MspInit_0+0x4  ;; 0x4002101c
+   \   00000028   0x6800             LDR      R0,[R0, #+0]
+   \   0000002A   0xF010 0x5080      ANDS     R0,R0,#0x10000000
+   \   0000002E   0x9000             STR      R0,[SP, #+0]
+   \   00000030   0x9D00             LDR      R5,[SP, #+0]
+     67          
+     68            HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+   \   00000032   0x2003             MOVS     R0,#+3
+   \   00000034   0x.... 0x....      BL       HAL_NVIC_SetPriorityGrouping
+     69          
+     70            /* System interrupt init*/
+     71            /* MemoryManagement_IRQn interrupt configuration */
+     72            HAL_NVIC_SetPriority(MemoryManagement_IRQn, 0, 0);
+   \   00000038   0x2200             MOVS     R2,#+0
+   \   0000003A   0x2100             MOVS     R1,#+0
+   \   0000003C   0xF07F 0x000B      MVNS     R0,#+11
+   \   00000040   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     73            /* BusFault_IRQn interrupt configuration */
+     74            HAL_NVIC_SetPriority(BusFault_IRQn, 0, 0);
+   \   00000044   0x2200             MOVS     R2,#+0
+   \   00000046   0x2100             MOVS     R1,#+0
+   \   00000048   0xF07F 0x000A      MVNS     R0,#+10
+   \   0000004C   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     75            /* UsageFault_IRQn interrupt configuration */
+     76            HAL_NVIC_SetPriority(UsageFault_IRQn, 0, 0);
+   \   00000050   0x2200             MOVS     R2,#+0
+   \   00000052   0x2100             MOVS     R1,#+0
+   \   00000054   0xF07F 0x0009      MVNS     R0,#+9
+   \   00000058   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     77            /* SVCall_IRQn interrupt configuration */
+     78            HAL_NVIC_SetPriority(SVCall_IRQn, 0, 0);
+   \   0000005C   0x2200             MOVS     R2,#+0
+   \   0000005E   0x2100             MOVS     R1,#+0
+   \   00000060   0xF07F 0x0004      MVNS     R0,#+4
+   \   00000064   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     79            /* DebugMonitor_IRQn interrupt configuration */
+     80            HAL_NVIC_SetPriority(DebugMonitor_IRQn, 0, 0);
+   \   00000068   0x2200             MOVS     R2,#+0
+   \   0000006A   0x2100             MOVS     R1,#+0
+   \   0000006C   0xF07F 0x0003      MVNS     R0,#+3
+   \   00000070   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     81            /* PendSV_IRQn interrupt configuration */
+     82            HAL_NVIC_SetPriority(PendSV_IRQn, 15, 0);
+   \   00000074   0x2200             MOVS     R2,#+0
+   \   00000076   0x210F             MOVS     R1,#+15
+   \   00000078   0xF07F 0x0001      MVNS     R0,#+1
+   \   0000007C   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     83            /* SysTick_IRQn interrupt configuration */
+     84            HAL_NVIC_SetPriority(SysTick_IRQn, 15, 0);
+   \   00000080   0x2200             MOVS     R2,#+0
+   \   00000082   0x210F             MOVS     R1,#+15
+   \   00000084   0xF05F 0x30FF      MOVS     R0,#-1
+   \   00000088   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     85          
+     86              /**ENABLE: Full SWJ (JTAG-DP + SW-DP): Reset State 
+     87              */
+     88            __HAL_AFIO_REMAP_SWJ_ENABLE();
+   \   0000008C   0x4805             LDR.N    R0,??HAL_MspInit_0+0x8  ;; 0x40010004
+   \   0000008E   0x6800             LDR      R0,[R0, #+0]
+   \   00000090   0xF030 0x60E0      BICS     R0,R0,#0x7000000
+   \   00000094   0x4903             LDR.N    R1,??HAL_MspInit_0+0x8  ;; 0x40010004
+   \   00000096   0x6008             STR      R0,[R1, #+0]
+     89          
+     90            /* USER CODE BEGIN MspInit 1 */
+     91          
+     92            /* USER CODE END MspInit 1 */
+     93          }
+   \   00000098   0xBD31             POP      {R0,R4,R5,PC}    ;; return
+   \   0000009A   0xBF00             Nop      
+   \                     ??HAL_MspInit_0:
+   \   0000009C   0x40021018         DC32     0x40021018
+   \   000000A0   0x4002101C         DC32     0x4002101c
+   \   000000A4   0x40010004         DC32     0x40010004
+     94          
+     95          /* USER CODE BEGIN 1 */
+     96          
+     97          /* USER CODE END 1 */
+     98          
+     99          /**
+    100            * @}
+    101            */
+    102          
+    103          /**
+    104            * @}
+    105            */
+    106          
+    107          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       16  HAL_MspInit
+             16 -> HAL_NVIC_SetPriority
+             16 -> HAL_NVIC_SetPriorityGrouping
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+     168  HAL_MspInit
+
+ 
+ 168 bytes in section .text
+ 
+ 168 bytes of CODE memory
+
+Errors: none
+Warnings: 1

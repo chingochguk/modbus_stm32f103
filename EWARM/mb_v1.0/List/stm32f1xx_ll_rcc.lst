@@ -1,0 +1,1012 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  06:16:13 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1 #
+#                    xx_HAL_Driver\Src\stm32f1xx_ll_rcc.c                     #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F #
+#                    1xx_HAL_Driver\Src\stm32f1xx_ll_rcc.c" -D                #
+#                    USE_FULL_LL_DRIVER -D USE_HAL_DRIVER -D STM32F103xB -lC  #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    List\" -o "D:\projects\задания от                        #
+#                    работодателя\ЭМИС\EWARM\mb_v1.0/Obj\" --no_cse           #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files\IAR Systems\Embedded Workbench                     #
+#                    6.0\arm\INC\c\DLib_Config_Full.h" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\stm32f1xx_ll_rcc.lst                                 #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\stm32f1xx_ll_rcc.o                                    #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_rcc.c
+      1          /**
+                   ^
+Warning[Pa050]: non-native end of line sequence detected (this diagnostic is
+          only issued once)
+      2            ******************************************************************************
+      3            * @file    stm32f1xx_ll_rcc.c
+      4            * @author  MCD Application Team
+      5            * @brief   RCC LL module driver.
+      6            ******************************************************************************
+      7            * @attention
+      8            *
+      9            * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+     10            *
+     11            * Redistribution and use in source and binary forms, with or without modification,
+     12            * are permitted provided that the following conditions are met:
+     13            *   1. Redistributions of source code must retain the above copyright notice,
+     14            *      this list of conditions and the following disclaimer.
+     15            *   2. Redistributions in binary form must reproduce the above copyright notice,
+     16            *      this list of conditions and the following disclaimer in the documentation
+     17            *      and/or other materials provided with the distribution.
+     18            *   3. Neither the name of STMicroelectronics nor the names of its contributors
+     19            *      may be used to endorse or promote products derived from this software
+     20            *      without specific prior written permission.
+     21            *
+     22            * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     23            * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     24            * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     25            * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+     26            * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     27            * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+     28            * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+     29            * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+     30            * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+     31            * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     32            *
+     33            ******************************************************************************
+     34            */
+     35          #if defined(USE_FULL_LL_DRIVER)
+     36          
+     37          /* Includes ------------------------------------------------------------------*/
+     38          #include "stm32f1xx_ll_rcc.h"
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_HSI_Enable(void)
+   \                     LL_RCC_HSI_Enable:
+   \   00000000   0x....             LDR.N    R0,??DataTable20  ;; 0x40021000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF050 0x0001      ORRS     R0,R0,#0x1
+   \   00000008   0x....             LDR.N    R1,??DataTable20  ;; 0x40021000
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_HSI_IsReady(void)
+   \                     LL_RCC_HSI_IsReady:
+   \   00000000   0x....             LDR.N    R0,??DataTable20  ;; 0x40021000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF3C0 0x0040      UBFX     R0,R0,#+1,#+1
+   \   00000008   0xF010 0x0001      ANDS     R0,R0,#0x1
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_HSI_SetCalibTrimming(uint32_t)
+   \                     LL_RCC_HSI_SetCalibTrimming:
+   \   00000000   0x....             LDR.N    R1,??DataTable20  ;; 0x40021000
+   \   00000002   0x6809             LDR      R1,[R1, #+0]
+   \   00000004   0xF031 0x01F8      BICS     R1,R1,#0xF8
+   \   00000008   0xEA51 0x00C0      ORRS     R0,R1,R0, LSL #+3
+   \   0000000C   0x....             LDR.N    R1,??DataTable20  ;; 0x40021000
+   \   0000000E   0x6008             STR      R0,[R1, #+0]
+   \   00000010   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_SetSysClkSource(uint32_t)
+   \                     LL_RCC_SetSysClkSource:
+   \   00000000   0x....             LDR.N    R1,??DataTable20_1  ;; 0x40021004
+   \   00000002   0x6809             LDR      R1,[R1, #+0]
+   \   00000004   0x0889             LSRS     R1,R1,#+2
+   \   00000006   0x0089             LSLS     R1,R1,#+2
+   \   00000008   0x4308             ORRS     R0,R0,R1
+   \   0000000A   0x....             LDR.N    R1,??DataTable20_1  ;; 0x40021004
+   \   0000000C   0x6008             STR      R0,[R1, #+0]
+   \   0000000E   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_GetSysClkSource(void)
+   \                     LL_RCC_GetSysClkSource:
+   \   00000000   0x....             LDR.N    R0,??DataTable20_1  ;; 0x40021004
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF010 0x000C      ANDS     R0,R0,#0xC
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_GetAHBPrescaler(void)
+   \                     LL_RCC_GetAHBPrescaler:
+   \   00000000   0x....             LDR.N    R0,??DataTable20_1  ;; 0x40021004
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF010 0x00F0      ANDS     R0,R0,#0xF0
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_GetAPB1Prescaler(void)
+   \                     LL_RCC_GetAPB1Prescaler:
+   \   00000000   0x....             LDR.N    R0,??DataTable20_1  ;; 0x40021004
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF410 0x60E0      ANDS     R0,R0,#0x700
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_GetAPB2Prescaler(void)
+   \                     LL_RCC_GetAPB2Prescaler:
+   \   00000000   0x....             LDR.N    R0,??DataTable20_1  ;; 0x40021004
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF410 0x5060      ANDS     R0,R0,#0x3800
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_GetUSBClockSource(uint32_t)
+   \                     LL_RCC_GetUSBClockSource:
+   \   00000000   0x....             LDR.N    R1,??DataTable20_1  ;; 0x40021004
+   \   00000002   0x6809             LDR      R1,[R1, #+0]
+   \   00000004   0x4008             ANDS     R0,R0,R1
+   \   00000006   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_GetADCClockSource(uint32_t)
+   \                     LL_RCC_GetADCClockSource:
+   \   00000000   0x....             LDR.N    R1,??DataTable20_1  ;; 0x40021004
+   \   00000002   0x6809             LDR      R1,[R1, #+0]
+   \   00000004   0x4008             ANDS     R0,R0,R1
+   \   00000006   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_PLL_IsReady(void)
+   \                     LL_RCC_PLL_IsReady:
+   \   00000000   0x....             LDR.N    R0,??DataTable20  ;; 0x40021000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF3C0 0x6040      UBFX     R0,R0,#+25,#+1
+   \   00000008   0xF010 0x0001      ANDS     R0,R0,#0x1
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_PLL_GetMainSource(void)
+   \                     LL_RCC_PLL_GetMainSource:
+   \   00000000   0x....             LDR.N    R0,??DataTable20_1  ;; 0x40021004
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF410 0x3080      ANDS     R0,R0,#0x10000
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_PLL_GetMultiplicator(void)
+   \                     LL_RCC_PLL_GetMultiplicator:
+   \   00000000   0x....             LDR.N    R0,??DataTable20_1  ;; 0x40021004
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF410 0x1070      ANDS     R0,R0,#0x3C0000
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_PLL_GetPrediv(void)
+   \                     LL_RCC_PLL_GetPrediv:
+   \   00000000   0x....             LDR.N    R0,??DataTable20_1  ;; 0x40021004
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF410 0x3000      ANDS     R0,R0,#0x20000
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_ClearResetFlags(void)
+   \                     LL_RCC_ClearResetFlags:
+   \   00000000   0x....             LDR.N    R0,??DataTable20_2  ;; 0x40021024
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF050 0x7080      ORRS     R0,R0,#0x1000000
+   \   00000008   0x....             LDR.N    R1,??DataTable20_2  ;; 0x40021024
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+   \   0000000C   0x4770             BX       LR               ;; return
+     39          #ifdef  USE_FULL_ASSERT
+     40            #include "stm32_assert.h"
+     41          #else
+     42            #define assert_param(expr) ((void)0U)
+     43          #endif /* USE_FULL_ASSERT */
+     44          /** @addtogroup STM32F1xx_LL_Driver
+     45            * @{
+     46            */
+     47          
+     48          #if defined(RCC)
+     49          
+     50          /** @defgroup RCC_LL RCC
+     51            * @{
+     52            */
+     53          
+     54          /* Private types -------------------------------------------------------------*/
+     55          /* Private variables ---------------------------------------------------------*/
+     56          /* Private constants ---------------------------------------------------------*/
+     57          /* Private macros ------------------------------------------------------------*/
+     58          /** @addtogroup RCC_LL_Private_Macros
+     59            * @{
+     60            */
+     61          #if defined(RCC_PLLI2S_SUPPORT)
+     62          #define IS_LL_RCC_I2S_CLKSOURCE(__VALUE__)     (((__VALUE__) == LL_RCC_I2S2_CLKSOURCE) \
+     63                                                       || ((__VALUE__) == LL_RCC_I2S3_CLKSOURCE))
+     64          #endif /* RCC_PLLI2S_SUPPORT */
+     65          
+     66          #if defined(USB) || defined(USB_OTG_FS)
+     67          #define IS_LL_RCC_USB_CLKSOURCE(__VALUE__)    (((__VALUE__) == LL_RCC_USB_CLKSOURCE))
+     68          #endif /* USB */
+     69          
+     70          #define IS_LL_RCC_ADC_CLKSOURCE(__VALUE__)    (((__VALUE__) == LL_RCC_ADC_CLKSOURCE))
+     71          /**
+     72            * @}
+     73            */
+     74          
+     75          /* Private function prototypes -----------------------------------------------*/
+     76          /** @defgroup RCC_LL_Private_Functions RCC Private functions
+     77            * @{
+     78            */
+     79          uint32_t RCC_GetSystemClockFreq(void);
+     80          uint32_t RCC_GetHCLKClockFreq(uint32_t SYSCLK_Frequency);
+     81          uint32_t RCC_GetPCLK1ClockFreq(uint32_t HCLK_Frequency);
+     82          uint32_t RCC_GetPCLK2ClockFreq(uint32_t HCLK_Frequency);
+     83          uint32_t RCC_PLL_GetFreqDomain_SYS(void);
+     84          #if defined(RCC_PLLI2S_SUPPORT)
+     85          uint32_t RCC_PLLI2S_GetFreqDomain_I2S(void);
+     86          #endif /* RCC_PLLI2S_SUPPORT */
+     87          #if defined(RCC_PLL2_SUPPORT)
+     88          uint32_t RCC_PLL2_GetFreqClockFreq(void);
+     89          #endif /* RCC_PLL2_SUPPORT */
+     90          /**
+     91            * @}
+     92            */
+     93          
+     94          /* Exported functions --------------------------------------------------------*/
+     95          /** @addtogroup RCC_LL_Exported_Functions
+     96            * @{
+     97            */
+     98          
+     99          /** @addtogroup RCC_LL_EF_Init
+    100            * @{
+    101            */
+    102          
+    103          /**
+    104            * @brief  Reset the RCC clock configuration to the default reset state.
+    105            * @note   The default reset state of the clock configuration is given below:
+    106            *         - HSI ON and used as system clock source
+    107            *         - HSE PLL, PLL2 & PLL3 are OFF 
+    108            *         - AHB, APB1 and APB2 prescaler set to 1.
+    109            *         - CSS, MCO OFF
+    110            *         - All interrupts disabled
+    111            * @note   This function doesn't modify the configuration of the
+    112            *         - Peripheral clocks
+    113            *         - LSI, LSE and RTC clocks
+    114            * @retval An ErrorStatus enumeration value:
+    115            *         - SUCCESS: RCC registers are de-initialized
+    116            *         - ERROR: not applicable
+    117            */
+
+   \                                 In section .text, align 2, keep-with-next
+    118          ErrorStatus LL_RCC_DeInit(void)
+    119          {
+   \                     LL_RCC_DeInit:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    120            /* Set HSION bit */
+    121            LL_RCC_HSI_Enable();
+   \   00000002   0x.... 0x....      BL       LL_RCC_HSI_Enable
+    122          
+    123            /* Wait for HSI READY bit */
+    124            while(LL_RCC_HSI_IsReady() != 1U)
+   \                     ??LL_RCC_DeInit_0:
+   \   00000006   0x.... 0x....      BL       LL_RCC_HSI_IsReady
+   \   0000000A   0x2801             CMP      R0,#+1
+   \   0000000C   0xD1FB             BNE.N    ??LL_RCC_DeInit_0
+    125            {}
+    126          
+    127            /* Configure HSI as system clock source */
+    128            LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSI);
+   \   0000000E   0x2000             MOVS     R0,#+0
+   \   00000010   0x.... 0x....      BL       LL_RCC_SetSysClkSource
+    129          
+    130            /* Wait till clock switch is ready */
+    131            while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSI)
+   \                     ??LL_RCC_DeInit_1:
+   \   00000014   0x.... 0x....      BL       LL_RCC_GetSysClkSource
+   \   00000018   0x2800             CMP      R0,#+0
+   \   0000001A   0xD1FB             BNE.N    ??LL_RCC_DeInit_1
+    132            {}
+    133          
+    134            /* Reset PLLON bit */
+    135            CLEAR_BIT(RCC->CR, RCC_CR_PLLON);
+   \   0000001C   0x....             LDR.N    R0,??DataTable20  ;; 0x40021000
+   \   0000001E   0x6800             LDR      R0,[R0, #+0]
+   \   00000020   0xF030 0x7080      BICS     R0,R0,#0x1000000
+   \   00000024   0x....             LDR.N    R1,??DataTable20  ;; 0x40021000
+   \   00000026   0x6008             STR      R0,[R1, #+0]
+    136          
+    137            /* Wait for PLL READY bit to be reset */
+    138            while(LL_RCC_PLL_IsReady() != 0U)
+   \                     ??LL_RCC_DeInit_2:
+   \   00000028   0x.... 0x....      BL       LL_RCC_PLL_IsReady
+   \   0000002C   0x2800             CMP      R0,#+0
+   \   0000002E   0xD1FB             BNE.N    ??LL_RCC_DeInit_2
+    139            {}
+    140          
+    141            /* Reset CFGR register */
+    142            LL_RCC_WriteReg(CFGR, 0x00000000U);
+   \   00000030   0x....             LDR.N    R0,??DataTable20_1  ;; 0x40021004
+   \   00000032   0x2100             MOVS     R1,#+0
+   \   00000034   0x6001             STR      R1,[R0, #+0]
+    143          
+    144            /* Reset HSEON, HSEBYP & CSSON bits */
+    145            CLEAR_BIT(RCC->CR, (RCC_CR_CSSON | RCC_CR_HSEON | RCC_CR_HSEBYP));
+   \   00000036   0x....             LDR.N    R0,??DataTable20  ;; 0x40021000
+   \   00000038   0x6800             LDR      R0,[R0, #+0]
+   \   0000003A   0xF430 0x2050      BICS     R0,R0,#0xD0000
+   \   0000003E   0x....             LDR.N    R1,??DataTable20  ;; 0x40021000
+   \   00000040   0x6008             STR      R0,[R1, #+0]
+    146          
+    147          #if defined(RCC_CR_PLL2ON)
+    148            /* Reset PLL2ON bit */
+    149            CLEAR_BIT(RCC->CR, RCC_CR_PLL2ON);
+    150          #endif /* RCC_CR_PLL2ON */
+    151          
+    152          #if defined(RCC_CR_PLL3ON)
+    153            /* Reset PLL3ON bit */
+    154            CLEAR_BIT(RCC->CR, RCC_CR_PLL3ON);
+    155          #endif /* RCC_CR_PLL3ON */
+    156          
+    157            /* Set HSITRIM bits to the reset value */
+    158            LL_RCC_HSI_SetCalibTrimming(0x10U);
+   \   00000042   0x2010             MOVS     R0,#+16
+   \   00000044   0x.... 0x....      BL       LL_RCC_HSI_SetCalibTrimming
+    159          
+    160          #if defined(RCC_CFGR2_PREDIV1)
+    161            /* Reset CFGR2 register */
+    162            LL_RCC_WriteReg(CFGR2, 0x00000000U);
+    163          #endif /* RCC_CFGR2_PREDIV1 */
+    164          
+    165            /* Disable all interrupts */
+    166            LL_RCC_WriteReg(CIR, 0x00000000U);
+   \   00000048   0x....             LDR.N    R0,??DataTable20_3  ;; 0x40021008
+   \   0000004A   0x2100             MOVS     R1,#+0
+   \   0000004C   0x6001             STR      R1,[R0, #+0]
+    167          
+    168            /* Clear reset flags */
+    169            LL_RCC_ClearResetFlags();
+   \   0000004E   0x.... 0x....      BL       LL_RCC_ClearResetFlags
+    170          
+    171            return SUCCESS;
+   \   00000052   0x2001             MOVS     R0,#+1
+   \   00000054   0xBD02             POP      {R1,PC}          ;; return
+    172          }
+    173          
+    174          /**
+    175            * @}
+    176            */
+    177          
+    178          /** @addtogroup RCC_LL_EF_Get_Freq
+    179            * @brief  Return the frequencies of different on chip clocks;  System, AHB, APB1 and APB2 buses clocks
+    180            *         and different peripheral clocks available on the device.
+    181            * @note   If SYSCLK source is HSI, function returns values based on HSI_VALUE(**)
+    182            * @note   If SYSCLK source is HSE, function returns values based on HSE_VALUE(***)
+    183            * @note   If SYSCLK source is PLL, function returns values based on 
+    184            *         HSI_VALUE(**) or HSE_VALUE(***) multiplied/divided by the PLL factors.
+    185            * @note   (**) HSI_VALUE is a defined constant but the real value may vary 
+    186            *              depending on the variations in voltage and temperature.
+    187            * @note   (***) HSE_VALUE is a defined constant, user has to ensure that
+    188            *               HSE_VALUE is same as the real frequency of the crystal used.
+    189            *               Otherwise, this function may have wrong result.
+    190            * @note   The result of this function could be incorrect when using fractional
+    191            *         value for HSE crystal.
+    192            * @note   This function can be used by the user application to compute the
+    193            *         baud-rate for the communication peripherals or configure other parameters.
+    194            * @{
+    195            */
+    196          
+    197          /**
+    198            * @brief  Return the frequencies of different on chip clocks;  System, AHB, APB1 and APB2 buses clocks
+    199            * @note   Each time SYSCLK, HCLK, PCLK1 and/or PCLK2 clock changes, this function
+    200            *         must be called to update structure fields. Otherwise, any
+    201            *         configuration based on this function will be incorrect.
+    202            * @param  RCC_Clocks pointer to a @ref LL_RCC_ClocksTypeDef structure which will hold the clocks frequencies
+    203            * @retval None
+    204            */
+
+   \                                 In section .text, align 2, keep-with-next
+    205          void LL_RCC_GetSystemClocksFreq(LL_RCC_ClocksTypeDef *RCC_Clocks)
+    206          {
+   \                     LL_RCC_GetSystemClocksFreq:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    207            /* Get SYSCLK frequency */
+    208            RCC_Clocks->SYSCLK_Frequency = RCC_GetSystemClockFreq();
+   \   00000004   0x.... 0x....      BL       RCC_GetSystemClockFreq
+   \   00000008   0x6020             STR      R0,[R4, #+0]
+    209          
+    210            /* HCLK clock frequency */
+    211            RCC_Clocks->HCLK_Frequency   = RCC_GetHCLKClockFreq(RCC_Clocks->SYSCLK_Frequency);
+   \   0000000A   0x6820             LDR      R0,[R4, #+0]
+   \   0000000C   0x.... 0x....      BL       RCC_GetHCLKClockFreq
+   \   00000010   0x6060             STR      R0,[R4, #+4]
+    212          
+    213            /* PCLK1 clock frequency */
+    214            RCC_Clocks->PCLK1_Frequency  = RCC_GetPCLK1ClockFreq(RCC_Clocks->HCLK_Frequency);
+   \   00000012   0x6860             LDR      R0,[R4, #+4]
+   \   00000014   0x.... 0x....      BL       RCC_GetPCLK1ClockFreq
+   \   00000018   0x60A0             STR      R0,[R4, #+8]
+    215          
+    216            /* PCLK2 clock frequency */
+    217            RCC_Clocks->PCLK2_Frequency  = RCC_GetPCLK2ClockFreq(RCC_Clocks->HCLK_Frequency);
+   \   0000001A   0x6860             LDR      R0,[R4, #+4]
+   \   0000001C   0x.... 0x....      BL       RCC_GetPCLK2ClockFreq
+   \   00000020   0x60E0             STR      R0,[R4, #+12]
+    218          }
+   \   00000022   0xBD10             POP      {R4,PC}          ;; return
+    219          
+    220          #if defined(RCC_CFGR2_I2S2SRC)
+    221          /**
+    222            * @brief  Return I2Sx clock frequency
+    223            * @param  I2SxSource This parameter can be one of the following values:
+    224            *         @arg @ref LL_RCC_I2S2_CLKSOURCE
+    225            *         @arg @ref LL_RCC_I2S3_CLKSOURCE
+    226            * @retval I2S clock frequency (in Hz)
+    227            */
+    228          uint32_t LL_RCC_GetI2SClockFreq(uint32_t I2SxSource)
+    229          {
+    230            uint32_t i2s_frequency = LL_RCC_PERIPH_FREQUENCY_NO;
+    231          
+    232            /* Check parameter */
+    233            assert_param(IS_LL_RCC_I2S_CLKSOURCE(I2SxSource));
+    234          
+    235            /* I2S1CLK clock frequency */
+    236            switch (LL_RCC_GetI2SClockSource(I2SxSource))
+    237            {
+    238              case LL_RCC_I2S2_CLKSOURCE_SYSCLK:        /*!< System clock selected as I2S clock source */
+    239              case LL_RCC_I2S3_CLKSOURCE_SYSCLK:
+    240                i2s_frequency = RCC_GetSystemClockFreq();
+    241                break;
+    242          
+    243              case LL_RCC_I2S2_CLKSOURCE_PLLI2S_VCO:    /*!< PLLI2S oscillator clock selected as I2S clock source */
+    244              case LL_RCC_I2S3_CLKSOURCE_PLLI2S_VCO:
+    245              default:
+    246                i2s_frequency = RCC_PLLI2S_GetFreqDomain_I2S() * 2U;
+    247                break;
+    248            }
+    249          
+    250            return i2s_frequency;
+    251          }
+    252          #endif /* RCC_CFGR2_I2S2SRC */
+    253          
+    254          #if defined(USB) || defined(USB_OTG_FS)
+    255          /**
+    256            * @brief  Return USBx clock frequency
+    257            * @param  USBxSource This parameter can be one of the following values:
+    258            *         @arg @ref LL_RCC_USB_CLKSOURCE
+    259            * @retval USB clock frequency (in Hz)
+    260            *         @arg @ref LL_RCC_PERIPH_FREQUENCY_NO indicates that oscillator (HSI), HSE or PLL is not ready
+    261            */
+
+   \                                 In section .text, align 2, keep-with-next
+    262          uint32_t LL_RCC_GetUSBClockFreq(uint32_t USBxSource)
+    263          {
+   \                     LL_RCC_GetUSBClockFreq:
+   \   00000000   0xB510             PUSH     {R4,LR}
+    264            uint32_t usb_frequency = LL_RCC_PERIPH_FREQUENCY_NO;
+   \   00000002   0x2400             MOVS     R4,#+0
+    265          
+    266            /* Check parameter */
+    267            assert_param(IS_LL_RCC_USB_CLKSOURCE(USBxSource));
+    268          
+    269            /* USBCLK clock frequency */
+    270            switch (LL_RCC_GetUSBClockSource(USBxSource))
+   \   00000004   0x.... 0x....      BL       LL_RCC_GetUSBClockSource
+   \   00000008   0xF5B0 0x0F80      CMP      R0,#+4194304
+   \   0000000C   0xD107             BNE.N    ??LL_RCC_GetUSBClockFreq_0
+    271            {
+    272          #if defined(RCC_CFGR_USBPRE)  
+    273              case LL_RCC_USB_CLKSOURCE_PLL:        /* PLL clock used as USB clock source */
+    274                if (LL_RCC_PLL_IsReady())
+   \   0000000E   0x.... 0x....      BL       LL_RCC_PLL_IsReady
+   \   00000012   0x2800             CMP      R0,#+0
+   \   00000014   0xD002             BEQ.N    ??LL_RCC_GetUSBClockFreq_1
+    275                {
+    276                  usb_frequency = RCC_PLL_GetFreqDomain_SYS();
+   \   00000016   0x.... 0x....      BL       RCC_PLL_GetFreqDomain_SYS
+   \   0000001A   0x0004             MOVS     R4,R0
+    277                }
+    278                break;
+   \                     ??LL_RCC_GetUSBClockFreq_1:
+   \   0000001C   0xE008             B.N      ??LL_RCC_GetUSBClockFreq_2
+    279          
+    280              case LL_RCC_USB_CLKSOURCE_PLL_DIV_1_5:        /* PLL clock divided by 1.5 used as USB clock source */
+    281              default:
+    282                if (LL_RCC_PLL_IsReady())
+   \                     ??LL_RCC_GetUSBClockFreq_0:
+   \   0000001E   0x.... 0x....      BL       LL_RCC_PLL_IsReady
+   \   00000022   0x2800             CMP      R0,#+0
+   \   00000024   0xD004             BEQ.N    ??LL_RCC_GetUSBClockFreq_3
+    283                {
+    284                  usb_frequency = (RCC_PLL_GetFreqDomain_SYS() * 3U) / 2U;
+   \   00000026   0x.... 0x....      BL       RCC_PLL_GetFreqDomain_SYS
+   \   0000002A   0x2103             MOVS     R1,#+3
+   \   0000002C   0x4348             MULS     R0,R1,R0
+   \   0000002E   0x0844             LSRS     R4,R0,#+1
+    285                }
+    286                break;
+    287          #endif /* RCC_CFGR_USBPRE */
+    288          #if defined(RCC_CFGR_OTGFSPRE)
+    289              /* USBCLK = PLLVCO/2 
+    290                        = (2 x PLLCLK) / 2 
+    291                        = PLLCLK */
+    292              case LL_RCC_USB_CLKSOURCE_PLL_DIV_2:        /* PLL clock used as USB clock source */
+    293                if (LL_RCC_PLL_IsReady())
+    294                {
+    295                  usb_frequency = RCC_PLL_GetFreqDomain_SYS();
+    296                }
+    297                break;
+    298          
+    299              /* USBCLK = PLLVCO/3 
+    300                        = (2 x PLLCLK) / 3 */
+    301              case LL_RCC_USB_CLKSOURCE_PLL_DIV_3:        /* PLL clock divided by 3 used as USB clock source */
+    302              default:
+    303                if (LL_RCC_PLL_IsReady())
+    304                {
+    305                  usb_frequency = (RCC_PLL_GetFreqDomain_SYS() * 2U) / 3U;
+    306                }
+    307                break;
+    308          #endif /* RCC_CFGR_OTGFSPRE */
+    309            }
+    310          
+    311            return usb_frequency;
+   \                     ??LL_RCC_GetUSBClockFreq_3:
+   \                     ??LL_RCC_GetUSBClockFreq_2:
+   \   00000030   0x0020             MOVS     R0,R4
+   \   00000032   0xBD10             POP      {R4,PC}          ;; return
+    312          }
+    313          #endif /* USB */
+    314          
+    315          /**
+    316            * @brief  Return ADCx clock frequency
+    317            * @param  ADCxSource This parameter can be one of the following values:
+    318            *         @arg @ref LL_RCC_ADC_CLKSOURCE
+    319            * @retval ADC clock frequency (in Hz)
+    320            */
+
+   \                                 In section .text, align 2, keep-with-next
+    321          uint32_t LL_RCC_GetADCClockFreq(uint32_t ADCxSource)
+    322          {
+   \                     LL_RCC_GetADCClockFreq:
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+   \   00000002   0x0005             MOVS     R5,R0
+    323            uint32_t adc_prescaler = 0U;
+   \   00000004   0x2600             MOVS     R6,#+0
+    324            uint32_t adc_frequency = 0U;
+   \   00000006   0x2400             MOVS     R4,#+0
+    325          
+    326            /* Check parameter */
+    327            assert_param(IS_LL_RCC_ADC_CLKSOURCE(ADCxSource));
+    328          
+    329            /* Get ADC prescaler */
+    330            adc_prescaler = LL_RCC_GetADCClockSource(ADCxSource);
+   \   00000008   0x0028             MOVS     R0,R5
+   \   0000000A   0x.... 0x....      BL       LL_RCC_GetADCClockSource
+   \   0000000E   0x0006             MOVS     R6,R0
+    331          
+    332            /* ADC frequency = PCLK2 frequency / ADC prescaler (2, 4, 6 or 8) */
+    333            adc_frequency = RCC_GetPCLK2ClockFreq(RCC_GetHCLKClockFreq(RCC_GetSystemClockFreq()))
+    334                            / (((adc_prescaler >> POSITION_VAL(ADCxSource)) + 1U) * 2U);
+   \   00000010   0x.... 0x....      BL       RCC_GetSystemClockFreq
+   \   00000014   0x.... 0x....      BL       RCC_GetHCLKClockFreq
+   \   00000018   0x.... 0x....      BL       RCC_GetPCLK2ClockFreq
+   \   0000001C   0xFA95 0xF1A5      RBIT     R1,R5
+   \   00000020   0xFAB1 0xF181      CLZ      R1,R1
+   \   00000024   0xFA36 0xF101      LSRS     R1,R6,R1
+   \   00000028   0x1C49             ADDS     R1,R1,#+1
+   \   0000002A   0x0049             LSLS     R1,R1,#+1
+   \   0000002C   0xFBB0 0xF0F1      UDIV     R0,R0,R1
+   \   00000030   0x0004             MOVS     R4,R0
+    335          
+    336            return adc_frequency;
+   \   00000032   0x0020             MOVS     R0,R4
+   \   00000034   0xBD70             POP      {R4-R6,PC}       ;; return
+    337          }
+    338          
+    339          /**
+    340            * @}
+    341            */
+    342          
+    343          /**
+    344            * @}
+    345            */
+    346          
+    347          /** @addtogroup RCC_LL_Private_Functions
+    348            * @{
+    349            */
+    350          
+    351          /**
+    352            * @brief  Return SYSTEM clock frequency
+    353            * @retval SYSTEM clock frequency (in Hz)
+    354            */
+
+   \                                 In section .text, align 2, keep-with-next
+    355          uint32_t RCC_GetSystemClockFreq(void)
+    356          {
+   \                     RCC_GetSystemClockFreq:
+   \   00000000   0xB510             PUSH     {R4,LR}
+    357            uint32_t frequency = 0U;
+   \   00000002   0x2400             MOVS     R4,#+0
+    358          
+    359            /* Get SYSCLK source -------------------------------------------------------*/
+    360            switch (LL_RCC_GetSysClkSource())
+   \   00000004   0x.... 0x....      BL       LL_RCC_GetSysClkSource
+   \   00000008   0x2800             CMP      R0,#+0
+   \   0000000A   0xD004             BEQ.N    ??RCC_GetSystemClockFreq_0
+   \   0000000C   0x2804             CMP      R0,#+4
+   \   0000000E   0xD004             BEQ.N    ??RCC_GetSystemClockFreq_1
+   \   00000010   0x2808             CMP      R0,#+8
+   \   00000012   0xD004             BEQ.N    ??RCC_GetSystemClockFreq_2
+   \   00000014   0xE007             B.N      ??RCC_GetSystemClockFreq_3
+    361            {
+    362              case LL_RCC_SYS_CLKSOURCE_STATUS_HSI:  /* HSI used as system clock  source */
+    363                frequency = HSI_VALUE;
+   \                     ??RCC_GetSystemClockFreq_0:
+   \   00000016   0x....             LDR.N    R4,??DataTable20_4  ;; 0x7a1200
+    364                break;
+   \   00000018   0xE006             B.N      ??RCC_GetSystemClockFreq_4
+    365          
+    366              case LL_RCC_SYS_CLKSOURCE_STATUS_HSE:  /* HSE used as system clock  source */
+    367                frequency = HSE_VALUE;
+   \                     ??RCC_GetSystemClockFreq_1:
+   \   0000001A   0x....             LDR.N    R4,??DataTable20_4  ;; 0x7a1200
+    368                break;
+   \   0000001C   0xE004             B.N      ??RCC_GetSystemClockFreq_4
+    369          
+    370              case LL_RCC_SYS_CLKSOURCE_STATUS_PLL:  /* PLL used as system clock  source */
+    371                frequency = RCC_PLL_GetFreqDomain_SYS();
+   \                     ??RCC_GetSystemClockFreq_2:
+   \   0000001E   0x.... 0x....      BL       RCC_PLL_GetFreqDomain_SYS
+   \   00000022   0x0004             MOVS     R4,R0
+    372                break;
+   \   00000024   0xE000             B.N      ??RCC_GetSystemClockFreq_4
+    373          
+    374              default:
+    375                frequency = HSI_VALUE;
+   \                     ??RCC_GetSystemClockFreq_3:
+   \   00000026   0x....             LDR.N    R4,??DataTable20_4  ;; 0x7a1200
+    376                break;
+    377            }
+    378          
+    379            return frequency;
+   \                     ??RCC_GetSystemClockFreq_4:
+   \   00000028   0x0020             MOVS     R0,R4
+   \   0000002A   0xBD10             POP      {R4,PC}          ;; return
+    380          }
+    381          
+    382          /**
+    383            * @brief  Return HCLK clock frequency
+    384            * @param  SYSCLK_Frequency SYSCLK clock frequency
+    385            * @retval HCLK clock frequency (in Hz)
+    386            */
+
+   \                                 In section .text, align 2, keep-with-next
+    387          uint32_t RCC_GetHCLKClockFreq(uint32_t SYSCLK_Frequency)
+    388          {
+   \                     RCC_GetHCLKClockFreq:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    389            /* HCLK clock frequency */
+    390            return __LL_RCC_CALC_HCLK_FREQ(SYSCLK_Frequency, LL_RCC_GetAHBPrescaler());
+   \   00000004   0x.... 0x....      BL       LL_RCC_GetAHBPrescaler
+   \   00000008   0xF3C0 0x1003      UBFX     R0,R0,#+4,#+4
+   \   0000000C   0x....             LDR.N    R1,??DataTable20_5
+   \   0000000E   0x5C40             LDRB     R0,[R0, R1]
+   \   00000010   0xFA34 0xF000      LSRS     R0,R4,R0
+   \   00000014   0xBD10             POP      {R4,PC}          ;; return
+    391          }
+    392          
+    393          /**
+    394            * @brief  Return PCLK1 clock frequency
+    395            * @param  HCLK_Frequency HCLK clock frequency
+    396            * @retval PCLK1 clock frequency (in Hz)
+    397            */
+
+   \                                 In section .text, align 2, keep-with-next
+    398          uint32_t RCC_GetPCLK1ClockFreq(uint32_t HCLK_Frequency)
+    399          {
+   \                     RCC_GetPCLK1ClockFreq:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    400            /* PCLK1 clock frequency */
+    401            return __LL_RCC_CALC_PCLK1_FREQ(HCLK_Frequency, LL_RCC_GetAPB1Prescaler());
+   \   00000004   0x.... 0x....      BL       LL_RCC_GetAPB1Prescaler
+   \   00000008   0x0A00             LSRS     R0,R0,#+8
+   \   0000000A   0x....             LDR.N    R1,??DataTable20_6
+   \   0000000C   0x5C40             LDRB     R0,[R0, R1]
+   \   0000000E   0xFA34 0xF000      LSRS     R0,R4,R0
+   \   00000012   0xBD10             POP      {R4,PC}          ;; return
+    402          }
+    403          
+    404          /**
+    405            * @brief  Return PCLK2 clock frequency
+    406            * @param  HCLK_Frequency HCLK clock frequency
+    407            * @retval PCLK2 clock frequency (in Hz)
+    408            */
+
+   \                                 In section .text, align 2, keep-with-next
+    409          uint32_t RCC_GetPCLK2ClockFreq(uint32_t HCLK_Frequency)
+    410          {
+   \                     RCC_GetPCLK2ClockFreq:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    411            /* PCLK2 clock frequency */
+    412            return __LL_RCC_CALC_PCLK2_FREQ(HCLK_Frequency, LL_RCC_GetAPB2Prescaler());
+   \   00000004   0x.... 0x....      BL       LL_RCC_GetAPB2Prescaler
+   \   00000008   0x0AC0             LSRS     R0,R0,#+11
+   \   0000000A   0x....             LDR.N    R1,??DataTable20_6
+   \   0000000C   0x5C40             LDRB     R0,[R0, R1]
+   \   0000000E   0xFA34 0xF000      LSRS     R0,R4,R0
+   \   00000012   0xBD10             POP      {R4,PC}          ;; return
+    413          }
+    414          
+    415          /**
+    416            * @brief  Return PLL clock frequency used for system domain
+    417            * @retval PLL clock frequency (in Hz)
+    418            */
+
+   \                                 In section .text, align 2, keep-with-next
+    419          uint32_t RCC_PLL_GetFreqDomain_SYS(void)
+    420          {
+   \                     RCC_PLL_GetFreqDomain_SYS:
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+    421            uint32_t pllinputfreq = 0U, pllsource = 0U;
+   \   00000002   0x2400             MOVS     R4,#+0
+   \   00000004   0x2500             MOVS     R5,#+0
+    422          
+    423            /* PLL_VCO = (HSE_VALUE, HSI_VALUE or PLL2 / PLL Predivider) * PLL Multiplicator */
+    424          
+    425            /* Get PLL source */
+    426            pllsource = LL_RCC_PLL_GetMainSource();
+   \   00000006   0x.... 0x....      BL       LL_RCC_PLL_GetMainSource
+   \   0000000A   0x0005             MOVS     R5,R0
+    427          
+    428            switch (pllsource)
+   \   0000000C   0x2D00             CMP      R5,#+0
+   \   0000000E   0xD003             BEQ.N    ??RCC_PLL_GetFreqDomain_SYS_0
+   \   00000010   0xF5B5 0x3F80      CMP      R5,#+65536
+   \   00000014   0xD002             BEQ.N    ??RCC_PLL_GetFreqDomain_SYS_1
+   \   00000016   0xE008             B.N      ??RCC_PLL_GetFreqDomain_SYS_2
+    429            {
+    430              case LL_RCC_PLLSOURCE_HSI_DIV_2: /* HSI used as PLL clock source */
+    431                pllinputfreq = HSI_VALUE / 2U;
+   \                     ??RCC_PLL_GetFreqDomain_SYS_0:
+   \   00000018   0x....             LDR.N    R4,??DataTable20_7  ;; 0x3d0900
+    432                break;
+   \   0000001A   0xE007             B.N      ??RCC_PLL_GetFreqDomain_SYS_3
+    433          
+    434              case LL_RCC_PLLSOURCE_HSE:       /* HSE used as PLL clock source */
+    435                pllinputfreq = HSE_VALUE / (LL_RCC_PLL_GetPrediv() + 1U);
+   \                     ??RCC_PLL_GetFreqDomain_SYS_1:
+   \   0000001C   0x.... 0x....      BL       LL_RCC_PLL_GetPrediv
+   \   00000020   0x1C40             ADDS     R0,R0,#+1
+   \   00000022   0x....             LDR.N    R1,??DataTable20_4  ;; 0x7a1200
+   \   00000024   0xFBB1 0xF4F0      UDIV     R4,R1,R0
+    436                break;
+   \   00000028   0xE000             B.N      ??RCC_PLL_GetFreqDomain_SYS_3
+    437          
+    438          #if defined(RCC_PLL2_SUPPORT)
+    439              case LL_RCC_PLLSOURCE_PLL2:       /* PLL2 used as PLL clock source */
+    440                pllinputfreq = RCC_PLL2_GetFreqClockFreq() / (LL_RCC_PLL_GetPrediv() + 1U);
+    441                break;
+    442          #endif /* RCC_PLL2_SUPPORT */
+    443          
+    444              default:
+    445                pllinputfreq = HSI_VALUE / 2U;
+   \                     ??RCC_PLL_GetFreqDomain_SYS_2:
+   \   0000002A   0x....             LDR.N    R4,??DataTable20_7  ;; 0x3d0900
+    446                break;
+    447            }
+    448            return __LL_RCC_CALC_PLLCLK_FREQ(pllinputfreq, LL_RCC_PLL_GetMultiplicator());
+   \                     ??RCC_PLL_GetFreqDomain_SYS_3:
+   \   0000002C   0x.... 0x....      BL       LL_RCC_PLL_GetMultiplicator
+   \   00000030   0x0C80             LSRS     R0,R0,#+18
+   \   00000032   0x1C80             ADDS     R0,R0,#+2
+   \   00000034   0xFB00 0xF004      MUL      R0,R0,R4
+   \   00000038   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+    449          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20:
+   \   00000000   0x40021000         DC32     0x40021000
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_1:
+   \   00000000   0x40021004         DC32     0x40021004
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_2:
+   \   00000000   0x40021024         DC32     0x40021024
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_3:
+   \   00000000   0x40021008         DC32     0x40021008
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_4:
+   \   00000000   0x007A1200         DC32     0x7a1200
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_5:
+   \   00000000   0x........         DC32     AHBPrescTable
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_6:
+   \   00000000   0x........         DC32     APBPrescTable
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_7:
+   \   00000000   0x003D0900         DC32     0x3d0900
+    450          
+    451          #if defined(RCC_PLL2_SUPPORT)
+    452          /**
+    453            * @brief  Return PLL clock frequency used for system domain
+    454            * @retval PLL clock frequency (in Hz)
+    455            */
+    456          uint32_t RCC_PLL2_GetFreqClockFreq(void)
+    457          {
+    458            return __LL_RCC_CALC_PLL2CLK_FREQ(HSE_VALUE, LL_RCC_PLL2_GetMultiplicator(), LL_RCC_HSE_GetPrediv2());
+    459          }
+    460          #endif /* RCC_PLL2_SUPPORT */
+    461          
+    462          #if defined(RCC_PLLI2S_SUPPORT)
+    463          /**
+    464            * @brief  Return PLL clock frequency used for system domain
+    465            * @retval PLL clock frequency (in Hz)
+    466            */
+    467          uint32_t RCC_PLLI2S_GetFreqDomain_I2S(void)
+    468          {
+    469            return __LL_RCC_CALC_PLLI2SCLK_FREQ(HSE_VALUE, LL_RCC_PLLI2S_GetMultiplicator(), LL_RCC_HSE_GetPrediv2());
+    470          }
+    471          #endif /* RCC_PLLI2S_SUPPORT */
+    472          
+    473          /**
+    474            * @}
+    475            */
+    476          
+    477          /**
+    478            * @}
+    479            */
+    480          
+    481          #endif /* defined(RCC) */
+    482          
+    483          /**
+    484            * @}
+    485            */
+    486          
+    487          #endif /* USE_FULL_LL_DRIVER */
+    488          
+    489          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  LL_RCC_ClearResetFlags
+        8  LL_RCC_DeInit
+              8 -> LL_RCC_ClearResetFlags
+              8 -> LL_RCC_GetSysClkSource
+              8 -> LL_RCC_HSI_Enable
+              8 -> LL_RCC_HSI_IsReady
+              8 -> LL_RCC_HSI_SetCalibTrimming
+              8 -> LL_RCC_PLL_IsReady
+              8 -> LL_RCC_SetSysClkSource
+       16  LL_RCC_GetADCClockFreq
+             16 -> LL_RCC_GetADCClockSource
+             16 -> RCC_GetHCLKClockFreq
+             16 -> RCC_GetPCLK2ClockFreq
+             16 -> RCC_GetSystemClockFreq
+        0  LL_RCC_GetADCClockSource
+        0  LL_RCC_GetAHBPrescaler
+        0  LL_RCC_GetAPB1Prescaler
+        0  LL_RCC_GetAPB2Prescaler
+        0  LL_RCC_GetSysClkSource
+        8  LL_RCC_GetSystemClocksFreq
+              8 -> RCC_GetHCLKClockFreq
+              8 -> RCC_GetPCLK1ClockFreq
+              8 -> RCC_GetPCLK2ClockFreq
+              8 -> RCC_GetSystemClockFreq
+        8  LL_RCC_GetUSBClockFreq
+              8 -> LL_RCC_GetUSBClockSource
+              8 -> LL_RCC_PLL_IsReady
+              8 -> RCC_PLL_GetFreqDomain_SYS
+        0  LL_RCC_GetUSBClockSource
+        0  LL_RCC_HSI_Enable
+        0  LL_RCC_HSI_IsReady
+        0  LL_RCC_HSI_SetCalibTrimming
+        0  LL_RCC_PLL_GetMainSource
+        0  LL_RCC_PLL_GetMultiplicator
+        0  LL_RCC_PLL_GetPrediv
+        0  LL_RCC_PLL_IsReady
+        0  LL_RCC_SetSysClkSource
+        8  RCC_GetHCLKClockFreq
+              8 -> LL_RCC_GetAHBPrescaler
+        8  RCC_GetPCLK1ClockFreq
+              8 -> LL_RCC_GetAPB1Prescaler
+        8  RCC_GetPCLK2ClockFreq
+              8 -> LL_RCC_GetAPB2Prescaler
+        8  RCC_GetSystemClockFreq
+              8 -> LL_RCC_GetSysClkSource
+              8 -> RCC_PLL_GetFreqDomain_SYS
+       16  RCC_PLL_GetFreqDomain_SYS
+             16 -> LL_RCC_PLL_GetMainSource
+             16 -> LL_RCC_PLL_GetMultiplicator
+             16 -> LL_RCC_PLL_GetPrediv
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable20
+       4  ??DataTable20_1
+       4  ??DataTable20_2
+       4  ??DataTable20_3
+       4  ??DataTable20_4
+       4  ??DataTable20_5
+       4  ??DataTable20_6
+       4  ??DataTable20_7
+      14  LL_RCC_ClearResetFlags
+      86  LL_RCC_DeInit
+      54  LL_RCC_GetADCClockFreq
+       8  LL_RCC_GetADCClockSource
+      10  LL_RCC_GetAHBPrescaler
+      10  LL_RCC_GetAPB1Prescaler
+      10  LL_RCC_GetAPB2Prescaler
+      10  LL_RCC_GetSysClkSource
+      36  LL_RCC_GetSystemClocksFreq
+      52  LL_RCC_GetUSBClockFreq
+       8  LL_RCC_GetUSBClockSource
+      14  LL_RCC_HSI_Enable
+      14  LL_RCC_HSI_IsReady
+      18  LL_RCC_HSI_SetCalibTrimming
+      10  LL_RCC_PLL_GetMainSource
+      10  LL_RCC_PLL_GetMultiplicator
+      10  LL_RCC_PLL_GetPrediv
+      14  LL_RCC_PLL_IsReady
+      16  LL_RCC_SetSysClkSource
+      22  RCC_GetHCLKClockFreq
+      20  RCC_GetPCLK1ClockFreq
+      20  RCC_GetPCLK2ClockFreq
+      44  RCC_GetSystemClockFreq
+      58  RCC_PLL_GetFreqDomain_SYS
+
+ 
+ 600 bytes in section .text
+ 
+ 600 bytes of CODE memory
+
+Errors: none
+Warnings: 1

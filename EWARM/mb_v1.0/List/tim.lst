@@ -1,0 +1,665 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  09:12:50 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\Src\tim.c       #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\Src\tim.c" -D  #
+#                    USE_FULL_LL_DRIVER -D USE_HAL_DRIVER -D STM32F103xB -lC  #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    List\" -o "D:\projects\задания от                        #
+#                    работодателя\ЭМИС\EWARM\mb_v1.0/Obj\" --no_cse           #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files\IAR Systems\Embedded Workbench                     #
+#                    6.0\arm\INC\c\DLib_Config_Full.h" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\tim.lst                                              #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\tim.o                                                 #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\Src\tim.c
+      1          /**
+      2            ******************************************************************************
+      3            * File Name          : TIM.c
+      4            * Description        : This file provides code for the configuration
+      5            *                      of the TIM instances.
+      6            ******************************************************************************
+      7            * This notice applies to any and all portions of this file
+      8            * that are not between comment pairs USER CODE BEGIN and
+      9            * USER CODE END. Other portions of this file, whether 
+     10            * inserted by the user or by software development tools
+     11            * are owned by their respective copyright owners.
+     12            *
+     13            * Copyright (c) 2018 STMicroelectronics International N.V. 
+     14            * All rights reserved.
+     15            *
+     16            * Redistribution and use in source and binary forms, with or without 
+     17            * modification, are permitted, provided that the following conditions are met:
+     18            *
+     19            * 1. Redistribution of source code must retain the above copyright notice, 
+     20            *    this list of conditions and the following disclaimer.
+     21            * 2. Redistributions in binary form must reproduce the above copyright notice,
+     22            *    this list of conditions and the following disclaimer in the documentation
+     23            *    and/or other materials provided with the distribution.
+     24            * 3. Neither the name of STMicroelectronics nor the names of other 
+     25            *    contributors to this software may be used to endorse or promote products 
+     26            *    derived from this software without specific written permission.
+     27            * 4. This software, including modifications and/or derivative works of this 
+     28            *    software, must execute solely and exclusively on microcontroller or
+     29            *    microprocessor devices manufactured by or for STMicroelectronics.
+     30            * 5. Redistribution and use of this software other than as permitted under 
+     31            *    this license is void and will automatically terminate your rights under 
+     32            *    this license. 
+     33            *
+     34            * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+     35            * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+     36            * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+     37            * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+     38            * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+     39            * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+     40            * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+     41            * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+     42            * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+     43            * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+     44            * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+     45            * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     46            *
+     47            ******************************************************************************
+     48            */
+     49          
+     50          /* Includes ------------------------------------------------------------------*/
+     51          #include "tim.h"
+
+  /**
+    ^
+"D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_tim.h",1  Warning[Pa050]: 
+          non-native end of line sequence detected (this diagnostic is only
+          issued once)
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t NVIC_GetPriorityGrouping(void)
+   \                     NVIC_GetPriorityGrouping:
+   \   00000000   0x....             LDR.N    R0,??DataTable10  ;; 0xe000ed0c
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF3C0 0x2002      UBFX     R0,R0,#+8,#+3
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void NVIC_EnableIRQ(IRQn_Type)
+   \                     NVIC_EnableIRQ:
+   \   00000000   0xB240             SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
+   \   00000002   0x0941             LSRS     R1,R0,#+5
+   \   00000004   0x....             LDR.N    R2,??DataTable10_1  ;; 0xe000e100
+   \   00000006   0x2301             MOVS     R3,#+1
+   \   00000008   0xF010 0x001F      ANDS     R0,R0,#0x1F
+   \   0000000C   0xFA13 0xF000      LSLS     R0,R3,R0
+   \   00000010   0xF842 0x0021      STR      R0,[R2, R1, LSL #+2]
+   \   00000014   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void NVIC_SetPriority(IRQn_Type, uint32_t)
+   \                     NVIC_SetPriority:
+   \   00000000   0xB240             SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
+   \   00000002   0x2800             CMP      R0,#+0
+   \   00000004   0xD508             BPL.N    ??NVIC_SetPriority_0
+   \   00000006   0xB240             SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
+   \   00000008   0xF010 0x000F      ANDS     R0,R0,#0xF
+   \   0000000C   0x....             LDR.N    R2,??DataTable10_2  ;; 0xe000ed18
+   \   0000000E   0x1880             ADDS     R0,R0,R2
+   \   00000010   0x0109             LSLS     R1,R1,#+4
+   \   00000012   0xF800 0x1C04      STRB     R1,[R0, #-4]
+   \   00000016   0xE003             B.N      ??NVIC_SetPriority_1
+   \                     ??NVIC_SetPriority_0:
+   \   00000018   0xB240             SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
+   \   0000001A   0x....             LDR.N    R2,??DataTable10_3  ;; 0xe000e400
+   \   0000001C   0x0109             LSLS     R1,R1,#+4
+   \   0000001E   0x5481             STRB     R1,[R0, R2]
+   \                     ??NVIC_SetPriority_1:
+   \   00000020   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t NVIC_EncodePriority(uint32_t, uint32_t, uint32_t)
+   \                     NVIC_EncodePriority:
+   \   00000000   0xB410             PUSH     {R4}
+   \   00000002   0xF010 0x0007      ANDS     R0,R0,#0x7
+   \   00000006   0xF1D0 0x0307      RSBS     R3,R0,#+7
+   \   0000000A   0x2B05             CMP      R3,#+5
+   \   0000000C   0xD301             BCC.N    ??NVIC_EncodePriority_0
+   \   0000000E   0x2304             MOVS     R3,#+4
+   \   00000010   0xE001             B.N      ??NVIC_EncodePriority_1
+   \                     ??NVIC_EncodePriority_0:
+   \   00000012   0xF1D0 0x0307      RSBS     R3,R0,#+7
+   \                     ??NVIC_EncodePriority_1:
+   \   00000016   0x1D04             ADDS     R4,R0,#+4
+   \   00000018   0x2C07             CMP      R4,#+7
+   \   0000001A   0xD201             BCS.N    ??NVIC_EncodePriority_2
+   \   0000001C   0x2000             MOVS     R0,#+0
+   \   0000001E   0xE000             B.N      ??NVIC_EncodePriority_3
+   \                     ??NVIC_EncodePriority_2:
+   \   00000020   0x1EC0             SUBS     R0,R0,#+3
+   \                     ??NVIC_EncodePriority_3:
+   \   00000022   0x2401             MOVS     R4,#+1
+   \   00000024   0xFA14 0xF303      LSLS     R3,R4,R3
+   \   00000028   0x1E5B             SUBS     R3,R3,#+1
+   \   0000002A   0x4019             ANDS     R1,R3,R1
+   \   0000002C   0x4081             LSLS     R1,R1,R0
+   \   0000002E   0x2301             MOVS     R3,#+1
+   \   00000030   0xFA13 0xF000      LSLS     R0,R3,R0
+   \   00000034   0x1E40             SUBS     R0,R0,#+1
+   \   00000036   0x4010             ANDS     R0,R0,R2
+   \   00000038   0x4308             ORRS     R0,R0,R1
+   \   0000003A   0xBC10             POP      {R4}
+   \   0000003C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_APB1_GRP1_EnableClock(uint32_t)
+   \                     LL_APB1_GRP1_EnableClock:
+   \   00000000   0xB081             SUB      SP,SP,#+4
+   \   00000002   0x....             LDR.N    R1,??DataTable10_4  ;; 0x4002101c
+   \   00000004   0x6809             LDR      R1,[R1, #+0]
+   \   00000006   0x4301             ORRS     R1,R0,R1
+   \   00000008   0x....             LDR.N    R2,??DataTable10_4  ;; 0x4002101c
+   \   0000000A   0x6011             STR      R1,[R2, #+0]
+   \   0000000C   0x....             LDR.N    R1,??DataTable10_4  ;; 0x4002101c
+   \   0000000E   0x6809             LDR      R1,[R1, #+0]
+   \   00000010   0x4008             ANDS     R0,R0,R1
+   \   00000012   0x9000             STR      R0,[SP, #+0]
+   \   00000014   0x9800             LDR      R0,[SP, #+0]
+   \   00000016   0xB001             ADD      SP,SP,#+4
+   \   00000018   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_APB2_GRP1_EnableClock(uint32_t)
+   \                     LL_APB2_GRP1_EnableClock:
+   \   00000000   0xB081             SUB      SP,SP,#+4
+   \   00000002   0x....             LDR.N    R1,??DataTable10_5  ;; 0x40021018
+   \   00000004   0x6809             LDR      R1,[R1, #+0]
+   \   00000006   0x4301             ORRS     R1,R0,R1
+   \   00000008   0x....             LDR.N    R2,??DataTable10_5  ;; 0x40021018
+   \   0000000A   0x6011             STR      R1,[R2, #+0]
+   \   0000000C   0x....             LDR.N    R1,??DataTable10_5  ;; 0x40021018
+   \   0000000E   0x6809             LDR      R1,[R1, #+0]
+   \   00000010   0x4008             ANDS     R0,R0,R1
+   \   00000012   0x9000             STR      R0,[SP, #+0]
+   \   00000014   0x9800             LDR      R0,[SP, #+0]
+   \   00000016   0xB001             ADD      SP,SP,#+4
+   \   00000018   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_EnableCounter(TIM_TypeDef *)
+   \                     LL_TIM_EnableCounter:
+   \   00000000   0x6801             LDR      R1,[R0, #+0]
+   \   00000002   0xF051 0x0101      ORRS     R1,R1,#0x1
+   \   00000006   0x6001             STR      R1,[R0, #+0]
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_DisableCounter(TIM_TypeDef *)
+   \                     LL_TIM_DisableCounter:
+   \   00000000   0x6801             LDR      R1,[R0, #+0]
+   \   00000002   0x0849             LSRS     R1,R1,#+1
+   \   00000004   0x0049             LSLS     R1,R1,#+1
+   \   00000006   0x6001             STR      R1,[R0, #+0]
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_EnableARRPreload(TIM_TypeDef *)
+   \                     LL_TIM_EnableARRPreload:
+   \   00000000   0x6801             LDR      R1,[R0, #+0]
+   \   00000002   0xF051 0x0180      ORRS     R1,R1,#0x80
+   \   00000006   0x6001             STR      R1,[R0, #+0]
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_DisableARRPreload(TIM_TypeDef *)
+   \                     LL_TIM_DisableARRPreload:
+   \   00000000   0x6801             LDR      R1,[R0, #+0]
+   \   00000002   0xF031 0x0180      BICS     R1,R1,#0x80
+   \   00000006   0x6001             STR      R1,[R0, #+0]
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_SetCounter(TIM_TypeDef *, uint32_t)
+   \                     LL_TIM_SetCounter:
+   \   00000000   0x6241             STR      R1,[R0, #+36]
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_SetAutoReload(TIM_TypeDef *, uint32_t)
+   \                     LL_TIM_SetAutoReload:
+   \   00000000   0x62C1             STR      R1,[R0, #+44]
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_SetClockSource(TIM_TypeDef *, uint32_t)
+   \                     LL_TIM_SetClockSource:
+   \   00000000   0x6882             LDR      R2,[R0, #+8]
+   \   00000002   0x....             LDR.N    R3,??DataTable10_6  ;; 0xffffbff8
+   \   00000004   0x401A             ANDS     R2,R3,R2
+   \   00000006   0x4311             ORRS     R1,R1,R2
+   \   00000008   0x6081             STR      R1,[R0, #+8]
+   \   0000000A   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_SetTriggerOutput(TIM_TypeDef *, uint32_t)
+   \                     LL_TIM_SetTriggerOutput:
+   \   00000000   0x6842             LDR      R2,[R0, #+4]
+   \   00000002   0xF032 0x0270      BICS     R2,R2,#0x70
+   \   00000006   0x4311             ORRS     R1,R1,R2
+   \   00000008   0x6041             STR      R1,[R0, #+4]
+   \   0000000A   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_EnableMasterSlaveMode(TIM_TypeDef *)
+   \                     LL_TIM_EnableMasterSlaveMode:
+   \   00000000   0x6881             LDR      R1,[R0, #+8]
+   \   00000002   0xF051 0x0180      ORRS     R1,R1,#0x80
+   \   00000006   0x6081             STR      R1,[R0, #+8]
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_DisableMasterSlaveMode(TIM_TypeDef *)
+   \                     LL_TIM_DisableMasterSlaveMode:
+   \   00000000   0x6881             LDR      R1,[R0, #+8]
+   \   00000002   0xF031 0x0180      BICS     R1,R1,#0x80
+   \   00000006   0x6081             STR      R1,[R0, #+8]
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_ClearFlag_UPDATE(TIM_TypeDef *)
+   \                     LL_TIM_ClearFlag_UPDATE:
+   \   00000000   0xF07F 0x0101      MVNS     R1,#+1
+   \   00000004   0x6101             STR      R1,[R0, #+16]
+   \   00000006   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_EnableIT_UPDATE(TIM_TypeDef *)
+   \                     LL_TIM_EnableIT_UPDATE:
+   \   00000000   0x68C1             LDR      R1,[R0, #+12]
+   \   00000002   0xF051 0x0101      ORRS     R1,R1,#0x1
+   \   00000006   0x60C1             STR      R1,[R0, #+12]
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_DisableIT_UPDATE(TIM_TypeDef *)
+   \                     LL_TIM_DisableIT_UPDATE:
+   \   00000000   0x68C1             LDR      R1,[R0, #+12]
+   \   00000002   0x0849             LSRS     R1,R1,#+1
+   \   00000004   0x0049             LSLS     R1,R1,#+1
+   \   00000006   0x60C1             STR      R1,[R0, #+12]
+   \   00000008   0x4770             BX       LR               ;; return
+     52          
+     53          /* USER CODE BEGIN 0 */
+     54          #include "hw_config.h"
+     55          /* USER CODE END 0 */
+     56          
+     57          /* TIM1 init function */
+
+   \                                 In section .text, align 2, keep-with-next
+     58          void MX_TIM1_Init(void)
+     59          {
+   \                     MX_TIM1_Init:
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB085             SUB      SP,SP,#+20
+     60            LL_TIM_InitTypeDef TIM_InitStruct;
+     61          
+     62            /* Peripheral clock enable */
+     63            LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_TIM1);
+   \   00000004   0xF44F 0x6000      MOV      R0,#+2048
+   \   00000008   0x.... 0x....      BL       LL_APB2_GRP1_EnableClock
+     64          
+     65            /* TIM1 interrupt Init */
+     66            NVIC_SetPriority(TIM1_UP_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),5, 0));
+   \   0000000C   0x.... 0x....      BL       NVIC_GetPriorityGrouping
+   \   00000010   0x2200             MOVS     R2,#+0
+   \   00000012   0x2105             MOVS     R1,#+5
+   \   00000014   0x.... 0x....      BL       NVIC_EncodePriority
+   \   00000018   0x0001             MOVS     R1,R0
+   \   0000001A   0x2019             MOVS     R0,#+25
+   \   0000001C   0x.... 0x....      BL       NVIC_SetPriority
+     67            NVIC_EnableIRQ(TIM1_UP_IRQn);
+   \   00000020   0x2019             MOVS     R0,#+25
+   \   00000022   0x.... 0x....      BL       NVIC_EnableIRQ
+     68          
+     69            TIM_InitStruct.Prescaler = 72;
+   \   00000026   0x2048             MOVS     R0,#+72
+   \   00000028   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+     70            TIM_InitStruct.CounterMode = LL_TIM_COUNTERMODE_UP;
+   \   0000002C   0x2000             MOVS     R0,#+0
+   \   0000002E   0x9001             STR      R0,[SP, #+4]
+     71            TIM_InitStruct.Autoreload = 750;
+   \   00000030   0xF240 0x20EE      MOVW     R0,#+750
+   \   00000034   0x9002             STR      R0,[SP, #+8]
+     72            TIM_InitStruct.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
+   \   00000036   0x2000             MOVS     R0,#+0
+   \   00000038   0x9003             STR      R0,[SP, #+12]
+     73            TIM_InitStruct.RepetitionCounter = 0;
+   \   0000003A   0x2000             MOVS     R0,#+0
+   \   0000003C   0xF88D 0x0010      STRB     R0,[SP, #+16]
+     74            LL_TIM_Init(TIM1, &TIM_InitStruct);
+   \   00000040   0xA900             ADD      R1,SP,#+0
+   \   00000042   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   00000044   0x.... 0x....      BL       LL_TIM_Init
+     75          
+     76            LL_TIM_DisableARRPreload(TIM1);
+   \   00000048   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   0000004A   0x.... 0x....      BL       LL_TIM_DisableARRPreload
+     77          
+     78            LL_TIM_SetClockSource(TIM1, LL_TIM_CLOCKSOURCE_INTERNAL);
+   \   0000004E   0x2100             MOVS     R1,#+0
+   \   00000050   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   00000052   0x.... 0x....      BL       LL_TIM_SetClockSource
+     79          
+     80            LL_TIM_SetTriggerOutput(TIM1, LL_TIM_TRGO_RESET);
+   \   00000056   0x2100             MOVS     R1,#+0
+   \   00000058   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   0000005A   0x.... 0x....      BL       LL_TIM_SetTriggerOutput
+     81          
+     82            LL_TIM_DisableMasterSlaveMode(TIM1);
+   \   0000005E   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   00000060   0x.... 0x....      BL       LL_TIM_DisableMasterSlaveMode
+     83          
+     84          }
+   \   00000064   0xB005             ADD      SP,SP,#+20
+   \   00000066   0xBD00             POP      {PC}             ;; return
+     85          /* TIM3 init function */
+
+   \                                 In section .text, align 2, keep-with-next
+     86          void MX_TIM3_Init(void)
+     87          {
+   \                     MX_TIM3_Init:
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB085             SUB      SP,SP,#+20
+     88            LL_TIM_InitTypeDef TIM_InitStruct;
+     89          
+     90            /* Peripheral clock enable */
+     91            LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM3);
+   \   00000004   0x2002             MOVS     R0,#+2
+   \   00000006   0x.... 0x....      BL       LL_APB1_GRP1_EnableClock
+     92          
+     93            TIM_InitStruct.Prescaler = 8;
+   \   0000000A   0x2008             MOVS     R0,#+8
+   \   0000000C   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+     94            TIM_InitStruct.CounterMode = LL_TIM_COUNTERMODE_UP;
+   \   00000010   0x2000             MOVS     R0,#+0
+   \   00000012   0x9001             STR      R0,[SP, #+4]
+     95            TIM_InitStruct.Autoreload = 2000;
+   \   00000014   0xF44F 0x60FA      MOV      R0,#+2000
+   \   00000018   0x9002             STR      R0,[SP, #+8]
+     96            TIM_InitStruct.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
+   \   0000001A   0x2000             MOVS     R0,#+0
+   \   0000001C   0x9003             STR      R0,[SP, #+12]
+     97            LL_TIM_Init(TIM3, &TIM_InitStruct);
+   \   0000001E   0xA900             ADD      R1,SP,#+0
+   \   00000020   0x....             LDR.N    R0,??DataTable10_8  ;; 0x40000400
+   \   00000022   0x.... 0x....      BL       LL_TIM_Init
+     98          
+     99            LL_TIM_EnableARRPreload(TIM3);
+   \   00000026   0x....             LDR.N    R0,??DataTable10_8  ;; 0x40000400
+   \   00000028   0x.... 0x....      BL       LL_TIM_EnableARRPreload
+    100          
+    101            LL_TIM_SetClockSource(TIM3, LL_TIM_CLOCKSOURCE_INTERNAL);
+   \   0000002C   0x2100             MOVS     R1,#+0
+   \   0000002E   0x....             LDR.N    R0,??DataTable10_8  ;; 0x40000400
+   \   00000030   0x.... 0x....      BL       LL_TIM_SetClockSource
+    102          
+    103            LL_TIM_SetTriggerOutput(TIM3, LL_TIM_TRGO_UPDATE);
+   \   00000034   0x2120             MOVS     R1,#+32
+   \   00000036   0x....             LDR.N    R0,??DataTable10_8  ;; 0x40000400
+   \   00000038   0x.... 0x....      BL       LL_TIM_SetTriggerOutput
+    104          
+    105            LL_TIM_EnableMasterSlaveMode(TIM3);
+   \   0000003C   0x....             LDR.N    R0,??DataTable10_8  ;; 0x40000400
+   \   0000003E   0x.... 0x....      BL       LL_TIM_EnableMasterSlaveMode
+    106          
+    107          }
+   \   00000042   0xB005             ADD      SP,SP,#+20
+   \   00000044   0xBD00             POP      {PC}             ;; return
+    108          
+    109          /* USER CODE BEGIN 1 */
+
+   \                                 In section .text, align 2, keep-with-next
+    110          BOOL mbTimerReInit( USHORT usTimerT35_50us )
+    111          {
+   \                     mbTimerReInit:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    112            LL_TIM_SetAutoReload(mbTimer, usTimerT35_50us);
+   \   00000002   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
+   \   00000004   0x0001             MOVS     R1,R0
+   \   00000006   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   00000008   0x.... 0x....      BL       LL_TIM_SetAutoReload
+    113            LL_TIM_DisableCounter(mbTimer);
+   \   0000000C   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   0000000E   0x.... 0x....      BL       LL_TIM_DisableCounter
+    114            return TRUE;
+   \   00000012   0x2001             MOVS     R0,#+1
+   \   00000014   0xBD02             POP      {R1,PC}          ;; return
+    115          }
+    116          
+
+   \                                 In section .text, align 2, keep-with-next
+    117          void vMBPortTimersEnable()
+    118          {
+   \                     vMBPortTimersEnable:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    119            LL_TIM_ClearFlag_UPDATE(mbTimer);
+   \   00000002   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   00000004   0x.... 0x....      BL       LL_TIM_ClearFlag_UPDATE
+    120            LL_TIM_EnableIT_UPDATE(mbTimer);
+   \   00000008   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   0000000A   0x.... 0x....      BL       LL_TIM_EnableIT_UPDATE
+    121            LL_TIM_SetCounter(mbTimer,0);
+   \   0000000E   0x2100             MOVS     R1,#+0
+   \   00000010   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   00000012   0x.... 0x....      BL       LL_TIM_SetCounter
+    122            LL_TIM_EnableCounter(mbTimer);
+   \   00000016   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   00000018   0x.... 0x....      BL       LL_TIM_EnableCounter
+    123          }
+   \   0000001C   0xBD01             POP      {R0,PC}          ;; return
+    124          
+
+   \                                 In section .text, align 2, keep-with-next
+    125          void vMBPortTimersDisable()
+    126          {
+   \                     vMBPortTimersDisable:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    127            LL_TIM_ClearFlag_UPDATE(mbTimer);
+   \   00000002   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   00000004   0x.... 0x....      BL       LL_TIM_ClearFlag_UPDATE
+    128            LL_TIM_DisableIT_UPDATE(mbTimer);
+   \   00000008   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   0000000A   0x.... 0x....      BL       LL_TIM_DisableIT_UPDATE
+    129            LL_TIM_SetCounter(mbTimer,0);
+   \   0000000E   0x2100             MOVS     R1,#+0
+   \   00000010   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   00000012   0x.... 0x....      BL       LL_TIM_SetCounter
+    130            LL_TIM_DisableCounter(mbTimer);
+   \   00000016   0x....             LDR.N    R0,??DataTable10_7  ;; 0x40012c00
+   \   00000018   0x.... 0x....      BL       LL_TIM_DisableCounter
+    131          }
+   \   0000001C   0xBD01             POP      {R0,PC}          ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10:
+   \   00000000   0xE000ED0C         DC32     0xe000ed0c
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_1:
+   \   00000000   0xE000E100         DC32     0xe000e100
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_2:
+   \   00000000   0xE000ED18         DC32     0xe000ed18
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_3:
+   \   00000000   0xE000E400         DC32     0xe000e400
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_4:
+   \   00000000   0x4002101C         DC32     0x4002101c
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_5:
+   \   00000000   0x40021018         DC32     0x40021018
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_6:
+   \   00000000   0xFFFFBFF8         DC32     0xffffbff8
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_7:
+   \   00000000   0x40012C00         DC32     0x40012c00
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_8:
+   \   00000000   0x40000400         DC32     0x40000400
+    132          /* USER CODE END 1 */
+    133          
+    134          /**
+    135            * @}
+    136            */
+    137          
+    138          /**
+    139            * @}
+    140            */
+    141          
+    142          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        4  LL_APB1_GRP1_EnableClock
+        4  LL_APB2_GRP1_EnableClock
+        0  LL_TIM_ClearFlag_UPDATE
+        0  LL_TIM_DisableARRPreload
+        0  LL_TIM_DisableCounter
+        0  LL_TIM_DisableIT_UPDATE
+        0  LL_TIM_DisableMasterSlaveMode
+        0  LL_TIM_EnableARRPreload
+        0  LL_TIM_EnableCounter
+        0  LL_TIM_EnableIT_UPDATE
+        0  LL_TIM_EnableMasterSlaveMode
+        0  LL_TIM_SetAutoReload
+        0  LL_TIM_SetClockSource
+        0  LL_TIM_SetCounter
+        0  LL_TIM_SetTriggerOutput
+       24  MX_TIM1_Init
+             24 -> LL_APB2_GRP1_EnableClock
+             24 -> LL_TIM_DisableARRPreload
+             24 -> LL_TIM_DisableMasterSlaveMode
+             24 -> LL_TIM_Init
+             24 -> LL_TIM_SetClockSource
+             24 -> LL_TIM_SetTriggerOutput
+             24 -> NVIC_EnableIRQ
+             24 -> NVIC_EncodePriority
+             24 -> NVIC_GetPriorityGrouping
+             24 -> NVIC_SetPriority
+       24  MX_TIM3_Init
+             24 -> LL_APB1_GRP1_EnableClock
+             24 -> LL_TIM_EnableARRPreload
+             24 -> LL_TIM_EnableMasterSlaveMode
+             24 -> LL_TIM_Init
+             24 -> LL_TIM_SetClockSource
+             24 -> LL_TIM_SetTriggerOutput
+        0  NVIC_EnableIRQ
+        4  NVIC_EncodePriority
+        0  NVIC_GetPriorityGrouping
+        0  NVIC_SetPriority
+        8  mbTimerReInit
+              8 -> LL_TIM_DisableCounter
+              8 -> LL_TIM_SetAutoReload
+        8  vMBPortTimersDisable
+              8 -> LL_TIM_ClearFlag_UPDATE
+              8 -> LL_TIM_DisableCounter
+              8 -> LL_TIM_DisableIT_UPDATE
+              8 -> LL_TIM_SetCounter
+        8  vMBPortTimersEnable
+              8 -> LL_TIM_ClearFlag_UPDATE
+              8 -> LL_TIM_EnableCounter
+              8 -> LL_TIM_EnableIT_UPDATE
+              8 -> LL_TIM_SetCounter
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable10
+       4  ??DataTable10_1
+       4  ??DataTable10_2
+       4  ??DataTable10_3
+       4  ??DataTable10_4
+       4  ??DataTable10_5
+       4  ??DataTable10_6
+       4  ??DataTable10_7
+       4  ??DataTable10_8
+      26  LL_APB1_GRP1_EnableClock
+      26  LL_APB2_GRP1_EnableClock
+       8  LL_TIM_ClearFlag_UPDATE
+      10  LL_TIM_DisableARRPreload
+      10  LL_TIM_DisableCounter
+      10  LL_TIM_DisableIT_UPDATE
+      10  LL_TIM_DisableMasterSlaveMode
+      10  LL_TIM_EnableARRPreload
+      10  LL_TIM_EnableCounter
+      10  LL_TIM_EnableIT_UPDATE
+      10  LL_TIM_EnableMasterSlaveMode
+       4  LL_TIM_SetAutoReload
+      12  LL_TIM_SetClockSource
+       4  LL_TIM_SetCounter
+      12  LL_TIM_SetTriggerOutput
+     104  MX_TIM1_Init
+      70  MX_TIM3_Init
+      22  NVIC_EnableIRQ
+      62  NVIC_EncodePriority
+      10  NVIC_GetPriorityGrouping
+      34  NVIC_SetPriority
+      22  mbTimerReInit
+      30  vMBPortTimersDisable
+      30  vMBPortTimersEnable
+
+ 
+ 592 bytes in section .text
+ 
+ 592 bytes of CODE memory
+
+Errors: none
+Warnings: 1

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Workspace>
+  <ConfigDictionary>
+    
+  <CurrentConfigs><Project>mb_v1.0/mb_v1.0</Project></CurrentConfigs></ConfigDictionary>
+  <Desktop>
+    <Static>
+      <Build>
+        
+        
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>980</ColumnWidth1><ColumnWidth2>261</ColumnWidth2><ColumnWidth3>65</ColumnWidth3></Build>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>223</Column0><Column1>2</Column1><Column2>27</Column2><Column3>0</Column3></ColumnWidths>
+      </Workspace>
+    <TerminalIO/><Find-in-Files><ColumnWidth0>470</ColumnWidth0><ColumnWidth1>67</ColumnWidth1><ColumnWidth2>806</ColumnWidth2></Find-in-Files><Debug-Log><ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1307</ColumnWidth1></Debug-Log></Static>
+    <Windows>
+      
+      
+    <Wnd2>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-4103-5256</Identity>
+            <TabName>Workspace</TabName>
+            <Factory>Workspace</Factory>
+            <Session>
+              
+            <NodeDict><ExpandedNode>mb_v1.0</ExpandedNode><ExpandedNode>mb_v1.0/Application</ExpandedNode><ExpandedNode>mb_v1.0/Application/User</ExpandedNode><ExpandedNode>mb_v1.0/Drivers</ExpandedNode><ExpandedNode>mb_v1.0/Output</ExpandedNode></NodeDict></Session>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd2><Wnd3>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-14852-5260</Identity>
+            <TabName>Build</TabName>
+            <Factory>Build</Factory>
+            <Session/>
+          </Tab>
+        <Tab><Identity>TabID-14168-14321</Identity><TabName>Find in Files</TabName><Factory>Find-in-Files</Factory><Session/></Tab><Tab><Identity>TabID-11868-28102</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd3></Windows>
+    <Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Src\stm32f1xx_hal_timebase_TIM.c</Filename><XPos>0</XPos><YPos>135</YPos><SelStart>6062</SelStart><SelEnd>6062</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Src\stm32f1xx_hal_msp.c</Filename><XPos>0</XPos><YPos>96</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h</Filename><XPos>0</XPos><YPos>49</YPos><SelStart>2693</SelStart><SelEnd>2693</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\port\port.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>514</SelStart><SelEnd>514</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_tim.h</Filename><XPos>0</XPos><YPos>1311</YPos><SelStart>67459</SelStart><SelEnd>67519</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_usart.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>518</SelStart><SelEnd>518</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Inc\tim.h</Filename><XPos>0</XPos><YPos>42</YPos><SelStart>3190</SelStart><SelEnd>3190</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\functions\mbfuncother.c</Filename><XPos>0</XPos><YPos>3</YPos><SelStart>1853</SelStart><SelEnd>1853</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_tim.c</Filename><XPos>0</XPos><YPos>33</YPos><SelStart>2230</SelStart><SelEnd>2230</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_adc.c</Filename><XPos>0</XPos><YPos>30</YPos><SelStart>2233</SelStart><SelEnd>2233</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_dma.c</Filename><XPos>0</XPos><YPos>29</YPos><SelStart>2229</SelStart><SelEnd>2229</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_gpio.c</Filename><XPos>0</XPos><YPos>24</YPos><SelStart>2191</SelStart><SelEnd>2191</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_rcc.c</Filename><XPos>0</XPos><YPos>28</YPos><SelStart>2203</SelStart><SelEnd>2203</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_utils.c</Filename><XPos>0</XPos><YPos>28</YPos><SelStart>2235</SelStart><SelEnd>2235</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_gpio.h</Filename><XPos>0</XPos><YPos>78</YPos><SelStart>2265</SelStart><SelEnd>2287</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\rtu\mbrtu.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>1627</SelStart><SelEnd>1627</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\rtu\mbcrc.c</Filename><XPos>0</XPos><YPos>36</YPos><SelStart>2750</SelStart><SelEnd>2750</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\functions\mbfunccoils.c</Filename><XPos>0</XPos><YPos>123</YPos><SelStart>5505</SelStart><SelEnd>5505</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Inc\flash.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>97</SelStart><SelEnd>97</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\mb_v1.0\List\mb_v1.0.map</Filename><XPos>0</XPos><YPos>889</YPos><SelStart>54953</SelStart><SelEnd>54953</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h</Filename><XPos>0</XPos><YPos>170</YPos><SelStart>7713</SelStart><SelEnd>7720</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM3\port.c</Filename><XPos>0</XPos><YPos>328</YPos><SelStart>13746</SelStart><SelEnd>13746</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_usart.h</Filename><XPos>0</XPos><YPos>208</YPos><SelStart>11275</SelStart><SelEnd>11295</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Inc\stm32f1xx_hal_conf.h</Filename><XPos>0</XPos><YPos>199</YPos><SelStart>9831</SelStart><SelEnd>9831</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\functions\mbfuncholding.c</Filename><XPos>0</XPos><YPos>54</YPos><SelStart>7129</SelStart><SelEnd>7129</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\include\mb.h</Filename><XPos>0</XPos><YPos>399</YPos><SelStart>10692</SelStart><SelEnd>10692</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\functions\mbfuncinput.c</Filename><XPos>0</XPos><YPos>16</YPos><SelStart>2676</SelStart><SelEnd>2676</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\include\mbfunc.h</Filename><XPos>0</XPos><YPos>56</YPos><SelStart>2866</SelStart><SelEnd>2866</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\include\mbconfig.h</Filename><XPos>0</XPos><YPos>76</YPos><SelStart>4834</SelStart><SelEnd>4834</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\functions\mbutils.c</Filename><XPos>0</XPos><YPos>120</YPos><SelStart>2099</SelStart><SelEnd>2099</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h</Filename><XPos>0</XPos><YPos>344</YPos><SelStart>10245</SelStart><SelEnd>10245</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Inc\adc.h</Filename><XPos>0</XPos><YPos>63</YPos><SelStart>3172</SelStart><SelEnd>3172</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Inc\usart.h</Filename><XPos>0</XPos><YPos>45</YPos><SelStart>3382</SelStart><SelEnd>3404</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h</Filename><XPos>0</XPos><YPos>3</YPos><SelStart>2</SelStart><SelEnd>2</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xb.h</Filename><XPos>0</XPos><YPos>607</YPos><SelStart>22157</SelStart><SelEnd>22157</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h</Filename><XPos>0</XPos><YPos>119</YPos><SelStart>10011</SelStart><SelEnd>10018</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Src\usart.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>4839</SelStart><SelEnd>4839</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\UserModbusSlaver.h</Filename><XPos>0</XPos><YPos>30</YPos><SelStart>1465</SelStart><SelEnd>1465</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Src\stm32f1xx_it.c</Filename><XPos>0</XPos><YPos>245</YPos><SelStart>7233</SelStart><SelEnd>7233</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\UserModbusSlaver.c</Filename><XPos>0</XPos><YPos>12</YPos><SelStart>920</SelStart><SelEnd>920</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Src\flash.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>2408</SelStart><SelEnd>2436</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c</Filename><XPos>0</XPos><YPos>725</YPos><SelStart>26302</SelStart><SelEnd>26302</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c</Filename><XPos>0</XPos><YPos>9</YPos><SelStart>10029</SelStart><SelEnd>10029</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Src\main.c</Filename><XPos>0</XPos><YPos>106</YPos><SelStart>4206</SelStart><SelEnd>4206</SelEnd></Tab><ActiveTab>43</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Src\freertos.c</Filename><XPos>0</XPos><YPos>150</YPos><SelStart>3577</SelStart><SelEnd>3590</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Inc\main.h</Filename><XPos>0</XPos><YPos>72</YPos><SelStart>3460</SelStart><SelEnd>3460</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Inc\hw_config.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>1325</SelStart><SelEnd>1335</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\mb.c</Filename><XPos>0</XPos><YPos>357</YPos><SelStart>8471</SelStart><SelEnd>8471</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\include\mbproto.h</Filename><XPos>0</XPos><YPos>34</YPos><SelStart>2408</SelStart><SelEnd>2408</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Middlewares\Third_Party\FreeRTOS\Source\tasks.c</Filename><XPos>0</XPos><YPos>3130</YPos><SelStart>103067</SelStart><SelEnd>103067</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\FreeModbus\modbus\rtu\mbrtu.c</Filename><XPos>0</XPos><YPos>279</YPos><SelStart>5671</SelStart><SelEnd>5671</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Src\adc.c</Filename><XPos>0</XPos><YPos>91</YPos><SelStart>3332</SelStart><SelEnd>3332</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Src\tim.c</Filename><XPos>0</XPos><YPos>99</YPos><SelStart>4571</SelStart><SelEnd>4571</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\Src\gpio.c</Filename><XPos>0</XPos><YPos>45</YPos><SelStart>3553</SelStart><SelEnd>3553</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-00f25ae8><key>iaridepm.enu1</key></Toolbar-00f25ae8></Sizes></Row0></Top><Left><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>483</Bottom><Right>289</Right><x>-2</x><y>-2</y><xscreen>200</xscreen><yscreen>200</yscreen><sizeHorzCX>146413</sizeHorzCX><sizeHorzCY>275482</sizeHorzCY><sizeVertCX>213031</sizeVertCX><sizeVertCY>668044</sizeVertCY></Rect></Wnd2></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>198</Bottom><Right>1368</Right><x>-2</x><y>-2</y><xscreen>1370</xscreen><yscreen>200</yscreen><sizeHorzCX>1002928</sizeHorzCX><sizeHorzCY>275482</sizeHorzCY><sizeVertCX>146413</sizeVertCX><sizeVertCY>275482</sizeVertCY></Rect></Wnd3></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Workspace>
+
+

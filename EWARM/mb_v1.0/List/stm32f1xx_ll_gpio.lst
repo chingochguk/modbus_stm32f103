@@ -1,0 +1,635 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  06:16:13 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1 #
+#                    xx_HAL_Driver\Src\stm32f1xx_ll_gpio.c                    #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F #
+#                    1xx_HAL_Driver\Src\stm32f1xx_ll_gpio.c" -D               #
+#                    USE_FULL_LL_DRIVER -D USE_HAL_DRIVER -D STM32F103xB -lC  #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    List\" -o "D:\projects\задания от                        #
+#                    работодателя\ЭМИС\EWARM\mb_v1.0/Obj\" --no_cse           #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files\IAR Systems\Embedded Workbench                     #
+#                    6.0\arm\INC\c\DLib_Config_Full.h" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\stm32f1xx_ll_gpio.lst                                #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\stm32f1xx_ll_gpio.o                                   #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_gpio.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    stm32f1xx_ll_gpio.c
+      4            * @author  MCD Application Team
+      5            * @brief   GPIO LL module driver.
+      6            ******************************************************************************
+      7            * @attention
+      8            *
+      9            * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+     10            *
+     11            * Redistribution and use in source and binary forms, with or without modification,
+     12            * are permitted provided that the following conditions are met:
+     13            *   1. Redistributions of source code must retain the above copyright notice,
+     14            *      this list of conditions and the following disclaimer.
+     15            *   2. Redistributions in binary form must reproduce the above copyright notice,
+     16            *      this list of conditions and the following disclaimer in the documentation
+     17            *      and/or other materials provided with the distribution.
+     18            *   3. Neither the name of STMicroelectronics nor the names of its contributors
+     19            *      may be used to endorse or promote products derived from this software
+     20            *      without specific prior written permission.
+     21            *
+     22            * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     23            * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     24            * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     25            * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+     26            * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     27            * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+     28            * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+     29            * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+     30            * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+     31            * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     32            *
+     33            ******************************************************************************
+     34            */
+     35          #if defined(USE_FULL_LL_DRIVER)
+     36          
+     37          /* Includes ------------------------------------------------------------------*/
+     38          #include "stm32f1xx_ll_gpio.h"
+
+  /**
+    ^
+"D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h",1  Warning[Pa050]: 
+          non-native end of line sequence detected (this diagnostic is only
+          issued once)
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_APB2_GRP1_ForceReset(uint32_t)
+   \                     LL_APB2_GRP1_ForceReset:
+   \   00000000   0x....             LDR.N    R1,??DataTable2  ;; 0x4002100c
+   \   00000002   0x6809             LDR      R1,[R1, #+0]
+   \   00000004   0x4308             ORRS     R0,R0,R1
+   \   00000006   0x....             LDR.N    R1,??DataTable2  ;; 0x4002100c
+   \   00000008   0x6008             STR      R0,[R1, #+0]
+   \   0000000A   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_APB2_GRP1_ReleaseReset(uint32_t)
+   \                     LL_APB2_GRP1_ReleaseReset:
+   \   00000000   0x....             LDR.N    R1,??DataTable2  ;; 0x4002100c
+   \   00000002   0x6809             LDR      R1,[R1, #+0]
+   \   00000004   0xEA31 0x0000      BICS     R0,R1,R0
+   \   00000008   0x....             LDR.N    R1,??DataTable2  ;; 0x4002100c
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_GPIO_SetPinMode(GPIO_TypeDef *, uint32_t, uint32_t)
+   \                     LL_GPIO_SetPinMode:
+   \   00000000   0xB430             PUSH     {R4,R5}
+   \   00000002   0xEB10 0x6011      ADDS     R0,R0,R1, LSR #+24
+   \   00000006   0xFA91 0xF3A1      RBIT     R3,R1
+   \   0000000A   0xFAB3 0xF383      CLZ      R3,R3
+   \   0000000E   0x6804             LDR      R4,[R0, #+0]
+   \   00000010   0x250F             MOVS     R5,#+15
+   \   00000012   0xB2DB             UXTB     R3,R3            ;; ZeroExt  R3,R3,#+24,#+24
+   \   00000014   0x009B             LSLS     R3,R3,#+2
+   \   00000016   0xFA15 0xF303      LSLS     R3,R5,R3
+   \   0000001A   0xEA34 0x0303      BICS     R3,R4,R3
+   \   0000001E   0xFA91 0xF1A1      RBIT     R1,R1
+   \   00000022   0xFAB1 0xF181      CLZ      R1,R1
+   \   00000026   0xB2C9             UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+   \   00000028   0x0089             LSLS     R1,R1,#+2
+   \   0000002A   0xFA12 0xF101      LSLS     R1,R2,R1
+   \   0000002E   0x4319             ORRS     R1,R1,R3
+   \   00000030   0x6001             STR      R1,[R0, #+0]
+   \   00000032   0xBC30             POP      {R4,R5}
+   \   00000034   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_GPIO_SetPinSpeed(GPIO_TypeDef *, uint32_t, uint32_t)
+   \                     LL_GPIO_SetPinSpeed:
+   \   00000000   0xB430             PUSH     {R4,R5}
+   \   00000002   0xEB10 0x6011      ADDS     R0,R0,R1, LSR #+24
+   \   00000006   0xFA91 0xF3A1      RBIT     R3,R1
+   \   0000000A   0xFAB3 0xF383      CLZ      R3,R3
+   \   0000000E   0x6804             LDR      R4,[R0, #+0]
+   \   00000010   0x2503             MOVS     R5,#+3
+   \   00000012   0xB2DB             UXTB     R3,R3            ;; ZeroExt  R3,R3,#+24,#+24
+   \   00000014   0x009B             LSLS     R3,R3,#+2
+   \   00000016   0xFA15 0xF303      LSLS     R3,R5,R3
+   \   0000001A   0xEA34 0x0303      BICS     R3,R4,R3
+   \   0000001E   0xFA91 0xF1A1      RBIT     R1,R1
+   \   00000022   0xFAB1 0xF181      CLZ      R1,R1
+   \   00000026   0xB2C9             UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+   \   00000028   0x0089             LSLS     R1,R1,#+2
+   \   0000002A   0xFA12 0xF101      LSLS     R1,R2,R1
+   \   0000002E   0x4319             ORRS     R1,R1,R3
+   \   00000030   0x6001             STR      R1,[R0, #+0]
+   \   00000032   0xBC30             POP      {R4,R5}
+   \   00000034   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_GPIO_SetPinOutputType(GPIO_TypeDef *, uint32_t, uint32_t)
+   \                     LL_GPIO_SetPinOutputType:
+   \   00000000   0xB430             PUSH     {R4,R5}
+   \   00000002   0xEB10 0x6011      ADDS     R0,R0,R1, LSR #+24
+   \   00000006   0xFA91 0xF3A1      RBIT     R3,R1
+   \   0000000A   0xFAB3 0xF383      CLZ      R3,R3
+   \   0000000E   0x6804             LDR      R4,[R0, #+0]
+   \   00000010   0x2504             MOVS     R5,#+4
+   \   00000012   0xB2DB             UXTB     R3,R3            ;; ZeroExt  R3,R3,#+24,#+24
+   \   00000014   0x009B             LSLS     R3,R3,#+2
+   \   00000016   0xFA15 0xF303      LSLS     R3,R5,R3
+   \   0000001A   0xEA34 0x0303      BICS     R3,R4,R3
+   \   0000001E   0xFA91 0xF1A1      RBIT     R1,R1
+   \   00000022   0xFAB1 0xF181      CLZ      R1,R1
+   \   00000026   0xB2C9             UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+   \   00000028   0x0089             LSLS     R1,R1,#+2
+   \   0000002A   0xFA12 0xF101      LSLS     R1,R2,R1
+   \   0000002E   0x4319             ORRS     R1,R1,R3
+   \   00000030   0x6001             STR      R1,[R0, #+0]
+   \   00000032   0xBC30             POP      {R4,R5}
+   \   00000034   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_GPIO_SetPinPull(GPIO_TypeDef *, uint32_t, uint32_t)
+   \                     LL_GPIO_SetPinPull:
+   \   00000000   0x68C3             LDR      R3,[R0, #+12]
+   \   00000002   0xEA33 0x2311      BICS     R3,R3,R1, LSR #+8
+   \   00000006   0x0A09             LSRS     R1,R1,#+8
+   \   00000008   0xFA91 0xF1A1      RBIT     R1,R1
+   \   0000000C   0xFAB1 0xF181      CLZ      R1,R1
+   \   00000010   0xFA12 0xF101      LSLS     R1,R2,R1
+   \   00000014   0x4319             ORRS     R1,R1,R3
+   \   00000016   0x60C1             STR      R1,[R0, #+12]
+   \   00000018   0x4770             BX       LR               ;; return
+     39          #include "stm32f1xx_ll_bus.h"
+     40          #ifdef  USE_FULL_ASSERT
+     41          #include "stm32_assert.h"
+     42          #else
+     43          #define assert_param(expr) ((void)0U)
+     44          #endif
+     45          
+     46          /** @addtogroup STM32F1xx_LL_Driver
+     47            * @{
+     48            */
+     49          
+     50          #if defined (GPIOA) || defined (GPIOB) || defined (GPIOC) || defined (GPIOD) || defined (GPIOE) || defined (GPIOF) || defined (GPIOG)
+     51          
+     52          /** @addtogroup GPIO_LL
+     53            * @{
+     54            */
+     55          
+     56          /* Private types -------------------------------------------------------------*/
+     57          /* Private variables ---------------------------------------------------------*/
+     58          /* Private constants ---------------------------------------------------------*/
+     59          /* Private macros ------------------------------------------------------------*/
+     60          /** @addtogroup GPIO_LL_Private_Macros
+     61            * @{
+     62            */
+     63          
+     64          #define IS_LL_GPIO_PIN(__VALUE__)          ((((__VALUE__) & LL_GPIO_PIN_ALL)!= 0U) &&\
+     65                                                      (((__VALUE__) & (~LL_GPIO_PIN_ALL))== 0U))
+     66          
+     67          #define IS_LL_GPIO_MODE(__VALUE__)         (((__VALUE__) == LL_GPIO_MODE_ANALOG)       ||\
+     68                                                      ((__VALUE__) == LL_GPIO_MODE_FLOATING)     ||\
+     69                                                      ((__VALUE__) == LL_GPIO_MODE_INPUT)        ||\
+     70                                                      ((__VALUE__) == LL_GPIO_MODE_OUTPUT)       ||\
+     71                                                      ((__VALUE__) == LL_GPIO_MODE_ALTERNATE))
+     72          
+     73          #define IS_LL_GPIO_SPEED(__VALUE__)        (((__VALUE__) == LL_GPIO_SPEED_FREQ_LOW)       ||\
+     74                                                      ((__VALUE__) == LL_GPIO_SPEED_FREQ_MEDIUM)    ||\
+     75                                                      ((__VALUE__) == LL_GPIO_SPEED_FREQ_HIGH))
+     76          
+     77          #define IS_LL_GPIO_OUTPUT_TYPE(__VALUE__)  (((__VALUE__) == LL_GPIO_OUTPUT_PUSHPULL)  ||\
+     78                                                      ((__VALUE__) == LL_GPIO_OUTPUT_OPENDRAIN))
+     79          
+     80          #define IS_LL_GPIO_PULL(__VALUE__)         (((__VALUE__) == LL_GPIO_PULL_DOWN)   ||\
+     81                                                      ((__VALUE__) == LL_GPIO_PULL_UP))
+     82          
+     83          /**
+     84            * @}
+     85            */
+     86          
+     87          /* Private function prototypes -----------------------------------------------*/
+     88          
+     89          /* Exported functions --------------------------------------------------------*/
+     90          /** @addtogroup GPIO_LL_Exported_Functions
+     91            * @{
+     92            */
+     93          
+     94          /** @addtogroup GPIO_LL_EF_Init
+     95            * @{
+     96            */
+     97          
+     98          /**
+     99            * @brief  De-initialize GPIO registers (Registers restored to their default values).
+    100            * @param  GPIOx GPIO Port
+    101            * @retval An ErrorStatus enumeration value:
+    102            *          - SUCCESS: GPIO registers are de-initialized
+    103            *          - ERROR:   Wrong GPIO Port
+    104            */
+
+   \                                 In section .text, align 2, keep-with-next
+    105          ErrorStatus LL_GPIO_DeInit(GPIO_TypeDef *GPIOx)
+    106          {
+   \                     LL_GPIO_DeInit:
+   \   00000000   0xB510             PUSH     {R4,LR}
+    107            ErrorStatus status = SUCCESS;
+   \   00000002   0x2401             MOVS     R4,#+1
+    108          
+    109            /* Check the parameters */
+    110            assert_param(IS_GPIO_ALL_INSTANCE(GPIOx));
+    111          
+    112            /* Force and Release reset on clock of GPIOx Port */
+    113            if (GPIOx == GPIOA)
+   \   00000004   0x....             LDR.N    R1,??DataTable2_1  ;; 0x40010800
+   \   00000006   0x4288             CMP      R0,R1
+   \   00000008   0xD106             BNE.N    ??LL_GPIO_DeInit_0
+    114            {
+    115              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_GPIOA);
+   \   0000000A   0x2004             MOVS     R0,#+4
+   \   0000000C   0x.... 0x....      BL       LL_APB2_GRP1_ForceReset
+    116              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_GPIOA);
+   \   00000010   0x2004             MOVS     R0,#+4
+   \   00000012   0x.... 0x....      BL       LL_APB2_GRP1_ReleaseReset
+   \   00000016   0xE028             B.N      ??LL_GPIO_DeInit_1
+    117            }
+    118            else if (GPIOx == GPIOB)
+   \                     ??LL_GPIO_DeInit_0:
+   \   00000018   0x....             LDR.N    R1,??DataTable2_2  ;; 0x40010c00
+   \   0000001A   0x4288             CMP      R0,R1
+   \   0000001C   0xD106             BNE.N    ??LL_GPIO_DeInit_2
+    119            {
+    120              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_GPIOB);
+   \   0000001E   0x2008             MOVS     R0,#+8
+   \   00000020   0x.... 0x....      BL       LL_APB2_GRP1_ForceReset
+    121              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_GPIOB);
+   \   00000024   0x2008             MOVS     R0,#+8
+   \   00000026   0x.... 0x....      BL       LL_APB2_GRP1_ReleaseReset
+   \   0000002A   0xE01E             B.N      ??LL_GPIO_DeInit_1
+    122            }
+    123            else if (GPIOx == GPIOC)
+   \                     ??LL_GPIO_DeInit_2:
+   \   0000002C   0x....             LDR.N    R1,??DataTable2_3  ;; 0x40011000
+   \   0000002E   0x4288             CMP      R0,R1
+   \   00000030   0xD106             BNE.N    ??LL_GPIO_DeInit_3
+    124            {
+    125              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_GPIOC);
+   \   00000032   0x2010             MOVS     R0,#+16
+   \   00000034   0x.... 0x....      BL       LL_APB2_GRP1_ForceReset
+    126              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_GPIOC);
+   \   00000038   0x2010             MOVS     R0,#+16
+   \   0000003A   0x.... 0x....      BL       LL_APB2_GRP1_ReleaseReset
+   \   0000003E   0xE014             B.N      ??LL_GPIO_DeInit_1
+    127            }
+    128            else if (GPIOx == GPIOD)
+   \                     ??LL_GPIO_DeInit_3:
+   \   00000040   0x....             LDR.N    R1,??DataTable2_4  ;; 0x40011400
+   \   00000042   0x4288             CMP      R0,R1
+   \   00000044   0xD106             BNE.N    ??LL_GPIO_DeInit_4
+    129            {
+    130              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_GPIOD);
+   \   00000046   0x2020             MOVS     R0,#+32
+   \   00000048   0x.... 0x....      BL       LL_APB2_GRP1_ForceReset
+    131              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_GPIOD);
+   \   0000004C   0x2020             MOVS     R0,#+32
+   \   0000004E   0x.... 0x....      BL       LL_APB2_GRP1_ReleaseReset
+   \   00000052   0xE00A             B.N      ??LL_GPIO_DeInit_1
+    132            }
+    133          #if defined(GPIOE)
+    134            else if (GPIOx == GPIOE)
+   \                     ??LL_GPIO_DeInit_4:
+   \   00000054   0x....             LDR.N    R1,??DataTable2_5  ;; 0x40011800
+   \   00000056   0x4288             CMP      R0,R1
+   \   00000058   0xD106             BNE.N    ??LL_GPIO_DeInit_5
+    135            {
+    136              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_GPIOE);
+   \   0000005A   0x2040             MOVS     R0,#+64
+   \   0000005C   0x.... 0x....      BL       LL_APB2_GRP1_ForceReset
+    137              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_GPIOE);
+   \   00000060   0x2040             MOVS     R0,#+64
+   \   00000062   0x.... 0x....      BL       LL_APB2_GRP1_ReleaseReset
+   \   00000066   0xE000             B.N      ??LL_GPIO_DeInit_1
+    138            }
+    139          #endif
+    140          #if defined(GPIOF)
+    141            else if (GPIOx == GPIOF)
+    142            {
+    143              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_GPIOF);
+    144              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_GPIOF);
+    145            }
+    146          #endif
+    147          #if defined(GPIOG)
+    148            else if (GPIOx == GPIOG)
+    149            {
+    150              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_GPIOG);
+    151              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_GPIOG);
+    152            }
+    153          #endif
+    154            else
+    155            {
+    156              status = ERROR;
+   \                     ??LL_GPIO_DeInit_5:
+   \   00000068   0x2400             MOVS     R4,#+0
+    157            }
+    158          
+    159            return (status);
+   \                     ??LL_GPIO_DeInit_1:
+   \   0000006A   0x0020             MOVS     R0,R4
+   \   0000006C   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000006E   0xBD10             POP      {R4,PC}          ;; return
+    160          }
+    161          
+    162          /**
+    163            * @brief  Initialize GPIO registers according to the specified parameters in GPIO_InitStruct.
+    164            * @param  GPIOx GPIO Port
+    165            * @param  GPIO_InitStruct: pointer to a @ref LL_GPIO_InitTypeDef structure
+    166            *         that contains the configuration information for the specified GPIO peripheral.
+    167            * @retval An ErrorStatus enumeration value:
+    168            *          - SUCCESS: GPIO registers are initialized according to GPIO_InitStruct content
+    169            *          - ERROR:   Not applicable
+    170            */
+
+   \                                 In section .text, align 2, keep-with-next
+    171          ErrorStatus LL_GPIO_Init(GPIO_TypeDef *GPIOx, LL_GPIO_InitTypeDef *GPIO_InitStruct)
+    172          {
+   \                     LL_GPIO_Init:
+   \   00000000   0xE92D 0x41F0      PUSH     {R4-R8,LR}
+   \   00000004   0x0004             MOVS     R4,R0
+   \   00000006   0x000D             MOVS     R5,R1
+    173            uint32_t pinmask;
+    174            uint32_t pinpos;
+    175            uint32_t currentpin;
+    176          
+    177            /* Check the parameters */
+    178            assert_param(IS_GPIO_ALL_INSTANCE(GPIOx));
+    179            assert_param(IS_LL_GPIO_PIN(GPIO_InitStruct->Pin));
+    180          
+    181            /* ------------------------- Configure the port pins ---------------- */
+    182            /* Initialize  pinpos on first pin set */
+    183          
+    184            pinmask = ((GPIO_InitStruct->Pin) << GPIO_PIN_MASK_POS) >> GPIO_PIN_NB;
+   \   00000008   0x6828             LDR      R0,[R5, #+0]
+   \   0000000A   0x0200             LSLS     R0,R0,#+8
+   \   0000000C   0x0C06             LSRS     R6,R0,#+16
+    185            pinpos = POSITION_VAL(pinmask);
+   \   0000000E   0xFA96 0xF0A6      RBIT     R0,R6
+   \   00000012   0xFAB0 0xF780      CLZ      R7,R0
+   \   00000016   0xE021             B.N      ??LL_GPIO_Init_0
+    186          
+    187            /* Configure the port pins */
+    188            while ((pinmask  >> pinpos) != 0U)
+    189            {
+    190              /* skip if bit is not set */
+    191              if ((pinmask & (1U << pinpos)) != 0U)
+    192              {
+    193                /* Get current io position */
+    194                if (pinpos < GPIO_PIN_MASK_POS)
+    195                {
+    196                  currentpin = (0x00000101U << pinpos);
+    197                }
+    198                else
+    199                {
+    200                  currentpin = ((0x00010001U << (pinpos - GPIO_PIN_MASK_POS)) | 0x04000000U);
+   \                     ??LL_GPIO_Init_1:
+   \   00000018   0xF05F 0x1001      MOVS     R0,#+65537
+   \   0000001C   0x0039             MOVS     R1,R7
+   \   0000001E   0x3908             SUBS     R1,R1,#+8
+   \   00000020   0x4088             LSLS     R0,R0,R1
+   \   00000022   0xF050 0x6880      ORRS     R8,R0,#0x4000000
+    201                }
+    202          
+    203                /* Check Pin Mode and Pin Pull parameters */
+    204                assert_param(IS_LL_GPIO_MODE(GPIO_InitStruct->Mode));
+    205                assert_param(IS_LL_GPIO_PULL(GPIO_InitStruct->Pull));
+    206          
+    207                /* Pin Mode configuration */
+    208                LL_GPIO_SetPinMode(GPIOx, currentpin, GPIO_InitStruct->Mode);
+   \                     ??LL_GPIO_Init_2:
+   \   00000026   0x686A             LDR      R2,[R5, #+4]
+   \   00000028   0x4641             MOV      R1,R8
+   \   0000002A   0x0020             MOVS     R0,R4
+   \   0000002C   0x.... 0x....      BL       LL_GPIO_SetPinMode
+    209          
+    210                /* Pull-up Pull-down resistor configuration*/
+    211                LL_GPIO_SetPinPull(GPIOx, currentpin, GPIO_InitStruct->Pull);
+   \   00000030   0x692A             LDR      R2,[R5, #+16]
+   \   00000032   0x4641             MOV      R1,R8
+   \   00000034   0x0020             MOVS     R0,R4
+   \   00000036   0x.... 0x....      BL       LL_GPIO_SetPinPull
+    212          
+    213                if ((GPIO_InitStruct->Mode == LL_GPIO_MODE_OUTPUT) || (GPIO_InitStruct->Mode == LL_GPIO_MODE_ALTERNATE))
+   \   0000003A   0x6868             LDR      R0,[R5, #+4]
+   \   0000003C   0x2801             CMP      R0,#+1
+   \   0000003E   0xD002             BEQ.N    ??LL_GPIO_Init_3
+   \   00000040   0x6868             LDR      R0,[R5, #+4]
+   \   00000042   0x2809             CMP      R0,#+9
+   \   00000044   0xD109             BNE.N    ??LL_GPIO_Init_4
+    214                {
+    215                  /* Check speed and Output mode parameters */
+    216                  assert_param(IS_LL_GPIO_SPEED(GPIO_InitStruct->Speed));
+    217                  assert_param(IS_LL_GPIO_OUTPUT_TYPE(GPIO_InitStruct->OutputType));
+    218          
+    219                  /* Speed mode configuration */
+    220                  LL_GPIO_SetPinSpeed(GPIOx, currentpin, GPIO_InitStruct->Speed);
+   \                     ??LL_GPIO_Init_3:
+   \   00000046   0x68AA             LDR      R2,[R5, #+8]
+   \   00000048   0x4641             MOV      R1,R8
+   \   0000004A   0x0020             MOVS     R0,R4
+   \   0000004C   0x.... 0x....      BL       LL_GPIO_SetPinSpeed
+    221          
+    222                  /* Output mode configuration*/
+    223                  LL_GPIO_SetPinOutputType(GPIOx, currentpin, GPIO_InitStruct->OutputType);
+   \   00000050   0x68EA             LDR      R2,[R5, #+12]
+   \   00000052   0x4641             MOV      R1,R8
+   \   00000054   0x0020             MOVS     R0,R4
+   \   00000056   0x.... 0x....      BL       LL_GPIO_SetPinOutputType
+    224                }
+    225              }
+    226              pinpos++;
+   \                     ??LL_GPIO_Init_4:
+   \   0000005A   0x1C7F             ADDS     R7,R7,#+1
+   \                     ??LL_GPIO_Init_0:
+   \   0000005C   0xFA36 0xF007      LSRS     R0,R6,R7
+   \   00000060   0x2800             CMP      R0,#+0
+   \   00000062   0xD00A             BEQ.N    ??LL_GPIO_Init_5
+   \   00000064   0x2001             MOVS     R0,#+1
+   \   00000066   0x40B8             LSLS     R0,R0,R7
+   \   00000068   0x4206             TST      R6,R0
+   \   0000006A   0xD0F6             BEQ.N    ??LL_GPIO_Init_4
+   \   0000006C   0x2F08             CMP      R7,#+8
+   \   0000006E   0xD2D3             BCS.N    ??LL_GPIO_Init_1
+   \   00000070   0xF240 0x1001      MOVW     R0,#+257
+   \   00000074   0xFA10 0xF807      LSLS     R8,R0,R7
+   \   00000078   0xE7D5             B.N      ??LL_GPIO_Init_2
+    227            }
+    228            return (SUCCESS);
+   \                     ??LL_GPIO_Init_5:
+   \   0000007A   0x2001             MOVS     R0,#+1
+   \   0000007C   0xE8BD 0x81F0      POP      {R4-R8,PC}       ;; return
+    229          }
+    230          
+    231          /**
+    232            * @brief Set each @ref LL_GPIO_InitTypeDef field to default value.
+    233            * @param GPIO_InitStruct: pointer to a @ref LL_GPIO_InitTypeDef structure
+    234            *                          whose fields will be set to default values.
+    235            * @retval None
+    236            */
+    237          
+
+   \                                 In section .text, align 2, keep-with-next
+    238          void LL_GPIO_StructInit(LL_GPIO_InitTypeDef *GPIO_InitStruct)
+    239          {
+    240            /* Reset GPIO init structure parameters values */
+    241            GPIO_InitStruct->Pin        = LL_GPIO_PIN_ALL;
+   \                     LL_GPIO_StructInit:
+   \   00000000   0xF07F 0x417B      MVNS     R1,#-83886080
+   \   00000004   0x6001             STR      R1,[R0, #+0]
+    242            GPIO_InitStruct->Mode       = LL_GPIO_MODE_FLOATING;
+   \   00000006   0x2104             MOVS     R1,#+4
+   \   00000008   0x6041             STR      R1,[R0, #+4]
+    243            GPIO_InitStruct->Speed      = LL_GPIO_SPEED_FREQ_LOW;
+   \   0000000A   0x2102             MOVS     R1,#+2
+   \   0000000C   0x6081             STR      R1,[R0, #+8]
+    244            GPIO_InitStruct->OutputType = LL_GPIO_OUTPUT_OPENDRAIN;
+   \   0000000E   0x2104             MOVS     R1,#+4
+   \   00000010   0x60C1             STR      R1,[R0, #+12]
+    245            GPIO_InitStruct->Pull       = LL_GPIO_PULL_DOWN;
+   \   00000012   0x2100             MOVS     R1,#+0
+   \   00000014   0x6101             STR      R1,[R0, #+16]
+    246          }
+   \   00000016   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2:
+   \   00000000   0x4002100C         DC32     0x4002100c
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_1:
+   \   00000000   0x40010800         DC32     0x40010800
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_2:
+   \   00000000   0x40010C00         DC32     0x40010c00
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_3:
+   \   00000000   0x40011000         DC32     0x40011000
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_4:
+   \   00000000   0x40011400         DC32     0x40011400
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_5:
+   \   00000000   0x40011800         DC32     0x40011800
+    247          
+    248          /**
+    249            * @}
+    250            */
+    251          
+    252          /**
+    253            * @}
+    254            */
+    255          
+    256          /**
+    257            * @}
+    258            */
+    259          
+    260          #endif /* defined (GPIOA) || defined (GPIOB) || defined (GPIOC) || defined (GPIOD) || defined (GPIOE) || defined (GPIOF) || defined (GPIOG) */
+    261          
+    262          /**
+    263            * @}
+    264            */
+    265          
+    266          #endif /* USE_FULL_LL_DRIVER */
+    267          
+    268          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  LL_APB2_GRP1_ForceReset
+        0  LL_APB2_GRP1_ReleaseReset
+        8  LL_GPIO_DeInit
+              8 -> LL_APB2_GRP1_ForceReset
+              8 -> LL_APB2_GRP1_ReleaseReset
+       24  LL_GPIO_Init
+             24 -> LL_GPIO_SetPinMode
+             24 -> LL_GPIO_SetPinOutputType
+             24 -> LL_GPIO_SetPinPull
+             24 -> LL_GPIO_SetPinSpeed
+        8  LL_GPIO_SetPinMode
+        8  LL_GPIO_SetPinOutputType
+        0  LL_GPIO_SetPinPull
+        8  LL_GPIO_SetPinSpeed
+        0  LL_GPIO_StructInit
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable2
+       4  ??DataTable2_1
+       4  ??DataTable2_2
+       4  ??DataTable2_3
+       4  ??DataTable2_4
+       4  ??DataTable2_5
+      12  LL_APB2_GRP1_ForceReset
+      14  LL_APB2_GRP1_ReleaseReset
+     112  LL_GPIO_DeInit
+     128  LL_GPIO_Init
+      54  LL_GPIO_SetPinMode
+      54  LL_GPIO_SetPinOutputType
+      26  LL_GPIO_SetPinPull
+      54  LL_GPIO_SetPinSpeed
+      24  LL_GPIO_StructInit
+
+ 
+ 502 bytes in section .text
+ 
+ 502 bytes of CODE memory
+
+Errors: none
+Warnings: 1

@@ -1,0 +1,58 @@
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[JLinkDriver]
+WatchCond=_ 0
+Watch0=_ 0 "" 0 "" 0 "" 0 "" 0 0 0 0
+Watch1=_ 0 "" 0 "" 0 "" 0 "" 0 0 0 0
+[DebugChecksum]
+Checksum=-1911715069
+[Exceptions]
+StopOnUncaught=_ 0
+StopOnThrow=_ 0
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[struct_types]
+Fmt0=FlashQueue_typedef-mask	4	0
+Fmt1=FlashQueue_typedef-reg2_h	4	0
+Fmt2=FlashQueue_typedef-reg2_l	4	0
+[array_types]
+Fmt0=USHORT[100]	4	0
+[watch_formats]
+Fmt0={W}0:Data	1	0
+Fmt1={W}0:PageAddr	4	0
+Fmt2={W}0:PageAddress	4	0
+Fmt3={W}0:RamSource	4	0
+Fmt4={W}0:data	4	0
+Fmt5={W}0:w_temp	4	0
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[CallStackLog]
+Enabled=0
+[DriverProfiling]
+Enabled=0
+Mode=0
+Graph=0
+Symbiont=0
+Exclusions=
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Count=0
+[Aliases]
+Count=0
+SuppressDialog=0

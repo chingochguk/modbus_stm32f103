@@ -1,0 +1,1269 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  06:16:16 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1 #
+#                    xx_HAL_Driver\Src\stm32f1xx_ll_utils.c                   #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F #
+#                    1xx_HAL_Driver\Src\stm32f1xx_ll_utils.c" -D              #
+#                    USE_FULL_LL_DRIVER -D USE_HAL_DRIVER -D STM32F103xB -lC  #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    List\" -o "D:\projects\задания от                        #
+#                    работодателя\ЭМИС\EWARM\mb_v1.0/Obj\" --no_cse           #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files\IAR Systems\Embedded Workbench                     #
+#                    6.0\arm\INC\c\DLib_Config_Full.h" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\stm32f1xx_ll_utils.lst                               #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\stm32f1xx_ll_utils.o                                  #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_utils.c
+      1          /**
+                   ^
+Warning[Pa050]: non-native end of line sequence detected (this diagnostic is
+          only issued once)
+      2            ******************************************************************************
+      3            * @file    stm32f1xx_ll_utils.c
+      4            * @author  MCD Application Team
+      5            * @brief   UTILS LL module driver.
+      6            ******************************************************************************
+      7            * @attention
+      8            *
+      9            * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+     10            *
+     11            * Redistribution and use in source and binary forms, with or without modification,
+     12            * are permitted provided that the following conditions are met:
+     13            *   1. Redistributions of source code must retain the above copyright notice,
+     14            *      this list of conditions and the following disclaimer.
+     15            *   2. Redistributions in binary form must reproduce the above copyright notice,
+     16            *      this list of conditions and the following disclaimer in the documentation
+     17            *      and/or other materials provided with the distribution.
+     18            *   3. Neither the name of STMicroelectronics nor the names of its contributors
+     19            *      may be used to endorse or promote products derived from this software
+     20            *      without specific prior written permission.
+     21            *
+     22            * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     23            * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     24            * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     25            * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+     26            * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     27            * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+     28            * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+     29            * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+     30            * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+     31            * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     32            *
+     33            ******************************************************************************
+     34            */
+     35          /* Includes ------------------------------------------------------------------*/
+     36          #include "stm32f1xx_ll_rcc.h"
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_FLASH_SetLatency(uint32_t)
+   \                     LL_FLASH_SetLatency:
+   \   00000000   0x....             LDR.N    R1,??DataTable22  ;; 0x40022000
+   \   00000002   0x6809             LDR      R1,[R1, #+0]
+   \   00000004   0x08C9             LSRS     R1,R1,#+3
+   \   00000006   0x00C9             LSLS     R1,R1,#+3
+   \   00000008   0x4308             ORRS     R0,R0,R1
+   \   0000000A   0x....             LDR.N    R1,??DataTable22  ;; 0x40022000
+   \   0000000C   0x6008             STR      R0,[R1, #+0]
+   \   0000000E   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_FLASH_GetLatency(void)
+   \                     LL_FLASH_GetLatency:
+   \   00000000   0x....             LDR.N    R0,??DataTable22  ;; 0x40022000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF010 0x0007      ANDS     R0,R0,#0x7
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_InitTick(uint32_t, uint32_t)
+   \                     LL_InitTick:
+   \   00000000   0xFBB0 0xF0F1      UDIV     R0,R0,R1
+   \   00000004   0x1E40             SUBS     R0,R0,#+1
+   \   00000006   0x....             LDR.N    R1,??DataTable22_1  ;; 0xe000e014
+   \   00000008   0x6008             STR      R0,[R1, #+0]
+   \   0000000A   0x....             LDR.N    R0,??DataTable22_2  ;; 0xe000e018
+   \   0000000C   0x2100             MOVS     R1,#+0
+   \   0000000E   0x6001             STR      R1,[R0, #+0]
+   \   00000010   0x....             LDR.N    R0,??DataTable22_3  ;; 0xe000e010
+   \   00000012   0x2105             MOVS     R1,#+5
+   \   00000014   0x6001             STR      R1,[R0, #+0]
+   \   00000016   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_HSE_EnableBypass(void)
+   \                     LL_RCC_HSE_EnableBypass:
+   \   00000000   0x....             LDR.N    R0,??DataTable22_4  ;; 0x40021000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF450 0x2080      ORRS     R0,R0,#0x40000
+   \   00000008   0x....             LDR.N    R1,??DataTable22_4  ;; 0x40021000
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_HSE_DisableBypass(void)
+   \                     LL_RCC_HSE_DisableBypass:
+   \   00000000   0x....             LDR.N    R0,??DataTable22_4  ;; 0x40021000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF430 0x2080      BICS     R0,R0,#0x40000
+   \   00000008   0x....             LDR.N    R1,??DataTable22_4  ;; 0x40021000
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_HSE_Enable(void)
+   \                     LL_RCC_HSE_Enable:
+   \   00000000   0x....             LDR.N    R0,??DataTable22_4  ;; 0x40021000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF450 0x3080      ORRS     R0,R0,#0x10000
+   \   00000008   0x....             LDR.N    R1,??DataTable22_4  ;; 0x40021000
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_HSE_IsReady(void)
+   \                     LL_RCC_HSE_IsReady:
+   \   00000000   0x....             LDR.N    R0,??DataTable22_4  ;; 0x40021000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF3C0 0x4040      UBFX     R0,R0,#+17,#+1
+   \   00000008   0xF010 0x0001      ANDS     R0,R0,#0x1
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_HSI_Enable(void)
+   \                     LL_RCC_HSI_Enable:
+   \   00000000   0x....             LDR.N    R0,??DataTable22_4  ;; 0x40021000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF050 0x0001      ORRS     R0,R0,#0x1
+   \   00000008   0x....             LDR.N    R1,??DataTable22_4  ;; 0x40021000
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_HSI_IsReady(void)
+   \                     LL_RCC_HSI_IsReady:
+   \   00000000   0x....             LDR.N    R0,??DataTable22_4  ;; 0x40021000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF3C0 0x0040      UBFX     R0,R0,#+1,#+1
+   \   00000008   0xF010 0x0001      ANDS     R0,R0,#0x1
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_SetSysClkSource(uint32_t)
+   \                     LL_RCC_SetSysClkSource:
+   \   00000000   0x....             LDR.N    R1,??DataTable22_5  ;; 0x40021004
+   \   00000002   0x6809             LDR      R1,[R1, #+0]
+   \   00000004   0x0889             LSRS     R1,R1,#+2
+   \   00000006   0x0089             LSLS     R1,R1,#+2
+   \   00000008   0x4308             ORRS     R0,R0,R1
+   \   0000000A   0x....             LDR.N    R1,??DataTable22_5  ;; 0x40021004
+   \   0000000C   0x6008             STR      R0,[R1, #+0]
+   \   0000000E   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_GetSysClkSource(void)
+   \                     LL_RCC_GetSysClkSource:
+   \   00000000   0x....             LDR.N    R0,??DataTable22_5  ;; 0x40021004
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF010 0x000C      ANDS     R0,R0,#0xC
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_SetAHBPrescaler(uint32_t)
+   \                     LL_RCC_SetAHBPrescaler:
+   \   00000000   0x....             LDR.N    R1,??DataTable22_5  ;; 0x40021004
+   \   00000002   0x6809             LDR      R1,[R1, #+0]
+   \   00000004   0xF031 0x01F0      BICS     R1,R1,#0xF0
+   \   00000008   0x4308             ORRS     R0,R0,R1
+   \   0000000A   0x....             LDR.N    R1,??DataTable22_5  ;; 0x40021004
+   \   0000000C   0x6008             STR      R0,[R1, #+0]
+   \   0000000E   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_SetAPB1Prescaler(uint32_t)
+   \                     LL_RCC_SetAPB1Prescaler:
+   \   00000000   0x....             LDR.N    R1,??DataTable22_5  ;; 0x40021004
+   \   00000002   0x6809             LDR      R1,[R1, #+0]
+   \   00000004   0xF431 0x61E0      BICS     R1,R1,#0x700
+   \   00000008   0x4308             ORRS     R0,R0,R1
+   \   0000000A   0x....             LDR.N    R1,??DataTable22_5  ;; 0x40021004
+   \   0000000C   0x6008             STR      R0,[R1, #+0]
+   \   0000000E   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_SetAPB2Prescaler(uint32_t)
+   \                     LL_RCC_SetAPB2Prescaler:
+   \   00000000   0x....             LDR.N    R1,??DataTable22_5  ;; 0x40021004
+   \   00000002   0x6809             LDR      R1,[R1, #+0]
+   \   00000004   0xF431 0x5160      BICS     R1,R1,#0x3800
+   \   00000008   0x4308             ORRS     R0,R0,R1
+   \   0000000A   0x....             LDR.N    R1,??DataTable22_5  ;; 0x40021004
+   \   0000000C   0x6008             STR      R0,[R1, #+0]
+   \   0000000E   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_GetAHBPrescaler(void)
+   \                     LL_RCC_GetAHBPrescaler:
+   \   00000000   0x....             LDR.N    R0,??DataTable22_5  ;; 0x40021004
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF010 0x00F0      ANDS     R0,R0,#0xF0
+   \   00000008   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_PLL_Enable(void)
+   \                     LL_RCC_PLL_Enable:
+   \   00000000   0x....             LDR.N    R0,??DataTable22_4  ;; 0x40021000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF050 0x7080      ORRS     R0,R0,#0x1000000
+   \   00000008   0x....             LDR.N    R1,??DataTable22_4  ;; 0x40021000
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp uint32_t LL_RCC_PLL_IsReady(void)
+   \                     LL_RCC_PLL_IsReady:
+   \   00000000   0x....             LDR.N    R0,??DataTable22_4  ;; 0x40021000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF3C0 0x6040      UBFX     R0,R0,#+25,#+1
+   \   00000008   0xF010 0x0001      ANDS     R0,R0,#0x1
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_RCC_PLL_ConfigDomain_SYS(uint32_t, uint32_t)
+   \                     LL_RCC_PLL_ConfigDomain_SYS:
+   \   00000000   0x....             LDR.N    R2,??DataTable22_5  ;; 0x40021004
+   \   00000002   0x6812             LDR      R2,[R2, #+0]
+   \   00000004   0xF432 0x127C      BICS     R2,R2,#0x3F0000
+   \   00000008   0xF410 0x3040      ANDS     R0,R0,#0x30000
+   \   0000000C   0x4310             ORRS     R0,R0,R2
+   \   0000000E   0x4308             ORRS     R0,R1,R0
+   \   00000010   0x....             LDR.N    R1,??DataTable22_5  ;; 0x40021004
+   \   00000012   0x6008             STR      R0,[R1, #+0]
+   \   00000014   0x4770             BX       LR               ;; return
+     37          #include "stm32f1xx_ll_utils.h"
+     38          #include "stm32f1xx_ll_system.h"
+     39          #ifdef  USE_FULL_ASSERT
+     40          #include "stm32_assert.h"
+     41          #else
+     42          #define assert_param(expr) ((void)0U)
+     43          #endif
+     44          
+     45          /** @addtogroup STM32F1xx_LL_Driver
+     46            * @{
+     47            */
+     48          
+     49          /** @addtogroup UTILS_LL
+     50            * @{
+     51            */
+     52          
+     53          /* Private types -------------------------------------------------------------*/
+     54          /* Private variables ---------------------------------------------------------*/
+     55          /* Private constants ---------------------------------------------------------*/
+     56          /** @addtogroup UTILS_LL_Private_Constants
+     57            * @{
+     58            */
+     59          
+     60          /* Defines used for PLL range */
+     61          #define UTILS_PLL_OUTPUT_MAX        RCC_MAX_FREQUENCY    /*!< Frequency max for PLL output, in Hz  */
+     62          
+     63          /* Defines used for HSE range */
+     64          #define UTILS_HSE_FREQUENCY_MIN     RCC_HSE_MIN       /*!< Frequency min for HSE frequency, in Hz   */
+     65          #define UTILS_HSE_FREQUENCY_MAX     RCC_HSE_MAX       /*!< Frequency max for HSE frequency, in Hz   */
+     66          
+     67          /* Defines used for FLASH latency according to HCLK Frequency */
+     68          #if defined(FLASH_ACR_LATENCY)
+     69          #define UTILS_LATENCY1_FREQ         24000000U        /*!< SYSCLK frequency to set FLASH latency 1 */
+     70          #define UTILS_LATENCY2_FREQ         48000000U        /*!< SYSCLK frequency to set FLASH latency 2 */
+     71          #else
+     72              /*!< No Latency Configuration in this device */
+     73          #endif
+     74          /**
+     75            * @}
+     76            */
+     77          /* Private macros ------------------------------------------------------------*/
+     78          /** @addtogroup UTILS_LL_Private_Macros
+     79            * @{
+     80            */
+     81          #define IS_LL_UTILS_SYSCLK_DIV(__VALUE__) (((__VALUE__) == LL_RCC_SYSCLK_DIV_1)   \
+     82                                                  || ((__VALUE__) == LL_RCC_SYSCLK_DIV_2)   \
+     83                                                  || ((__VALUE__) == LL_RCC_SYSCLK_DIV_4)   \
+     84                                                  || ((__VALUE__) == LL_RCC_SYSCLK_DIV_8)   \
+     85                                                  || ((__VALUE__) == LL_RCC_SYSCLK_DIV_16)  \
+     86                                                  || ((__VALUE__) == LL_RCC_SYSCLK_DIV_64)  \
+     87                                                  || ((__VALUE__) == LL_RCC_SYSCLK_DIV_128) \
+     88                                                  || ((__VALUE__) == LL_RCC_SYSCLK_DIV_256) \
+     89                                                  || ((__VALUE__) == LL_RCC_SYSCLK_DIV_512))
+     90          
+     91          #define IS_LL_UTILS_APB1_DIV(__VALUE__) (((__VALUE__) == LL_RCC_APB1_DIV_1) \
+     92                                                || ((__VALUE__) == LL_RCC_APB1_DIV_2) \
+     93                                                || ((__VALUE__) == LL_RCC_APB1_DIV_4) \
+     94                                                || ((__VALUE__) == LL_RCC_APB1_DIV_8) \
+     95                                                || ((__VALUE__) == LL_RCC_APB1_DIV_16))
+     96          
+     97          #define IS_LL_UTILS_APB2_DIV(__VALUE__) (((__VALUE__) == LL_RCC_APB2_DIV_1) \
+     98                                                || ((__VALUE__) == LL_RCC_APB2_DIV_2) \
+     99                                                || ((__VALUE__) == LL_RCC_APB2_DIV_4) \
+    100                                                || ((__VALUE__) == LL_RCC_APB2_DIV_8) \
+    101                                                || ((__VALUE__) == LL_RCC_APB2_DIV_16))
+    102          
+    103          #if defined(RCC_CFGR_PLLMULL6_5)
+    104          #define IS_LL_UTILS_PLLMUL_VALUE(__VALUE__) (((__VALUE__) == LL_RCC_PLL_MUL_4) \
+    105                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_5) \
+    106                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_6) \
+    107                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_7) \
+    108                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_8) \
+    109                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_9) \
+    110                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_6_5))
+    111          #else
+    112          #define IS_LL_UTILS_PLLMUL_VALUE(__VALUE__) (((__VALUE__) == LL_RCC_PLL_MUL_2) \
+    113                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_3) \
+    114                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_4) \
+    115                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_5) \
+    116                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_6) \
+    117                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_7) \
+    118                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_8) \
+    119                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_9) \
+    120                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_10) \
+    121                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_11) \
+    122                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_12) \
+    123                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_13) \
+    124                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_14) \
+    125                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_15) \
+    126                                                    || ((__VALUE__) == LL_RCC_PLL_MUL_16))
+    127          #endif /* RCC_CFGR_PLLMULL6_5 */
+    128          
+    129          #if defined(RCC_CFGR2_PREDIV1)
+    130          #define IS_LL_UTILS_PREDIV_VALUE(__VALUE__) (((__VALUE__) == LL_RCC_PREDIV_DIV_1)  || ((__VALUE__) == LL_RCC_PREDIV_DIV_2)   || \
+    131                                                       ((__VALUE__) == LL_RCC_PREDIV_DIV_3)  || ((__VALUE__) == LL_RCC_PREDIV_DIV_4)   || \
+    132                                                       ((__VALUE__) == LL_RCC_PREDIV_DIV_5)  || ((__VALUE__) == LL_RCC_PREDIV_DIV_6)   || \
+    133                                                       ((__VALUE__) == LL_RCC_PREDIV_DIV_7)  || ((__VALUE__) == LL_RCC_PREDIV_DIV_8)   || \
+    134                                                       ((__VALUE__) == LL_RCC_PREDIV_DIV_9)  || ((__VALUE__) == LL_RCC_PREDIV_DIV_10)  || \
+    135                                                       ((__VALUE__) == LL_RCC_PREDIV_DIV_11) || ((__VALUE__) == LL_RCC_PREDIV_DIV_12)  || \
+    136                                                       ((__VALUE__) == LL_RCC_PREDIV_DIV_13) || ((__VALUE__) == LL_RCC_PREDIV_DIV_14)  || \
+    137                                                       ((__VALUE__) == LL_RCC_PREDIV_DIV_15) || ((__VALUE__) == LL_RCC_PREDIV_DIV_16))
+    138          #else
+    139          #define IS_LL_UTILS_PREDIV_VALUE(__VALUE__) (((__VALUE__) == LL_RCC_PREDIV_DIV_1)  || ((__VALUE__) == LL_RCC_PREDIV_DIV_2))
+    140          #endif /*RCC_PREDIV1_DIV_2_16_SUPPORT*/
+    141          
+    142          #define IS_LL_UTILS_PLL_FREQUENCY(__VALUE__) ((__VALUE__) <= UTILS_PLL_OUTPUT_MAX)
+    143          
+    144          
+    145          #define IS_LL_UTILS_HSE_BYPASS(__STATE__) (((__STATE__) == LL_UTILS_HSEBYPASS_ON) \
+    146                                                  || ((__STATE__) == LL_UTILS_HSEBYPASS_OFF))
+    147          
+    148          #define IS_LL_UTILS_HSE_FREQUENCY(__FREQUENCY__) (((__FREQUENCY__) >= UTILS_HSE_FREQUENCY_MIN) && ((__FREQUENCY__) <= UTILS_HSE_FREQUENCY_MAX))
+    149          /**
+    150            * @}
+    151            */
+    152          /* Private function prototypes -----------------------------------------------*/
+    153          /** @defgroup UTILS_LL_Private_Functions UTILS Private functions
+    154            * @{
+    155            */
+    156          static uint32_t    UTILS_GetPLLOutputFrequency(uint32_t PLL_InputFrequency,
+    157                                                         LL_UTILS_PLLInitTypeDef *UTILS_PLLInitStruct);
+    158          #if defined(FLASH_ACR_LATENCY)
+    159          static ErrorStatus UTILS_SetFlashLatency(uint32_t Frequency);
+    160          #endif /* FLASH_ACR_LATENCY */
+    161          static ErrorStatus UTILS_EnablePLLAndSwitchSystem(uint32_t SYSCLK_Frequency, LL_UTILS_ClkInitTypeDef *UTILS_ClkInitStruct);
+    162          static ErrorStatus UTILS_PLL_IsBusy(void);
+    163          /**
+    164            * @}
+    165            */
+    166          
+    167          /* Exported functions --------------------------------------------------------*/
+    168          /** @addtogroup UTILS_LL_Exported_Functions
+    169            * @{
+    170            */
+    171          
+    172          /** @addtogroup UTILS_LL_EF_DELAY
+    173            * @{
+    174            */
+    175          
+    176          /**
+    177            * @brief  This function configures the Cortex-M SysTick source to have 1ms time base.
+    178            * @note   When a RTOS is used, it is recommended to avoid changing the Systick
+    179            *         configuration by calling this function, for a delay use rather osDelay RTOS service.
+    180            * @param  HCLKFrequency HCLK frequency in Hz
+    181            * @note   HCLK frequency can be calculated thanks to RCC helper macro or function @ref LL_RCC_GetSystemClocksFreq
+    182            * @retval None
+    183            */
+
+   \                                 In section .text, align 2, keep-with-next
+    184          void LL_Init1msTick(uint32_t HCLKFrequency)
+    185          {
+   \                     LL_Init1msTick:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    186            /* Use frequency provided in argument */
+    187            LL_InitTick(HCLKFrequency, 1000U);
+   \   00000002   0xF44F 0x717A      MOV      R1,#+1000
+   \   00000006   0x.... 0x....      BL       LL_InitTick
+    188          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+    189          
+    190          /**
+    191            * @brief  This function provides accurate delay (in milliseconds) based
+    192            *         on SysTick counter flag
+    193            * @note   When a RTOS is used, it is recommended to avoid using blocking delay
+    194            *         and use rather osDelay service.
+    195            * @note   To respect 1ms timebase, user should call @ref LL_Init1msTick function which
+    196            *         will configure Systick to 1ms
+    197            * @param  Delay specifies the delay time length, in milliseconds.
+    198            * @retval None
+    199            */
+
+   \                                 In section .text, align 2, keep-with-next
+    200          void LL_mDelay(uint32_t Delay)
+    201          {
+   \                     LL_mDelay:
+   \   00000000   0xB081             SUB      SP,SP,#+4
+    202            __IO uint32_t  tmp = SysTick->CTRL;  /* Clear the COUNTFLAG first */
+   \   00000002   0x....             LDR.N    R1,??DataTable22_3  ;; 0xe000e010
+   \   00000004   0x6809             LDR      R1,[R1, #+0]
+   \   00000006   0x9100             STR      R1,[SP, #+0]
+    203            /* Add this code to indicate that local variable is not used */
+    204            ((void)tmp);
+   \   00000008   0x9900             LDR      R1,[SP, #+0]
+    205          
+    206            /* Add a period to guaranty minimum wait */
+    207            if (Delay < LL_MAX_DELAY)
+   \   0000000A   0xF110 0x0F01      CMN      R0,#+1
+   \   0000000E   0xD006             BEQ.N    ??LL_mDelay_0
+    208            {
+    209              Delay++;
+   \   00000010   0x1C40             ADDS     R0,R0,#+1
+   \   00000012   0xE004             B.N      ??LL_mDelay_0
+    210            }
+    211          
+    212            while (Delay)
+    213            {
+    214              if ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) != 0U)
+   \                     ??LL_mDelay_1:
+   \   00000014   0x....             LDR.N    R1,??DataTable22_3  ;; 0xe000e010
+   \   00000016   0x6809             LDR      R1,[R1, #+0]
+   \   00000018   0x03C9             LSLS     R1,R1,#+15
+   \   0000001A   0xD500             BPL.N    ??LL_mDelay_0
+    215              {
+    216                Delay--;
+   \   0000001C   0x1E40             SUBS     R0,R0,#+1
+    217              }
+    218            }
+   \                     ??LL_mDelay_0:
+   \   0000001E   0x2800             CMP      R0,#+0
+   \   00000020   0xD1F8             BNE.N    ??LL_mDelay_1
+    219          }
+   \   00000022   0xB001             ADD      SP,SP,#+4
+   \   00000024   0x4770             BX       LR               ;; return
+    220          
+    221          /**
+    222            * @}
+    223            */
+    224          
+    225          /** @addtogroup UTILS_EF_SYSTEM
+    226            *  @brief    System Configuration functions
+    227            *
+    228            @verbatim
+    229           ===============================================================================
+    230                     ##### System Configuration functions #####
+    231           ===============================================================================
+    232              [..]
+    233                   System, AHB and APB buses clocks configuration
+    234          
+    235                   (+) The maximum frequency of the SYSCLK, HCLK, PCLK1 and PCLK2 is RCC_MAX_FREQUENCY Hz.
+    236            @endverbatim
+    237            @internal
+    238                       Depending on the SYSCLK frequency, the flash latency should be adapted accordingly:
+    239                       (++) +-----------------------------------------------+
+    240                       (++) | Latency       | SYSCLK clock frequency (MHz)  |
+    241                       (++) |---------------|-------------------------------|
+    242                       (++) |0WS(1CPU cycle)|       0 < SYSCLK <= 24        |
+    243                       (++) |---------------|-------------------------------|
+    244                       (++) |1WS(2CPU cycle)|      24 < SYSCLK <= 48        |
+    245                       (++) |---------------|-------------------------------|
+    246                       (++) |2WS(3CPU cycle)|      48 < SYSCLK <= 72        |
+    247                       (++) +-----------------------------------------------+
+    248            @endinternal
+    249            * @{
+    250            */
+    251          
+    252          /**
+    253            * @brief  This function sets directly SystemCoreClock CMSIS variable.
+    254            * @note   Variable can be calculated also through SystemCoreClockUpdate function.
+    255            * @param  HCLKFrequency HCLK frequency in Hz (can be calculated thanks to RCC helper macro)
+    256            * @retval None
+    257            */
+
+   \                                 In section .text, align 2, keep-with-next
+    258          void LL_SetSystemCoreClock(uint32_t HCLKFrequency)
+    259          {
+    260            /* HCLK clock frequency */
+    261            SystemCoreClock = HCLKFrequency;
+   \                     LL_SetSystemCoreClock:
+   \   00000000   0x....             LDR.N    R1,??DataTable22_6
+   \   00000002   0x6008             STR      R0,[R1, #+0]
+    262          }
+   \   00000004   0x4770             BX       LR               ;; return
+    263          
+    264          /**
+    265            * @brief  This function configures system clock with HSI as clock source of the PLL
+    266            * @note   The application need to ensure that PLL is disabled.
+    267            * @note   Function is based on the following formula:
+    268            *         - PLL output frequency = ((HSI frequency / PREDIV) * PLLMUL)
+    269            *         - PREDIV: Set to 2 for few devices
+    270            *         - PLLMUL: The application software must set correctly the PLL multiplication factor to 
+    271            *                   not exceed 72MHz
+    272            * @note   FLASH latency can be modified through this function. 
+    273            * @param  UTILS_PLLInitStruct pointer to a @ref LL_UTILS_PLLInitTypeDef structure that contains
+    274            *                             the configuration information for the PLL.
+    275            * @param  UTILS_ClkInitStruct pointer to a @ref LL_UTILS_ClkInitTypeDef structure that contains
+    276            *                             the configuration information for the BUS prescalers.
+    277            * @retval An ErrorStatus enumeration value:
+    278            *          - SUCCESS: Max frequency configuration done
+    279            *          - ERROR: Max frequency configuration not done
+    280            */
+
+   \                                 In section .text, align 2, keep-with-next
+    281          ErrorStatus LL_PLL_ConfigSystemClock_HSI(LL_UTILS_PLLInitTypeDef *UTILS_PLLInitStruct,
+    282                                                   LL_UTILS_ClkInitTypeDef *UTILS_ClkInitStruct)
+    283          {
+   \                     LL_PLL_ConfigSystemClock_HSI:
+   \   00000000   0xB5F8             PUSH     {R3-R7,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+    284            ErrorStatus status = SUCCESS;
+   \   00000006   0x2601             MOVS     R6,#+1
+    285            uint32_t pllfreq = 0U;
+   \   00000008   0x2700             MOVS     R7,#+0
+    286          
+    287            /* Check if one of the PLL is enabled */
+    288            if (UTILS_PLL_IsBusy() == SUCCESS)
+   \   0000000A   0x.... 0x....      BL       UTILS_PLL_IsBusy
+   \   0000000E   0x2801             CMP      R0,#+1
+   \   00000010   0xD11B             BNE.N    ??LL_PLL_ConfigSystemClock_HSI_0
+    289            {
+    290          #if defined(RCC_PLLSRC_PREDIV1_SUPPORT)
+    291              /* Check PREDIV value */
+    292              assert_param(IS_LL_UTILS_PREDIV_VALUE(UTILS_PLLInitStruct->PLLDiv));
+    293          #else
+    294              /* Force PREDIV value to 2 */
+    295              UTILS_PLLInitStruct->Prediv = LL_RCC_PREDIV_DIV_2;
+   \   00000012   0xF45F 0x3000      MOVS     R0,#+131072
+   \   00000016   0x6060             STR      R0,[R4, #+4]
+    296          #endif /*RCC_PLLSRC_PREDIV1_SUPPORT*/
+    297              /* Calculate the new PLL output frequency */
+    298              pllfreq = UTILS_GetPLLOutputFrequency(HSI_VALUE, UTILS_PLLInitStruct);
+   \   00000018   0x0021             MOVS     R1,R4
+   \   0000001A   0x....             LDR.N    R0,??DataTable22_7  ;; 0x7a1200
+   \   0000001C   0x.... 0x....      BL       UTILS_GetPLLOutputFrequency
+   \   00000020   0x0007             MOVS     R7,R0
+    299          
+    300              /* Enable HSI if not enabled */
+    301              if (LL_RCC_HSI_IsReady() != 1U)
+   \   00000022   0x.... 0x....      BL       LL_RCC_HSI_IsReady
+   \   00000026   0x2801             CMP      R0,#+1
+   \   00000028   0xD005             BEQ.N    ??LL_PLL_ConfigSystemClock_HSI_1
+    302              {
+    303                LL_RCC_HSI_Enable();
+   \   0000002A   0x.... 0x....      BL       LL_RCC_HSI_Enable
+    304                while (LL_RCC_HSI_IsReady() != 1U)
+   \                     ??LL_PLL_ConfigSystemClock_HSI_2:
+   \   0000002E   0x.... 0x....      BL       LL_RCC_HSI_IsReady
+   \   00000032   0x2801             CMP      R0,#+1
+   \   00000034   0xD1FB             BNE.N    ??LL_PLL_ConfigSystemClock_HSI_2
+    305                {
+    306                  /* Wait for HSI ready */
+    307                }
+    308              }
+    309          
+    310              /* Configure PLL */
+    311              LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSI_DIV_2, UTILS_PLLInitStruct->PLLMul);
+   \                     ??LL_PLL_ConfigSystemClock_HSI_1:
+   \   00000036   0x6821             LDR      R1,[R4, #+0]
+   \   00000038   0x2000             MOVS     R0,#+0
+   \   0000003A   0x.... 0x....      BL       LL_RCC_PLL_ConfigDomain_SYS
+    312          
+    313              /* Enable PLL and switch system clock to PLL */
+    314              status = UTILS_EnablePLLAndSwitchSystem(pllfreq, UTILS_ClkInitStruct);
+   \   0000003E   0x0029             MOVS     R1,R5
+   \   00000040   0x0038             MOVS     R0,R7
+   \   00000042   0x.... 0x....      BL       UTILS_EnablePLLAndSwitchSystem
+   \   00000046   0x0006             MOVS     R6,R0
+   \   00000048   0xE000             B.N      ??LL_PLL_ConfigSystemClock_HSI_3
+    315            }
+    316            else
+    317            {
+    318              /* Current PLL configuration cannot be modified */
+    319              status = ERROR;
+   \                     ??LL_PLL_ConfigSystemClock_HSI_0:
+   \   0000004A   0x2600             MOVS     R6,#+0
+    320            }
+    321          
+    322            return status;
+   \                     ??LL_PLL_ConfigSystemClock_HSI_3:
+   \   0000004C   0x0030             MOVS     R0,R6
+   \   0000004E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000050   0xBDF2             POP      {R1,R4-R7,PC}    ;; return
+    323          }
+    324          
+    325          /**
+    326            * @brief  This function configures system clock with HSE as clock source of the PLL
+    327            * @note   The application need to ensure that PLL is disabled.
+    328            * @note   Function is based on the following formula:
+    329            *         - PLL output frequency = ((HSI frequency / PREDIV) * PLLMUL)
+    330            *         - PREDIV: Set to 2 for few devices
+    331            *         - PLLMUL: The application software must set correctly the PLL multiplication factor to 
+    332            *                   not exceed @ref UTILS_PLL_OUTPUT_MAX
+    333            * @note   FLASH latency can be modified through this function. 
+    334            * @param  HSEFrequency Value between Min_Data = RCC_HSE_MIN and Max_Data = RCC_HSE_MAX
+    335            * @param  HSEBypass This parameter can be one of the following values:
+    336            *         @arg @ref LL_UTILS_HSEBYPASS_ON
+    337            *         @arg @ref LL_UTILS_HSEBYPASS_OFF
+    338            * @param  UTILS_PLLInitStruct pointer to a @ref LL_UTILS_PLLInitTypeDef structure that contains
+    339            *                             the configuration information for the PLL.
+    340            * @param  UTILS_ClkInitStruct pointer to a @ref LL_UTILS_ClkInitTypeDef structure that contains
+    341            *                             the configuration information for the BUS prescalers.
+    342            * @retval An ErrorStatus enumeration value:
+    343            *          - SUCCESS: Max frequency configuration done
+    344            *          - ERROR: Max frequency configuration not done
+    345            */
+
+   \                                 In section .text, align 2, keep-with-next
+    346          ErrorStatus LL_PLL_ConfigSystemClock_HSE(uint32_t HSEFrequency, uint32_t HSEBypass,
+    347                                                   LL_UTILS_PLLInitTypeDef *UTILS_PLLInitStruct, LL_UTILS_ClkInitTypeDef *UTILS_ClkInitStruct)
+    348          {
+   \                     LL_PLL_ConfigSystemClock_HSE:
+   \   00000000   0xE92D 0x43F8      PUSH     {R3-R9,LR}
+   \   00000004   0x0004             MOVS     R4,R0
+   \   00000006   0x000D             MOVS     R5,R1
+   \   00000008   0x0016             MOVS     R6,R2
+   \   0000000A   0x001F             MOVS     R7,R3
+    349            ErrorStatus status = SUCCESS;
+   \   0000000C   0xF05F 0x0801      MOVS     R8,#+1
+    350            uint32_t pllfreq = 0U;
+   \   00000010   0xF05F 0x0900      MOVS     R9,#+0
+    351          
+    352            /* Check the parameters */
+    353            assert_param(IS_LL_UTILS_HSE_FREQUENCY(HSEFrequency));
+    354            assert_param(IS_LL_UTILS_HSE_BYPASS(HSEBypass));
+    355          
+    356            /* Check if one of the PLL is enabled */
+    357            if (UTILS_PLL_IsBusy() == SUCCESS)
+   \   00000014   0x.... 0x....      BL       UTILS_PLL_IsBusy
+   \   00000018   0x2801             CMP      R0,#+1
+   \   0000001A   0xD121             BNE.N    ??LL_PLL_ConfigSystemClock_HSE_0
+    358            {
+    359              assert_param(IS_LL_UTILS_PREDIV_VALUE(UTILS_PLLInitStruct->Prediv));
+    360          
+    361              /* Calculate the new PLL output frequency */
+    362              pllfreq = UTILS_GetPLLOutputFrequency(HSEFrequency, UTILS_PLLInitStruct);
+   \   0000001C   0x0031             MOVS     R1,R6
+   \   0000001E   0x0020             MOVS     R0,R4
+   \   00000020   0x.... 0x....      BL       UTILS_GetPLLOutputFrequency
+   \   00000024   0x4681             MOV      R9,R0
+    363          
+    364              /* Enable HSE if not enabled */
+    365              if (LL_RCC_HSE_IsReady() != 1U)
+   \   00000026   0x.... 0x....      BL       LL_RCC_HSE_IsReady
+   \   0000002A   0x2801             CMP      R0,#+1
+   \   0000002C   0xD00C             BEQ.N    ??LL_PLL_ConfigSystemClock_HSE_1
+    366              {
+    367                /* Check if need to enable HSE bypass feature or not */
+    368                if (HSEBypass == LL_UTILS_HSEBYPASS_ON)
+   \   0000002E   0x2D01             CMP      R5,#+1
+   \   00000030   0xD102             BNE.N    ??LL_PLL_ConfigSystemClock_HSE_2
+    369                {
+    370                  LL_RCC_HSE_EnableBypass();
+   \   00000032   0x.... 0x....      BL       LL_RCC_HSE_EnableBypass
+   \   00000036   0xE001             B.N      ??LL_PLL_ConfigSystemClock_HSE_3
+    371                }
+    372                else
+    373                {
+    374                  LL_RCC_HSE_DisableBypass();
+   \                     ??LL_PLL_ConfigSystemClock_HSE_2:
+   \   00000038   0x.... 0x....      BL       LL_RCC_HSE_DisableBypass
+    375                }
+    376          
+    377                /* Enable HSE */
+    378                LL_RCC_HSE_Enable();
+   \                     ??LL_PLL_ConfigSystemClock_HSE_3:
+   \   0000003C   0x.... 0x....      BL       LL_RCC_HSE_Enable
+    379                while (LL_RCC_HSE_IsReady() != 1U)
+   \                     ??LL_PLL_ConfigSystemClock_HSE_4:
+   \   00000040   0x.... 0x....      BL       LL_RCC_HSE_IsReady
+   \   00000044   0x2801             CMP      R0,#+1
+   \   00000046   0xD1FB             BNE.N    ??LL_PLL_ConfigSystemClock_HSE_4
+    380                {
+    381                  /* Wait for HSE ready */
+    382                }
+    383              }
+    384          
+    385                /* Configure PLL */
+    386              LL_RCC_PLL_ConfigDomain_SYS((RCC_CFGR_PLLSRC | UTILS_PLLInitStruct->Prediv), UTILS_PLLInitStruct->PLLMul);
+   \                     ??LL_PLL_ConfigSystemClock_HSE_1:
+   \   00000048   0x6831             LDR      R1,[R6, #+0]
+   \   0000004A   0x6870             LDR      R0,[R6, #+4]
+   \   0000004C   0xF450 0x3080      ORRS     R0,R0,#0x10000
+   \   00000050   0x.... 0x....      BL       LL_RCC_PLL_ConfigDomain_SYS
+    387          
+    388              /* Enable PLL and switch system clock to PLL */
+    389              status = UTILS_EnablePLLAndSwitchSystem(pllfreq, UTILS_ClkInitStruct);
+   \   00000054   0x0039             MOVS     R1,R7
+   \   00000056   0x4648             MOV      R0,R9
+   \   00000058   0x.... 0x....      BL       UTILS_EnablePLLAndSwitchSystem
+   \   0000005C   0x4680             MOV      R8,R0
+   \   0000005E   0xE001             B.N      ??LL_PLL_ConfigSystemClock_HSE_5
+    390            }
+    391            else
+    392            {
+    393              /* Current PLL configuration cannot be modified */
+    394              status = ERROR;
+   \                     ??LL_PLL_ConfigSystemClock_HSE_0:
+   \   00000060   0xF05F 0x0800      MOVS     R8,#+0
+    395            }
+    396          
+    397            return status;
+   \                     ??LL_PLL_ConfigSystemClock_HSE_5:
+   \   00000064   0x4640             MOV      R0,R8
+   \   00000066   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000068   0xE8BD 0x83F2      POP      {R1,R4-R9,PC}    ;; return
+    398          }
+    399          
+    400          /**
+    401            * @}
+    402            */
+    403          
+    404          /**
+    405            * @}
+    406            */
+    407          
+    408          /** @addtogroup UTILS_LL_Private_Functions
+    409            * @{
+    410            */
+    411          /**
+    412            * @brief  Update number of Flash wait states in line with new frequency and current
+    413                      voltage range.
+    414            * @param  Frequency  SYSCLK frequency
+    415            * @retval An ErrorStatus enumeration value:
+    416            *          - SUCCESS: Latency has been modified
+    417            *          - ERROR: Latency cannot be modified
+    418            */
+    419          #if defined(FLASH_ACR_LATENCY)
+
+   \                                 In section .text, align 2, keep-with-next
+    420          static ErrorStatus UTILS_SetFlashLatency(uint32_t Frequency)
+    421          {
+   \                     UTILS_SetFlashLatency:
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+    422            ErrorStatus status = SUCCESS;
+   \   00000002   0x2401             MOVS     R4,#+1
+    423          
+    424            uint32_t latency = LL_FLASH_LATENCY_0;  /* default value 0WS */
+   \   00000004   0x2500             MOVS     R5,#+0
+    425          
+    426            /* Frequency cannot be equal to 0 */
+    427            if (Frequency == 0U)
+   \   00000006   0x2800             CMP      R0,#+0
+   \   00000008   0xD101             BNE.N    ??UTILS_SetFlashLatency_0
+    428            {
+    429              status = ERROR;
+   \   0000000A   0x2400             MOVS     R4,#+0
+   \   0000000C   0xE010             B.N      ??UTILS_SetFlashLatency_1
+    430            }
+    431            else
+    432            {
+    433              if (Frequency > UTILS_LATENCY2_FREQ)
+   \                     ??UTILS_SetFlashLatency_0:
+   \   0000000E   0x....             LDR.N    R1,??DataTable22_8  ;; 0x2dc6c01
+   \   00000010   0x4288             CMP      R0,R1
+   \   00000012   0xD301             BCC.N    ??UTILS_SetFlashLatency_2
+    434              {
+    435                /* 48 < SYSCLK <= 72 => 2WS (3 CPU cycles) */
+    436                latency = LL_FLASH_LATENCY_2;
+   \   00000014   0x2502             MOVS     R5,#+2
+   \   00000016   0xE003             B.N      ??UTILS_SetFlashLatency_3
+    437              }
+    438              else
+    439              {
+    440                if (Frequency > UTILS_LATENCY1_FREQ)
+   \                     ??UTILS_SetFlashLatency_2:
+   \   00000018   0x....             LDR.N    R1,??DataTable22_9  ;; 0x16e3601
+   \   0000001A   0x4288             CMP      R0,R1
+   \   0000001C   0xD300             BCC.N    ??UTILS_SetFlashLatency_3
+    441                {
+    442                  /* 24 < SYSCLK <= 48 => 1WS (2 CPU cycles) */
+    443                  latency = LL_FLASH_LATENCY_1;
+   \   0000001E   0x2501             MOVS     R5,#+1
+    444                }
+    445                /* else SYSCLK < 24MHz default LL_FLASH_LATENCY_0 0WS */
+    446              }
+    447          
+    448              LL_FLASH_SetLatency(latency);
+   \                     ??UTILS_SetFlashLatency_3:
+   \   00000020   0x0028             MOVS     R0,R5
+   \   00000022   0x.... 0x....      BL       LL_FLASH_SetLatency
+    449          
+    450              /* Check that the new number of wait states is taken into account to access the Flash
+    451                 memory by reading the FLASH_ACR register */
+    452              if (LL_FLASH_GetLatency() != latency)
+   \   00000026   0x.... 0x....      BL       LL_FLASH_GetLatency
+   \   0000002A   0x42A8             CMP      R0,R5
+   \   0000002C   0xD000             BEQ.N    ??UTILS_SetFlashLatency_1
+    453              {
+    454                status = ERROR;
+   \   0000002E   0x2400             MOVS     R4,#+0
+    455              }
+    456            }
+    457            return status;
+   \                     ??UTILS_SetFlashLatency_1:
+   \   00000030   0x0020             MOVS     R0,R4
+   \   00000032   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000034   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+    458          }
+    459          #endif /* FLASH_ACR_LATENCY */
+    460          
+    461          /**
+    462            * @brief  Function to check that PLL can be modified
+    463            * @param  PLL_InputFrequency  PLL input frequency (in Hz)
+    464            * @param  UTILS_PLLInitStruct pointer to a @ref LL_UTILS_PLLInitTypeDef structure that contains
+    465            *                             the configuration information for the PLL.
+    466            * @retval PLL output frequency (in Hz)
+    467            */
+
+   \                                 In section .text, align 2, keep-with-next
+    468          static uint32_t UTILS_GetPLLOutputFrequency(uint32_t PLL_InputFrequency, LL_UTILS_PLLInitTypeDef *UTILS_PLLInitStruct)
+    469          {
+    470            uint32_t pllfreq = 0U;
+   \                     UTILS_GetPLLOutputFrequency:
+   \   00000000   0x2200             MOVS     R2,#+0
+    471          
+    472            /* Check the parameters */
+    473            assert_param(IS_LL_UTILS_PLLMUL_VALUE(UTILS_PLLInitStruct->PLLMul));
+    474          
+    475            /* Check different PLL parameters according to RM                          */
+    476          #if defined (RCC_CFGR2_PREDIV1)
+    477            pllfreq = __LL_RCC_CALC_PLLCLK_FREQ(PLL_InputFrequency / (UTILS_PLLInitStruct->Prediv + 1U), UTILS_PLLInitStruct->PLLMul);
+    478          #elif defined(RCC_CFGR2_PREDIV1SRC)
+    479            pllfreq = __LL_RCC_CALC_PLLCLK_FREQ(PLL_InputFrequency, UTILS_PLLInitStruct->PLLMul, UTILS_PLLInitStruct->PLLDiv);
+    480          #else
+    481            pllfreq = __LL_RCC_CALC_PLLCLK_FREQ(PLL_InputFrequency / ((UTILS_PLLInitStruct->Prediv >> RCC_CFGR_PLLXTPRE_Pos) + 1U), UTILS_PLLInitStruct->PLLMul);
+   \   00000002   0x684B             LDR      R3,[R1, #+4]
+   \   00000004   0x0C5B             LSRS     R3,R3,#+17
+   \   00000006   0x1C5B             ADDS     R3,R3,#+1
+   \   00000008   0xFBB0 0xF0F3      UDIV     R0,R0,R3
+   \   0000000C   0x6809             LDR      R1,[R1, #+0]
+   \   0000000E   0x0C89             LSRS     R1,R1,#+18
+   \   00000010   0x1C89             ADDS     R1,R1,#+2
+   \   00000012   0x4348             MULS     R0,R1,R0
+   \   00000014   0x0002             MOVS     R2,R0
+    482          #endif /*RCC_CFGR2_PREDIV1SRC*/
+    483            assert_param(IS_LL_UTILS_PLL_FREQUENCY(pllfreq));
+    484          
+    485            return pllfreq;
+   \   00000016   0x0010             MOVS     R0,R2
+   \   00000018   0x4770             BX       LR               ;; return
+    486          }
+    487          
+    488          /**
+    489            * @brief  Function to check that PLL can be modified
+    490            * @retval An ErrorStatus enumeration value:
+    491            *          - SUCCESS: PLL modification can be done
+    492            *          - ERROR: PLL is busy
+    493            */
+
+   \                                 In section .text, align 2, keep-with-next
+    494          static ErrorStatus UTILS_PLL_IsBusy(void)
+    495          {
+   \                     UTILS_PLL_IsBusy:
+   \   00000000   0xB510             PUSH     {R4,LR}
+    496            ErrorStatus status = SUCCESS;
+   \   00000002   0x2401             MOVS     R4,#+1
+    497          
+    498            /* Check if PLL is busy*/
+    499            if (LL_RCC_PLL_IsReady() != 0U)
+   \   00000004   0x.... 0x....      BL       LL_RCC_PLL_IsReady
+   \   00000008   0x2800             CMP      R0,#+0
+   \   0000000A   0xD000             BEQ.N    ??UTILS_PLL_IsBusy_0
+    500            {
+    501              /* PLL configuration cannot be modified */
+    502              status = ERROR;
+   \   0000000C   0x2400             MOVS     R4,#+0
+    503            }
+    504          #if defined(RCC_PLL2_SUPPORT)
+    505            /* Check if PLL2 is busy*/
+    506            if (LL_RCC_PLL2_IsReady() != 0U)
+    507            {
+    508              /* PLL2 configuration cannot be modified */
+    509              status = ERROR;
+    510            }
+    511          #endif /* RCC_PLL2_SUPPORT */
+    512          
+    513          #if defined(RCC_PLLI2S_SUPPORT)
+    514            /* Check if PLLI2S  is busy*/
+    515            if (LL_RCC_PLLI2S_IsReady() != 0U)
+    516            {
+    517              /* PLLI2S configuration cannot be modified */
+    518              status = ERROR;
+    519            }
+    520          #endif /* RCC_PLLI2S_SUPPORT */
+    521          
+    522            return status;
+   \                     ??UTILS_PLL_IsBusy_0:
+   \   0000000E   0x0020             MOVS     R0,R4
+   \   00000010   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000012   0xBD10             POP      {R4,PC}          ;; return
+    523          }
+    524          
+    525          /**
+    526            * @brief  Function to enable PLL and switch system clock to PLL
+    527            * @param  SYSCLK_Frequency SYSCLK frequency
+    528            * @param  UTILS_ClkInitStruct pointer to a @ref LL_UTILS_ClkInitTypeDef structure that contains
+    529            *                             the configuration information for the BUS prescalers.
+    530            * @retval An ErrorStatus enumeration value:
+    531            *          - SUCCESS: No problem to switch system to PLL
+    532            *          - ERROR: Problem to switch system to PLL
+    533            */
+
+   \                                 In section .text, align 2, keep-with-next
+    534          static ErrorStatus UTILS_EnablePLLAndSwitchSystem(uint32_t SYSCLK_Frequency, LL_UTILS_ClkInitTypeDef *UTILS_ClkInitStruct)
+    535          {
+   \                     UTILS_EnablePLLAndSwitchSystem:
+   \   00000000   0xB5F8             PUSH     {R3-R7,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+    536            ErrorStatus status = SUCCESS;
+   \   00000006   0x2601             MOVS     R6,#+1
+    537          #if defined(FLASH_ACR_LATENCY)
+    538            uint32_t sysclk_frequency_current = 0U;
+   \   00000008   0x2700             MOVS     R7,#+0
+    539          #endif /* FLASH_ACR_LATENCY */
+    540          
+    541            assert_param(IS_LL_UTILS_SYSCLK_DIV(UTILS_ClkInitStruct->AHBCLKDivider));
+    542            assert_param(IS_LL_UTILS_APB1_DIV(UTILS_ClkInitStruct->APB1CLKDivider));
+    543            assert_param(IS_LL_UTILS_APB2_DIV(UTILS_ClkInitStruct->APB2CLKDivider));
+    544          
+    545          #if defined(FLASH_ACR_LATENCY)
+    546            /* Calculate current SYSCLK frequency */
+    547            sysclk_frequency_current = (SystemCoreClock << AHBPrescTable[LL_RCC_GetAHBPrescaler() >> RCC_CFGR_HPRE_Pos]);
+   \   0000000A   0x.... 0x....      BL       LL_RCC_GetAHBPrescaler
+   \   0000000E   0x....             LDR.N    R1,??DataTable22_6
+   \   00000010   0x6809             LDR      R1,[R1, #+0]
+   \   00000012   0x0900             LSRS     R0,R0,#+4
+   \   00000014   0x....             LDR.N    R2,??DataTable22_10
+   \   00000016   0x5C80             LDRB     R0,[R0, R2]
+   \   00000018   0xFA11 0xF000      LSLS     R0,R1,R0
+   \   0000001C   0x0007             MOVS     R7,R0
+    548          #endif /* FLASH_ACR_LATENCY */
+    549          
+    550            /* Increasing the number of wait states because of higher CPU frequency */
+    551          #if defined (FLASH_ACR_LATENCY)
+    552            if (sysclk_frequency_current < SYSCLK_Frequency)
+   \   0000001E   0x42A7             CMP      R7,R4
+   \   00000020   0xD203             BCS.N    ??UTILS_EnablePLLAndSwitchSystem_0
+    553            {
+    554              /* Set FLASH latency to highest latency */
+    555              status = UTILS_SetFlashLatency(SYSCLK_Frequency);
+   \   00000022   0x0020             MOVS     R0,R4
+   \   00000024   0x.... 0x....      BL       UTILS_SetFlashLatency
+   \   00000028   0x0006             MOVS     R6,R0
+    556            }
+    557          #endif /* FLASH_ACR_LATENCY */
+    558          
+    559            /* Update system clock configuration */
+    560            if (status == SUCCESS)
+   \                     ??UTILS_EnablePLLAndSwitchSystem_0:
+   \   0000002A   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   0000002C   0x2E01             CMP      R6,#+1
+   \   0000002E   0xD115             BNE.N    ??UTILS_EnablePLLAndSwitchSystem_1
+    561            {
+    562          #if defined(RCC_PLL2_SUPPORT)
+    563              /* Enable PLL2 */
+    564              LL_RCC_PLL2_Enable();
+    565              while (LL_RCC_PLL2_IsReady() != 1U)
+    566              {
+    567                /* Wait for PLL2 ready */
+    568              }
+    569              
+    570          #endif /* RCC_PLL2_SUPPORT */
+    571              /* Enable PLL */
+    572              LL_RCC_PLL_Enable();
+   \   00000030   0x.... 0x....      BL       LL_RCC_PLL_Enable
+    573              while (LL_RCC_PLL_IsReady() != 1U)
+   \                     ??UTILS_EnablePLLAndSwitchSystem_2:
+   \   00000034   0x.... 0x....      BL       LL_RCC_PLL_IsReady
+   \   00000038   0x2801             CMP      R0,#+1
+   \   0000003A   0xD1FB             BNE.N    ??UTILS_EnablePLLAndSwitchSystem_2
+    574              {
+    575                /* Wait for PLL ready */
+    576              }
+    577          
+    578              /* Sysclk activation on the main PLL */
+    579              LL_RCC_SetAHBPrescaler(UTILS_ClkInitStruct->AHBCLKDivider);
+   \   0000003C   0x6828             LDR      R0,[R5, #+0]
+   \   0000003E   0x.... 0x....      BL       LL_RCC_SetAHBPrescaler
+    580              LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
+   \   00000042   0x2002             MOVS     R0,#+2
+   \   00000044   0x.... 0x....      BL       LL_RCC_SetSysClkSource
+    581              while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
+   \                     ??UTILS_EnablePLLAndSwitchSystem_3:
+   \   00000048   0x.... 0x....      BL       LL_RCC_GetSysClkSource
+   \   0000004C   0x2808             CMP      R0,#+8
+   \   0000004E   0xD1FB             BNE.N    ??UTILS_EnablePLLAndSwitchSystem_3
+    582              {
+    583                /* Wait for system clock switch to PLL */
+    584              }
+    585          
+    586              /* Set APB1 & APB2 prescaler*/
+    587              LL_RCC_SetAPB1Prescaler(UTILS_ClkInitStruct->APB1CLKDivider);
+   \   00000050   0x6868             LDR      R0,[R5, #+4]
+   \   00000052   0x.... 0x....      BL       LL_RCC_SetAPB1Prescaler
+    588              LL_RCC_SetAPB2Prescaler(UTILS_ClkInitStruct->APB2CLKDivider);
+   \   00000056   0x68A8             LDR      R0,[R5, #+8]
+   \   00000058   0x.... 0x....      BL       LL_RCC_SetAPB2Prescaler
+    589            }
+    590          
+    591            /* Decreasing the number of wait states because of lower CPU frequency */
+    592          #if defined (FLASH_ACR_LATENCY)
+    593            if (sysclk_frequency_current > SYSCLK_Frequency)
+   \                     ??UTILS_EnablePLLAndSwitchSystem_1:
+   \   0000005C   0x42BC             CMP      R4,R7
+   \   0000005E   0xD203             BCS.N    ??UTILS_EnablePLLAndSwitchSystem_4
+    594            {
+    595              /* Set FLASH latency to lowest latency */
+    596              status = UTILS_SetFlashLatency(SYSCLK_Frequency);
+   \   00000060   0x0020             MOVS     R0,R4
+   \   00000062   0x.... 0x....      BL       UTILS_SetFlashLatency
+   \   00000066   0x0006             MOVS     R6,R0
+    597            }
+    598          #endif /* FLASH_ACR_LATENCY */
+    599          
+    600            /* Update SystemCoreClock variable */
+    601            if (status == SUCCESS)
+   \                     ??UTILS_EnablePLLAndSwitchSystem_4:
+   \   00000068   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   0000006A   0x2E01             CMP      R6,#+1
+   \   0000006C   0xD108             BNE.N    ??UTILS_EnablePLLAndSwitchSystem_5
+    602            {
+    603              LL_SetSystemCoreClock(__LL_RCC_CALC_HCLK_FREQ(SYSCLK_Frequency, UTILS_ClkInitStruct->AHBCLKDivider));
+   \   0000006E   0x6828             LDR      R0,[R5, #+0]
+   \   00000070   0xF3C0 0x1003      UBFX     R0,R0,#+4,#+4
+   \   00000074   0x....             LDR.N    R1,??DataTable22_10
+   \   00000076   0x5C40             LDRB     R0,[R0, R1]
+   \   00000078   0xFA34 0xF000      LSRS     R0,R4,R0
+   \   0000007C   0x.... 0x....      BL       LL_SetSystemCoreClock
+    604            }
+    605          
+    606            return status;
+   \                     ??UTILS_EnablePLLAndSwitchSystem_5:
+   \   00000080   0x0030             MOVS     R0,R6
+   \   00000082   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000084   0xBDF2             POP      {R1,R4-R7,PC}    ;; return
+    607          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable22:
+   \   00000000   0x40022000         DC32     0x40022000
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable22_1:
+   \   00000000   0xE000E014         DC32     0xe000e014
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable22_2:
+   \   00000000   0xE000E018         DC32     0xe000e018
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable22_3:
+   \   00000000   0xE000E010         DC32     0xe000e010
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable22_4:
+   \   00000000   0x40021000         DC32     0x40021000
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable22_5:
+   \   00000000   0x40021004         DC32     0x40021004
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable22_6:
+   \   00000000   0x........         DC32     SystemCoreClock
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable22_7:
+   \   00000000   0x007A1200         DC32     0x7a1200
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable22_8:
+   \   00000000   0x02DC6C01         DC32     0x2dc6c01
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable22_9:
+   \   00000000   0x016E3601         DC32     0x16e3601
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable22_10:
+   \   00000000   0x........         DC32     AHBPrescTable
+    608          
+    609          /**
+    610            * @}
+    611            */
+    612          
+    613          /**
+    614            * @}
+    615            */
+    616          
+    617          /**
+    618            * @}
+    619            */
+    620          
+    621          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  LL_FLASH_GetLatency
+        0  LL_FLASH_SetLatency
+        8  LL_Init1msTick
+              8 -> LL_InitTick
+        0  LL_InitTick
+       32  LL_PLL_ConfigSystemClock_HSE
+             32 -> LL_RCC_HSE_DisableBypass
+             32 -> LL_RCC_HSE_Enable
+             32 -> LL_RCC_HSE_EnableBypass
+             32 -> LL_RCC_HSE_IsReady
+             32 -> LL_RCC_PLL_ConfigDomain_SYS
+             32 -> UTILS_EnablePLLAndSwitchSystem
+             32 -> UTILS_GetPLLOutputFrequency
+             32 -> UTILS_PLL_IsBusy
+       24  LL_PLL_ConfigSystemClock_HSI
+             24 -> LL_RCC_HSI_Enable
+             24 -> LL_RCC_HSI_IsReady
+             24 -> LL_RCC_PLL_ConfigDomain_SYS
+             24 -> UTILS_EnablePLLAndSwitchSystem
+             24 -> UTILS_GetPLLOutputFrequency
+             24 -> UTILS_PLL_IsBusy
+        0  LL_RCC_GetAHBPrescaler
+        0  LL_RCC_GetSysClkSource
+        0  LL_RCC_HSE_DisableBypass
+        0  LL_RCC_HSE_Enable
+        0  LL_RCC_HSE_EnableBypass
+        0  LL_RCC_HSE_IsReady
+        0  LL_RCC_HSI_Enable
+        0  LL_RCC_HSI_IsReady
+        0  LL_RCC_PLL_ConfigDomain_SYS
+        0  LL_RCC_PLL_Enable
+        0  LL_RCC_PLL_IsReady
+        0  LL_RCC_SetAHBPrescaler
+        0  LL_RCC_SetAPB1Prescaler
+        0  LL_RCC_SetAPB2Prescaler
+        0  LL_RCC_SetSysClkSource
+        0  LL_SetSystemCoreClock
+        4  LL_mDelay
+       24  UTILS_EnablePLLAndSwitchSystem
+             24 -> LL_RCC_GetAHBPrescaler
+             24 -> LL_RCC_GetSysClkSource
+             24 -> LL_RCC_PLL_Enable
+             24 -> LL_RCC_PLL_IsReady
+             24 -> LL_RCC_SetAHBPrescaler
+             24 -> LL_RCC_SetAPB1Prescaler
+             24 -> LL_RCC_SetAPB2Prescaler
+             24 -> LL_RCC_SetSysClkSource
+             24 -> LL_SetSystemCoreClock
+             24 -> UTILS_SetFlashLatency
+        0  UTILS_GetPLLOutputFrequency
+        8  UTILS_PLL_IsBusy
+              8 -> LL_RCC_PLL_IsReady
+       16  UTILS_SetFlashLatency
+             16 -> LL_FLASH_GetLatency
+             16 -> LL_FLASH_SetLatency
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable22
+       4  ??DataTable22_1
+       4  ??DataTable22_10
+       4  ??DataTable22_2
+       4  ??DataTable22_3
+       4  ??DataTable22_4
+       4  ??DataTable22_5
+       4  ??DataTable22_6
+       4  ??DataTable22_7
+       4  ??DataTable22_8
+       4  ??DataTable22_9
+      10  LL_FLASH_GetLatency
+      16  LL_FLASH_SetLatency
+      12  LL_Init1msTick
+      24  LL_InitTick
+     108  LL_PLL_ConfigSystemClock_HSE
+      82  LL_PLL_ConfigSystemClock_HSI
+      10  LL_RCC_GetAHBPrescaler
+      10  LL_RCC_GetSysClkSource
+      14  LL_RCC_HSE_DisableBypass
+      14  LL_RCC_HSE_Enable
+      14  LL_RCC_HSE_EnableBypass
+      14  LL_RCC_HSE_IsReady
+      14  LL_RCC_HSI_Enable
+      14  LL_RCC_HSI_IsReady
+      22  LL_RCC_PLL_ConfigDomain_SYS
+      14  LL_RCC_PLL_Enable
+      14  LL_RCC_PLL_IsReady
+      16  LL_RCC_SetAHBPrescaler
+      16  LL_RCC_SetAPB1Prescaler
+      16  LL_RCC_SetAPB2Prescaler
+      16  LL_RCC_SetSysClkSource
+       6  LL_SetSystemCoreClock
+      38  LL_mDelay
+     134  UTILS_EnablePLLAndSwitchSystem
+      26  UTILS_GetPLLOutputFrequency
+      20  UTILS_PLL_IsBusy
+      54  UTILS_SetFlashLatency
+
+ 
+ 792 bytes in section .text
+ 
+ 792 bytes of CODE memory
+
+Errors: none
+Warnings: 1

@@ -1,0 +1,696 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  09:12:47 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\Src\freertos.c  #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\Src\freertos.c #
+#                    " -D USE_FULL_LL_DRIVER -D USE_HAL_DRIVER -D             #
+#                    STM32F103xB -lC "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM\mb_v1.0/List\" -o                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    Obj\" --no_cse --no_unroll --no_inline --no_code_motion  #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files\IAR Systems\Embedded     #
+#                    Workbench 6.0\arm\INC\c\DLib_Config_Full.h" -I           #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\freertos.lst                                         #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\freertos.o                                            #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\Src\freertos.c
+      1          /**
+      2            ******************************************************************************
+      3            * File Name          : freertos.c
+      4            * Description        : Code for freertos applications
+      5            ******************************************************************************
+      6            * This notice applies to any and all portions of this file
+      7            * that are not between comment pairs USER CODE BEGIN and
+      8            * USER CODE END. Other portions of this file, whether 
+      9            * inserted by the user or by software development tools
+     10            * are owned by their respective copyright owners.
+     11            *
+     12            * Copyright (c) 2018 STMicroelectronics International N.V. 
+     13            * All rights reserved.
+     14            *
+     15            * Redistribution and use in source and binary forms, with or without 
+     16            * modification, are permitted, provided that the following conditions are met:
+     17            *
+     18            * 1. Redistribution of source code must retain the above copyright notice, 
+     19            *    this list of conditions and the following disclaimer.
+     20            * 2. Redistributions in binary form must reproduce the above copyright notice,
+     21            *    this list of conditions and the following disclaimer in the documentation
+     22            *    and/or other materials provided with the distribution.
+     23            * 3. Neither the name of STMicroelectronics nor the names of other 
+     24            *    contributors to this software may be used to endorse or promote products 
+     25            *    derived from this software without specific written permission.
+     26            * 4. This software, including modifications and/or derivative works of this 
+     27            *    software, must execute solely and exclusively on microcontroller or
+     28            *    microprocessor devices manufactured by or for STMicroelectronics.
+     29            * 5. Redistribution and use of this software other than as permitted under 
+     30            *    this license is void and will automatically terminate your rights under 
+     31            *    this license. 
+     32            *
+     33            * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+     34            * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+     35            * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+     36            * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+     37            * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+     38            * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+     39            * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+     40            * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+     41            * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+     42            * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+     43            * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+     44            * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     45            *
+     46            ******************************************************************************
+     47            */
+     48          
+     49          /* Includes ------------------------------------------------------------------*/
+     50          #include "FreeRTOS.h"
+
+  /**
+    ^
+"D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_adc.h",1  Warning[Pa050]: 
+          non-native end of line sequence detected (this diagnostic is only
+          issued once)
+     51          #include "task.h"
+     52          #include "cmsis_os.h"
+     53          
+     54          /* USER CODE BEGIN Includes */     
+     55          
+     56          #include "flash.h"
+     57          #include "mb.h"
+     58          #include "hw_config.h"
+     59          #include "UserModbusSlaver.h"
+     60          
+     61          /* USER CODE END Includes */
+     62          
+     63          /* Variables -----------------------------------------------------------------*/
+
+   \                                 In section .bss, align 4
+     64          osThreadId MonitorTaskHandle;
+   \                     MonitorTaskHandle:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+     65          uint32_t MonitorTaskBuffer[ 512 ];
+   \                     MonitorTaskBuffer:
+   \   00000000                      DS8 2048
+
+   \                                 In section .bss, align 4
+     66          osStaticThreadDef_t MonitorTaskControlBlock;
+   \                     MonitorTaskControlBlock:
+   \   00000000                      DS8 84
+
+   \                                 In section .bss, align 4
+     67          osThreadId FlashWritingTasHandle;
+   \                     FlashWritingTasHandle:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+     68          uint32_t FlashWritingTasBuffer[ 256 ];
+   \                     FlashWritingTasBuffer:
+   \   00000000                      DS8 1024
+
+   \                                 In section .bss, align 4
+     69          osStaticThreadDef_t FlashWritingTasControlBlock;
+   \                     FlashWritingTasControlBlock:
+   \   00000000                      DS8 84
+
+   \                                 In section .bss, align 4
+     70          osSemaphoreId MbTimSemHandle;
+   \                     MbTimSemHandle:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+     71          osStaticSemaphoreDef_t MbTimSemControlBlock;
+   \                     MbTimSemControlBlock:
+   \   00000000                      DS8 72
+
+   \                                 In section .bss, align 4
+     72          osSemaphoreId MbTXSemHandle;
+   \                     MbTXSemHandle:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+     73          osStaticSemaphoreDef_t MbTXSemControlBlock;
+   \                     MbTXSemControlBlock:
+   \   00000000                      DS8 72
+
+   \                                 In section .bss, align 4
+     74          osSemaphoreId FlashWriteSemHandle;
+   \                     FlashWriteSemHandle:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+     75          osStaticSemaphoreDef_t FlashWriteSemControlBlock;
+   \                     FlashWriteSemControlBlock:
+   \   00000000                      DS8 72
+     76          
+     77          /* USER CODE BEGIN Variables */
+
+   \                                 In section .bss, align 4
+     78          FlashQueue_typedef flash_queue_data = {0,0,0,0,0};
+   \                     flash_queue_data:
+   \   00000000                      DS8 12
+     79          /* USER CODE END Variables */
+     80          
+     81          /* Function prototypes -------------------------------------------------------*/
+     82          void StartMonitorTask(void const * argument);
+     83          void StartFlashWritingTask(void const * argument);
+     84          
+     85          void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
+     86          
+     87          /* USER CODE BEGIN FunctionPrototypes */
+     88          
+     89          /* USER CODE END FunctionPrototypes */
+     90          
+     91          /* GetIdleTaskMemory prototype (linked to static allocation support) */
+     92          void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
+     93          
+     94          /* Hook prototypes */
+     95          
+     96          /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
+
+   \                                 In section .bss, align 4
+     97          static StaticTask_t xIdleTaskTCBBuffer;
+   \                     xIdleTaskTCBBuffer:
+   \   00000000                      DS8 84
+
+   \                                 In section .bss, align 4
+     98          static StackType_t xIdleStack[configMINIMAL_STACK_SIZE];
+   \                     xIdleStack:
+   \   00000000                      DS8 1024
+     99            
+
+   \                                 In section .text, align 2, keep-with-next
+    100          void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize )
+    101          {
+    102            *ppxIdleTaskTCBBuffer = &xIdleTaskTCBBuffer;
+   \                     vApplicationGetIdleTaskMemory:
+   \   00000000   0x....             LDR.N    R3,??DataTable3
+   \   00000002   0x6003             STR      R3,[R0, #+0]
+    103            *ppxIdleTaskStackBuffer = &xIdleStack[0];
+   \   00000004   0x....             LDR.N    R0,??DataTable3_1
+   \   00000006   0x6008             STR      R0,[R1, #+0]
+    104            *pulIdleTaskStackSize = configMINIMAL_STACK_SIZE;
+   \   00000008   0xF44F 0x7080      MOV      R0,#+256
+   \   0000000C   0x6010             STR      R0,[R2, #+0]
+    105            /* place for user code */
+    106          }                   
+   \   0000000E   0x4770             BX       LR               ;; return
+    107          /* USER CODE END GET_IDLE_TASK_MEMORY */
+    108          
+    109          /* Init FreeRTOS */
+    110          
+
+   \                                 In section .text, align 2, keep-with-next
+    111          void MX_FREERTOS_Init(void) {
+   \                     MX_FREERTOS_Init:
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB095             SUB      SP,SP,#+84
+    112            /* USER CODE BEGIN Init */
+    113                 
+    114            /* USER CODE END Init */
+    115          
+    116            /* USER CODE BEGIN RTOS_MUTEX */
+    117            /* add mutexes, ... */
+    118            /* USER CODE END RTOS_MUTEX */
+    119          
+    120            /* Create the semaphores(s) */
+    121            /* definition and creation of MbTimSem */
+    122            osSemaphoreStaticDef(MbTimSem, &MbTimSemControlBlock);
+   \   00000004   0x....             LDR.N    R0,??DataTable3_2
+   \   00000006   0xE9D0 0x2300      LDRD     R2,R3,[R0, #+0]
+   \   0000000A   0xE9CD 0x2304      STRD     R2,R3,[SP, #+16]
+    123            MbTimSemHandle = osSemaphoreCreate(osSemaphore(MbTimSem), 1);
+   \   0000000E   0x2101             MOVS     R1,#+1
+   \   00000010   0xA804             ADD      R0,SP,#+16
+   \   00000012   0x.... 0x....      BL       osSemaphoreCreate
+   \   00000016   0x....             LDR.N    R1,??DataTable3_3
+   \   00000018   0x6008             STR      R0,[R1, #+0]
+    124          
+    125            /* definition and creation of MbTXSem */
+    126            osSemaphoreStaticDef(MbTXSem, &MbTXSemControlBlock);
+   \   0000001A   0x....             LDR.N    R0,??DataTable3_4
+   \   0000001C   0xE9D0 0x2300      LDRD     R2,R3,[R0, #+0]
+   \   00000020   0xE9CD 0x2302      STRD     R2,R3,[SP, #+8]
+    127            MbTXSemHandle = osSemaphoreCreate(osSemaphore(MbTXSem), 1);
+   \   00000024   0x2101             MOVS     R1,#+1
+   \   00000026   0xA802             ADD      R0,SP,#+8
+   \   00000028   0x.... 0x....      BL       osSemaphoreCreate
+   \   0000002C   0x....             LDR.N    R1,??DataTable3_5
+   \   0000002E   0x6008             STR      R0,[R1, #+0]
+    128          
+    129            /* definition and creation of FlashWriteSem */
+    130            osSemaphoreStaticDef(FlashWriteSem, &FlashWriteSemControlBlock);
+   \   00000030   0x....             LDR.N    R0,??DataTable3_6
+   \   00000032   0xE9D0 0x2300      LDRD     R2,R3,[R0, #+0]
+   \   00000036   0xE9CD 0x2300      STRD     R2,R3,[SP, #+0]
+    131            FlashWriteSemHandle = osSemaphoreCreate(osSemaphore(FlashWriteSem), 1);
+   \   0000003A   0x2101             MOVS     R1,#+1
+   \   0000003C   0xA800             ADD      R0,SP,#+0
+   \   0000003E   0x.... 0x....      BL       osSemaphoreCreate
+   \   00000042   0x....             LDR.N    R1,??DataTable3_7
+   \   00000044   0x6008             STR      R0,[R1, #+0]
+    132          
+    133            /* USER CODE BEGIN RTOS_SEMAPHORES */
+    134            /* add semaphores, ... */
+    135            /* USER CODE END RTOS_SEMAPHORES */
+    136          
+    137            /* USER CODE BEGIN RTOS_TIMERS */
+    138            /* start timers, add new ones, ... */
+    139            /* USER CODE END RTOS_TIMERS */
+    140          
+    141            /* Create the thread(s) */
+    142            /* definition and creation of MonitorTask */
+    143            osThreadStaticDef(MonitorTask, StartMonitorTask, osPriorityNormal, 0, 512, MonitorTaskBuffer, &MonitorTaskControlBlock);
+   \   00000046   0xA80D             ADD      R0,SP,#+52
+   \   00000048   0x....             LDR.N    R1,??DataTable3_8
+   \   0000004A   0x221C             MOVS     R2,#+28
+   \   0000004C   0x.... 0x....      BL       __aeabi_memcpy4
+    144            MonitorTaskHandle = osThreadCreate(osThread(MonitorTask), NULL);
+   \   00000050   0x2100             MOVS     R1,#+0
+   \   00000052   0xA80D             ADD      R0,SP,#+52
+   \   00000054   0x.... 0x....      BL       osThreadCreate
+   \   00000058   0x....             LDR.N    R1,??DataTable3_9
+   \   0000005A   0x6008             STR      R0,[R1, #+0]
+    145          
+    146            /* definition and creation of FlashWritingTas */
+    147            osThreadStaticDef(FlashWritingTas, StartFlashWritingTask, osPriorityNormal, 0, 256, FlashWritingTasBuffer, &FlashWritingTasControlBlock);
+   \   0000005C   0xA806             ADD      R0,SP,#+24
+   \   0000005E   0x....             LDR.N    R1,??DataTable3_10
+   \   00000060   0x221C             MOVS     R2,#+28
+   \   00000062   0x.... 0x....      BL       __aeabi_memcpy4
+    148            FlashWritingTasHandle = osThreadCreate(osThread(FlashWritingTas), NULL);
+   \   00000066   0x2100             MOVS     R1,#+0
+   \   00000068   0xA806             ADD      R0,SP,#+24
+   \   0000006A   0x.... 0x....      BL       osThreadCreate
+   \   0000006E   0x....             LDR.N    R1,??DataTable3_11
+   \   00000070   0x6008             STR      R0,[R1, #+0]
+    149          
+    150            /* USER CODE BEGIN RTOS_THREADS */
+    151            /* add threads, ... */
+    152            /* USER CODE END RTOS_THREADS */
+    153          
+    154            /* USER CODE BEGIN RTOS_QUEUES */
+    155            /* add queues, ... */
+    156            /* USER CODE END RTOS_QUEUES */
+    157          }
+   \   00000072   0xB015             ADD      SP,SP,#+84
+   \   00000074   0xBD00             POP      {PC}             ;; return
+    158          
+    159          /* StartMonitorTask function */
+
+   \                                 In section .text, align 2, keep-with-next
+    160          void StartMonitorTask(void const * argument)
+    161          {
+   \                     StartMonitorTask:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    162          
+    163            /* USER CODE BEGIN StartMonitorTask */
+    164            eMBInit(MB_RTU, MB_ADDRESS);///>Modbus RTU initialisation
+   \   00000002   0x2101             MOVS     R1,#+1
+   \   00000004   0x2000             MOVS     R0,#+0
+   \   00000006   0x.... 0x....      BL       eMBInit
+    165            eMBEnable();///>Modbus RTU activating
+   \   0000000A   0x.... 0x....      BL       eMBEnable
+    166            /* Infinite loop */
+    167            for(;;)
+    168            {
+    169              if(xSemaphoreTake(MbTimSemHandle, 1 / portTICK_RATE_MS) == pdTRUE )
+   \                     ??StartMonitorTask_0:
+   \   0000000E   0x2300             MOVS     R3,#+0
+   \   00000010   0x2201             MOVS     R2,#+1
+   \   00000012   0x2100             MOVS     R1,#+0
+   \   00000014   0x....             LDR.N    R0,??DataTable3_3
+   \   00000016   0x6800             LDR      R0,[R0, #+0]
+   \   00000018   0x.... 0x....      BL       xQueueGenericReceive
+   \   0000001C   0x2801             CMP      R0,#+1
+   \   0000001E   0xD102             BNE.N    ??StartMonitorTask_1
+    170              {
+    171                 pxMBPortCBTimerExpired();    
+   \   00000020   0x....             LDR.N    R0,??DataTable3_12
+   \   00000022   0x6800             LDR      R0,[R0, #+0]
+   \   00000024   0x4780             BLX      R0
+    172              }
+    173              eMBPoll(); ///> polling  
+   \                     ??StartMonitorTask_1:
+   \   00000026   0x.... 0x....      BL       eMBPoll
+   \   0000002A   0xE7F0             B.N      ??StartMonitorTask_0
+    174              
+    175            }
+    176            /* USER CODE END StartMonitorTask */
+    177          }
+    178          
+    179          /* StartFlashWritingTask function */
+
+   \                                 In section .text, align 2, keep-with-next
+    180          void StartFlashWritingTask(void const * argument)
+    181          {
+   \                     StartFlashWritingTask:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0xB082             SUB      SP,SP,#+8
+    182            /* USER CODE BEGIN StartFlashWritingTask */
+    183           FlashQueue_typedef *queue_data = &flash_queue_data;
+   \   00000004   0x....             LDR.N    R4,??DataTable3_13
+    184           union FloatChar FlWd;
+    185          
+    186            /* Infinite loop */
+    187            for(;;)
+    188            {
+    189              if(xSemaphoreTake(FlashWriteSemHandle, portMAX_DELAY  )== pdTRUE)///> waiting for writing flash semaphore
+   \                     ??StartFlashWritingTask_0:
+   \   00000006   0x2300             MOVS     R3,#+0
+   \   00000008   0xF05F 0x32FF      MOVS     R2,#-1
+   \   0000000C   0x2100             MOVS     R1,#+0
+   \   0000000E   0x....             LDR.N    R0,??DataTable3_7
+   \   00000010   0x6800             LDR      R0,[R0, #+0]
+   \   00000012   0x.... 0x....      BL       xQueueGenericReceive
+   \   00000016   0x2801             CMP      R0,#+1
+   \   00000018   0xD1F5             BNE.N    ??StartFlashWritingTask_0
+    190              {
+    191                if(queue_data->mask > 0)
+   \   0000001A   0x8920             LDRH     R0,[R4, #+8]
+   \   0000001C   0x2801             CMP      R0,#+1
+   \   0000001E   0xD3F2             BCC.N    ??StartFlashWritingTask_0
+    192                {
+    193                 if((queue_data->mask & HOLDING_REG1_H_MASK)||(queue_data->mask & HOLDING_REG1_L_MASK))
+   \   00000020   0x7A20             LDRB     R0,[R4, #+8]
+   \   00000022   0x2103             MOVS     R1,#+3
+   \   00000024   0x4208             TST      R0,R1
+   \   00000026   0xD015             BEQ.N    ??StartFlashWritingTask_1
+    194                 {
+    195                   /* First, let's read and save data from address which is used as holding register1 */
+    196                   ReadFlash((void *)&FlWd.dwd, sizeof(uint32_t), mbHoldingReg1HIGH);
+   \   00000028   0x....             LDR.N    R2,??DataTable3_14  ;; 0x800f800
+   \   0000002A   0x2104             MOVS     R1,#+4
+   \   0000002C   0xA800             ADD      R0,SP,#+0
+   \   0000002E   0x.... 0x....      BL       ReadFlash
+    197                   if(queue_data->mask & HOLDING_REG1_H_MASK)
+   \   00000032   0x7A20             LDRB     R0,[R4, #+8]
+   \   00000034   0x07C0             LSLS     R0,R0,#+31
+   \   00000036   0xD502             BPL.N    ??StartFlashWritingTask_2
+    198                                FlWd.wd[0] = queue_data->reg1_h;
+   \   00000038   0x8820             LDRH     R0,[R4, #+0]
+   \   0000003A   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+    199                   if(queue_data->mask & HOLDING_REG1_L_MASK)
+   \                     ??StartFlashWritingTask_2:
+   \   0000003E   0x7A20             LDRB     R0,[R4, #+8]
+   \   00000040   0x0780             LSLS     R0,R0,#+30
+   \   00000042   0xD502             BPL.N    ??StartFlashWritingTask_3
+    200                                FlWd.wd[1] = queue_data->reg1_l;
+   \   00000044   0x8860             LDRH     R0,[R4, #+2]
+   \   00000046   0xF8AD 0x0002      STRH     R0,[SP, #+2]
+    201                   /*we write only data which was changed*/
+    202                   WriteFlash((void*)FlWd.dwd, sizeof(uint32_t), mbHoldingReg1HIGH);
+   \                     ??StartFlashWritingTask_3:
+   \   0000004A   0x....             LDR.N    R2,??DataTable3_14  ;; 0x800f800
+   \   0000004C   0x2104             MOVS     R1,#+4
+   \   0000004E   0x9800             LDR      R0,[SP, #+0]
+   \   00000050   0x.... 0x....      BL       WriteFlash
+    203                 }
+    204                 if((queue_data->mask & HOLDING_REG2_H_MASK)||(queue_data->mask & HOLDING_REG2_L_MASK))
+   \                     ??StartFlashWritingTask_1:
+   \   00000054   0x7A20             LDRB     R0,[R4, #+8]
+   \   00000056   0x210C             MOVS     R1,#+12
+   \   00000058   0x4208             TST      R0,R1
+   \   0000005A   0xD0D4             BEQ.N    ??StartFlashWritingTask_0
+    205                 {
+    206                   ReadFlash((void *)&FlWd.dwd, sizeof(uint32_t), mbHoldingReg2HIGH);
+   \   0000005C   0x....             LDR.N    R2,??DataTable3_15  ;; 0x800f400
+   \   0000005E   0x2104             MOVS     R1,#+4
+   \   00000060   0xA800             ADD      R0,SP,#+0
+   \   00000062   0x.... 0x....      BL       ReadFlash
+    207                   if(queue_data->mask & HOLDING_REG2_H_MASK)
+   \   00000066   0x7A20             LDRB     R0,[R4, #+8]
+   \   00000068   0x0740             LSLS     R0,R0,#+29
+   \   0000006A   0xD502             BPL.N    ??StartFlashWritingTask_4
+    208                                FlWd.wd[0] = queue_data->reg2_h;
+   \   0000006C   0x88A0             LDRH     R0,[R4, #+4]
+   \   0000006E   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+    209                   if(queue_data->mask & HOLDING_REG2_L_MASK)
+   \                     ??StartFlashWritingTask_4:
+   \   00000072   0x7A20             LDRB     R0,[R4, #+8]
+   \   00000074   0x0700             LSLS     R0,R0,#+28
+   \   00000076   0xD502             BPL.N    ??StartFlashWritingTask_5
+    210                                FlWd.wd[1] = queue_data->reg2_l;
+   \   00000078   0x88E0             LDRH     R0,[R4, #+6]
+   \   0000007A   0xF8AD 0x0002      STRH     R0,[SP, #+2]
+    211                   WriteFlash((void*)FlWd.dwd, sizeof(uint32_t), mbHoldingReg2HIGH);
+   \                     ??StartFlashWritingTask_5:
+   \   0000007E   0x....             LDR.N    R2,??DataTable3_15  ;; 0x800f400
+   \   00000080   0x2104             MOVS     R1,#+4
+   \   00000082   0x9800             LDR      R0,[SP, #+0]
+   \   00000084   0x.... 0x....      BL       WriteFlash
+   \   00000088   0xE7BD             B.N      ??StartFlashWritingTask_0
+    212                 } 
+    213          
+    214                }
+    215              }
+    216            }
+    217            /* USER CODE END StartFlashWritingTask */
+    218          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3:
+   \   00000000   0x........         DC32     xIdleTaskTCBBuffer
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_1:
+   \   00000000   0x........         DC32     xIdleStack
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_2:
+   \   00000000   0x........         DC32     `?<Constant {0, &MbTimSemControlBlock}>`
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_3:
+   \   00000000   0x........         DC32     MbTimSemHandle
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_4:
+   \   00000000   0x........         DC32     `?<Constant {0, &MbTXSemControlBlock}>`
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_5:
+   \   00000000   0x........         DC32     MbTXSemHandle
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_6:
+   \   00000000   0x........         DC32     `?<Constant {0, &FlashWriteSemControlBlock}>`
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_7:
+   \   00000000   0x........         DC32     FlashWriteSemHandle
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_8:
+   \   00000000   0x........         DC32     `?<Constant {&"MonitorTask", StartMonitorTask, `
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_9:
+   \   00000000   0x........         DC32     MonitorTaskHandle
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_10:
+   \   00000000   0x........         DC32     `?<Constant {&"FlashWritingTas", StartFlashWrit`
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_11:
+   \   00000000   0x........         DC32     FlashWritingTasHandle
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_12:
+   \   00000000   0x........         DC32     pxMBPortCBTimerExpired
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_13:
+   \   00000000   0x........         DC32     flash_queue_data
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_14:
+   \   00000000   0x0800F800         DC32     0x800f800
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_15:
+   \   00000000   0x0800F400         DC32     0x800f400
+
+   \                                 In section .rodata, align 4
+   \                     `?<Constant {0, &MbTimSemControlBlock}>`:
+   \   00000000   0x00000000         DC32 0, MbTimSemControlBlock
+   \              0x........   
+
+   \                                 In section .rodata, align 4
+   \                     `?<Constant {0, &MbTXSemControlBlock}>`:
+   \   00000000   0x00000000         DC32 0, MbTXSemControlBlock
+   \              0x........   
+
+   \                                 In section .rodata, align 4
+   \                     `?<Constant {0, &FlashWriteSemControlBlock}>`:
+   \   00000000   0x00000000         DC32 0, FlashWriteSemControlBlock
+   \              0x........   
+
+   \                                 In section .rodata, align 4
+   \                     `?<Constant "MonitorTask">`:
+   \   00000000   0x4D 0x6F          DC8 "MonitorTask"
+   \              0x6E 0x69    
+   \              0x74 0x6F    
+   \              0x72 0x54    
+   \              0x61 0x73    
+   \              0x6B 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     `?<Constant {&"MonitorTask", StartMonitorTask, `:
+   \   00000000   0x........         DC32 `?<Constant "MonitorTask">`, StartMonitorTask
+   \              0x........   
+   \   00000008   0x0000             DC16 0
+   \   0000000A   0x00 0x00          DC8 0, 0
+   \   0000000C   0x00000000         DC32 0, 512, MonitorTaskBuffer, MonitorTaskControlBlock
+   \              0x00000200   
+   \              0x........   
+   \              0x........   
+
+   \                                 In section .rodata, align 4
+   \                     `?<Constant "FlashWritingTas">`:
+   \   00000000   0x46 0x6C          DC8 "FlashWritingTas"
+   \              0x61 0x73    
+   \              0x68 0x57    
+   \              0x72 0x69    
+   \              0x74 0x69    
+   \              0x6E 0x67    
+   \              0x54 0x61    
+   \              0x73 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     `?<Constant {&"FlashWritingTas", StartFlashWrit`:
+   \   00000000   0x........         DC32 `?<Constant "FlashWritingTas">`, StartFlashWritingTask
+   \              0x........   
+   \   00000008   0x0000             DC16 0
+   \   0000000A   0x00 0x00          DC8 0, 0
+   \   0000000C   0x00000000         DC32 0, 256, FlashWritingTasBuffer, FlashWritingTasControlBlock
+   \              0x00000100   
+   \              0x........   
+   \              0x........   
+    219          
+    220          /* USER CODE BEGIN Application */
+    221               
+    222          /* USER CODE END Application */
+    223          
+    224          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       88  MX_FREERTOS_Init
+             88 -> __aeabi_memcpy4
+             88 -> osSemaphoreCreate
+             88 -> osThreadCreate
+       16  StartFlashWritingTask
+             16 -> ReadFlash
+             16 -> WriteFlash
+             16 -> xQueueGenericReceive
+        8  StartMonitorTask
+              8 -- Indirect call
+              8 -> eMBEnable
+              8 -> eMBInit
+              8 -> eMBPoll
+              8 -> xQueueGenericReceive
+        0  vApplicationGetIdleTaskMemory
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      16  ?<Constant "FlashWritingTas">
+      12  ?<Constant "MonitorTask">
+      28  ?<Constant {&"FlashWritingTas", StartFlashWrit
+      28  ?<Constant {&"MonitorTask", StartMonitorTask,
+       8  ?<Constant {0, &FlashWriteSemControlBlock}>
+       8  ?<Constant {0, &MbTXSemControlBlock}>
+       8  ?<Constant {0, &MbTimSemControlBlock}>
+       4  ??DataTable3
+       4  ??DataTable3_1
+       4  ??DataTable3_10
+       4  ??DataTable3_11
+       4  ??DataTable3_12
+       4  ??DataTable3_13
+       4  ??DataTable3_14
+       4  ??DataTable3_15
+       4  ??DataTable3_2
+       4  ??DataTable3_3
+       4  ??DataTable3_4
+       4  ??DataTable3_5
+       4  ??DataTable3_6
+       4  ??DataTable3_7
+       4  ??DataTable3_8
+       4  ??DataTable3_9
+      72  FlashWriteSemControlBlock
+       4  FlashWriteSemHandle
+    1024  FlashWritingTasBuffer
+      84  FlashWritingTasControlBlock
+       4  FlashWritingTasHandle
+     118  MX_FREERTOS_Init
+      72  MbTXSemControlBlock
+       4  MbTXSemHandle
+      72  MbTimSemControlBlock
+       4  MbTimSemHandle
+    2048  MonitorTaskBuffer
+      84  MonitorTaskControlBlock
+       4  MonitorTaskHandle
+     138  StartFlashWritingTask
+      44  StartMonitorTask
+      12  flash_queue_data
+      16  vApplicationGetIdleTaskMemory
+    1024  xIdleStack
+      84  xIdleTaskTCBBuffer
+
+ 
+ 4 596 bytes in section .bss
+   108 bytes in section .rodata
+   380 bytes in section .text
+ 
+   380 bytes of CODE  memory
+   108 bytes of CONST memory
+ 4 596 bytes of DATA  memory
+
+Errors: none
+Warnings: 1

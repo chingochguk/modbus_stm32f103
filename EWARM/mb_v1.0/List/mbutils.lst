@@ -1,0 +1,313 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  06:15:59 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\FreeModbus\modb #
+#                    us\functions\mbutils.c                                   #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\FreeModbus\mod #
+#                    bus\functions\mbutils.c" -D USE_FULL_LL_DRIVER -D        #
+#                    USE_HAL_DRIVER -D STM32F103xB -lC "D:\projects\задания   #
+#                    от работодателя\ЭМИС\EWARM\mb_v1.0/List\" -o             #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    Obj\" --no_cse --no_unroll --no_inline --no_code_motion  #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files\IAR Systems\Embedded     #
+#                    Workbench 6.0\arm\INC\c\DLib_Config_Full.h" -I           #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\mbutils.lst                                          #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\mbutils.o                                             #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\FreeModbus\modbus\functions\mbutils.c
+      1          /* 
+      2           * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
+      3           * Copyright (c) 2006 Christian Walter <wolti@sil.at>
+      4           * All rights reserved.
+      5           *
+      6           * Redistribution and use in source and binary forms, with or without
+      7           * modification, are permitted provided that the following conditions
+      8           * are met:
+      9           * 1. Redistributions of source code must retain the above copyright
+     10           *    notice, this list of conditions and the following disclaimer.
+     11           * 2. Redistributions in binary form must reproduce the above copyright
+     12           *    notice, this list of conditions and the following disclaimer in the
+     13           *    documentation and/or other materials provided with the distribution.
+     14           * 3. The name of the author may not be used to endorse or promote products
+     15           *    derived from this software without specific prior written permission.
+     16           *
+     17           * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+     18           * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+     19           * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+     20           * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+     21           * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+     22           * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+     23           * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+     24           * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+     25           * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+     26           * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     27           *
+     28           * File: $Id: mbutils.c,v 1.6 2007/02/18 23:49:07 wolti Exp $
+     29           */
+     30          
+     31          /* ----------------------- System includes ----------------------------------*/
+     32          #include "stdlib.h"
+     33          #include "string.h"
+     34          
+     35          /* ----------------------- Platform includes --------------------------------*/
+     36          #include "port.h"
+     37          #include "stm32f1xx.h"
+
+  /**
+    ^
+"D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h",1  Warning[Pa050]: 
+          non-native end of line sequence detected (this diagnostic is only
+          issued once)
+     38          
+     39          /* ----------------------- Modbus includes ----------------------------------*/
+     40          #include "mb.h"
+     41          #include "mbproto.h"
+     42          
+     43          /* ----------------------- Defines ------------------------------------------*/
+     44          #define BITS_UCHAR      8U
+     45          
+     46          /* ----------------------- Start implementation -----------------------------*/
+
+   \                                 In section .text, align 2, keep-with-next
+     47          void
+     48          xMBUtilSetBits( UCHAR * ucByteBuf, USHORT usBitOffset, UCHAR ucNBits,
+     49                          UCHAR ucValue )
+     50          {
+   \                     xMBUtilSetBits:
+   \   00000000   0xB430             PUSH     {R4,R5}
+     51              USHORT          usWordBuf;
+     52              USHORT          usMask;
+     53              USHORT          usByteOffset;
+     54              USHORT          usNPreBits;
+     55              USHORT          usValue = ucValue;
+   \   00000002   0xB2DB             UXTB     R3,R3            ;; ZeroExt  R3,R3,#+24,#+24
+     56          
+     57              assert_param( ucNBits <= 8 );
+     58              assert_param( ( size_t )BITS_UCHAR == sizeof( UCHAR ) * 8 );
+     59          
+     60              /* Calculate byte offset for first byte containing the bit values starting
+     61               * at usBitOffset. */
+     62              usByteOffset = ( USHORT )( ( usBitOffset ) / BITS_UCHAR );
+   \   00000004   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
+   \   00000006   0x08CC             LSRS     R4,R1,#+3
+     63          
+     64              /* How many bits precede our bits to set. */
+     65              usNPreBits = ( USHORT )( usBitOffset - usByteOffset * BITS_UCHAR );
+   \   00000008   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
+   \   0000000A   0xB2A4             UXTH     R4,R4            ;; ZeroExt  R4,R4,#+16,#+16
+   \   0000000C   0xEBB1 0x05C4      SUBS     R5,R1,R4, LSL #+3
+     66          
+     67              /* Move bit field into position over bits to set */
+     68              usValue <<= usNPreBits;
+   \   00000010   0x40AB             LSLS     R3,R3,R5
+     69          
+     70              /* Prepare a mask for setting the new bits. */
+     71              usMask = ( USHORT )( ( 1 << ( USHORT ) ucNBits ) - 1 );
+   \   00000012   0x2501             MOVS     R5,#+1
+   \   00000014   0xFA15 0xF202      LSLS     R2,R5,R2
+   \   00000018   0x1E52             SUBS     R2,R2,#+1
+     72              usMask <<= usBitOffset - usByteOffset * BITS_UCHAR;
+   \   0000001A   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
+   \   0000001C   0xB2A4             UXTH     R4,R4            ;; ZeroExt  R4,R4,#+16,#+16
+   \   0000001E   0xEBB1 0x01C4      SUBS     R1,R1,R4, LSL #+3
+   \   00000022   0x408A             LSLS     R2,R2,R1
+     73          
+     74              /* copy bits into temporary storage. */
+     75              usWordBuf = ucByteBuf[usByteOffset];
+   \   00000024   0xB2A4             UXTH     R4,R4            ;; ZeroExt  R4,R4,#+16,#+16
+   \   00000026   0x5C21             LDRB     R1,[R4, R0]
+     76              usWordBuf |= ucByteBuf[usByteOffset + 1] << BITS_UCHAR;
+   \   00000028   0xB2A4             UXTH     R4,R4            ;; ZeroExt  R4,R4,#+16,#+16
+   \   0000002A   0x1825             ADDS     R5,R4,R0
+   \   0000002C   0x786D             LDRB     R5,[R5, #+1]
+   \   0000002E   0xEA51 0x2105      ORRS     R1,R1,R5, LSL #+8
+     77          
+     78              /* Zero out bit field bits and then or value bits into them. */
+     79              usWordBuf = ( USHORT )( ( usWordBuf & ( ~usMask ) ) | usValue );
+   \   00000032   0x4391             BICS     R1,R1,R2
+   \   00000034   0x4319             ORRS     R1,R3,R1
+     80          
+     81              /* move bits back into storage */
+     82              ucByteBuf[usByteOffset] = ( UCHAR )( usWordBuf & 0xFF );
+   \   00000036   0xB2A4             UXTH     R4,R4            ;; ZeroExt  R4,R4,#+16,#+16
+   \   00000038   0x5421             STRB     R1,[R4, R0]
+     83              ucByteBuf[usByteOffset + 1] = ( UCHAR )( usWordBuf >> BITS_UCHAR );
+   \   0000003A   0xB2A4             UXTH     R4,R4            ;; ZeroExt  R4,R4,#+16,#+16
+   \   0000003C   0x1820             ADDS     R0,R4,R0
+   \   0000003E   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
+   \   00000040   0x0A09             LSRS     R1,R1,#+8
+   \   00000042   0x7041             STRB     R1,[R0, #+1]
+     84          }
+   \   00000044   0xBC30             POP      {R4,R5}
+   \   00000046   0x4770             BX       LR               ;; return
+     85          
+
+   \                                 In section .text, align 2, keep-with-next
+     86          UCHAR
+     87          xMBUtilGetBits( UCHAR * ucByteBuf, USHORT usBitOffset, UCHAR ucNBits )
+     88          {
+   \                     xMBUtilGetBits:
+   \   00000000   0xB410             PUSH     {R4}
+     89              USHORT          usWordBuf;
+     90              USHORT          usMask;
+     91              USHORT          usByteOffset;
+     92              USHORT          usNPreBits;
+     93          
+     94              /* Calculate byte offset for first byte containing the bit values starting
+     95               * at usBitOffset. */
+     96              usByteOffset = ( USHORT )( ( usBitOffset ) / BITS_UCHAR );
+   \   00000002   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
+   \   00000004   0x08CB             LSRS     R3,R1,#+3
+     97          
+     98              /* How many bits precede our bits to set. */
+     99              usNPreBits = ( USHORT )( usBitOffset - usByteOffset * BITS_UCHAR );
+   \   00000006   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
+   \   00000008   0xB29B             UXTH     R3,R3            ;; ZeroExt  R3,R3,#+16,#+16
+   \   0000000A   0xEBB1 0x04C3      SUBS     R4,R1,R3, LSL #+3
+    100          
+    101              /* Prepare a mask for setting the new bits. */
+    102              usMask = ( USHORT )( ( 1 << ( USHORT ) ucNBits ) - 1 );
+   \   0000000E   0x2101             MOVS     R1,#+1
+   \   00000010   0x4091             LSLS     R1,R1,R2
+   \   00000012   0x1E4A             SUBS     R2,R1,#+1
+    103          
+    104              /* copy bits into temporary storage. */
+    105              usWordBuf = ucByteBuf[usByteOffset];
+   \   00000014   0xB29B             UXTH     R3,R3            ;; ZeroExt  R3,R3,#+16,#+16
+   \   00000016   0x5C19             LDRB     R1,[R3, R0]
+    106              usWordBuf |= ucByteBuf[usByteOffset + 1] << BITS_UCHAR;
+   \   00000018   0xB29B             UXTH     R3,R3            ;; ZeroExt  R3,R3,#+16,#+16
+   \   0000001A   0x1818             ADDS     R0,R3,R0
+   \   0000001C   0x7840             LDRB     R0,[R0, #+1]
+   \   0000001E   0xEA51 0x2100      ORRS     R1,R1,R0, LSL #+8
+    107          
+    108              /* throw away unneeded bits. */
+    109              usWordBuf >>= usNPreBits;
+   \   00000022   0x40E1             LSRS     R1,R1,R4
+    110          
+    111              /* mask away bits above the requested bitfield. */
+    112              usWordBuf &= usMask;
+   \   00000024   0x4011             ANDS     R1,R2,R1
+    113          
+    114              return ( UCHAR ) usWordBuf;
+   \   00000026   0x0008             MOVS     R0,R1
+   \   00000028   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000002A   0xBC10             POP      {R4}
+   \   0000002C   0x4770             BX       LR               ;; return
+    115          }
+    116          
+
+   \                                 In section .text, align 2, keep-with-next
+    117          eMBException
+    118          prveMBError2Exception( eMBErrorCode eErrorCode )
+    119          {
+    120              eMBException    eStatus;
+    121          
+    122              switch ( eErrorCode )
+   \                     prveMBError2Exception:
+   \   00000000   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000002   0x2800             CMP      R0,#+0
+   \   00000004   0xD004             BEQ.N    ??prveMBError2Exception_0
+   \   00000006   0x2801             CMP      R0,#+1
+   \   00000008   0xD004             BEQ.N    ??prveMBError2Exception_1
+   \   0000000A   0x2807             CMP      R0,#+7
+   \   0000000C   0xD004             BEQ.N    ??prveMBError2Exception_2
+   \   0000000E   0xE005             B.N      ??prveMBError2Exception_3
+    123              {
+    124                  case MB_ENOERR:
+    125                      eStatus = MB_EX_NONE;
+   \                     ??prveMBError2Exception_0:
+   \   00000010   0x2000             MOVS     R0,#+0
+    126                      break;
+   \   00000012   0xE004             B.N      ??prveMBError2Exception_4
+    127          
+    128                  case MB_ENOREG:
+    129                      eStatus = MB_EX_ILLEGAL_DATA_ADDRESS;
+   \                     ??prveMBError2Exception_1:
+   \   00000014   0x2002             MOVS     R0,#+2
+    130                      break;
+   \   00000016   0xE002             B.N      ??prveMBError2Exception_4
+    131          
+    132                  case MB_ETIMEDOUT:
+    133                      eStatus = MB_EX_SLAVE_BUSY;
+   \                     ??prveMBError2Exception_2:
+   \   00000018   0x2006             MOVS     R0,#+6
+    134                      break;
+   \   0000001A   0xE000             B.N      ??prveMBError2Exception_4
+    135          
+    136                  default:
+    137                      eStatus = MB_EX_SLAVE_DEVICE_FAILURE;
+   \                     ??prveMBError2Exception_3:
+   \   0000001C   0x2004             MOVS     R0,#+4
+    138                      break;
+    139              }
+    140          
+    141              return eStatus;
+   \                     ??prveMBError2Exception_4:
+   \   0000001E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000020   0x4770             BX       LR               ;; return
+    142          }
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  prveMBError2Exception
+        4  xMBUtilGetBits
+        8  xMBUtilSetBits
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      34  prveMBError2Exception
+      46  xMBUtilGetBits
+      72  xMBUtilSetBits
+
+ 
+ 152 bytes in section .text
+ 
+ 152 bytes of CODE memory
+
+Errors: none
+Warnings: 1

@@ -1,0 +1,2208 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  06:16:14 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1 #
+#                    xx_HAL_Driver\Src\stm32f1xx_ll_tim.c                     #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F #
+#                    1xx_HAL_Driver\Src\stm32f1xx_ll_tim.c" -D                #
+#                    USE_FULL_LL_DRIVER -D USE_HAL_DRIVER -D STM32F103xB -lC  #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    List\" -o "D:\projects\задания от                        #
+#                    работодателя\ЭМИС\EWARM\mb_v1.0/Obj\" --no_cse           #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files\IAR Systems\Embedded Workbench                     #
+#                    6.0\arm\INC\c\DLib_Config_Full.h" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\stm32f1xx_ll_tim.lst                                 #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\stm32f1xx_ll_tim.o                                    #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_tim.c
+      1          /**
+                   ^
+Warning[Pa050]: non-native end of line sequence detected (this diagnostic is
+          only issued once)
+      2            ******************************************************************************
+      3            * @file    stm32f1xx_ll_tim.c
+      4            * @author  MCD Application Team
+      5            * @brief   TIM LL module driver.
+      6            ******************************************************************************
+      7            * @attention
+      8            *
+      9            * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+     10            *
+     11            * Redistribution and use in source and binary forms, with or without modification,
+     12            * are permitted provided that the following conditions are met:
+     13            *   1. Redistributions of source code must retain the above copyright notice,
+     14            *      this list of conditions and the following disclaimer.
+     15            *   2. Redistributions in binary form must reproduce the above copyright notice,
+     16            *      this list of conditions and the following disclaimer in the documentation
+     17            *      and/or other materials provided with the distribution.
+     18            *   3. Neither the name of STMicroelectronics nor the names of its contributors
+     19            *      may be used to endorse or promote products derived from this software
+     20            *      without specific prior written permission.
+     21            *
+     22            * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     23            * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     24            * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     25            * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+     26            * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     27            * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+     28            * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+     29            * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+     30            * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+     31            * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     32            *
+     33            ******************************************************************************
+     34            */
+     35          #if defined(USE_FULL_LL_DRIVER)
+     36          
+     37          /* Includes ------------------------------------------------------------------*/
+     38          #include "stm32f1xx_ll_tim.h"
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_APB1_GRP1_ForceReset(uint32_t)
+   \                     LL_APB1_GRP1_ForceReset:
+   \   00000000   0x.... 0x....      LDR.W    R1,??DataTable9  ;; 0x40021010
+   \   00000004   0x6809             LDR      R1,[R1, #+0]
+   \   00000006   0x4308             ORRS     R0,R0,R1
+   \   00000008   0x.... 0x....      LDR.W    R1,??DataTable9  ;; 0x40021010
+   \   0000000C   0x6008             STR      R0,[R1, #+0]
+   \   0000000E   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_APB1_GRP1_ReleaseReset(uint32_t)
+   \                     LL_APB1_GRP1_ReleaseReset:
+   \   00000000   0x.... 0x....      LDR.W    R1,??DataTable9  ;; 0x40021010
+   \   00000004   0x6809             LDR      R1,[R1, #+0]
+   \   00000006   0xEA31 0x0000      BICS     R0,R1,R0
+   \   0000000A   0x.... 0x....      LDR.W    R1,??DataTable9  ;; 0x40021010
+   \   0000000E   0x6008             STR      R0,[R1, #+0]
+   \   00000010   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_APB2_GRP1_ForceReset(uint32_t)
+   \                     LL_APB2_GRP1_ForceReset:
+   \   00000000   0x.... 0x....      LDR.W    R1,??DataTable9_1  ;; 0x4002100c
+   \   00000004   0x6809             LDR      R1,[R1, #+0]
+   \   00000006   0x4308             ORRS     R0,R0,R1
+   \   00000008   0x.... 0x....      LDR.W    R1,??DataTable9_1  ;; 0x4002100c
+   \   0000000C   0x6008             STR      R0,[R1, #+0]
+   \   0000000E   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_APB2_GRP1_ReleaseReset(uint32_t)
+   \                     LL_APB2_GRP1_ReleaseReset:
+   \   00000000   0x.... 0x....      LDR.W    R1,??DataTable9_1  ;; 0x4002100c
+   \   00000004   0x6809             LDR      R1,[R1, #+0]
+   \   00000006   0xEA31 0x0000      BICS     R0,R1,R0
+   \   0000000A   0x.... 0x....      LDR.W    R1,??DataTable9_1  ;; 0x4002100c
+   \   0000000E   0x6008             STR      R0,[R1, #+0]
+   \   00000010   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_SetPrescaler(TIM_TypeDef *, uint32_t)
+   \                     LL_TIM_SetPrescaler:
+   \   00000000   0x6281             STR      R1,[R0, #+40]
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_SetAutoReload(TIM_TypeDef *, uint32_t)
+   \                     LL_TIM_SetAutoReload:
+   \   00000000   0x62C1             STR      R1,[R0, #+44]
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_SetRepetitionCounter(TIM_TypeDef *, uint32_t)
+   \                     LL_TIM_SetRepetitionCounter:
+   \   00000000   0x6301             STR      R1,[R0, #+48]
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_OC_SetCompareCH1(TIM_TypeDef *, uint32_t)
+   \                     LL_TIM_OC_SetCompareCH1:
+   \   00000000   0x6341             STR      R1,[R0, #+52]
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_OC_SetCompareCH2(TIM_TypeDef *, uint32_t)
+   \                     LL_TIM_OC_SetCompareCH2:
+   \   00000000   0x6381             STR      R1,[R0, #+56]
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_OC_SetCompareCH3(TIM_TypeDef *, uint32_t)
+   \                     LL_TIM_OC_SetCompareCH3:
+   \   00000000   0x63C1             STR      R1,[R0, #+60]
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_OC_SetCompareCH4(TIM_TypeDef *, uint32_t)
+   \                     LL_TIM_OC_SetCompareCH4:
+   \   00000000   0x6401             STR      R1,[R0, #+64]
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_SetEncoderMode(TIM_TypeDef *, uint32_t)
+   \                     LL_TIM_SetEncoderMode:
+   \   00000000   0x6882             LDR      R2,[R0, #+8]
+   \   00000002   0x08D2             LSRS     R2,R2,#+3
+   \   00000004   0x00D2             LSLS     R2,R2,#+3
+   \   00000006   0x4311             ORRS     R1,R1,R2
+   \   00000008   0x6081             STR      R1,[R0, #+8]
+   \   0000000A   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_TIM_GenerateEvent_UPDATE(TIM_TypeDef *)
+   \                     LL_TIM_GenerateEvent_UPDATE:
+   \   00000000   0x6941             LDR      R1,[R0, #+20]
+   \   00000002   0xF051 0x0101      ORRS     R1,R1,#0x1
+   \   00000006   0x6141             STR      R1,[R0, #+20]
+   \   00000008   0x4770             BX       LR               ;; return
+     39          #include "stm32f1xx_ll_bus.h"
+     40          
+     41          #ifdef  USE_FULL_ASSERT
+     42          #include "stm32_assert.h"
+     43          #else
+     44          #define assert_param(expr) ((void)0U)
+     45          #endif
+     46          
+     47          /** @addtogroup STM32F1xx_LL_Driver
+     48            * @{
+     49            */
+     50          
+     51          #if defined (TIM1) || defined (TIM2) || defined (TIM3) || defined (TIM4) || defined (TIM5) || defined (TIM6) || defined (TIM7) || defined (TIM8) || defined (TIM9) || defined (TIM10) || defined (TIM11) || defined (TIM12) || defined (TIM13) || defined (TIM14) || defined (TIM15) || defined (TIM16) || defined (TIM17) 
+     52          
+     53          /** @addtogroup TIM_LL
+     54            * @{
+     55            */
+     56          
+     57          /* Private types -------------------------------------------------------------*/
+     58          /* Private variables ---------------------------------------------------------*/
+     59          /* Private constants ---------------------------------------------------------*/
+     60          /* Private macros ------------------------------------------------------------*/
+     61          /** @addtogroup TIM_LL_Private_Macros
+     62            * @{
+     63            */
+     64          #define IS_LL_TIM_COUNTERMODE(__VALUE__) (((__VALUE__) == LL_TIM_COUNTERMODE_UP) \
+     65                                                 || ((__VALUE__) == LL_TIM_COUNTERMODE_DOWN) \
+     66                                                 || ((__VALUE__) == LL_TIM_COUNTERMODE_CENTER_UP) \
+     67                                                 || ((__VALUE__) == LL_TIM_COUNTERMODE_CENTER_DOWN) \
+     68                                                 || ((__VALUE__) == LL_TIM_COUNTERMODE_CENTER_UP_DOWN))
+     69          
+     70          #define IS_LL_TIM_CLOCKDIVISION(__VALUE__) (((__VALUE__) == LL_TIM_CLOCKDIVISION_DIV1) \
+     71                                                   || ((__VALUE__) == LL_TIM_CLOCKDIVISION_DIV2) \
+     72                                                   || ((__VALUE__) == LL_TIM_CLOCKDIVISION_DIV4))
+     73          
+     74          #define IS_LL_TIM_OCMODE(__VALUE__) (((__VALUE__) == LL_TIM_OCMODE_FROZEN) \
+     75                                            || ((__VALUE__) == LL_TIM_OCMODE_ACTIVE) \
+     76                                            || ((__VALUE__) == LL_TIM_OCMODE_INACTIVE) \
+     77                                            || ((__VALUE__) == LL_TIM_OCMODE_TOGGLE) \
+     78                                            || ((__VALUE__) == LL_TIM_OCMODE_FORCED_INACTIVE) \
+     79                                            || ((__VALUE__) == LL_TIM_OCMODE_FORCED_ACTIVE) \
+     80                                            || ((__VALUE__) == LL_TIM_OCMODE_PWM1) \
+     81                                            || ((__VALUE__) == LL_TIM_OCMODE_PWM2))
+     82          
+     83          #define IS_LL_TIM_OCSTATE(__VALUE__) (((__VALUE__) == LL_TIM_OCSTATE_DISABLE) \
+     84                                             || ((__VALUE__) == LL_TIM_OCSTATE_ENABLE))
+     85          
+     86          #define IS_LL_TIM_OCPOLARITY(__VALUE__) (((__VALUE__) == LL_TIM_OCPOLARITY_HIGH) \
+     87                                                || ((__VALUE__) == LL_TIM_OCPOLARITY_LOW))
+     88          
+     89          #define IS_LL_TIM_OCIDLESTATE(__VALUE__) (((__VALUE__) == LL_TIM_OCIDLESTATE_LOW) \
+     90                                                 || ((__VALUE__) == LL_TIM_OCIDLESTATE_HIGH))
+     91          
+     92          #define IS_LL_TIM_ACTIVEINPUT(__VALUE__) (((__VALUE__) == LL_TIM_ACTIVEINPUT_DIRECTTI) \
+     93                                                 || ((__VALUE__) == LL_TIM_ACTIVEINPUT_INDIRECTTI) \
+     94                                                 || ((__VALUE__) == LL_TIM_ACTIVEINPUT_TRC))
+     95          
+     96          #define IS_LL_TIM_ICPSC(__VALUE__) (((__VALUE__) == LL_TIM_ICPSC_DIV1) \
+     97                                           || ((__VALUE__) == LL_TIM_ICPSC_DIV2) \
+     98                                           || ((__VALUE__) == LL_TIM_ICPSC_DIV4) \
+     99                                           || ((__VALUE__) == LL_TIM_ICPSC_DIV8))
+    100          
+    101          #define IS_LL_TIM_IC_FILTER(__VALUE__) (((__VALUE__) == LL_TIM_IC_FILTER_FDIV1) \
+    102                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV1_N2) \
+    103                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV1_N4) \
+    104                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV1_N8) \
+    105                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV2_N6) \
+    106                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV2_N8) \
+    107                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV4_N6) \
+    108                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV4_N8) \
+    109                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV8_N6) \
+    110                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV8_N8) \
+    111                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV16_N5) \
+    112                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV16_N6) \
+    113                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV16_N8) \
+    114                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV32_N5) \
+    115                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV32_N6) \
+    116                                               || ((__VALUE__) == LL_TIM_IC_FILTER_FDIV32_N8))
+    117          
+    118          #define IS_LL_TIM_IC_POLARITY(__VALUE__) (((__VALUE__) == LL_TIM_IC_POLARITY_RISING) \
+    119                                                 || ((__VALUE__) == LL_TIM_IC_POLARITY_FALLING))
+    120          
+    121          #define IS_LL_TIM_ENCODERMODE(__VALUE__) (((__VALUE__) == LL_TIM_ENCODERMODE_X2_TI1) \
+    122                                                 || ((__VALUE__) == LL_TIM_ENCODERMODE_X2_TI2) \
+    123                                                 || ((__VALUE__) == LL_TIM_ENCODERMODE_X4_TI12))
+    124          
+    125          #define IS_LL_TIM_IC_POLARITY_ENCODER(__VALUE__) (((__VALUE__) == LL_TIM_IC_POLARITY_RISING) \
+    126                                                         || ((__VALUE__) == LL_TIM_IC_POLARITY_FALLING))
+    127          
+    128          #define IS_LL_TIM_OSSR_STATE(__VALUE__) (((__VALUE__) == LL_TIM_OSSR_DISABLE) \
+    129                                               || ((__VALUE__) == LL_TIM_OSSR_ENABLE))
+    130          
+    131          #define IS_LL_TIM_OSSI_STATE(__VALUE__) (((__VALUE__) == LL_TIM_OSSI_DISABLE) \
+    132                                                || ((__VALUE__) == LL_TIM_OSSI_ENABLE))
+    133          
+    134          #define IS_LL_TIM_LOCK_LEVEL(__VALUE__) (((__VALUE__) == LL_TIM_LOCKLEVEL_OFF) \
+    135                                                || ((__VALUE__) == LL_TIM_LOCKLEVEL_1)   \
+    136                                                || ((__VALUE__) == LL_TIM_LOCKLEVEL_2)   \
+    137                                                || ((__VALUE__) == LL_TIM_LOCKLEVEL_3))
+    138          
+    139          #define IS_LL_TIM_BREAK_STATE(__VALUE__) (((__VALUE__) == LL_TIM_BREAK_DISABLE) \
+    140                                                 || ((__VALUE__) == LL_TIM_BREAK_ENABLE))
+    141          
+    142          #define IS_LL_TIM_BREAK_POLARITY(__VALUE__) (((__VALUE__) == LL_TIM_BREAK_POLARITY_LOW) \
+    143                                                    || ((__VALUE__) == LL_TIM_BREAK_POLARITY_HIGH))
+    144          
+    145          #define IS_LL_TIM_AUTOMATIC_OUTPUT_STATE(__VALUE__) (((__VALUE__) == LL_TIM_AUTOMATICOUTPUT_DISABLE) \
+    146                                                            || ((__VALUE__) == LL_TIM_AUTOMATICOUTPUT_ENABLE))
+    147          /**
+    148            * @}
+    149            */
+    150          
+    151          
+    152          /* Private function prototypes -----------------------------------------------*/
+    153          /** @defgroup TIM_LL_Private_Functions TIM Private Functions
+    154            * @{
+    155            */
+    156          static ErrorStatus OC1Config(TIM_TypeDef *TIMx, LL_TIM_OC_InitTypeDef *TIM_OCInitStruct);
+    157          static ErrorStatus OC2Config(TIM_TypeDef *TIMx, LL_TIM_OC_InitTypeDef *TIM_OCInitStruct);
+    158          static ErrorStatus OC3Config(TIM_TypeDef *TIMx, LL_TIM_OC_InitTypeDef *TIM_OCInitStruct);
+    159          static ErrorStatus OC4Config(TIM_TypeDef *TIMx, LL_TIM_OC_InitTypeDef *TIM_OCInitStruct);
+    160          static ErrorStatus IC1Config(TIM_TypeDef *TIMx, LL_TIM_IC_InitTypeDef *TIM_ICInitStruct);
+    161          static ErrorStatus IC2Config(TIM_TypeDef *TIMx, LL_TIM_IC_InitTypeDef *TIM_ICInitStruct);
+    162          static ErrorStatus IC3Config(TIM_TypeDef *TIMx, LL_TIM_IC_InitTypeDef *TIM_ICInitStruct);
+    163          static ErrorStatus IC4Config(TIM_TypeDef *TIMx, LL_TIM_IC_InitTypeDef *TIM_ICInitStruct);
+    164          /**
+    165            * @}
+    166            */
+    167          
+    168          /* Exported functions --------------------------------------------------------*/
+    169          /** @addtogroup TIM_LL_Exported_Functions
+    170            * @{
+    171            */
+    172          
+    173          /** @addtogroup TIM_LL_EF_Init
+    174            * @{
+    175            */
+    176          
+    177          /**
+    178            * @brief  Set TIMx registers to their reset values.
+    179            * @param  TIMx Timer instance
+    180            * @retval An ErrorStatus enumeration value:
+    181            *          - SUCCESS: TIMx registers are de-initialized
+    182            *          - ERROR: invalid TIMx instance
+    183            */
+
+   \                                 In section .text, align 2, keep-with-next
+    184          ErrorStatus LL_TIM_DeInit(TIM_TypeDef *TIMx)
+    185          {
+   \                     LL_TIM_DeInit:
+   \   00000000   0xB510             PUSH     {R4,LR}
+    186            ErrorStatus result = SUCCESS;
+   \   00000002   0x2401             MOVS     R4,#+1
+    187          
+    188            /* Check the parameters */
+    189            assert_param(IS_TIM_INSTANCE(TIMx));
+    190          
+    191            if (TIMx == TIM2)
+   \   00000004   0xF1B0 0x4F80      CMP      R0,#+1073741824
+   \   00000008   0xD106             BNE.N    ??LL_TIM_DeInit_0
+    192            {
+    193              LL_APB1_GRP1_ForceReset(LL_APB1_GRP1_PERIPH_TIM2);
+   \   0000000A   0x2001             MOVS     R0,#+1
+   \   0000000C   0x.... 0x....      BL       LL_APB1_GRP1_ForceReset
+    194              LL_APB1_GRP1_ReleaseReset(LL_APB1_GRP1_PERIPH_TIM2);
+   \   00000010   0x2001             MOVS     R0,#+1
+   \   00000012   0x.... 0x....      BL       LL_APB1_GRP1_ReleaseReset
+   \   00000016   0xE023             B.N      ??LL_TIM_DeInit_1
+    195            }
+    196          #if defined(TIM1)
+    197            else if (TIMx == TIM1)
+   \                     ??LL_TIM_DeInit_0:
+   \   00000018   0x.... 0x....      LDR.W    R1,??DataTable9_2  ;; 0x40012c00
+   \   0000001C   0x4288             CMP      R0,R1
+   \   0000001E   0xD108             BNE.N    ??LL_TIM_DeInit_2
+    198            {
+    199              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_TIM1);
+   \   00000020   0xF44F 0x6000      MOV      R0,#+2048
+   \   00000024   0x.... 0x....      BL       LL_APB2_GRP1_ForceReset
+    200              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_TIM1);
+   \   00000028   0xF44F 0x6000      MOV      R0,#+2048
+   \   0000002C   0x.... 0x....      BL       LL_APB2_GRP1_ReleaseReset
+   \   00000030   0xE016             B.N      ??LL_TIM_DeInit_1
+    201            }
+    202          #endif
+    203          #if defined(TIM3)
+    204            else if (TIMx == TIM3)
+   \                     ??LL_TIM_DeInit_2:
+   \   00000032   0x.... 0x....      LDR.W    R1,??DataTable9_3  ;; 0x40000400
+   \   00000036   0x4288             CMP      R0,R1
+   \   00000038   0xD106             BNE.N    ??LL_TIM_DeInit_3
+    205            {
+    206              LL_APB1_GRP1_ForceReset(LL_APB1_GRP1_PERIPH_TIM3);
+   \   0000003A   0x2002             MOVS     R0,#+2
+   \   0000003C   0x.... 0x....      BL       LL_APB1_GRP1_ForceReset
+    207              LL_APB1_GRP1_ReleaseReset(LL_APB1_GRP1_PERIPH_TIM3);
+   \   00000040   0x2002             MOVS     R0,#+2
+   \   00000042   0x.... 0x....      BL       LL_APB1_GRP1_ReleaseReset
+   \   00000046   0xE00B             B.N      ??LL_TIM_DeInit_1
+    208            }
+    209          #endif
+    210          #if defined(TIM4)
+    211            else if (TIMx == TIM4)
+   \                     ??LL_TIM_DeInit_3:
+   \   00000048   0x.... 0x....      LDR.W    R1,??DataTable9_4  ;; 0x40000800
+   \   0000004C   0x4288             CMP      R0,R1
+   \   0000004E   0xD106             BNE.N    ??LL_TIM_DeInit_4
+    212            {
+    213              LL_APB1_GRP1_ForceReset(LL_APB1_GRP1_PERIPH_TIM4);
+   \   00000050   0x2004             MOVS     R0,#+4
+   \   00000052   0x.... 0x....      BL       LL_APB1_GRP1_ForceReset
+    214              LL_APB1_GRP1_ReleaseReset(LL_APB1_GRP1_PERIPH_TIM4);
+   \   00000056   0x2004             MOVS     R0,#+4
+   \   00000058   0x.... 0x....      BL       LL_APB1_GRP1_ReleaseReset
+   \   0000005C   0xE000             B.N      ??LL_TIM_DeInit_1
+    215            }
+    216          #endif
+    217          #if defined(TIM5)
+    218            else if (TIMx == TIM5)
+    219            {
+    220              LL_APB1_GRP1_ForceReset(LL_APB1_GRP1_PERIPH_TIM5);
+    221              LL_APB1_GRP1_ReleaseReset(LL_APB1_GRP1_PERIPH_TIM5);
+    222            }
+    223          #endif
+    224          #if defined(TIM6)
+    225            else if (TIMx == TIM6)
+    226            {
+    227              LL_APB1_GRP1_ForceReset(LL_APB1_GRP1_PERIPH_TIM6);
+    228              LL_APB1_GRP1_ReleaseReset(LL_APB1_GRP1_PERIPH_TIM6);
+    229            }
+    230          #endif
+    231          #if defined (TIM7)
+    232            else if (TIMx == TIM7)
+    233            {
+    234              LL_APB1_GRP1_ForceReset(LL_APB1_GRP1_PERIPH_TIM7);
+    235              LL_APB1_GRP1_ReleaseReset(LL_APB1_GRP1_PERIPH_TIM7);
+    236            }
+    237          #endif
+    238          #if defined(TIM8)
+    239            else if (TIMx == TIM8)
+    240            {
+    241              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_TIM8);
+    242              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_TIM8);
+    243            }
+    244          #endif
+    245          #if defined(TIM9)
+    246            else if (TIMx == TIM9)
+    247            {
+    248              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_TIM9);
+    249              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_TIM9);
+    250            }
+    251          #endif
+    252          #if defined(TIM10)
+    253            else if (TIMx == TIM10)
+    254            {
+    255              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_TIM10);
+    256              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_TIM10);
+    257            }
+    258          #endif
+    259          #if defined(TIM11)
+    260            else if (TIMx == TIM11)
+    261            {
+    262              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_TIM11);
+    263              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_TIM11);
+    264            }
+    265          #endif
+    266          #if defined(TIM12)
+    267            else if (TIMx == TIM12)
+    268            {
+    269              LL_APB1_GRP1_ForceReset(LL_APB1_GRP1_PERIPH_TIM12);
+    270              LL_APB1_GRP1_ReleaseReset(LL_APB1_GRP1_PERIPH_TIM12);
+    271            }
+    272          #endif
+    273          #if defined(TIM13)
+    274            else if (TIMx == TIM13)
+    275            {
+    276              LL_APB1_GRP1_ForceReset(LL_APB1_GRP1_PERIPH_TIM13);
+    277              LL_APB1_GRP1_ReleaseReset(LL_APB1_GRP1_PERIPH_TIM13);
+    278            }
+    279          #endif
+    280          #if defined(TIM14)
+    281            else if (TIMx == TIM14)
+    282            {
+    283              LL_APB1_GRP1_ForceReset(LL_APB1_GRP1_PERIPH_TIM14);
+    284              LL_APB1_GRP1_ReleaseReset(LL_APB1_GRP1_PERIPH_TIM14);
+    285            }
+    286          #endif
+    287          #if defined(TIM15)
+    288            else if (TIMx == TIM15)
+    289            {
+    290              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_TIM15);
+    291              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_TIM15);
+    292            }
+    293          #endif
+    294          #if defined(TIM16)
+    295            else if (TIMx == TIM16)
+    296            {
+    297              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_TIM16);
+    298              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_TIM16);
+    299            }
+    300          #endif
+    301          #if defined(TIM17)
+    302            else if (TIMx == TIM17)
+    303            {
+    304              LL_APB2_GRP1_ForceReset(LL_APB2_GRP1_PERIPH_TIM17);
+    305              LL_APB2_GRP1_ReleaseReset(LL_APB2_GRP1_PERIPH_TIM17);
+    306            }
+    307          #endif
+    308            else
+    309            {
+    310              result = ERROR;
+   \                     ??LL_TIM_DeInit_4:
+   \   0000005E   0x2400             MOVS     R4,#+0
+    311            }
+    312          
+    313            return result;
+   \                     ??LL_TIM_DeInit_1:
+   \   00000060   0x0020             MOVS     R0,R4
+   \   00000062   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000064   0xBD10             POP      {R4,PC}          ;; return
+    314          }
+    315          
+    316          /**
+    317            * @brief  Set the fields of the time base unit configuration data structure
+    318            *         to their default values.
+    319            * @param  TIM_InitStruct pointer to a @ref LL_TIM_InitTypeDef structure (time base unit configuration data structure)
+    320            * @retval None
+    321            */
+
+   \                                 In section .text, align 2, keep-with-next
+    322          void LL_TIM_StructInit(LL_TIM_InitTypeDef *TIM_InitStruct)
+    323          {
+    324            /* Set the default configuration */
+    325            TIM_InitStruct->Prescaler         = (uint16_t)0x0000;
+   \                     LL_TIM_StructInit:
+   \   00000000   0x2100             MOVS     R1,#+0
+   \   00000002   0x8001             STRH     R1,[R0, #+0]
+    326            TIM_InitStruct->CounterMode       = LL_TIM_COUNTERMODE_UP;
+   \   00000004   0x2100             MOVS     R1,#+0
+   \   00000006   0x6041             STR      R1,[R0, #+4]
+    327            TIM_InitStruct->Autoreload        = 0xFFFFFFFFU;
+   \   00000008   0xF05F 0x31FF      MOVS     R1,#-1
+   \   0000000C   0x6081             STR      R1,[R0, #+8]
+    328            TIM_InitStruct->ClockDivision     = LL_TIM_CLOCKDIVISION_DIV1;
+   \   0000000E   0x2100             MOVS     R1,#+0
+   \   00000010   0x60C1             STR      R1,[R0, #+12]
+    329            TIM_InitStruct->RepetitionCounter = (uint8_t)0x00;
+   \   00000012   0x2100             MOVS     R1,#+0
+   \   00000014   0x7401             STRB     R1,[R0, #+16]
+    330          }
+   \   00000016   0x4770             BX       LR               ;; return
+    331          
+    332          /**
+    333            * @brief  Configure the TIMx time base unit.
+    334            * @param  TIMx Timer Instance
+    335            * @param  TIM_InitStruct pointer to a @ref LL_TIM_InitTypeDef structure (TIMx time base unit configuration data structure)
+    336            * @retval An ErrorStatus enumeration value:
+    337            *          - SUCCESS: TIMx registers are de-initialized
+    338            *          - ERROR: not applicable
+    339            */
+
+   \                                 In section .text, align 2, keep-with-next
+    340          ErrorStatus LL_TIM_Init(TIM_TypeDef *TIMx, LL_TIM_InitTypeDef *TIM_InitStruct)
+    341          {
+   \                     LL_TIM_Init:
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+    342            uint32_t tmpcr1 = 0U;
+   \   00000006   0x2000             MOVS     R0,#+0
+    343          
+    344            /* Check the parameters */
+    345            assert_param(IS_TIM_INSTANCE(TIMx));
+    346            assert_param(IS_LL_TIM_COUNTERMODE(TIM_InitStruct->CounterMode));
+    347            assert_param(IS_LL_TIM_CLOCKDIVISION(TIM_InitStruct->ClockDivision));
+    348          
+    349            tmpcr1 = LL_TIM_ReadReg(TIMx, CR1);
+   \   00000008   0x6821             LDR      R1,[R4, #+0]
+   \   0000000A   0x0008             MOVS     R0,R1
+    350          
+    351            if (IS_TIM_COUNTER_MODE_SELECT_INSTANCE(TIMx))
+   \   0000000C   0x.... 0x....      LDR.W    R1,??DataTable9_2  ;; 0x40012c00
+   \   00000010   0x428C             CMP      R4,R1
+   \   00000012   0xD00A             BEQ.N    ??LL_TIM_Init_0
+   \   00000014   0xF1B4 0x4F80      CMP      R4,#+1073741824
+   \   00000018   0xD007             BEQ.N    ??LL_TIM_Init_0
+   \   0000001A   0x.... 0x....      LDR.W    R1,??DataTable9_3  ;; 0x40000400
+   \   0000001E   0x428C             CMP      R4,R1
+   \   00000020   0xD003             BEQ.N    ??LL_TIM_Init_0
+   \   00000022   0x.... 0x....      LDR.W    R1,??DataTable9_4  ;; 0x40000800
+   \   00000026   0x428C             CMP      R4,R1
+   \   00000028   0xD103             BNE.N    ??LL_TIM_Init_1
+    352            {
+    353              /* Select the Counter Mode */
+    354              MODIFY_REG(tmpcr1, (TIM_CR1_DIR | TIM_CR1_CMS), TIM_InitStruct->CounterMode);
+   \                     ??LL_TIM_Init_0:
+   \   0000002A   0xF030 0x0070      BICS     R0,R0,#0x70
+   \   0000002E   0x6869             LDR      R1,[R5, #+4]
+   \   00000030   0x4308             ORRS     R0,R1,R0
+    355            }
+    356          
+    357            if (IS_TIM_CLOCK_DIVISION_INSTANCE(TIMx))
+   \                     ??LL_TIM_Init_1:
+   \   00000032   0x.... 0x....      LDR.W    R1,??DataTable9_2  ;; 0x40012c00
+   \   00000036   0x428C             CMP      R4,R1
+   \   00000038   0xD00A             BEQ.N    ??LL_TIM_Init_2
+   \   0000003A   0xF1B4 0x4F80      CMP      R4,#+1073741824
+   \   0000003E   0xD007             BEQ.N    ??LL_TIM_Init_2
+   \   00000040   0x.... 0x....      LDR.W    R1,??DataTable9_3  ;; 0x40000400
+   \   00000044   0x428C             CMP      R4,R1
+   \   00000046   0xD003             BEQ.N    ??LL_TIM_Init_2
+   \   00000048   0x.... 0x....      LDR.W    R1,??DataTable9_4  ;; 0x40000800
+   \   0000004C   0x428C             CMP      R4,R1
+   \   0000004E   0xD103             BNE.N    ??LL_TIM_Init_3
+    358            {
+    359              /* Set the clock division */
+    360              MODIFY_REG(tmpcr1, TIM_CR1_CKD, TIM_InitStruct->ClockDivision);
+   \                     ??LL_TIM_Init_2:
+   \   00000050   0xF430 0x7040      BICS     R0,R0,#0x300
+   \   00000054   0x68E9             LDR      R1,[R5, #+12]
+   \   00000056   0x4308             ORRS     R0,R1,R0
+    361            }
+    362          
+    363            /* Write to TIMx CR1 */
+    364            LL_TIM_WriteReg(TIMx, CR1, tmpcr1);
+   \                     ??LL_TIM_Init_3:
+   \   00000058   0x6020             STR      R0,[R4, #+0]
+    365          
+    366            /* Set the Autoreload value */
+    367            LL_TIM_SetAutoReload(TIMx, TIM_InitStruct->Autoreload);
+   \   0000005A   0x68A9             LDR      R1,[R5, #+8]
+   \   0000005C   0x0020             MOVS     R0,R4
+   \   0000005E   0x.... 0x....      BL       LL_TIM_SetAutoReload
+    368          
+    369            /* Set the Prescaler value */
+    370            LL_TIM_SetPrescaler(TIMx, TIM_InitStruct->Prescaler);
+   \   00000062   0x8829             LDRH     R1,[R5, #+0]
+   \   00000064   0x0020             MOVS     R0,R4
+   \   00000066   0x.... 0x....      BL       LL_TIM_SetPrescaler
+    371          
+    372            if (IS_TIM_REPETITION_COUNTER_INSTANCE(TIMx))
+   \   0000006A   0x.... 0x....      LDR.W    R0,??DataTable9_2  ;; 0x40012c00
+   \   0000006E   0x4284             CMP      R4,R0
+   \   00000070   0xD103             BNE.N    ??LL_TIM_Init_4
+    373            {
+    374              /* Set the Repetition Counter value */
+    375              LL_TIM_SetRepetitionCounter(TIMx, TIM_InitStruct->RepetitionCounter);
+   \   00000072   0x7C29             LDRB     R1,[R5, #+16]
+   \   00000074   0x0020             MOVS     R0,R4
+   \   00000076   0x.... 0x....      BL       LL_TIM_SetRepetitionCounter
+    376            }
+    377          
+    378            /* Generate an update event to reload the Prescaler
+    379               and the repetition counter value (if applicable) immediately */
+    380            LL_TIM_GenerateEvent_UPDATE(TIMx);
+   \                     ??LL_TIM_Init_4:
+   \   0000007A   0x0020             MOVS     R0,R4
+   \   0000007C   0x.... 0x....      BL       LL_TIM_GenerateEvent_UPDATE
+    381          
+    382            return SUCCESS;
+   \   00000080   0x2001             MOVS     R0,#+1
+   \   00000082   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+    383          }
+    384          
+    385          /**
+    386            * @brief  Set the fields of the TIMx output channel configuration data
+    387            *         structure to their default values.
+    388            * @param  TIM_OC_InitStruct pointer to a @ref LL_TIM_OC_InitTypeDef structure (the output channel configuration data structure)
+    389            * @retval None
+    390            */
+
+   \                                 In section .text, align 2, keep-with-next
+    391          void LL_TIM_OC_StructInit(LL_TIM_OC_InitTypeDef *TIM_OC_InitStruct)
+    392          {
+    393            /* Set the default configuration */
+    394            TIM_OC_InitStruct->OCMode       = LL_TIM_OCMODE_FROZEN;
+   \                     LL_TIM_OC_StructInit:
+   \   00000000   0x2100             MOVS     R1,#+0
+   \   00000002   0x6001             STR      R1,[R0, #+0]
+    395            TIM_OC_InitStruct->OCState      = LL_TIM_OCSTATE_DISABLE;
+   \   00000004   0x2100             MOVS     R1,#+0
+   \   00000006   0x6041             STR      R1,[R0, #+4]
+    396            TIM_OC_InitStruct->OCNState     = LL_TIM_OCSTATE_DISABLE;
+   \   00000008   0x2100             MOVS     R1,#+0
+   \   0000000A   0x6081             STR      R1,[R0, #+8]
+    397            TIM_OC_InitStruct->CompareValue = 0x00000000U;
+   \   0000000C   0x2100             MOVS     R1,#+0
+   \   0000000E   0x60C1             STR      R1,[R0, #+12]
+    398            TIM_OC_InitStruct->OCPolarity   = LL_TIM_OCPOLARITY_HIGH;
+   \   00000010   0x2100             MOVS     R1,#+0
+   \   00000012   0x6101             STR      R1,[R0, #+16]
+    399            TIM_OC_InitStruct->OCNPolarity  = LL_TIM_OCPOLARITY_HIGH;
+   \   00000014   0x2100             MOVS     R1,#+0
+   \   00000016   0x6141             STR      R1,[R0, #+20]
+    400            TIM_OC_InitStruct->OCIdleState  = LL_TIM_OCIDLESTATE_LOW;
+   \   00000018   0x2100             MOVS     R1,#+0
+   \   0000001A   0x6181             STR      R1,[R0, #+24]
+    401            TIM_OC_InitStruct->OCNIdleState = LL_TIM_OCIDLESTATE_LOW;
+   \   0000001C   0x2100             MOVS     R1,#+0
+   \   0000001E   0x61C1             STR      R1,[R0, #+28]
+    402          }
+   \   00000020   0x4770             BX       LR               ;; return
+    403          
+    404          /**
+    405            * @brief  Configure the TIMx output channel.
+    406            * @param  TIMx Timer Instance
+    407            * @param  Channel This parameter can be one of the following values:
+    408            *         @arg @ref LL_TIM_CHANNEL_CH1
+    409            *         @arg @ref LL_TIM_CHANNEL_CH2
+    410            *         @arg @ref LL_TIM_CHANNEL_CH3
+    411            *         @arg @ref LL_TIM_CHANNEL_CH4
+    412            * @param  TIM_OC_InitStruct pointer to a @ref LL_TIM_OC_InitTypeDef structure (TIMx output channel configuration data structure)
+    413            * @retval An ErrorStatus enumeration value:
+    414            *          - SUCCESS: TIMx output channel is initialized
+    415            *          - ERROR: TIMx output channel is not initialized
+    416            */
+
+   \                                 In section .text, align 2, keep-with-next
+    417          ErrorStatus LL_TIM_OC_Init(TIM_TypeDef *TIMx, uint32_t Channel, LL_TIM_OC_InitTypeDef *TIM_OC_InitStruct)
+    418          {
+   \                     LL_TIM_OC_Init:
+   \   00000000   0xB580             PUSH     {R7,LR}
+   \   00000002   0x0003             MOVS     R3,R0
+    419            ErrorStatus result = ERROR;
+   \   00000004   0x2000             MOVS     R0,#+0
+    420          
+    421            switch (Channel)
+   \   00000006   0x2901             CMP      R1,#+1
+   \   00000008   0xD008             BEQ.N    ??LL_TIM_OC_Init_0
+   \   0000000A   0x2910             CMP      R1,#+16
+   \   0000000C   0xD00B             BEQ.N    ??LL_TIM_OC_Init_1
+   \   0000000E   0xF5B1 0x7F80      CMP      R1,#+256
+   \   00000012   0xD00D             BEQ.N    ??LL_TIM_OC_Init_2
+   \   00000014   0xF5B1 0x5F80      CMP      R1,#+4096
+   \   00000018   0xD00F             BEQ.N    ??LL_TIM_OC_Init_3
+   \   0000001A   0xE013             B.N      ??LL_TIM_OC_Init_4
+    422            {
+    423              case LL_TIM_CHANNEL_CH1:
+    424                result = OC1Config(TIMx, TIM_OC_InitStruct);
+   \                     ??LL_TIM_OC_Init_0:
+   \   0000001C   0x0011             MOVS     R1,R2
+   \   0000001E   0x0018             MOVS     R0,R3
+   \   00000020   0x.... 0x....      BL       OC1Config
+    425                break;
+   \   00000024   0xE00E             B.N      ??LL_TIM_OC_Init_5
+    426              case LL_TIM_CHANNEL_CH2:
+    427                result = OC2Config(TIMx, TIM_OC_InitStruct);
+   \                     ??LL_TIM_OC_Init_1:
+   \   00000026   0x0011             MOVS     R1,R2
+   \   00000028   0x0018             MOVS     R0,R3
+   \   0000002A   0x.... 0x....      BL       OC2Config
+    428                break;
+   \   0000002E   0xE009             B.N      ??LL_TIM_OC_Init_5
+    429              case LL_TIM_CHANNEL_CH3:
+    430                result = OC3Config(TIMx, TIM_OC_InitStruct);
+   \                     ??LL_TIM_OC_Init_2:
+   \   00000030   0x0011             MOVS     R1,R2
+   \   00000032   0x0018             MOVS     R0,R3
+   \   00000034   0x.... 0x....      BL       OC3Config
+    431                break;
+   \   00000038   0xE004             B.N      ??LL_TIM_OC_Init_5
+    432              case LL_TIM_CHANNEL_CH4:
+    433                result = OC4Config(TIMx, TIM_OC_InitStruct);
+   \                     ??LL_TIM_OC_Init_3:
+   \   0000003A   0x0011             MOVS     R1,R2
+   \   0000003C   0x0018             MOVS     R0,R3
+   \   0000003E   0x.... 0x....      BL       OC4Config
+    434                break;
+   \   00000042   0xE7FF             B.N      ??LL_TIM_OC_Init_5
+    435              default:
+    436                break;
+    437            }
+    438          
+    439            return result;
+   \                     ??LL_TIM_OC_Init_4:
+   \                     ??LL_TIM_OC_Init_5:
+   \   00000044   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000046   0xBD02             POP      {R1,PC}          ;; return
+    440          }
+    441          
+    442          /**
+    443            * @brief  Set the fields of the TIMx input channel configuration data
+    444            *         structure to their default values.
+    445            * @param  TIM_ICInitStruct pointer to a @ref LL_TIM_IC_InitTypeDef structure (the input channel configuration data structure)
+    446            * @retval None
+    447            */
+
+   \                                 In section .text, align 2, keep-with-next
+    448          void LL_TIM_IC_StructInit(LL_TIM_IC_InitTypeDef *TIM_ICInitStruct)
+    449          {
+    450            /* Set the default configuration */
+    451            TIM_ICInitStruct->ICPolarity    = LL_TIM_IC_POLARITY_RISING;
+   \                     LL_TIM_IC_StructInit:
+   \   00000000   0x2100             MOVS     R1,#+0
+   \   00000002   0x6001             STR      R1,[R0, #+0]
+    452            TIM_ICInitStruct->ICActiveInput = LL_TIM_ACTIVEINPUT_DIRECTTI;
+   \   00000004   0xF45F 0x3180      MOVS     R1,#+65536
+   \   00000008   0x6041             STR      R1,[R0, #+4]
+    453            TIM_ICInitStruct->ICPrescaler   = LL_TIM_ICPSC_DIV1;
+   \   0000000A   0x2100             MOVS     R1,#+0
+   \   0000000C   0x6081             STR      R1,[R0, #+8]
+    454            TIM_ICInitStruct->ICFilter      = LL_TIM_IC_FILTER_FDIV1;
+   \   0000000E   0x2100             MOVS     R1,#+0
+   \   00000010   0x60C1             STR      R1,[R0, #+12]
+    455          }
+   \   00000012   0x4770             BX       LR               ;; return
+    456          
+    457          /**
+    458            * @brief  Configure the TIMx input channel.
+    459            * @param  TIMx Timer Instance
+    460            * @param  Channel This parameter can be one of the following values:
+    461            *         @arg @ref LL_TIM_CHANNEL_CH1
+    462            *         @arg @ref LL_TIM_CHANNEL_CH2
+    463            *         @arg @ref LL_TIM_CHANNEL_CH3
+    464            *         @arg @ref LL_TIM_CHANNEL_CH4
+    465            * @param  TIM_IC_InitStruct pointer to a @ref LL_TIM_IC_InitTypeDef structure (TIMx input channel configuration data structure)
+    466            * @retval An ErrorStatus enumeration value:
+    467            *          - SUCCESS: TIMx output channel is initialized
+    468            *          - ERROR: TIMx output channel is not initialized
+    469            */
+
+   \                                 In section .text, align 2, keep-with-next
+    470          ErrorStatus LL_TIM_IC_Init(TIM_TypeDef *TIMx, uint32_t Channel, LL_TIM_IC_InitTypeDef *TIM_IC_InitStruct)
+    471          {
+   \                     LL_TIM_IC_Init:
+   \   00000000   0xB580             PUSH     {R7,LR}
+   \   00000002   0x0003             MOVS     R3,R0
+    472            ErrorStatus result = ERROR;
+   \   00000004   0x2000             MOVS     R0,#+0
+    473          
+    474            switch (Channel)
+   \   00000006   0x2901             CMP      R1,#+1
+   \   00000008   0xD008             BEQ.N    ??LL_TIM_IC_Init_0
+   \   0000000A   0x2910             CMP      R1,#+16
+   \   0000000C   0xD00B             BEQ.N    ??LL_TIM_IC_Init_1
+   \   0000000E   0xF5B1 0x7F80      CMP      R1,#+256
+   \   00000012   0xD00D             BEQ.N    ??LL_TIM_IC_Init_2
+   \   00000014   0xF5B1 0x5F80      CMP      R1,#+4096
+   \   00000018   0xD00F             BEQ.N    ??LL_TIM_IC_Init_3
+   \   0000001A   0xE013             B.N      ??LL_TIM_IC_Init_4
+    475            {
+    476              case LL_TIM_CHANNEL_CH1:
+    477                result = IC1Config(TIMx, TIM_IC_InitStruct);
+   \                     ??LL_TIM_IC_Init_0:
+   \   0000001C   0x0011             MOVS     R1,R2
+   \   0000001E   0x0018             MOVS     R0,R3
+   \   00000020   0x.... 0x....      BL       IC1Config
+    478                break;
+   \   00000024   0xE00E             B.N      ??LL_TIM_IC_Init_5
+    479              case LL_TIM_CHANNEL_CH2:
+    480                result = IC2Config(TIMx, TIM_IC_InitStruct);
+   \                     ??LL_TIM_IC_Init_1:
+   \   00000026   0x0011             MOVS     R1,R2
+   \   00000028   0x0018             MOVS     R0,R3
+   \   0000002A   0x.... 0x....      BL       IC2Config
+    481                break;
+   \   0000002E   0xE009             B.N      ??LL_TIM_IC_Init_5
+    482              case LL_TIM_CHANNEL_CH3:
+    483                result = IC3Config(TIMx, TIM_IC_InitStruct);
+   \                     ??LL_TIM_IC_Init_2:
+   \   00000030   0x0011             MOVS     R1,R2
+   \   00000032   0x0018             MOVS     R0,R3
+   \   00000034   0x.... 0x....      BL       IC3Config
+    484                break;
+   \   00000038   0xE004             B.N      ??LL_TIM_IC_Init_5
+    485              case LL_TIM_CHANNEL_CH4:
+    486                result = IC4Config(TIMx, TIM_IC_InitStruct);
+   \                     ??LL_TIM_IC_Init_3:
+   \   0000003A   0x0011             MOVS     R1,R2
+   \   0000003C   0x0018             MOVS     R0,R3
+   \   0000003E   0x.... 0x....      BL       IC4Config
+    487                break;
+   \   00000042   0xE7FF             B.N      ??LL_TIM_IC_Init_5
+    488              default:
+    489                break;
+    490            }
+    491          
+    492            return result;
+   \                     ??LL_TIM_IC_Init_4:
+   \                     ??LL_TIM_IC_Init_5:
+   \   00000044   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000046   0xBD02             POP      {R1,PC}          ;; return
+    493          }
+    494          
+    495          /**
+    496            * @brief  Fills each TIM_EncoderInitStruct field with its default value
+    497            * @param  TIM_EncoderInitStruct pointer to a @ref LL_TIM_ENCODER_InitTypeDef structure (encoder interface configuration data structure)
+    498            * @retval None
+    499            */
+
+   \                                 In section .text, align 2, keep-with-next
+    500          void LL_TIM_ENCODER_StructInit(LL_TIM_ENCODER_InitTypeDef *TIM_EncoderInitStruct)
+    501          {
+    502            /* Set the default configuration */
+    503            TIM_EncoderInitStruct->EncoderMode    = LL_TIM_ENCODERMODE_X2_TI1;
+   \                     LL_TIM_ENCODER_StructInit:
+   \   00000000   0x2101             MOVS     R1,#+1
+   \   00000002   0x6001             STR      R1,[R0, #+0]
+    504            TIM_EncoderInitStruct->IC1Polarity    = LL_TIM_IC_POLARITY_RISING;
+   \   00000004   0x2100             MOVS     R1,#+0
+   \   00000006   0x6041             STR      R1,[R0, #+4]
+    505            TIM_EncoderInitStruct->IC1ActiveInput = LL_TIM_ACTIVEINPUT_DIRECTTI;
+   \   00000008   0xF45F 0x3180      MOVS     R1,#+65536
+   \   0000000C   0x6081             STR      R1,[R0, #+8]
+    506            TIM_EncoderInitStruct->IC1Prescaler   = LL_TIM_ICPSC_DIV1;
+   \   0000000E   0x2100             MOVS     R1,#+0
+   \   00000010   0x60C1             STR      R1,[R0, #+12]
+    507            TIM_EncoderInitStruct->IC1Filter      = LL_TIM_IC_FILTER_FDIV1;
+   \   00000012   0x2100             MOVS     R1,#+0
+   \   00000014   0x6101             STR      R1,[R0, #+16]
+    508            TIM_EncoderInitStruct->IC2Polarity    = LL_TIM_IC_POLARITY_RISING;
+   \   00000016   0x2100             MOVS     R1,#+0
+   \   00000018   0x6141             STR      R1,[R0, #+20]
+    509            TIM_EncoderInitStruct->IC2ActiveInput = LL_TIM_ACTIVEINPUT_DIRECTTI;
+   \   0000001A   0xF45F 0x3180      MOVS     R1,#+65536
+   \   0000001E   0x6181             STR      R1,[R0, #+24]
+    510            TIM_EncoderInitStruct->IC2Prescaler   = LL_TIM_ICPSC_DIV1;
+   \   00000020   0x2100             MOVS     R1,#+0
+   \   00000022   0x61C1             STR      R1,[R0, #+28]
+    511            TIM_EncoderInitStruct->IC2Filter      = LL_TIM_IC_FILTER_FDIV1;
+   \   00000024   0x2100             MOVS     R1,#+0
+   \   00000026   0x6201             STR      R1,[R0, #+32]
+    512          }
+   \   00000028   0x4770             BX       LR               ;; return
+    513          
+    514          /**
+    515            * @brief  Configure the encoder interface of the timer instance.
+    516            * @param  TIMx Timer Instance
+    517            * @param  TIM_EncoderInitStruct pointer to a @ref LL_TIM_ENCODER_InitTypeDef structure (TIMx encoder interface configuration data structure)
+    518            * @retval An ErrorStatus enumeration value:
+    519            *          - SUCCESS: TIMx registers are de-initialized
+    520            *          - ERROR: not applicable
+    521            */
+
+   \                                 In section .text, align 2, keep-with-next
+    522          ErrorStatus LL_TIM_ENCODER_Init(TIM_TypeDef *TIMx, LL_TIM_ENCODER_InitTypeDef *TIM_EncoderInitStruct)
+    523          {
+   \                     LL_TIM_ENCODER_Init:
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    524            uint32_t tmpccmr1 = 0U;
+   \   00000004   0x2600             MOVS     R6,#+0
+    525            uint32_t tmpccer = 0U;
+   \   00000006   0x2500             MOVS     R5,#+0
+    526          
+    527            /* Check the parameters */
+    528            assert_param(IS_TIM_ENCODER_INTERFACE_INSTANCE(TIMx));
+    529            assert_param(IS_LL_TIM_ENCODERMODE(TIM_EncoderInitStruct->EncoderMode));
+    530            assert_param(IS_LL_TIM_IC_POLARITY_ENCODER(TIM_EncoderInitStruct->IC1Polarity));
+    531            assert_param(IS_LL_TIM_ACTIVEINPUT(TIM_EncoderInitStruct->IC1ActiveInput));
+    532            assert_param(IS_LL_TIM_ICPSC(TIM_EncoderInitStruct->IC1Prescaler));
+    533            assert_param(IS_LL_TIM_IC_FILTER(TIM_EncoderInitStruct->IC1Filter));
+    534            assert_param(IS_LL_TIM_IC_POLARITY_ENCODER(TIM_EncoderInitStruct->IC2Polarity));
+    535            assert_param(IS_LL_TIM_ACTIVEINPUT(TIM_EncoderInitStruct->IC2ActiveInput));
+    536            assert_param(IS_LL_TIM_ICPSC(TIM_EncoderInitStruct->IC2Prescaler));
+    537            assert_param(IS_LL_TIM_IC_FILTER(TIM_EncoderInitStruct->IC2Filter));
+    538          
+    539            /* Disable the CC1 and CC2: Reset the CC1E and CC2E Bits */
+    540            TIMx->CCER &= (uint32_t)~(TIM_CCER_CC1E | TIM_CCER_CC2E);
+   \   00000008   0x6A20             LDR      R0,[R4, #+32]
+   \   0000000A   0xF030 0x0011      BICS     R0,R0,#0x11
+   \   0000000E   0x6220             STR      R0,[R4, #+32]
+    541          
+    542            /* Get the TIMx CCMR1 register value */
+    543            tmpccmr1 = LL_TIM_ReadReg(TIMx, CCMR1);
+   \   00000010   0x69A0             LDR      R0,[R4, #+24]
+   \   00000012   0x0006             MOVS     R6,R0
+    544          
+    545            /* Get the TIMx CCER register value */
+    546            tmpccer = LL_TIM_ReadReg(TIMx, CCER);
+   \   00000014   0x6A20             LDR      R0,[R4, #+32]
+   \   00000016   0x0005             MOVS     R5,R0
+    547          
+    548            /* Configure TI1 */
+    549            tmpccmr1 &= (uint32_t)~(TIM_CCMR1_CC1S | TIM_CCMR1_IC1F  | TIM_CCMR1_IC1PSC);
+   \   00000018   0x0A36             LSRS     R6,R6,#+8
+   \   0000001A   0x0236             LSLS     R6,R6,#+8
+    550            tmpccmr1 |= (uint32_t)(TIM_EncoderInitStruct->IC1ActiveInput >> 16U);
+   \   0000001C   0x6888             LDR      R0,[R1, #+8]
+   \   0000001E   0xEA56 0x4610      ORRS     R6,R6,R0, LSR #+16
+    551            tmpccmr1 |= (uint32_t)(TIM_EncoderInitStruct->IC1Filter >> 16U);
+   \   00000022   0x6908             LDR      R0,[R1, #+16]
+   \   00000024   0xEA56 0x4610      ORRS     R6,R6,R0, LSR #+16
+    552            tmpccmr1 |= (uint32_t)(TIM_EncoderInitStruct->IC1Prescaler >> 16U);
+   \   00000028   0x68C8             LDR      R0,[R1, #+12]
+   \   0000002A   0xEA56 0x4610      ORRS     R6,R6,R0, LSR #+16
+    553          
+    554            /* Configure TI2 */
+    555            tmpccmr1 &= (uint32_t)~(TIM_CCMR1_CC2S | TIM_CCMR1_IC2F  | TIM_CCMR1_IC2PSC);
+   \   0000002E   0xF436 0x467F      BICS     R6,R6,#0xFF00
+    556            tmpccmr1 |= (uint32_t)(TIM_EncoderInitStruct->IC2ActiveInput >> 8U);
+   \   00000032   0x6988             LDR      R0,[R1, #+24]
+   \   00000034   0xEA56 0x2610      ORRS     R6,R6,R0, LSR #+8
+    557            tmpccmr1 |= (uint32_t)(TIM_EncoderInitStruct->IC2Filter >> 8U);
+   \   00000038   0x6A08             LDR      R0,[R1, #+32]
+   \   0000003A   0xEA56 0x2610      ORRS     R6,R6,R0, LSR #+8
+    558            tmpccmr1 |= (uint32_t)(TIM_EncoderInitStruct->IC2Prescaler >> 8U);
+   \   0000003E   0x69C8             LDR      R0,[R1, #+28]
+   \   00000040   0xEA56 0x2610      ORRS     R6,R6,R0, LSR #+8
+    559          
+    560            /* Set TI1 and TI2 polarity and enable TI1 and TI2 */
+    561            tmpccer &= (uint32_t)~(TIM_CCER_CC1P | TIM_CCER_CC1NP | TIM_CCER_CC2P | TIM_CCER_CC2NP);
+   \   00000044   0xF035 0x05AA      BICS     R5,R5,#0xAA
+    562            tmpccer |= (uint32_t)(TIM_EncoderInitStruct->IC1Polarity);
+   \   00000048   0x6848             LDR      R0,[R1, #+4]
+   \   0000004A   0x4305             ORRS     R5,R0,R5
+    563            tmpccer |= (uint32_t)(TIM_EncoderInitStruct->IC2Polarity << 4U);
+   \   0000004C   0x6948             LDR      R0,[R1, #+20]
+   \   0000004E   0xEA55 0x1500      ORRS     R5,R5,R0, LSL #+4
+    564            tmpccer |= (uint32_t)(TIM_CCER_CC1E | TIM_CCER_CC2E);
+   \   00000052   0xF055 0x0511      ORRS     R5,R5,#0x11
+    565          
+    566            /* Set encoder mode */
+    567            LL_TIM_SetEncoderMode(TIMx, TIM_EncoderInitStruct->EncoderMode);
+   \   00000056   0x6809             LDR      R1,[R1, #+0]
+   \   00000058   0x0020             MOVS     R0,R4
+   \   0000005A   0x.... 0x....      BL       LL_TIM_SetEncoderMode
+    568          
+    569            /* Write to TIMx CCMR1 */
+    570            LL_TIM_WriteReg(TIMx, CCMR1, tmpccmr1);
+   \   0000005E   0x61A6             STR      R6,[R4, #+24]
+    571          
+    572            /* Write to TIMx CCER */
+    573            LL_TIM_WriteReg(TIMx, CCER, tmpccer);
+   \   00000060   0x6225             STR      R5,[R4, #+32]
+    574          
+    575            return SUCCESS;
+   \   00000062   0x2001             MOVS     R0,#+1
+   \   00000064   0xBD70             POP      {R4-R6,PC}       ;; return
+    576          }
+    577          
+    578          /**
+    579            * @brief  Set the fields of the TIMx Hall sensor interface configuration data
+    580            *         structure to their default values.
+    581            * @param  TIM_HallSensorInitStruct pointer to a @ref LL_TIM_HALLSENSOR_InitTypeDef structure (HALL sensor interface configuration data structure)
+    582            * @retval None
+    583            */
+
+   \                                 In section .text, align 2, keep-with-next
+    584          void LL_TIM_HALLSENSOR_StructInit(LL_TIM_HALLSENSOR_InitTypeDef *TIM_HallSensorInitStruct)
+    585          {
+    586            /* Set the default configuration */
+    587            TIM_HallSensorInitStruct->IC1Polarity       = LL_TIM_IC_POLARITY_RISING;
+   \                     LL_TIM_HALLSENSOR_StructInit:
+   \   00000000   0x2100             MOVS     R1,#+0
+   \   00000002   0x6001             STR      R1,[R0, #+0]
+    588            TIM_HallSensorInitStruct->IC1Prescaler      = LL_TIM_ICPSC_DIV1;
+   \   00000004   0x2100             MOVS     R1,#+0
+   \   00000006   0x6041             STR      R1,[R0, #+4]
+    589            TIM_HallSensorInitStruct->IC1Filter         = LL_TIM_IC_FILTER_FDIV1;
+   \   00000008   0x2100             MOVS     R1,#+0
+   \   0000000A   0x6081             STR      R1,[R0, #+8]
+    590            TIM_HallSensorInitStruct->CommutationDelay  = 0U;
+   \   0000000C   0x2100             MOVS     R1,#+0
+   \   0000000E   0x60C1             STR      R1,[R0, #+12]
+    591          }
+   \   00000010   0x4770             BX       LR               ;; return
+    592          
+    593          /**
+    594            * @brief  Configure the Hall sensor interface of the timer instance.
+    595            * @note TIMx CH1, CH2 and CH3 inputs connected through a XOR
+    596            *       to the TI1 input channel
+    597            * @note TIMx slave mode controller is configured in reset mode.
+    598                    Selected internal trigger is TI1F_ED.
+    599            * @note Channel 1 is configured as input, IC1 is mapped on TRC.
+    600            * @note Captured value stored in TIMx_CCR1 correspond to the time elapsed
+    601            *       between 2 changes on the inputs. It gives information about motor speed.
+    602            * @note Channel 2 is configured in output PWM 2 mode.
+    603            * @note Compare value stored in TIMx_CCR2 corresponds to the commutation delay.
+    604            * @note OC2REF is selected as trigger output on TRGO.
+    605            * @param  TIMx Timer Instance
+    606            * @param  TIM_HallSensorInitStruct pointer to a @ref LL_TIM_HALLSENSOR_InitTypeDef structure (TIMx HALL sensor interface configuration data structure)
+    607            * @retval An ErrorStatus enumeration value:
+    608            *          - SUCCESS: TIMx registers are de-initialized
+    609            *          - ERROR: not applicable
+    610            */
+
+   \                                 In section .text, align 2, keep-with-next
+    611          ErrorStatus LL_TIM_HALLSENSOR_Init(TIM_TypeDef *TIMx, LL_TIM_HALLSENSOR_InitTypeDef *TIM_HallSensorInitStruct)
+    612          {
+   \                     LL_TIM_HALLSENSOR_Init:
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+    613            uint32_t tmpcr2 = 0U;
+   \   00000002   0x2200             MOVS     R2,#+0
+    614            uint32_t tmpccmr1 = 0U;
+   \   00000004   0x2400             MOVS     R4,#+0
+    615            uint32_t tmpccer = 0U;
+   \   00000006   0x2500             MOVS     R5,#+0
+    616            uint32_t tmpsmcr = 0U;
+   \   00000008   0x2300             MOVS     R3,#+0
+    617          
+    618            /* Check the parameters */
+    619            assert_param(IS_TIM_HALL_SENSOR_INTERFACE_INSTANCE(TIMx));
+    620            assert_param(IS_LL_TIM_IC_POLARITY_ENCODER(TIM_HallSensorInitStruct->IC1Polarity));
+    621            assert_param(IS_LL_TIM_ICPSC(TIM_HallSensorInitStruct->IC1Prescaler));
+    622            assert_param(IS_LL_TIM_IC_FILTER(TIM_HallSensorInitStruct->IC1Filter));
+    623          
+    624            /* Disable the CC1 and CC2: Reset the CC1E and CC2E Bits */
+    625            TIMx->CCER &= (uint32_t)~(TIM_CCER_CC1E | TIM_CCER_CC2E);
+   \   0000000A   0x6A06             LDR      R6,[R0, #+32]
+   \   0000000C   0xF036 0x0611      BICS     R6,R6,#0x11
+   \   00000010   0x6206             STR      R6,[R0, #+32]
+    626          
+    627            /* Get the TIMx CR2 register value */
+    628            tmpcr2 = LL_TIM_ReadReg(TIMx, CR2);
+   \   00000012   0x6846             LDR      R6,[R0, #+4]
+   \   00000014   0x0032             MOVS     R2,R6
+    629          
+    630            /* Get the TIMx CCMR1 register value */
+    631            tmpccmr1 = LL_TIM_ReadReg(TIMx, CCMR1);
+   \   00000016   0x6986             LDR      R6,[R0, #+24]
+   \   00000018   0x0034             MOVS     R4,R6
+    632          
+    633            /* Get the TIMx CCER register value */
+    634            tmpccer = LL_TIM_ReadReg(TIMx, CCER);
+   \   0000001A   0x6A06             LDR      R6,[R0, #+32]
+   \   0000001C   0x0035             MOVS     R5,R6
+    635          
+    636            /* Get the TIMx SMCR register value */
+    637            tmpsmcr = LL_TIM_ReadReg(TIMx, SMCR);
+   \   0000001E   0x6886             LDR      R6,[R0, #+8]
+   \   00000020   0x0033             MOVS     R3,R6
+    638          
+    639            /* Connect TIMx_CH1, CH2 and CH3 pins to the TI1 input */
+    640            tmpcr2 |= TIM_CR2_TI1S;
+   \   00000022   0xF052 0x0280      ORRS     R2,R2,#0x80
+    641          
+    642            /* OC2REF signal is used as trigger output (TRGO) */
+    643            tmpcr2 |= LL_TIM_TRGO_OC2REF;
+   \   00000026   0xF052 0x0250      ORRS     R2,R2,#0x50
+    644          
+    645            /* Configure the slave mode controller */
+    646            tmpsmcr &= (uint32_t)~(TIM_SMCR_TS | TIM_SMCR_SMS);
+   \   0000002A   0xF033 0x0377      BICS     R3,R3,#0x77
+    647            tmpsmcr |= LL_TIM_TS_TI1F_ED;
+   \   0000002E   0xF053 0x0340      ORRS     R3,R3,#0x40
+    648            tmpsmcr |= LL_TIM_SLAVEMODE_RESET;
+   \   00000032   0xF053 0x0304      ORRS     R3,R3,#0x4
+    649          
+    650            /* Configure input channel 1 */
+    651            tmpccmr1 &= (uint32_t)~(TIM_CCMR1_CC1S | TIM_CCMR1_IC1F  | TIM_CCMR1_IC1PSC);
+   \   00000036   0x0A24             LSRS     R4,R4,#+8
+   \   00000038   0x0224             LSLS     R4,R4,#+8
+    652            tmpccmr1 |= (uint32_t)(LL_TIM_ACTIVEINPUT_TRC >> 16U);
+   \   0000003A   0xF054 0x0403      ORRS     R4,R4,#0x3
+    653            tmpccmr1 |= (uint32_t)(TIM_HallSensorInitStruct->IC1Filter >> 16U);
+   \   0000003E   0x688E             LDR      R6,[R1, #+8]
+   \   00000040   0xEA54 0x4416      ORRS     R4,R4,R6, LSR #+16
+    654            tmpccmr1 |= (uint32_t)(TIM_HallSensorInitStruct->IC1Prescaler >> 16U);
+   \   00000044   0x684E             LDR      R6,[R1, #+4]
+   \   00000046   0xEA54 0x4416      ORRS     R4,R4,R6, LSR #+16
+    655          
+    656            /* Configure input channel 2 */
+    657            tmpccmr1 &= (uint32_t)~(TIM_CCMR1_OC2M | TIM_CCMR1_OC2FE  | TIM_CCMR1_OC2PE  | TIM_CCMR1_OC2CE);
+   \   0000004A   0xF434 0x447C      BICS     R4,R4,#0xFC00
+    658            tmpccmr1 |= (uint32_t)(LL_TIM_OCMODE_PWM2 << 8U);
+   \   0000004E   0xF454 0x44E0      ORRS     R4,R4,#0x7000
+    659          
+    660            /* Set Channel 1 polarity and enable Channel 1 and Channel2 */
+    661            tmpccer &= (uint32_t)~(TIM_CCER_CC1P | TIM_CCER_CC1NP | TIM_CCER_CC2P | TIM_CCER_CC2NP);
+   \   00000052   0xF035 0x05AA      BICS     R5,R5,#0xAA
+    662            tmpccer |= (uint32_t)(TIM_HallSensorInitStruct->IC1Polarity);
+   \   00000056   0x680E             LDR      R6,[R1, #+0]
+   \   00000058   0x4335             ORRS     R5,R6,R5
+    663            tmpccer |= (uint32_t)(TIM_CCER_CC1E | TIM_CCER_CC2E);
+   \   0000005A   0xF055 0x0511      ORRS     R5,R5,#0x11
+    664          
+    665            /* Write to TIMx CR2 */
+    666            LL_TIM_WriteReg(TIMx, CR2, tmpcr2);
+   \   0000005E   0x6042             STR      R2,[R0, #+4]
+    667          
+    668            /* Write to TIMx SMCR */
+    669            LL_TIM_WriteReg(TIMx, SMCR, tmpsmcr);
+   \   00000060   0x6083             STR      R3,[R0, #+8]
+    670          
+    671            /* Write to TIMx CCMR1 */
+    672            LL_TIM_WriteReg(TIMx, CCMR1, tmpccmr1);
+   \   00000062   0x6184             STR      R4,[R0, #+24]
+    673          
+    674            /* Write to TIMx CCER */
+    675            LL_TIM_WriteReg(TIMx, CCER, tmpccer);
+   \   00000064   0x6205             STR      R5,[R0, #+32]
+    676          
+    677            /* Write to TIMx CCR2 */
+    678            LL_TIM_OC_SetCompareCH2(TIMx, TIM_HallSensorInitStruct->CommutationDelay);
+   \   00000066   0x68C9             LDR      R1,[R1, #+12]
+   \   00000068   0x.... 0x....      BL       LL_TIM_OC_SetCompareCH2
+    679          
+    680            return SUCCESS;
+   \   0000006C   0x2001             MOVS     R0,#+1
+   \   0000006E   0xBD70             POP      {R4-R6,PC}       ;; return
+    681          }
+    682          
+    683          /**
+    684            * @brief  Set the fields of the Break and Dead Time configuration data structure
+    685            *         to their default values.
+    686            * @param  TIM_BDTRInitStruct pointer to a @ref LL_TIM_BDTR_InitTypeDef structure (Break and Dead Time configuration data structure)
+    687            * @retval None
+    688            */
+
+   \                                 In section .text, align 2, keep-with-next
+    689          void LL_TIM_BDTR_StructInit(LL_TIM_BDTR_InitTypeDef *TIM_BDTRInitStruct)
+    690          {
+    691            /* Set the default configuration */
+    692            TIM_BDTRInitStruct->OSSRState       = LL_TIM_OSSR_DISABLE;
+   \                     LL_TIM_BDTR_StructInit:
+   \   00000000   0x2100             MOVS     R1,#+0
+   \   00000002   0x6001             STR      R1,[R0, #+0]
+    693            TIM_BDTRInitStruct->OSSIState       = LL_TIM_OSSI_DISABLE;
+   \   00000004   0x2100             MOVS     R1,#+0
+   \   00000006   0x6041             STR      R1,[R0, #+4]
+    694            TIM_BDTRInitStruct->LockLevel       = LL_TIM_LOCKLEVEL_OFF;
+   \   00000008   0x2100             MOVS     R1,#+0
+   \   0000000A   0x6081             STR      R1,[R0, #+8]
+    695            TIM_BDTRInitStruct->DeadTime        = (uint8_t)0x00;
+   \   0000000C   0x2100             MOVS     R1,#+0
+   \   0000000E   0x7301             STRB     R1,[R0, #+12]
+    696            TIM_BDTRInitStruct->BreakState      = LL_TIM_BREAK_DISABLE;
+   \   00000010   0x2100             MOVS     R1,#+0
+   \   00000012   0x81C1             STRH     R1,[R0, #+14]
+    697            TIM_BDTRInitStruct->BreakPolarity   = LL_TIM_BREAK_POLARITY_LOW;
+   \   00000014   0x2100             MOVS     R1,#+0
+   \   00000016   0x6101             STR      R1,[R0, #+16]
+    698            TIM_BDTRInitStruct->AutomaticOutput = LL_TIM_AUTOMATICOUTPUT_DISABLE;
+   \   00000018   0x2100             MOVS     R1,#+0
+   \   0000001A   0x6141             STR      R1,[R0, #+20]
+    699          }
+   \   0000001C   0x4770             BX       LR               ;; return
+    700          
+    701          /**
+    702            * @brief  Configure the Break and Dead Time feature of the timer instance.
+    703            * @note As the bits AOE, BKP, BKE, OSSR, OSSI and DTG[7:0] can be write-locked
+    704            *  depending on the LOCK configuration, it can be necessary to configure all of
+    705            *  them during the first write access to the TIMx_BDTR register.
+    706            * @note Macro @ref IS_TIM_BREAK_INSTANCE(TIMx) can be used to check whether or not
+    707            *       a timer instance provides a break input.
+    708            * @param  TIMx Timer Instance
+    709            * @param  TIM_BDTRInitStruct pointer to a @ref LL_TIM_BDTR_InitTypeDef structure(Break and Dead Time configuration data structure)
+    710            * @retval An ErrorStatus enumeration value:
+    711            *          - SUCCESS: Break and Dead Time is initialized
+    712            *          - ERROR: not applicable
+    713            */
+
+   \                                 In section .text, align 2, keep-with-next
+    714          ErrorStatus LL_TIM_BDTR_Init(TIM_TypeDef *TIMx, LL_TIM_BDTR_InitTypeDef *TIM_BDTRInitStruct)
+    715          {
+    716            uint32_t tmpbdtr = 0;
+   \                     LL_TIM_BDTR_Init:
+   \   00000000   0x2200             MOVS     R2,#+0
+    717          
+    718            /* Check the parameters */
+    719            assert_param(IS_TIM_BREAK_INSTANCE(TIMx));
+    720            assert_param(IS_LL_TIM_OSSR_STATE(TIM_BDTRInitStruct->OSSRState));
+    721            assert_param(IS_LL_TIM_OSSI_STATE(TIM_BDTRInitStruct->OSSIState));
+    722            assert_param(IS_LL_TIM_LOCK_LEVEL(TIM_BDTRInitStruct->LockLevel));
+    723            assert_param(IS_LL_TIM_BREAK_STATE(TIM_BDTRInitStruct->BreakState));
+    724            assert_param(IS_LL_TIM_BREAK_POLARITY(TIM_BDTRInitStruct->BreakPolarity));
+    725            assert_param(IS_LL_TIM_AUTOMATIC_OUTPUT_STATE(TIM_BDTRInitStruct->AutomaticOutput));
+    726          
+    727            /* Set the Lock level, the Break enable Bit and the Polarity, the OSSR State,
+    728            the OSSI State, the dead time value and the Automatic Output Enable Bit */
+    729          
+    730            /* Set the BDTR bits */
+    731            MODIFY_REG(tmpbdtr, TIM_BDTR_DTG, TIM_BDTRInitStruct->DeadTime);
+   \   00000002   0x7B0B             LDRB     R3,[R1, #+12]
+   \   00000004   0xF363 0x0207      BFI      R2,R3,#+0,#+8
+    732            MODIFY_REG(tmpbdtr, TIM_BDTR_LOCK, TIM_BDTRInitStruct->LockLevel);
+   \   00000008   0xF432 0x7240      BICS     R2,R2,#0x300
+   \   0000000C   0x688B             LDR      R3,[R1, #+8]
+   \   0000000E   0x431A             ORRS     R2,R3,R2
+    733            MODIFY_REG(tmpbdtr, TIM_BDTR_OSSI, TIM_BDTRInitStruct->OSSIState);
+   \   00000010   0xF432 0x6280      BICS     R2,R2,#0x400
+   \   00000014   0x684B             LDR      R3,[R1, #+4]
+   \   00000016   0x431A             ORRS     R2,R3,R2
+    734            MODIFY_REG(tmpbdtr, TIM_BDTR_OSSR, TIM_BDTRInitStruct->OSSRState);
+   \   00000018   0xF432 0x6200      BICS     R2,R2,#0x800
+   \   0000001C   0x680B             LDR      R3,[R1, #+0]
+   \   0000001E   0x431A             ORRS     R2,R3,R2
+    735            MODIFY_REG(tmpbdtr, TIM_BDTR_BKE, TIM_BDTRInitStruct->BreakState);
+   \   00000020   0xF432 0x5280      BICS     R2,R2,#0x1000
+   \   00000024   0x89CB             LDRH     R3,[R1, #+14]
+   \   00000026   0x431A             ORRS     R2,R3,R2
+    736            MODIFY_REG(tmpbdtr, TIM_BDTR_BKP, TIM_BDTRInitStruct->BreakPolarity);
+   \   00000028   0xF432 0x5200      BICS     R2,R2,#0x2000
+   \   0000002C   0x690B             LDR      R3,[R1, #+16]
+   \   0000002E   0x431A             ORRS     R2,R3,R2
+    737            MODIFY_REG(tmpbdtr, TIM_BDTR_AOE, TIM_BDTRInitStruct->AutomaticOutput);
+   \   00000030   0xF432 0x4280      BICS     R2,R2,#0x4000
+   \   00000034   0x694B             LDR      R3,[R1, #+20]
+   \   00000036   0x431A             ORRS     R2,R3,R2
+    738            MODIFY_REG(tmpbdtr, TIM_BDTR_MOE, TIM_BDTRInitStruct->AutomaticOutput);
+   \   00000038   0xF432 0x4200      BICS     R2,R2,#0x8000
+   \   0000003C   0x6949             LDR      R1,[R1, #+20]
+   \   0000003E   0x430A             ORRS     R2,R1,R2
+    739          
+    740            /* Set TIMx_BDTR */
+    741            LL_TIM_WriteReg(TIMx, BDTR, tmpbdtr);
+   \   00000040   0x6442             STR      R2,[R0, #+68]
+    742          
+    743            return SUCCESS;
+   \   00000042   0x2001             MOVS     R0,#+1
+   \   00000044   0x4770             BX       LR               ;; return
+    744          }
+    745          /**
+    746            * @}
+    747            */
+    748          
+    749          /**
+    750            * @}
+    751            */
+    752          
+    753          /** @addtogroup TIM_LL_Private_Functions TIM Private Functions
+    754           *  @brief   Private functions
+    755            * @{
+    756            */
+    757          /**
+    758            * @brief  Configure the TIMx output channel 1.
+    759            * @param  TIMx Timer Instance
+    760            * @param  TIM_OCInitStruct pointer to the the TIMx output channel 1 configuration data structure
+    761            * @retval An ErrorStatus enumeration value:
+    762            *          - SUCCESS: TIMx registers are de-initialized
+    763            *          - ERROR: not applicable
+    764            */
+
+   \                                 In section .text, align 2, keep-with-next
+    765          static ErrorStatus OC1Config(TIM_TypeDef *TIMx, LL_TIM_OC_InitTypeDef *TIM_OCInitStruct)
+    766          {
+   \                     OC1Config:
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    767            uint32_t tmpccmr1 = 0U;
+   \   00000004   0x2200             MOVS     R2,#+0
+    768            uint32_t tmpccer = 0U;
+   \   00000006   0x2500             MOVS     R5,#+0
+    769            uint32_t tmpcr2 = 0U;
+   \   00000008   0x2000             MOVS     R0,#+0
+    770          
+    771            /* Check the parameters */
+    772            assert_param(IS_TIM_CC1_INSTANCE(TIMx));
+    773            assert_param(IS_LL_TIM_OCMODE(TIM_OCInitStruct->OCMode));
+    774            assert_param(IS_LL_TIM_OCSTATE(TIM_OCInitStruct->OCState));
+    775            assert_param(IS_LL_TIM_OCPOLARITY(TIM_OCInitStruct->OCPolarity));
+    776            assert_param(IS_LL_TIM_OCSTATE(TIM_OCInitStruct->OCNState));
+    777            assert_param(IS_LL_TIM_OCPOLARITY(TIM_OCInitStruct->OCNPolarity));
+    778          
+    779            /* Disable the Channel 1: Reset the CC1E Bit */
+    780            CLEAR_BIT(TIMx->CCER, TIM_CCER_CC1E);
+   \   0000000A   0x6A23             LDR      R3,[R4, #+32]
+   \   0000000C   0x085B             LSRS     R3,R3,#+1
+   \   0000000E   0x005B             LSLS     R3,R3,#+1
+   \   00000010   0x6223             STR      R3,[R4, #+32]
+    781          
+    782            /* Get the TIMx CCER register value */
+    783            tmpccer = LL_TIM_ReadReg(TIMx, CCER);
+   \   00000012   0x6A23             LDR      R3,[R4, #+32]
+   \   00000014   0x001D             MOVS     R5,R3
+    784          
+    785            /* Get the TIMx CR2 register value */
+    786            tmpcr2 = LL_TIM_ReadReg(TIMx, CR2);
+   \   00000016   0x6863             LDR      R3,[R4, #+4]
+   \   00000018   0x0018             MOVS     R0,R3
+    787          
+    788            /* Get the TIMx CCMR1 register value */
+    789            tmpccmr1 = LL_TIM_ReadReg(TIMx, CCMR1);
+   \   0000001A   0x69A3             LDR      R3,[R4, #+24]
+   \   0000001C   0x001A             MOVS     R2,R3
+    790          
+    791            /* Reset Capture/Compare selection Bits */
+    792            CLEAR_BIT(tmpccmr1, TIM_CCMR1_CC1S);
+   \   0000001E   0x0892             LSRS     R2,R2,#+2
+   \   00000020   0x0092             LSLS     R2,R2,#+2
+    793          
+    794            /* Set the Output Compare Mode */
+    795            MODIFY_REG(tmpccmr1, TIM_CCMR1_OC1M, TIM_OCInitStruct->OCMode);
+   \   00000022   0xF032 0x0270      BICS     R2,R2,#0x70
+   \   00000026   0x680B             LDR      R3,[R1, #+0]
+   \   00000028   0x431A             ORRS     R2,R3,R2
+    796          
+    797            /* Set the Output Compare Polarity */
+    798            MODIFY_REG(tmpccer, TIM_CCER_CC1P, TIM_OCInitStruct->OCPolarity);
+   \   0000002A   0xF035 0x0302      BICS     R3,R5,#0x2
+   \   0000002E   0x690D             LDR      R5,[R1, #+16]
+   \   00000030   0x431D             ORRS     R5,R5,R3
+    799          
+    800            /* Set the Output State */
+    801            MODIFY_REG(tmpccer, TIM_CCER_CC1E, TIM_OCInitStruct->OCState);
+   \   00000032   0x086B             LSRS     R3,R5,#+1
+   \   00000034   0x005B             LSLS     R3,R3,#+1
+   \   00000036   0x684D             LDR      R5,[R1, #+4]
+   \   00000038   0x431D             ORRS     R5,R5,R3
+    802          
+    803            if (IS_TIM_BREAK_INSTANCE(TIMx))
+   \   0000003A   0x....             LDR.N    R3,??DataTable9_2  ;; 0x40012c00
+   \   0000003C   0x429C             CMP      R4,R3
+   \   0000003E   0xD112             BNE.N    ??OC1Config_0
+    804            {
+    805              assert_param(IS_LL_TIM_OCIDLESTATE(TIM_OCInitStruct->OCNIdleState));
+    806              assert_param(IS_LL_TIM_OCIDLESTATE(TIM_OCInitStruct->OCIdleState));
+    807          
+    808              /* Set the complementary output Polarity */
+    809              MODIFY_REG(tmpccer, TIM_CCER_CC1NP, TIM_OCInitStruct->OCNPolarity << 2U);
+   \   00000040   0xF035 0x0308      BICS     R3,R5,#0x8
+   \   00000044   0x694D             LDR      R5,[R1, #+20]
+   \   00000046   0xEA53 0x0585      ORRS     R5,R3,R5, LSL #+2
+    810          
+    811              /* Set the complementary output State */
+    812              MODIFY_REG(tmpccer, TIM_CCER_CC1NE, TIM_OCInitStruct->OCNState << 2U);
+   \   0000004A   0xF035 0x0304      BICS     R3,R5,#0x4
+   \   0000004E   0x688D             LDR      R5,[R1, #+8]
+   \   00000050   0xEA53 0x0585      ORRS     R5,R3,R5, LSL #+2
+    813          
+    814              /* Set the Output Idle state */
+    815              MODIFY_REG(tmpcr2, TIM_CR2_OIS1, TIM_OCInitStruct->OCIdleState);
+   \   00000054   0xF430 0x7080      BICS     R0,R0,#0x100
+   \   00000058   0x698B             LDR      R3,[R1, #+24]
+   \   0000005A   0x4318             ORRS     R0,R3,R0
+    816          
+    817              /* Set the complementary output Idle state */
+    818              MODIFY_REG(tmpcr2, TIM_CR2_OIS1N, TIM_OCInitStruct->OCNIdleState << 1U);
+   \   0000005C   0xF430 0x7000      BICS     R0,R0,#0x200
+   \   00000060   0x69CB             LDR      R3,[R1, #+28]
+   \   00000062   0xEA50 0x0043      ORRS     R0,R0,R3, LSL #+1
+    819            }
+    820          
+    821            /* Write to TIMx CR2 */
+    822            LL_TIM_WriteReg(TIMx, CR2, tmpcr2);
+   \                     ??OC1Config_0:
+   \   00000066   0x6060             STR      R0,[R4, #+4]
+    823          
+    824            /* Write to TIMx CCMR1 */
+    825            LL_TIM_WriteReg(TIMx, CCMR1, tmpccmr1);
+   \   00000068   0x61A2             STR      R2,[R4, #+24]
+    826          
+    827            /* Set the Capture Compare Register value */
+    828            LL_TIM_OC_SetCompareCH1(TIMx, TIM_OCInitStruct->CompareValue);
+   \   0000006A   0x68C9             LDR      R1,[R1, #+12]
+   \   0000006C   0x0020             MOVS     R0,R4
+   \   0000006E   0x.... 0x....      BL       LL_TIM_OC_SetCompareCH1
+    829          
+    830            /* Write to TIMx CCER */
+    831            LL_TIM_WriteReg(TIMx, CCER, tmpccer);
+   \   00000072   0x6225             STR      R5,[R4, #+32]
+    832          
+    833            return SUCCESS;
+   \   00000074   0x2001             MOVS     R0,#+1
+   \   00000076   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+    834          }
+    835          
+    836          /**
+    837            * @brief  Configure the TIMx output channel 2.
+    838            * @param  TIMx Timer Instance
+    839            * @param  TIM_OCInitStruct pointer to the the TIMx output channel 2 configuration data structure
+    840            * @retval An ErrorStatus enumeration value:
+    841            *          - SUCCESS: TIMx registers are de-initialized
+    842            *          - ERROR: not applicable
+    843            */
+
+   \                                 In section .text, align 2, keep-with-next
+    844          static ErrorStatus OC2Config(TIM_TypeDef *TIMx, LL_TIM_OC_InitTypeDef *TIM_OCInitStruct)
+    845          {
+   \                     OC2Config:
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    846            uint32_t tmpccmr1 = 0U;
+   \   00000004   0x2200             MOVS     R2,#+0
+    847            uint32_t tmpccer = 0U;
+   \   00000006   0x2500             MOVS     R5,#+0
+    848            uint32_t tmpcr2 = 0U;
+   \   00000008   0x2000             MOVS     R0,#+0
+    849          
+    850            /* Check the parameters */
+    851            assert_param(IS_TIM_CC2_INSTANCE(TIMx));
+    852            assert_param(IS_LL_TIM_OCMODE(TIM_OCInitStruct->OCMode));
+    853            assert_param(IS_LL_TIM_OCSTATE(TIM_OCInitStruct->OCState));
+    854            assert_param(IS_LL_TIM_OCPOLARITY(TIM_OCInitStruct->OCPolarity));
+    855            assert_param(IS_LL_TIM_OCSTATE(TIM_OCInitStruct->OCNState));
+    856            assert_param(IS_LL_TIM_OCPOLARITY(TIM_OCInitStruct->OCNPolarity));
+    857          
+    858            /* Disable the Channel 2: Reset the CC2E Bit */
+    859            CLEAR_BIT(TIMx->CCER, TIM_CCER_CC2E);
+   \   0000000A   0x6A23             LDR      R3,[R4, #+32]
+   \   0000000C   0xF033 0x0310      BICS     R3,R3,#0x10
+   \   00000010   0x6223             STR      R3,[R4, #+32]
+    860          
+    861            /* Get the TIMx CCER register value */
+    862            tmpccer =  LL_TIM_ReadReg(TIMx, CCER);
+   \   00000012   0x6A23             LDR      R3,[R4, #+32]
+   \   00000014   0x001D             MOVS     R5,R3
+    863          
+    864            /* Get the TIMx CR2 register value */
+    865            tmpcr2 = LL_TIM_ReadReg(TIMx, CR2);
+   \   00000016   0x6863             LDR      R3,[R4, #+4]
+   \   00000018   0x0018             MOVS     R0,R3
+    866          
+    867            /* Get the TIMx CCMR1 register value */
+    868            tmpccmr1 = LL_TIM_ReadReg(TIMx, CCMR1);
+   \   0000001A   0x69A3             LDR      R3,[R4, #+24]
+   \   0000001C   0x001A             MOVS     R2,R3
+    869          
+    870            /* Reset Capture/Compare selection Bits */
+    871            CLEAR_BIT(tmpccmr1, TIM_CCMR1_CC2S);
+   \   0000001E   0xF432 0x7240      BICS     R2,R2,#0x300
+    872          
+    873            /* Select the Output Compare Mode */
+    874            MODIFY_REG(tmpccmr1, TIM_CCMR1_OC2M, TIM_OCInitStruct->OCMode << 8U);
+   \   00000022   0xF432 0x42E0      BICS     R2,R2,#0x7000
+   \   00000026   0x680B             LDR      R3,[R1, #+0]
+   \   00000028   0xEA52 0x2203      ORRS     R2,R2,R3, LSL #+8
+    875          
+    876            /* Set the Output Compare Polarity */
+    877            MODIFY_REG(tmpccer, TIM_CCER_CC2P, TIM_OCInitStruct->OCPolarity << 4U);
+   \   0000002C   0xF035 0x0320      BICS     R3,R5,#0x20
+   \   00000030   0x690D             LDR      R5,[R1, #+16]
+   \   00000032   0xEA53 0x1505      ORRS     R5,R3,R5, LSL #+4
+    878          
+    879            /* Set the Output State */
+    880            MODIFY_REG(tmpccer, TIM_CCER_CC2E, TIM_OCInitStruct->OCState << 4U);
+   \   00000036   0xF035 0x0310      BICS     R3,R5,#0x10
+   \   0000003A   0x684D             LDR      R5,[R1, #+4]
+   \   0000003C   0xEA53 0x1505      ORRS     R5,R3,R5, LSL #+4
+    881          
+    882            if (IS_TIM_BREAK_INSTANCE(TIMx))
+   \   00000040   0x....             LDR.N    R3,??DataTable9_2  ;; 0x40012c00
+   \   00000042   0x429C             CMP      R4,R3
+   \   00000044   0xD113             BNE.N    ??OC2Config_0
+    883            {
+    884              assert_param(IS_LL_TIM_OCIDLESTATE(TIM_OCInitStruct->OCNIdleState));
+    885              assert_param(IS_LL_TIM_OCIDLESTATE(TIM_OCInitStruct->OCIdleState));
+    886          
+    887              /* Set the complementary output Polarity */
+    888              MODIFY_REG(tmpccer, TIM_CCER_CC2NP, TIM_OCInitStruct->OCNPolarity << 6U);
+   \   00000046   0xF035 0x0380      BICS     R3,R5,#0x80
+   \   0000004A   0x694D             LDR      R5,[R1, #+20]
+   \   0000004C   0xEA53 0x1585      ORRS     R5,R3,R5, LSL #+6
+    889          
+    890              /* Set the complementary output State */
+    891              MODIFY_REG(tmpccer, TIM_CCER_CC2NE, TIM_OCInitStruct->OCNState << 6U);
+   \   00000050   0xF035 0x0340      BICS     R3,R5,#0x40
+   \   00000054   0x688D             LDR      R5,[R1, #+8]
+   \   00000056   0xEA53 0x1585      ORRS     R5,R3,R5, LSL #+6
+    892          
+    893              /* Set the Output Idle state */
+    894              MODIFY_REG(tmpcr2, TIM_CR2_OIS2, TIM_OCInitStruct->OCIdleState << 2U);
+   \   0000005A   0xF430 0x6080      BICS     R0,R0,#0x400
+   \   0000005E   0x698B             LDR      R3,[R1, #+24]
+   \   00000060   0xEA50 0x0083      ORRS     R0,R0,R3, LSL #+2
+    895          
+    896              /* Set the complementary output Idle state */
+    897              MODIFY_REG(tmpcr2, TIM_CR2_OIS2N, TIM_OCInitStruct->OCNIdleState << 3U);
+   \   00000064   0xF430 0x6000      BICS     R0,R0,#0x800
+   \   00000068   0x69CB             LDR      R3,[R1, #+28]
+   \   0000006A   0xEA50 0x00C3      ORRS     R0,R0,R3, LSL #+3
+    898            }
+    899          
+    900            /* Write to TIMx CR2 */
+    901            LL_TIM_WriteReg(TIMx, CR2, tmpcr2);
+   \                     ??OC2Config_0:
+   \   0000006E   0x6060             STR      R0,[R4, #+4]
+    902          
+    903            /* Write to TIMx CCMR1 */
+    904            LL_TIM_WriteReg(TIMx, CCMR1, tmpccmr1);
+   \   00000070   0x61A2             STR      R2,[R4, #+24]
+    905          
+    906            /* Set the Capture Compare Register value */
+    907            LL_TIM_OC_SetCompareCH2(TIMx, TIM_OCInitStruct->CompareValue);
+   \   00000072   0x68C9             LDR      R1,[R1, #+12]
+   \   00000074   0x0020             MOVS     R0,R4
+   \   00000076   0x.... 0x....      BL       LL_TIM_OC_SetCompareCH2
+    908          
+    909            /* Write to TIMx CCER */
+    910            LL_TIM_WriteReg(TIMx, CCER, tmpccer);
+   \   0000007A   0x6225             STR      R5,[R4, #+32]
+    911          
+    912            return SUCCESS;
+   \   0000007C   0x2001             MOVS     R0,#+1
+   \   0000007E   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+    913          }
+    914          
+    915          /**
+    916            * @brief  Configure the TIMx output channel 3.
+    917            * @param  TIMx Timer Instance
+    918            * @param  TIM_OCInitStruct pointer to the the TIMx output channel 3 configuration data structure
+    919            * @retval An ErrorStatus enumeration value:
+    920            *          - SUCCESS: TIMx registers are de-initialized
+    921            *          - ERROR: not applicable
+    922            */
+
+   \                                 In section .text, align 2, keep-with-next
+    923          static ErrorStatus OC3Config(TIM_TypeDef *TIMx, LL_TIM_OC_InitTypeDef *TIM_OCInitStruct)
+    924          {
+   \                     OC3Config:
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    925            uint32_t tmpccmr2 = 0U;
+   \   00000004   0x2200             MOVS     R2,#+0
+    926            uint32_t tmpccer = 0U;
+   \   00000006   0x2500             MOVS     R5,#+0
+    927            uint32_t tmpcr2 = 0U;
+   \   00000008   0x2000             MOVS     R0,#+0
+    928          
+    929            /* Check the parameters */
+    930            assert_param(IS_TIM_CC3_INSTANCE(TIMx));
+    931            assert_param(IS_LL_TIM_OCMODE(TIM_OCInitStruct->OCMode));
+    932            assert_param(IS_LL_TIM_OCSTATE(TIM_OCInitStruct->OCState));
+    933            assert_param(IS_LL_TIM_OCPOLARITY(TIM_OCInitStruct->OCPolarity));
+    934            assert_param(IS_LL_TIM_OCSTATE(TIM_OCInitStruct->OCNState));
+    935            assert_param(IS_LL_TIM_OCPOLARITY(TIM_OCInitStruct->OCNPolarity));
+    936          
+    937            /* Disable the Channel 3: Reset the CC3E Bit */
+    938            CLEAR_BIT(TIMx->CCER, TIM_CCER_CC3E);
+   \   0000000A   0x6A23             LDR      R3,[R4, #+32]
+   \   0000000C   0xF433 0x7380      BICS     R3,R3,#0x100
+   \   00000010   0x6223             STR      R3,[R4, #+32]
+    939          
+    940            /* Get the TIMx CCER register value */
+    941            tmpccer =  LL_TIM_ReadReg(TIMx, CCER);
+   \   00000012   0x6A23             LDR      R3,[R4, #+32]
+   \   00000014   0x001D             MOVS     R5,R3
+    942          
+    943            /* Get the TIMx CR2 register value */
+    944            tmpcr2 = LL_TIM_ReadReg(TIMx, CR2);
+   \   00000016   0x6863             LDR      R3,[R4, #+4]
+   \   00000018   0x0018             MOVS     R0,R3
+    945          
+    946            /* Get the TIMx CCMR2 register value */
+    947            tmpccmr2 = LL_TIM_ReadReg(TIMx, CCMR2);
+   \   0000001A   0x69E3             LDR      R3,[R4, #+28]
+   \   0000001C   0x001A             MOVS     R2,R3
+    948          
+    949            /* Reset Capture/Compare selection Bits */
+    950            CLEAR_BIT(tmpccmr2, TIM_CCMR2_CC3S);
+   \   0000001E   0x0892             LSRS     R2,R2,#+2
+   \   00000020   0x0092             LSLS     R2,R2,#+2
+    951          
+    952            /* Select the Output Compare Mode */
+    953            MODIFY_REG(tmpccmr2, TIM_CCMR2_OC3M, TIM_OCInitStruct->OCMode);
+   \   00000022   0xF032 0x0270      BICS     R2,R2,#0x70
+   \   00000026   0x680B             LDR      R3,[R1, #+0]
+   \   00000028   0x431A             ORRS     R2,R3,R2
+    954          
+    955            /* Set the Output Compare Polarity */
+    956            MODIFY_REG(tmpccer, TIM_CCER_CC3P, TIM_OCInitStruct->OCPolarity << 8U);
+   \   0000002A   0xF435 0x7300      BICS     R3,R5,#0x200
+   \   0000002E   0x690D             LDR      R5,[R1, #+16]
+   \   00000030   0xEA53 0x2505      ORRS     R5,R3,R5, LSL #+8
+    957          
+    958            /* Set the Output State */
+    959            MODIFY_REG(tmpccer, TIM_CCER_CC3E, TIM_OCInitStruct->OCState << 8U);
+   \   00000034   0xF435 0x7380      BICS     R3,R5,#0x100
+   \   00000038   0x684D             LDR      R5,[R1, #+4]
+   \   0000003A   0xEA53 0x2505      ORRS     R5,R3,R5, LSL #+8
+    960          
+    961            if (IS_TIM_BREAK_INSTANCE(TIMx))
+   \   0000003E   0x....             LDR.N    R3,??DataTable9_2  ;; 0x40012c00
+   \   00000040   0x429C             CMP      R4,R3
+   \   00000042   0xD113             BNE.N    ??OC3Config_0
+    962            {
+    963              assert_param(IS_LL_TIM_OCIDLESTATE(TIM_OCInitStruct->OCNIdleState));
+    964              assert_param(IS_LL_TIM_OCIDLESTATE(TIM_OCInitStruct->OCIdleState));
+    965          
+    966              /* Set the complementary output Polarity */
+    967              MODIFY_REG(tmpccer, TIM_CCER_CC3NP, TIM_OCInitStruct->OCNPolarity << 10U);
+   \   00000044   0xF435 0x6300      BICS     R3,R5,#0x800
+   \   00000048   0x694D             LDR      R5,[R1, #+20]
+   \   0000004A   0xEA53 0x2585      ORRS     R5,R3,R5, LSL #+10
+    968          
+    969              /* Set the complementary output State */
+    970              MODIFY_REG(tmpccer, TIM_CCER_CC3NE, TIM_OCInitStruct->OCNState << 10U);
+   \   0000004E   0xF435 0x6380      BICS     R3,R5,#0x400
+   \   00000052   0x688D             LDR      R5,[R1, #+8]
+   \   00000054   0xEA53 0x2585      ORRS     R5,R3,R5, LSL #+10
+    971          
+    972              /* Set the Output Idle state */
+    973              MODIFY_REG(tmpcr2, TIM_CR2_OIS3, TIM_OCInitStruct->OCIdleState << 4U);
+   \   00000058   0xF430 0x5080      BICS     R0,R0,#0x1000
+   \   0000005C   0x698B             LDR      R3,[R1, #+24]
+   \   0000005E   0xEA50 0x1003      ORRS     R0,R0,R3, LSL #+4
+    974          
+    975              /* Set the complementary output Idle state */
+    976              MODIFY_REG(tmpcr2, TIM_CR2_OIS3N, TIM_OCInitStruct->OCNIdleState << 5U);
+   \   00000062   0xF430 0x5000      BICS     R0,R0,#0x2000
+   \   00000066   0x69CB             LDR      R3,[R1, #+28]
+   \   00000068   0xEA50 0x1043      ORRS     R0,R0,R3, LSL #+5
+    977            }
+    978          
+    979            /* Write to TIMx CR2 */
+    980            LL_TIM_WriteReg(TIMx, CR2, tmpcr2);
+   \                     ??OC3Config_0:
+   \   0000006C   0x6060             STR      R0,[R4, #+4]
+    981          
+    982            /* Write to TIMx CCMR2 */
+    983            LL_TIM_WriteReg(TIMx, CCMR2, tmpccmr2);
+   \   0000006E   0x61E2             STR      R2,[R4, #+28]
+    984          
+    985            /* Set the Capture Compare Register value */
+    986            LL_TIM_OC_SetCompareCH3(TIMx, TIM_OCInitStruct->CompareValue);
+   \   00000070   0x68C9             LDR      R1,[R1, #+12]
+   \   00000072   0x0020             MOVS     R0,R4
+   \   00000074   0x.... 0x....      BL       LL_TIM_OC_SetCompareCH3
+    987          
+    988            /* Write to TIMx CCER */
+    989            LL_TIM_WriteReg(TIMx, CCER, tmpccer);
+   \   00000078   0x6225             STR      R5,[R4, #+32]
+    990          
+    991            return SUCCESS;
+   \   0000007A   0x2001             MOVS     R0,#+1
+   \   0000007C   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+    992          }
+    993          
+    994          /**
+    995            * @brief  Configure the TIMx output channel 4.
+    996            * @param  TIMx Timer Instance
+    997            * @param  TIM_OCInitStruct pointer to the the TIMx output channel 4 configuration data structure
+    998            * @retval An ErrorStatus enumeration value:
+    999            *          - SUCCESS: TIMx registers are de-initialized
+   1000            *          - ERROR: not applicable
+   1001            */
+
+   \                                 In section .text, align 2, keep-with-next
+   1002          static ErrorStatus OC4Config(TIM_TypeDef *TIMx, LL_TIM_OC_InitTypeDef *TIM_OCInitStruct)
+   1003          {
+   \                     OC4Config:
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   1004            uint32_t tmpccmr2 = 0U;
+   \   00000004   0x2200             MOVS     R2,#+0
+   1005            uint32_t tmpccer = 0U;
+   \   00000006   0x2500             MOVS     R5,#+0
+   1006            uint32_t tmpcr2 = 0U;
+   \   00000008   0x2000             MOVS     R0,#+0
+   1007          
+   1008            /* Check the parameters */
+   1009            assert_param(IS_TIM_CC4_INSTANCE(TIMx));
+   1010            assert_param(IS_LL_TIM_OCMODE(TIM_OCInitStruct->OCMode));
+   1011            assert_param(IS_LL_TIM_OCSTATE(TIM_OCInitStruct->OCState));
+   1012            assert_param(IS_LL_TIM_OCPOLARITY(TIM_OCInitStruct->OCPolarity));
+   1013            assert_param(IS_LL_TIM_OCPOLARITY(TIM_OCInitStruct->OCNPolarity));
+   1014            assert_param(IS_LL_TIM_OCSTATE(TIM_OCInitStruct->OCNState));
+   1015          
+   1016            /* Disable the Channel 4: Reset the CC4E Bit */
+   1017            CLEAR_BIT(TIMx->CCER, TIM_CCER_CC4E);
+   \   0000000A   0x6A23             LDR      R3,[R4, #+32]
+   \   0000000C   0xF433 0x5380      BICS     R3,R3,#0x1000
+   \   00000010   0x6223             STR      R3,[R4, #+32]
+   1018          
+   1019            /* Get the TIMx CCER register value */
+   1020            tmpccer = LL_TIM_ReadReg(TIMx, CCER);
+   \   00000012   0x6A23             LDR      R3,[R4, #+32]
+   \   00000014   0x001D             MOVS     R5,R3
+   1021          
+   1022            /* Get the TIMx CR2 register value */
+   1023            tmpcr2 =  LL_TIM_ReadReg(TIMx, CR2);
+   \   00000016   0x6863             LDR      R3,[R4, #+4]
+   \   00000018   0x0018             MOVS     R0,R3
+   1024          
+   1025            /* Get the TIMx CCMR2 register value */
+   1026            tmpccmr2 = LL_TIM_ReadReg(TIMx, CCMR2);
+   \   0000001A   0x69E3             LDR      R3,[R4, #+28]
+   \   0000001C   0x001A             MOVS     R2,R3
+   1027          
+   1028            /* Reset Capture/Compare selection Bits */
+   1029            CLEAR_BIT(tmpccmr2, TIM_CCMR2_CC4S);
+   \   0000001E   0xF432 0x7240      BICS     R2,R2,#0x300
+   1030          
+   1031            /* Select the Output Compare Mode */
+   1032            MODIFY_REG(tmpccmr2, TIM_CCMR2_OC4M, TIM_OCInitStruct->OCMode << 8U);
+   \   00000022   0xF432 0x42E0      BICS     R2,R2,#0x7000
+   \   00000026   0x680B             LDR      R3,[R1, #+0]
+   \   00000028   0xEA52 0x2203      ORRS     R2,R2,R3, LSL #+8
+   1033          
+   1034            /* Set the Output Compare Polarity */
+   1035            MODIFY_REG(tmpccer, TIM_CCER_CC4P, TIM_OCInitStruct->OCPolarity << 12U);
+   \   0000002C   0xF435 0x5300      BICS     R3,R5,#0x2000
+   \   00000030   0x690D             LDR      R5,[R1, #+16]
+   \   00000032   0xEA53 0x3505      ORRS     R5,R3,R5, LSL #+12
+   1036          
+   1037            /* Set the Output State */
+   1038            MODIFY_REG(tmpccer, TIM_CCER_CC4E, TIM_OCInitStruct->OCState << 12U);
+   \   00000036   0xF435 0x5380      BICS     R3,R5,#0x1000
+   \   0000003A   0x684D             LDR      R5,[R1, #+4]
+   \   0000003C   0xEA53 0x3505      ORRS     R5,R3,R5, LSL #+12
+   1039          
+   1040            if (IS_TIM_BREAK_INSTANCE(TIMx))
+   \   00000040   0x....             LDR.N    R3,??DataTable9_2  ;; 0x40012c00
+   \   00000042   0x429C             CMP      R4,R3
+   \   00000044   0xD104             BNE.N    ??OC4Config_0
+   1041            {
+   1042              assert_param(IS_LL_TIM_OCIDLESTATE(TIM_OCInitStruct->OCNIdleState));
+   1043              assert_param(IS_LL_TIM_OCIDLESTATE(TIM_OCInitStruct->OCIdleState));
+   1044          
+   1045              /* Set the Output Idle state */
+   1046              MODIFY_REG(tmpcr2, TIM_CR2_OIS4, TIM_OCInitStruct->OCIdleState << 6U);
+   \   00000046   0xF430 0x4080      BICS     R0,R0,#0x4000
+   \   0000004A   0x698B             LDR      R3,[R1, #+24]
+   \   0000004C   0xEA50 0x1083      ORRS     R0,R0,R3, LSL #+6
+   1047            }
+   1048          
+   1049            /* Write to TIMx CR2 */
+   1050            LL_TIM_WriteReg(TIMx, CR2, tmpcr2);
+   \                     ??OC4Config_0:
+   \   00000050   0x6060             STR      R0,[R4, #+4]
+   1051          
+   1052            /* Write to TIMx CCMR2 */
+   1053            LL_TIM_WriteReg(TIMx, CCMR2, tmpccmr2);
+   \   00000052   0x61E2             STR      R2,[R4, #+28]
+   1054          
+   1055            /* Set the Capture Compare Register value */
+   1056            LL_TIM_OC_SetCompareCH4(TIMx, TIM_OCInitStruct->CompareValue);
+   \   00000054   0x68C9             LDR      R1,[R1, #+12]
+   \   00000056   0x0020             MOVS     R0,R4
+   \   00000058   0x.... 0x....      BL       LL_TIM_OC_SetCompareCH4
+   1057          
+   1058            /* Write to TIMx CCER */
+   1059            LL_TIM_WriteReg(TIMx, CCER, tmpccer);
+   \   0000005C   0x6225             STR      R5,[R4, #+32]
+   1060          
+   1061            return SUCCESS;
+   \   0000005E   0x2001             MOVS     R0,#+1
+   \   00000060   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+   1062          }
+   1063          
+   1064          
+   1065          /**
+   1066            * @brief  Configure the TIMx input channel 1.
+   1067            * @param  TIMx Timer Instance
+   1068            * @param  TIM_ICInitStruct pointer to the the TIMx input channel 1 configuration data structure
+   1069            * @retval An ErrorStatus enumeration value:
+   1070            *          - SUCCESS: TIMx registers are de-initialized
+   1071            *          - ERROR: not applicable
+   1072            */
+
+   \                                 In section .text, align 2, keep-with-next
+   1073          static ErrorStatus IC1Config(TIM_TypeDef *TIMx, LL_TIM_IC_InitTypeDef *TIM_ICInitStruct)
+   1074          {
+   \                     IC1Config:
+   \   00000000   0xB410             PUSH     {R4}
+   1075            /* Check the parameters */
+   1076            assert_param(IS_TIM_CC1_INSTANCE(TIMx));
+   1077            assert_param(IS_LL_TIM_IC_POLARITY(TIM_ICInitStruct->ICPolarity));
+   1078            assert_param(IS_LL_TIM_ACTIVEINPUT(TIM_ICInitStruct->ICActiveInput));
+   1079            assert_param(IS_LL_TIM_ICPSC(TIM_ICInitStruct->ICPrescaler));
+   1080            assert_param(IS_LL_TIM_IC_FILTER(TIM_ICInitStruct->ICFilter));
+   1081          
+   1082            /* Disable the Channel 1: Reset the CC1E Bit */
+   1083            TIMx->CCER &= (uint32_t)~TIM_CCER_CC1E;
+   \   00000002   0x6A02             LDR      R2,[R0, #+32]
+   \   00000004   0x0852             LSRS     R2,R2,#+1
+   \   00000006   0x0052             LSLS     R2,R2,#+1
+   \   00000008   0x6202             STR      R2,[R0, #+32]
+   1084          
+   1085            /* Select the Input and set the filter and the prescaler value */
+   1086            MODIFY_REG(TIMx->CCMR1,
+   1087                       (TIM_CCMR1_CC1S | TIM_CCMR1_IC1F | TIM_CCMR1_IC1PSC),
+   1088                       (TIM_ICInitStruct->ICActiveInput | TIM_ICInitStruct->ICFilter | TIM_ICInitStruct->ICPrescaler) >> 16U);
+   \   0000000A   0x6982             LDR      R2,[R0, #+24]
+   \   0000000C   0x0A12             LSRS     R2,R2,#+8
+   \   0000000E   0x0212             LSLS     R2,R2,#+8
+   \   00000010   0x684B             LDR      R3,[R1, #+4]
+   \   00000012   0x68CC             LDR      R4,[R1, #+12]
+   \   00000014   0x4323             ORRS     R3,R4,R3
+   \   00000016   0x688C             LDR      R4,[R1, #+8]
+   \   00000018   0x4323             ORRS     R3,R4,R3
+   \   0000001A   0xEA52 0x4213      ORRS     R2,R2,R3, LSR #+16
+   \   0000001E   0x6182             STR      R2,[R0, #+24]
+   1089          
+   1090            /* Select the Polarity and set the CC1E Bit */
+   1091            MODIFY_REG(TIMx->CCER,
+   1092                       (TIM_CCER_CC1P | TIM_CCER_CC1NP),
+   1093                       (TIM_ICInitStruct->ICPolarity | TIM_CCER_CC1E));
+   \   00000020   0x6A02             LDR      R2,[R0, #+32]
+   \   00000022   0xF032 0x020A      BICS     R2,R2,#0xA
+   \   00000026   0x6809             LDR      R1,[R1, #+0]
+   \   00000028   0x4311             ORRS     R1,R1,R2
+   \   0000002A   0xF051 0x0101      ORRS     R1,R1,#0x1
+   \   0000002E   0x6201             STR      R1,[R0, #+32]
+   1094          
+   1095            return SUCCESS;
+   \   00000030   0x2001             MOVS     R0,#+1
+   \   00000032   0xBC10             POP      {R4}
+   \   00000034   0x4770             BX       LR               ;; return
+   1096          }
+   1097          
+   1098          /**
+   1099            * @brief  Configure the TIMx input channel 2.
+   1100            * @param  TIMx Timer Instance
+   1101            * @param  TIM_ICInitStruct pointer to the the TIMx input channel 2 configuration data structure
+   1102            * @retval An ErrorStatus enumeration value:
+   1103            *          - SUCCESS: TIMx registers are de-initialized
+   1104            *          - ERROR: not applicable
+   1105            */
+
+   \                                 In section .text, align 2, keep-with-next
+   1106          static ErrorStatus IC2Config(TIM_TypeDef *TIMx, LL_TIM_IC_InitTypeDef *TIM_ICInitStruct)
+   1107          {
+   \                     IC2Config:
+   \   00000000   0xB410             PUSH     {R4}
+   1108            /* Check the parameters */
+   1109            assert_param(IS_TIM_CC2_INSTANCE(TIMx));
+   1110            assert_param(IS_LL_TIM_IC_POLARITY(TIM_ICInitStruct->ICPolarity));
+   1111            assert_param(IS_LL_TIM_ACTIVEINPUT(TIM_ICInitStruct->ICActiveInput));
+   1112            assert_param(IS_LL_TIM_ICPSC(TIM_ICInitStruct->ICPrescaler));
+   1113            assert_param(IS_LL_TIM_IC_FILTER(TIM_ICInitStruct->ICFilter));
+   1114          
+   1115            /* Disable the Channel 2: Reset the CC2E Bit */
+   1116            TIMx->CCER &= (uint32_t)~TIM_CCER_CC2E;
+   \   00000002   0x6A02             LDR      R2,[R0, #+32]
+   \   00000004   0xF032 0x0210      BICS     R2,R2,#0x10
+   \   00000008   0x6202             STR      R2,[R0, #+32]
+   1117          
+   1118            /* Select the Input and set the filter and the prescaler value */
+   1119            MODIFY_REG(TIMx->CCMR1,
+   1120                       (TIM_CCMR1_CC2S | TIM_CCMR1_IC2F | TIM_CCMR1_IC2PSC),
+   1121                       (TIM_ICInitStruct->ICActiveInput | TIM_ICInitStruct->ICFilter | TIM_ICInitStruct->ICPrescaler) >> 8U);
+   \   0000000A   0x6982             LDR      R2,[R0, #+24]
+   \   0000000C   0xF432 0x427F      BICS     R2,R2,#0xFF00
+   \   00000010   0x684B             LDR      R3,[R1, #+4]
+   \   00000012   0x68CC             LDR      R4,[R1, #+12]
+   \   00000014   0x4323             ORRS     R3,R4,R3
+   \   00000016   0x688C             LDR      R4,[R1, #+8]
+   \   00000018   0x4323             ORRS     R3,R4,R3
+   \   0000001A   0xEA52 0x2213      ORRS     R2,R2,R3, LSR #+8
+   \   0000001E   0x6182             STR      R2,[R0, #+24]
+   1122          
+   1123            /* Select the Polarity and set the CC2E Bit */
+   1124            MODIFY_REG(TIMx->CCER,
+   1125                       (TIM_CCER_CC2P | TIM_CCER_CC2NP),
+   1126                       ((TIM_ICInitStruct->ICPolarity << 4U) | TIM_CCER_CC2E));
+   \   00000020   0x6A02             LDR      R2,[R0, #+32]
+   \   00000022   0xF032 0x02A0      BICS     R2,R2,#0xA0
+   \   00000026   0x6809             LDR      R1,[R1, #+0]
+   \   00000028   0xEA52 0x1101      ORRS     R1,R2,R1, LSL #+4
+   \   0000002C   0xF051 0x0110      ORRS     R1,R1,#0x10
+   \   00000030   0x6201             STR      R1,[R0, #+32]
+   1127          
+   1128            return SUCCESS;
+   \   00000032   0x2001             MOVS     R0,#+1
+   \   00000034   0xBC10             POP      {R4}
+   \   00000036   0x4770             BX       LR               ;; return
+   1129          }
+   1130          
+   1131          /**
+   1132            * @brief  Configure the TIMx input channel 3.
+   1133            * @param  TIMx Timer Instance
+   1134            * @param  TIM_ICInitStruct pointer to the the TIMx input channel 3 configuration data structure
+   1135            * @retval An ErrorStatus enumeration value:
+   1136            *          - SUCCESS: TIMx registers are de-initialized
+   1137            *          - ERROR: not applicable
+   1138            */
+
+   \                                 In section .text, align 2, keep-with-next
+   1139          static ErrorStatus IC3Config(TIM_TypeDef *TIMx, LL_TIM_IC_InitTypeDef *TIM_ICInitStruct)
+   1140          {
+   \                     IC3Config:
+   \   00000000   0xB410             PUSH     {R4}
+   1141            /* Check the parameters */
+   1142            assert_param(IS_TIM_CC3_INSTANCE(TIMx));
+   1143            assert_param(IS_LL_TIM_IC_POLARITY(TIM_ICInitStruct->ICPolarity));
+   1144            assert_param(IS_LL_TIM_ACTIVEINPUT(TIM_ICInitStruct->ICActiveInput));
+   1145            assert_param(IS_LL_TIM_ICPSC(TIM_ICInitStruct->ICPrescaler));
+   1146            assert_param(IS_LL_TIM_IC_FILTER(TIM_ICInitStruct->ICFilter));
+   1147          
+   1148            /* Disable the Channel 3: Reset the CC3E Bit */
+   1149            TIMx->CCER &= (uint32_t)~TIM_CCER_CC3E;
+   \   00000002   0x6A02             LDR      R2,[R0, #+32]
+   \   00000004   0xF432 0x7280      BICS     R2,R2,#0x100
+   \   00000008   0x6202             STR      R2,[R0, #+32]
+   1150          
+   1151            /* Select the Input and set the filter and the prescaler value */
+   1152            MODIFY_REG(TIMx->CCMR2,
+   1153                       (TIM_CCMR2_CC3S | TIM_CCMR2_IC3F | TIM_CCMR2_IC3PSC),
+   1154                       (TIM_ICInitStruct->ICActiveInput | TIM_ICInitStruct->ICFilter | TIM_ICInitStruct->ICPrescaler) >> 16U);
+   \   0000000A   0x69C2             LDR      R2,[R0, #+28]
+   \   0000000C   0x0A12             LSRS     R2,R2,#+8
+   \   0000000E   0x0212             LSLS     R2,R2,#+8
+   \   00000010   0x684B             LDR      R3,[R1, #+4]
+   \   00000012   0x68CC             LDR      R4,[R1, #+12]
+   \   00000014   0x4323             ORRS     R3,R4,R3
+   \   00000016   0x688C             LDR      R4,[R1, #+8]
+   \   00000018   0x4323             ORRS     R3,R4,R3
+   \   0000001A   0xEA52 0x4213      ORRS     R2,R2,R3, LSR #+16
+   \   0000001E   0x61C2             STR      R2,[R0, #+28]
+   1155          
+   1156            /* Select the Polarity and set the CC3E Bit */
+   1157            MODIFY_REG(TIMx->CCER,
+   1158                       (TIM_CCER_CC3P | TIM_CCER_CC3NP),
+   1159                       ((TIM_ICInitStruct->ICPolarity << 8U) | TIM_CCER_CC3E));
+   \   00000020   0x6A02             LDR      R2,[R0, #+32]
+   \   00000022   0xF432 0x6220      BICS     R2,R2,#0xA00
+   \   00000026   0x6809             LDR      R1,[R1, #+0]
+   \   00000028   0xEA52 0x2101      ORRS     R1,R2,R1, LSL #+8
+   \   0000002C   0xF44F 0x7280      MOV      R2,#+256
+   \   00000030   0x4311             ORRS     R1,R2,R1
+   \   00000032   0x6201             STR      R1,[R0, #+32]
+   1160          
+   1161            return SUCCESS;
+   \   00000034   0x2001             MOVS     R0,#+1
+   \   00000036   0xBC10             POP      {R4}
+   \   00000038   0x4770             BX       LR               ;; return
+   1162          }
+   1163          
+   1164          /**
+   1165            * @brief  Configure the TIMx input channel 4.
+   1166            * @param  TIMx Timer Instance
+   1167            * @param  TIM_ICInitStruct pointer to the the TIMx input channel 4 configuration data structure
+   1168            * @retval An ErrorStatus enumeration value:
+   1169            *          - SUCCESS: TIMx registers are de-initialized
+   1170            *          - ERROR: not applicable
+   1171            */
+
+   \                                 In section .text, align 2, keep-with-next
+   1172          static ErrorStatus IC4Config(TIM_TypeDef *TIMx, LL_TIM_IC_InitTypeDef *TIM_ICInitStruct)
+   1173          {
+   \                     IC4Config:
+   \   00000000   0xB410             PUSH     {R4}
+   1174            /* Check the parameters */
+   1175            assert_param(IS_TIM_CC4_INSTANCE(TIMx));
+   1176            assert_param(IS_LL_TIM_IC_POLARITY(TIM_ICInitStruct->ICPolarity));
+   1177            assert_param(IS_LL_TIM_ACTIVEINPUT(TIM_ICInitStruct->ICActiveInput));
+   1178            assert_param(IS_LL_TIM_ICPSC(TIM_ICInitStruct->ICPrescaler));
+   1179            assert_param(IS_LL_TIM_IC_FILTER(TIM_ICInitStruct->ICFilter));
+   1180          
+   1181            /* Disable the Channel 4: Reset the CC4E Bit */
+   1182            TIMx->CCER &= (uint32_t)~TIM_CCER_CC4E;
+   \   00000002   0x6A02             LDR      R2,[R0, #+32]
+   \   00000004   0xF432 0x5280      BICS     R2,R2,#0x1000
+   \   00000008   0x6202             STR      R2,[R0, #+32]
+   1183          
+   1184            /* Select the Input and set the filter and the prescaler value */
+   1185            MODIFY_REG(TIMx->CCMR2,
+   1186                       (TIM_CCMR2_CC4S | TIM_CCMR2_IC4F | TIM_CCMR2_IC4PSC),
+   1187                       (TIM_ICInitStruct->ICActiveInput | TIM_ICInitStruct->ICFilter | TIM_ICInitStruct->ICPrescaler) >> 8U);
+   \   0000000A   0x69C2             LDR      R2,[R0, #+28]
+   \   0000000C   0xF432 0x427F      BICS     R2,R2,#0xFF00
+   \   00000010   0x684B             LDR      R3,[R1, #+4]
+   \   00000012   0x68CC             LDR      R4,[R1, #+12]
+   \   00000014   0x4323             ORRS     R3,R4,R3
+   \   00000016   0x688C             LDR      R4,[R1, #+8]
+   \   00000018   0x4323             ORRS     R3,R4,R3
+   \   0000001A   0xEA52 0x2213      ORRS     R2,R2,R3, LSR #+8
+   \   0000001E   0x61C2             STR      R2,[R0, #+28]
+   1188          
+   1189            /* Select the Polarity and set the CC4E Bit */
+   1190            MODIFY_REG(TIMx->CCER,
+   1191                       TIM_CCER_CC4P,
+   1192                       ((TIM_ICInitStruct->ICPolarity << 12U) | TIM_CCER_CC4E));
+   \   00000020   0x6A02             LDR      R2,[R0, #+32]
+   \   00000022   0xF432 0x5200      BICS     R2,R2,#0x2000
+   \   00000026   0x6809             LDR      R1,[R1, #+0]
+   \   00000028   0xEA52 0x3101      ORRS     R1,R2,R1, LSL #+12
+   \   0000002C   0xF451 0x5180      ORRS     R1,R1,#0x1000
+   \   00000030   0x6201             STR      R1,[R0, #+32]
+   1193          
+   1194            return SUCCESS;
+   \   00000032   0x2001             MOVS     R0,#+1
+   \   00000034   0xBC10             POP      {R4}
+   \   00000036   0x4770             BX       LR               ;; return
+   1195          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9:
+   \   00000000   0x40021010         DC32     0x40021010
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_1:
+   \   00000000   0x4002100C         DC32     0x4002100c
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_2:
+   \   00000000   0x40012C00         DC32     0x40012c00
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_3:
+   \   00000000   0x40000400         DC32     0x40000400
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_4:
+   \   00000000   0x40000800         DC32     0x40000800
+   1196          
+   1197          
+   1198          /**
+   1199            * @}
+   1200            */
+   1201          
+   1202          /**
+   1203            * @}
+   1204            */
+   1205          
+   1206          #endif /* TIM1 || TIM2 || TIM3 || TIM4 || TIM5 || TIM6 || TIM7 || TIM8 || TIM9 || TIM10 || TIM11 || TIM12 || TIM13 || TIM14  || TIM15 || TIM16 || TIM17 */
+   1207          
+   1208          /**
+   1209            * @}
+   1210            */
+   1211          
+   1212          #endif /* USE_FULL_LL_DRIVER */
+   1213          
+   1214          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        4  IC1Config
+        4  IC2Config
+        4  IC3Config
+        4  IC4Config
+        0  LL_APB1_GRP1_ForceReset
+        0  LL_APB1_GRP1_ReleaseReset
+        0  LL_APB2_GRP1_ForceReset
+        0  LL_APB2_GRP1_ReleaseReset
+        0  LL_TIM_BDTR_Init
+        0  LL_TIM_BDTR_StructInit
+        8  LL_TIM_DeInit
+              8 -> LL_APB1_GRP1_ForceReset
+              8 -> LL_APB1_GRP1_ReleaseReset
+              8 -> LL_APB2_GRP1_ForceReset
+              8 -> LL_APB2_GRP1_ReleaseReset
+       16  LL_TIM_ENCODER_Init
+             16 -> LL_TIM_SetEncoderMode
+        0  LL_TIM_ENCODER_StructInit
+        0  LL_TIM_GenerateEvent_UPDATE
+       16  LL_TIM_HALLSENSOR_Init
+             16 -> LL_TIM_OC_SetCompareCH2
+        0  LL_TIM_HALLSENSOR_StructInit
+        8  LL_TIM_IC_Init
+              8 -> IC1Config
+              8 -> IC2Config
+              8 -> IC3Config
+              8 -> IC4Config
+        0  LL_TIM_IC_StructInit
+       16  LL_TIM_Init
+             16 -> LL_TIM_GenerateEvent_UPDATE
+             16 -> LL_TIM_SetAutoReload
+             16 -> LL_TIM_SetPrescaler
+             16 -> LL_TIM_SetRepetitionCounter
+        8  LL_TIM_OC_Init
+              8 -> OC1Config
+              8 -> OC2Config
+              8 -> OC3Config
+              8 -> OC4Config
+        0  LL_TIM_OC_SetCompareCH1
+        0  LL_TIM_OC_SetCompareCH2
+        0  LL_TIM_OC_SetCompareCH3
+        0  LL_TIM_OC_SetCompareCH4
+        0  LL_TIM_OC_StructInit
+        0  LL_TIM_SetAutoReload
+        0  LL_TIM_SetEncoderMode
+        0  LL_TIM_SetPrescaler
+        0  LL_TIM_SetRepetitionCounter
+        0  LL_TIM_StructInit
+       16  OC1Config
+             16 -> LL_TIM_OC_SetCompareCH1
+       16  OC2Config
+             16 -> LL_TIM_OC_SetCompareCH2
+       16  OC3Config
+             16 -> LL_TIM_OC_SetCompareCH3
+       16  OC4Config
+             16 -> LL_TIM_OC_SetCompareCH4
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable9
+       4  ??DataTable9_1
+       4  ??DataTable9_2
+       4  ??DataTable9_3
+       4  ??DataTable9_4
+      54  IC1Config
+      56  IC2Config
+      58  IC3Config
+      56  IC4Config
+      16  LL_APB1_GRP1_ForceReset
+      18  LL_APB1_GRP1_ReleaseReset
+      16  LL_APB2_GRP1_ForceReset
+      18  LL_APB2_GRP1_ReleaseReset
+      70  LL_TIM_BDTR_Init
+      30  LL_TIM_BDTR_StructInit
+     102  LL_TIM_DeInit
+     102  LL_TIM_ENCODER_Init
+      42  LL_TIM_ENCODER_StructInit
+      10  LL_TIM_GenerateEvent_UPDATE
+     112  LL_TIM_HALLSENSOR_Init
+      18  LL_TIM_HALLSENSOR_StructInit
+      72  LL_TIM_IC_Init
+      20  LL_TIM_IC_StructInit
+     132  LL_TIM_Init
+      72  LL_TIM_OC_Init
+       4  LL_TIM_OC_SetCompareCH1
+       4  LL_TIM_OC_SetCompareCH2
+       4  LL_TIM_OC_SetCompareCH3
+       4  LL_TIM_OC_SetCompareCH4
+      34  LL_TIM_OC_StructInit
+       4  LL_TIM_SetAutoReload
+      12  LL_TIM_SetEncoderMode
+       4  LL_TIM_SetPrescaler
+       4  LL_TIM_SetRepetitionCounter
+      24  LL_TIM_StructInit
+     120  OC1Config
+     128  OC2Config
+     126  OC3Config
+      98  OC4Config
+
+ 
+ 1 664 bytes in section .text
+ 
+ 1 664 bytes of CODE memory
+
+Errors: none
+Warnings: 1

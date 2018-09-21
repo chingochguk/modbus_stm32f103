@@ -1,0 +1,282 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  03:21:40 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\FreeModbus\modb #
+#                    us\functions\mbfuncother.c                               #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\FreeModbus\mod #
+#                    bus\functions\mbfuncother.c" -D USE_FULL_LL_DRIVER -D    #
+#                    USE_HAL_DRIVER -D STM32F103xB -lC "D:\projects\задания   #
+#                    от работодателя\ЭМИС\EWARM\mb_v1.0/List\" -o             #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    Obj\" --no_cse --no_unroll --no_inline --no_code_motion  #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files\IAR Systems\Embedded     #
+#                    Workbench 6.0\arm\INC\c\DLib_Config_Full.h" -I           #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\mbfuncother.lst                                      #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\mbfuncother.o                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\FreeModbus\modbus\functions\mbfuncother.c
+      1          /* 
+      2           * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
+      3           * Copyright (c) 2006 Christian Walter <wolti@sil.at>
+      4           * All rights reserved.
+      5           *
+      6           * Redistribution and use in source and binary forms, with or without
+      7           * modification, are permitted provided that the following conditions
+      8           * are met:
+      9           * 1. Redistributions of source code must retain the above copyright
+     10           *    notice, this list of conditions and the following disclaimer.
+     11           * 2. Redistributions in binary form must reproduce the above copyright
+     12           *    notice, this list of conditions and the following disclaimer in the
+     13           *    documentation and/or other materials provided with the distribution.
+     14           * 3. The name of the author may not be used to endorse or promote products
+     15           *    derived from this software without specific prior written permission.
+     16           *
+     17           * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+     18           * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+     19           * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+     20           * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+     21           * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+     22           * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+     23           * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+     24           * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+     25           * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+     26           * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     27           *
+     28           * File: $Id: mbfuncother.c,v 1.8 2006/12/07 22:10:34 wolti Exp $
+     29           */
+     30          
+     31          /* ----------------------- System includes ----------------------------------*/
+     32          #include "stdlib.h"
+     33          #include "string.h"
+
+   \                                 In section .text, align 2
+   \   __intrinsic __nounwind __interwork __softfp void *memcpy(void *, void const *, size_t)
+   \                     memcpy:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x0020             MOVS     R0,R4
+   \   00000006   0x.... 0x....      BL       __aeabi_memcpy
+   \   0000000A   0x0020             MOVS     R0,R4
+   \   0000000C   0xBD10             POP      {R4,PC}          ;; return
+     34          
+     35          /* ----------------------- Platform includes --------------------------------*/
+     36          #include "port.h"
+     37          
+     38          /* ----------------------- Modbus includes ----------------------------------*/
+     39          #include "mb.h"
+     40          #include "mbframe.h"
+     41          #include "mbproto.h"
+     42          #include "mbconfig.h"
+     43          
+     44          #if MB_FUNC_OTHER_REP_SLAVEID_ENABLED > 0
+     45          
+     46          /* ----------------------- Static variables ---------------------------------*/
+
+   \                                 In section .bss, align 4
+     47          static UCHAR    ucMBSlaveID[MB_FUNC_OTHER_REP_SLAVEID_BUF];
+   \                     ucMBSlaveID:
+   \   00000000                      DS8 32
+
+   \                                 In section .bss, align 2
+     48          static USHORT   usMBSlaveIDLen;
+   \                     usMBSlaveIDLen:
+   \   00000000                      DS8 2
+     49          
+     50          /* ----------------------- Start implementation -----------------------------*/
+     51          
+
+   \                                 In section .text, align 2, keep-with-next
+     52          eMBErrorCode
+     53          eMBSetSlaveID( UCHAR ucSlaveID, BOOL xIsRunning,
+     54                         UCHAR const *pucAdditional, USHORT usAdditionalLen )
+     55          {
+   \                     eMBSetSlaveID:
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+   \   00000002   0x0014             MOVS     R4,R2
+   \   00000004   0x001D             MOVS     R5,R3
+     56              eMBErrorCode    eStatus = MB_ENOERR;
+   \   00000006   0x2600             MOVS     R6,#+0
+     57          
+     58              /* the first byte and second byte in the buffer is reserved for
+     59               * the parameter ucSlaveID and the running flag. The rest of
+     60               * the buffer is available for additional data. */
+     61              if( usAdditionalLen + 2 < MB_FUNC_OTHER_REP_SLAVEID_BUF )
+   \   00000008   0xB2AD             UXTH     R5,R5            ;; ZeroExt  R5,R5,#+16,#+16
+   \   0000000A   0x1CAA             ADDS     R2,R5,#+2
+   \   0000000C   0x2A20             CMP      R2,#+32
+   \   0000000E   0xDA2B             BGE.N    ??eMBSetSlaveID_0
+     62              {
+     63                  usMBSlaveIDLen = 0;
+   \   00000010   0x....             LDR.N    R2,??DataTable1
+   \   00000012   0x2300             MOVS     R3,#+0
+   \   00000014   0x8013             STRH     R3,[R2, #+0]
+     64                  ucMBSlaveID[usMBSlaveIDLen++] = ucSlaveID;
+   \   00000016   0x....             LDR.N    R2,??DataTable1
+   \   00000018   0x8812             LDRH     R2,[R2, #+0]
+   \   0000001A   0x....             LDR.N    R3,??DataTable1_1
+   \   0000001C   0x54D0             STRB     R0,[R2, R3]
+   \   0000001E   0x....             LDR.N    R0,??DataTable1
+   \   00000020   0x8800             LDRH     R0,[R0, #+0]
+   \   00000022   0x1C40             ADDS     R0,R0,#+1
+   \   00000024   0x....             LDR.N    R2,??DataTable1
+   \   00000026   0x8010             STRH     R0,[R2, #+0]
+     65                  ucMBSlaveID[usMBSlaveIDLen++] = ( UCHAR )( xIsRunning ? 0xFF : 0x00 );
+   \   00000028   0x....             LDR.N    R0,??DataTable1
+   \   0000002A   0x8800             LDRH     R0,[R0, #+0]
+   \   0000002C   0x1C42             ADDS     R2,R0,#+1
+   \   0000002E   0x....             LDR.N    R3,??DataTable1
+   \   00000030   0x801A             STRH     R2,[R3, #+0]
+   \   00000032   0xB2C9             UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+   \   00000034   0x2900             CMP      R1,#+0
+   \   00000036   0xD001             BEQ.N    ??eMBSetSlaveID_1
+   \   00000038   0x21FF             MOVS     R1,#+255
+   \   0000003A   0xE000             B.N      ??eMBSetSlaveID_2
+   \                     ??eMBSetSlaveID_1:
+   \   0000003C   0x2100             MOVS     R1,#+0
+   \                     ??eMBSetSlaveID_2:
+   \   0000003E   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
+   \   00000040   0x....             LDR.N    R2,??DataTable1_1
+   \   00000042   0x5481             STRB     R1,[R0, R2]
+     66                  if( usAdditionalLen > 0 )
+   \   00000044   0xB2AD             UXTH     R5,R5            ;; ZeroExt  R5,R5,#+16,#+16
+   \   00000046   0x2D01             CMP      R5,#+1
+   \   00000048   0xD30F             BCC.N    ??eMBSetSlaveID_3
+     67                  {
+     68                      memcpy( &ucMBSlaveID[usMBSlaveIDLen], pucAdditional,
+     69                              ( size_t )usAdditionalLen );
+   \   0000004A   0xB2AD             UXTH     R5,R5            ;; ZeroExt  R5,R5,#+16,#+16
+   \   0000004C   0x002A             MOVS     R2,R5
+   \   0000004E   0x0021             MOVS     R1,R4
+   \   00000050   0x....             LDR.N    R0,??DataTable1
+   \   00000052   0x8800             LDRH     R0,[R0, #+0]
+   \   00000054   0x....             LDR.N    R3,??DataTable1_1
+   \   00000056   0x18C0             ADDS     R0,R0,R3
+   \   00000058   0x.... 0x....      BL       memcpy
+     70                      usMBSlaveIDLen += usAdditionalLen;
+   \   0000005C   0x....             LDR.N    R0,??DataTable1
+   \   0000005E   0x8800             LDRH     R0,[R0, #+0]
+   \   00000060   0x1828             ADDS     R0,R5,R0
+   \   00000062   0x....             LDR.N    R1,??DataTable1
+   \   00000064   0x8008             STRH     R0,[R1, #+0]
+   \   00000066   0xE000             B.N      ??eMBSetSlaveID_3
+     71                  }
+     72              }
+     73              else
+     74              {
+     75                  eStatus = MB_ENORES;
+   \                     ??eMBSetSlaveID_0:
+   \   00000068   0x2604             MOVS     R6,#+4
+     76              }
+     77              return eStatus;
+   \                     ??eMBSetSlaveID_3:
+   \   0000006A   0x0030             MOVS     R0,R6
+   \   0000006C   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000006E   0xBD70             POP      {R4-R6,PC}       ;; return
+     78          }
+     79          
+
+   \                                 In section .text, align 2, keep-with-next
+     80          eMBException
+     81          eMBFuncReportSlaveID( UCHAR * pucFrame, USHORT * usLen )
+     82          {
+   \                     eMBFuncReportSlaveID:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x000C             MOVS     R4,R1
+     83              memcpy( &pucFrame[MB_PDU_DATA_OFF], &ucMBSlaveID[0], ( size_t )usMBSlaveIDLen );
+   \   00000004   0x....             LDR.N    R1,??DataTable1
+   \   00000006   0x880A             LDRH     R2,[R1, #+0]
+   \   00000008   0x....             LDR.N    R1,??DataTable1_1
+   \   0000000A   0x1C40             ADDS     R0,R0,#+1
+   \   0000000C   0x.... 0x....      BL       memcpy
+     84              *usLen = ( USHORT )( MB_PDU_DATA_OFF + usMBSlaveIDLen );
+   \   00000010   0x....             LDR.N    R0,??DataTable1
+   \   00000012   0x8800             LDRH     R0,[R0, #+0]
+   \   00000014   0x1C40             ADDS     R0,R0,#+1
+   \   00000016   0x8020             STRH     R0,[R4, #+0]
+     85              return MB_EX_NONE;
+   \   00000018   0x2000             MOVS     R0,#+0
+   \   0000001A   0xBD10             POP      {R4,PC}          ;; return
+     86          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1:
+   \   00000000   0x........         DC32     usMBSlaveIDLen
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_1:
+   \   00000000   0x........         DC32     ucMBSlaveID
+     87          
+     88          #endif
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        8  eMBFuncReportSlaveID
+              8 -> memcpy
+       16  eMBSetSlaveID
+             16 -> memcpy
+        8  memcpy
+              8 -> __aeabi_memcpy
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable1
+       4  ??DataTable1_1
+      28  eMBFuncReportSlaveID
+     112  eMBSetSlaveID
+      14  memcpy
+      32  ucMBSlaveID
+       2  usMBSlaveIDLen
+
+ 
+  34 bytes in section .bss
+ 162 bytes in section .text
+ 
+ 148 bytes of CODE memory (+ 14 bytes shared)
+  34 bytes of DATA memory
+
+Errors: none
+Warnings: none

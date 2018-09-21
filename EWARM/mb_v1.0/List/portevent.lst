@@ -1,0 +1,198 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  03:21:28 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\FreeModbus\port #
+#                    \portevent.c                                             #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\FreeModbus\por #
+#                    t\portevent.c" -D USE_FULL_LL_DRIVER -D USE_HAL_DRIVER   #
+#                    -D STM32F103xB -lC "D:\projects\задания от               #
+#                    работодателя\ЭМИС\EWARM\mb_v1.0/List\" -o                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    Obj\" --no_cse --no_unroll --no_inline --no_code_motion  #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files\IAR Systems\Embedded     #
+#                    Workbench 6.0\arm\INC\c\DLib_Config_Full.h" -I           #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\portevent.lst                                        #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\portevent.o                                           #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\FreeModbus\port\portevent.c
+      1          /*
+      2            * FreeModbus Libary: LPC214X Port
+      3            * Copyright (C) 2007 Tiago Prado Lone <tiago@maxwellbohr.com.br>
+      4           *
+      5           * This library is free software; you can redistribute it and/or
+      6           * modify it under the terms of the GNU Lesser General Public
+      7           * License as published by the Free Software Foundation; either
+      8           * version 2.1 of the License, or (at your option) any later version.
+      9           *
+     10           * This library is distributed in the hope that it will be useful,
+     11           * but WITHOUT ANY WARRANTY; without even the implied warranty of
+     12           * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+     13           * Lesser General Public License for more details.
+     14           *
+     15           * You should have received a copy of the GNU Lesser General Public
+     16           * License along with this library; if not, write to the Free Software
+     17           * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+     18           *
+     19           * File: $Id: portevent.c,v 1.1 2007/04/24 23:15:18 wolti Exp $
+     20           */
+     21          
+     22          /* ----------------------- Modbus includes ----------------------------------*/
+     23          #include "mb.h"
+     24          #include "mbport.h"
+     25          
+     26          /* ----------------------- Variables ----------------------------------------*/
+
+   \                                 In section .bss, align 1
+     27          static eMBEventType eQueuedEvent;
+   \                     eQueuedEvent:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 1
+     28          static BOOL     xEventInQueue;
+   \                     xEventInQueue:
+   \   00000000                      DS8 1
+     29          
+     30          /* ----------------------- Start implementation -----------------------------*/
+
+   \                                 In section .text, align 2, keep-with-next
+     31          BOOL
+     32          xMBPortEventInit( void )
+     33          {
+     34              xEventInQueue = FALSE;
+   \                     xMBPortEventInit:
+   \   00000000   0x....             LDR.N    R0,??DataTable2
+   \   00000002   0x2100             MOVS     R1,#+0
+   \   00000004   0x7001             STRB     R1,[R0, #+0]
+     35              return TRUE;
+   \   00000006   0x2001             MOVS     R0,#+1
+   \   00000008   0x4770             BX       LR               ;; return
+     36          }
+     37          
+
+   \                                 In section .text, align 2, keep-with-next
+     38          BOOL
+     39          xMBPortEventPost( eMBEventType eEvent )
+     40          {
+     41              xEventInQueue = TRUE;
+   \                     xMBPortEventPost:
+   \   00000000   0x....             LDR.N    R1,??DataTable2
+   \   00000002   0x2201             MOVS     R2,#+1
+   \   00000004   0x700A             STRB     R2,[R1, #+0]
+     42              eQueuedEvent = eEvent;
+   \   00000006   0x....             LDR.N    R1,??DataTable2_1
+   \   00000008   0x7008             STRB     R0,[R1, #+0]
+     43              return TRUE;
+   \   0000000A   0x2001             MOVS     R0,#+1
+   \   0000000C   0x4770             BX       LR               ;; return
+     44          }
+     45          
+
+   \                                 In section .text, align 2, keep-with-next
+     46          BOOL
+     47          xMBPortEventGet( eMBEventType * eEvent )
+     48          {
+     49              BOOL            xEventHappened = FALSE;
+   \                     xMBPortEventGet:
+   \   00000000   0x2100             MOVS     R1,#+0
+     50          
+     51              if( xEventInQueue )
+   \   00000002   0x....             LDR.N    R2,??DataTable2
+   \   00000004   0x7812             LDRB     R2,[R2, #+0]
+   \   00000006   0x2A00             CMP      R2,#+0
+   \   00000008   0xD006             BEQ.N    ??xMBPortEventGet_0
+     52              {
+     53                  *eEvent = eQueuedEvent;
+   \   0000000A   0x....             LDR.N    R1,??DataTable2_1
+   \   0000000C   0x7809             LDRB     R1,[R1, #+0]
+   \   0000000E   0x7001             STRB     R1,[R0, #+0]
+     54                  xEventInQueue = FALSE;
+   \   00000010   0x....             LDR.N    R0,??DataTable2
+   \   00000012   0x2100             MOVS     R1,#+0
+   \   00000014   0x7001             STRB     R1,[R0, #+0]
+     55                  xEventHappened = TRUE;
+   \   00000016   0x2101             MOVS     R1,#+1
+     56              }
+     57              return xEventHappened;
+   \                     ??xMBPortEventGet_0:
+   \   00000018   0x0008             MOVS     R0,R1
+   \   0000001A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000001C   0x4770             BX       LR               ;; return
+     58          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2:
+   \   00000000   0x........         DC32     xEventInQueue
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_1:
+   \   00000000   0x........         DC32     eQueuedEvent
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  xMBPortEventGet
+        0  xMBPortEventInit
+        0  xMBPortEventPost
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable2
+       4  ??DataTable2_1
+       1  eQueuedEvent
+       1  xEventInQueue
+      30  xMBPortEventGet
+      10  xMBPortEventInit
+      14  xMBPortEventPost
+
+ 
+  2 bytes in section .bss
+ 62 bytes in section .text
+ 
+ 62 bytes of CODE memory
+  2 bytes of DATA memory
+
+Errors: none
+Warnings: none

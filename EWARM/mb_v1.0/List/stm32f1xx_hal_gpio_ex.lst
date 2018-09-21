@@ -1,0 +1,266 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  06:15:48 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1 #
+#                    xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c                #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F #
+#                    1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c" -D           #
+#                    USE_FULL_LL_DRIVER -D USE_HAL_DRIVER -D STM32F103xB -lC  #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    List\" -o "D:\projects\задания от                        #
+#                    работодателя\ЭМИС\EWARM\mb_v1.0/Obj\" --no_cse           #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files\IAR Systems\Embedded Workbench                     #
+#                    6.0\arm\INC\c\DLib_Config_Full.h" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\stm32f1xx_hal_gpio_ex.lst                            #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\stm32f1xx_hal_gpio_ex.o                               #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    stm32f1xx_hal_gpio_ex.c
+      4            * @author  MCD Application Team
+      5            * @brief   GPIO Extension HAL module driver.
+      6            *         This file provides firmware functions to manage the following
+      7            *          functionalities of the General Purpose Input/Output (GPIO) extension peripheral.
+      8            *           + Extended features functions
+      9            *
+     10            @verbatim
+     11            ==============================================================================
+     12                              ##### GPIO Peripheral extension features #####
+     13            ==============================================================================
+     14            [..] GPIO module on STM32F1 family, manage also the AFIO register:
+     15                 (+) Possibility to use the EVENTOUT Cortex feature
+     16          
+     17                               ##### How to use this driver #####
+     18            ==============================================================================
+     19            [..] This driver provides functions to use EVENTOUT Cortex feature
+     20              (#) Configure EVENTOUT Cortex feature using the function HAL_GPIOEx_ConfigEventout()
+     21              (#) Activate EVENTOUT Cortex feature using the HAL_GPIOEx_EnableEventout()
+     22              (#) Deactivate EVENTOUT Cortex feature using the HAL_GPIOEx_DisableEventout()
+     23          
+     24            @endverbatim
+     25            ******************************************************************************
+     26            * @attention
+     27            *
+     28            * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+     29            *
+     30            * Redistribution and use in source and binary forms, with or without modification,
+     31            * are permitted provided that the following conditions are met:
+     32            *   1. Redistributions of source code must retain the above copyright notice,
+     33            *      this list of conditions and the following disclaimer.
+     34            *   2. Redistributions in binary form must reproduce the above copyright notice,
+     35            *      this list of conditions and the following disclaimer in the documentation
+     36            *      and/or other materials provided with the distribution.
+     37            *   3. Neither the name of STMicroelectronics nor the names of its contributors
+     38            *      may be used to endorse or promote products derived from this software
+     39            *      without specific prior written permission.
+     40            *
+     41            * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     42            * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     43            * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     44            * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+     45            * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     46            * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+     47            * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+     48            * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+     49            * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+     50            * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     51            *
+     52            ******************************************************************************
+     53            */
+     54          
+     55          /* Includes ------------------------------------------------------------------*/
+     56          #include "stm32f1xx_hal.h"
+
+  /**
+    ^
+"D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h",1  Warning[Pa050]: 
+          non-native end of line sequence detected (this diagnostic is only
+          issued once)
+     57          
+     58          /** @addtogroup STM32F1xx_HAL_Driver
+     59            * @{
+     60            */
+     61          
+     62          /** @defgroup GPIOEx GPIOEx
+     63            * @brief GPIO HAL module driver
+     64            * @{
+     65            */
+     66          
+     67          #ifdef HAL_GPIO_MODULE_ENABLED
+     68          
+     69          /** @defgroup GPIOEx_Exported_Functions GPIOEx Exported Functions
+     70            * @{
+     71            */
+     72          
+     73          /** @defgroup GPIOEx_Exported_Functions_Group1 Extended features functions
+     74           *  @brief    Extended features functions
+     75           *
+     76          @verbatim
+     77            ==============================================================================
+     78                           ##### Extended features functions #####
+     79            ==============================================================================
+     80              [..]  This section provides functions allowing to:
+     81              (+) Configure EVENTOUT Cortex feature using the function HAL_GPIOEx_ConfigEventout()
+     82              (+) Activate EVENTOUT Cortex feature using the HAL_GPIOEx_EnableEventout()
+     83              (+) Deactivate EVENTOUT Cortex feature using the HAL_GPIOEx_DisableEventout()
+     84          
+     85          @endverbatim
+     86            * @{
+     87            */
+     88          
+     89          /**
+     90            * @brief  Configures the port and pin on which the EVENTOUT Cortex signal will be connected.
+     91            * @param  GPIO_PortSource Select the port used to output the Cortex EVENTOUT signal.
+     92            *   This parameter can be a value of @ref GPIOEx_EVENTOUT_PORT.
+     93            * @param  GPIO_PinSource Select the pin used to output the Cortex EVENTOUT signal.
+     94            *   This parameter can be a value of @ref GPIOEx_EVENTOUT_PIN.
+     95            * @retval None
+     96            */
+
+   \                                 In section .text, align 2, keep-with-next
+     97          void HAL_GPIOEx_ConfigEventout(uint32_t GPIO_PortSource, uint32_t GPIO_PinSource)
+     98          {
+     99            /* Verify the parameters */
+    100            assert_param(IS_AFIO_EVENTOUT_PORT(GPIO_PortSource));
+    101            assert_param(IS_AFIO_EVENTOUT_PIN(GPIO_PinSource));
+    102          
+    103            /* Apply the new configuration */
+    104            MODIFY_REG(AFIO->EVCR, (AFIO_EVCR_PORT) | (AFIO_EVCR_PIN), (GPIO_PortSource) | (GPIO_PinSource));
+   \                     HAL_GPIOEx_ConfigEventout:
+   \   00000000   0x....             LDR.N    R2,??DataTable2  ;; 0x40010000
+   \   00000002   0x6812             LDR      R2,[R2, #+0]
+   \   00000004   0x09D2             LSRS     R2,R2,#+7
+   \   00000006   0x01D2             LSLS     R2,R2,#+7
+   \   00000008   0x4308             ORRS     R0,R0,R1
+   \   0000000A   0x4310             ORRS     R0,R0,R2
+   \   0000000C   0x....             LDR.N    R1,??DataTable2  ;; 0x40010000
+   \   0000000E   0x6008             STR      R0,[R1, #+0]
+    105          }
+   \   00000010   0x4770             BX       LR               ;; return
+    106          
+    107          /**
+    108            * @brief  Enables the Event Output.
+    109            * @retval None
+    110            */
+
+   \                                 In section .text, align 2, keep-with-next
+    111          void HAL_GPIOEx_EnableEventout(void)
+    112          {
+    113            SET_BIT(AFIO->EVCR, AFIO_EVCR_EVOE);
+   \                     HAL_GPIOEx_EnableEventout:
+   \   00000000   0x....             LDR.N    R0,??DataTable2  ;; 0x40010000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF050 0x0080      ORRS     R0,R0,#0x80
+   \   00000008   0x....             LDR.N    R1,??DataTable2  ;; 0x40010000
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+    114          }
+   \   0000000C   0x4770             BX       LR               ;; return
+    115          
+    116          /**
+    117            * @brief  Disables the Event Output.
+    118            * @retval None
+    119            */
+
+   \                                 In section .text, align 2, keep-with-next
+    120          void HAL_GPIOEx_DisableEventout(void)
+    121          {
+    122            CLEAR_BIT(AFIO->EVCR, AFIO_EVCR_EVOE);
+   \                     HAL_GPIOEx_DisableEventout:
+   \   00000000   0x....             LDR.N    R0,??DataTable2  ;; 0x40010000
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0xF030 0x0080      BICS     R0,R0,#0x80
+   \   00000008   0x....             LDR.N    R1,??DataTable2  ;; 0x40010000
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+    123          }
+   \   0000000C   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2:
+   \   00000000   0x40010000         DC32     0x40010000
+    124          
+    125          /**
+    126            * @}
+    127            */
+    128          
+    129          /**
+    130            * @}
+    131            */
+    132          
+    133          #endif /* HAL_GPIO_MODULE_ENABLED */
+    134          
+    135          /**
+    136            * @}
+    137            */
+    138          
+    139          /**
+    140            * @}
+    141            */
+    142          
+    143          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  HAL_GPIOEx_ConfigEventout
+        0  HAL_GPIOEx_DisableEventout
+        0  HAL_GPIOEx_EnableEventout
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable2
+      18  HAL_GPIOEx_ConfigEventout
+      14  HAL_GPIOEx_DisableEventout
+      14  HAL_GPIOEx_EnableEventout
+
+ 
+ 50 bytes in section .text
+ 
+ 50 bytes of CODE memory
+
+Errors: none
+Warnings: 1

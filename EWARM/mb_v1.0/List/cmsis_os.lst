@@ -1,0 +1,3276 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  06:15:53 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\Middlewares\Thi #
+#                    rd_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.c           #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\Middlewares\Th #
+#                    ird_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.c" -D      #
+#                    USE_FULL_LL_DRIVER -D USE_HAL_DRIVER -D STM32F103xB -lC  #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    List\" -o "D:\projects\задания от                        #
+#                    работодателя\ЭМИС\EWARM\mb_v1.0/Obj\" --no_cse           #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files\IAR Systems\Embedded Workbench                     #
+#                    6.0\arm\INC\c\DLib_Config_Full.h" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\cmsis_os.lst                                         #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\cmsis_os.o                                            #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.c
+      1          /* ----------------------------------------------------------------------
+      2           * $Date:        5. February 2013
+      3           * $Revision:    V1.02
+      4           *
+      5           * Project:      CMSIS-RTOS API
+      6           * Title:        cmsis_os.c
+      7           *
+      8           * Version 0.02
+      9           *    Initial Proposal Phase
+     10           * Version 0.03
+     11           *    osKernelStart added, optional feature: main started as thread
+     12           *    osSemaphores have standard behavior
+     13           *    osTimerCreate does not start the timer, added osTimerStart
+     14           *    osThreadPass is renamed to osThreadYield
+     15           * Version 1.01
+     16           *    Support for C++ interface
+     17           *     - const attribute removed from the osXxxxDef_t typedef's
+     18           *     - const attribute added to the osXxxxDef macros
+     19           *    Added: osTimerDelete, osMutexDelete, osSemaphoreDelete
+     20           *    Added: osKernelInitialize
+     21           * Version 1.02
+     22           *    Control functions for short timeouts in microsecond resolution:
+     23           *    Added: osKernelSysTick, osKernelSysTickFrequency, osKernelSysTickMicroSec
+     24           *    Removed: osSignalGet 
+     25           *    
+     26           *  
+     27           *----------------------------------------------------------------------------
+     28           *
+     29           * Portions Copyright © 2016 STMicroelectronics International N.V. All rights reserved.
+     30           * Portions Copyright (c) 2013 ARM LIMITED
+     31           * All rights reserved.
+     32           * Redistribution and use in source and binary forms, with or without
+     33           * modification, are permitted provided that the following conditions are met:
+     34           *  - Redistributions of source code must retain the above copyright
+     35           *    notice, this list of conditions and the following disclaimer.
+     36           *  - Redistributions in binary form must reproduce the above copyright
+     37           *    notice, this list of conditions and the following disclaimer in the
+     38           *    documentation and/or other materials provided with the distribution.
+     39           *  - Neither the name of ARM  nor the names of its contributors may be used
+     40           *    to endorse or promote products derived from this software without
+     41           *    specific prior written permission.
+     42           *
+     43           * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     44           * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     45           * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     46           * ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+     47           * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     48           * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     49           * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     50           * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     51           * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     52           * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     53           * POSSIBILITY OF SUCH DAMAGE.
+     54           *---------------------------------------------------------------------------*/
+     55          
+     56           /**
+     57            ******************************************************************************
+     58            * @file    cmsis_os.c
+     59            * @author  MCD Application Team
+     60            * @date    03-March-2017
+     61            * @brief   CMSIS-RTOS API implementation for FreeRTOS V9.0.0
+     62            ******************************************************************************
+     63            * @attention
+     64            *
+     65            * Redistribution and use in source and binary forms, with or without 
+     66            * modification, are permitted, provided that the following conditions are met:
+     67            *
+     68            * 1. Redistribution of source code must retain the above copyright notice, 
+     69            *    this list of conditions and the following disclaimer.
+     70            * 2. Redistributions in binary form must reproduce the above copyright notice,
+     71            *    this list of conditions and the following disclaimer in the documentation
+     72            *    and/or other materials provided with the distribution.
+     73            * 3. Neither the name of STMicroelectronics nor the names of other 
+     74            *    contributors to this software may be used to endorse or promote products 
+     75            *    derived from this software without specific written permission.
+     76            * 4. This software, including modifications and/or derivative works of this 
+     77            *    software, must execute solely and exclusively on microcontroller or
+     78            *    microprocessor devices manufactured by or for STMicroelectronics.
+     79            * 5. Redistribution and use of this software other than as permitted under 
+     80            *    this license is void and will automatically terminate your rights under 
+     81            *    this license. 
+     82            *
+     83            * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+     84            * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+     85            * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+     86            * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+     87            * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+     88            * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+     89            * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+     90            * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+     91            * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+     92            * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+     93            * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+     94            * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     95            *
+     96            ******************************************************************************
+     97            */ 
+     98          
+     99          #include <string.h>
+
+   \                                 In section .text, align 2
+   \   __intrinsic __nounwind __interwork __softfp void *memset(void *, int, size_t)
+   \                     memset:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x0010             MOVS     R0,R2
+   \   00000006   0x000A             MOVS     R2,R1
+   \   00000008   0x0001             MOVS     R1,R0
+   \   0000000A   0x0020             MOVS     R0,R4
+   \   0000000C   0x.... 0x....      BL       __aeabi_memset
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0xBD10             POP      {R4,PC}          ;; return
+    100          #include "cmsis_os.h"
+
+  /**
+    ^
+"D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_adc.h",1  Warning[Pa050]: 
+          non-native end of line sequence detected (this diagnostic is only
+          issued once)
+    101          
+    102          /*
+    103           * ARM Compiler 4/5
+    104           */
+    105          #if   defined ( __CC_ARM )
+    106          
+    107            #define __ASM            __asm                                      
+    108            #define __INLINE         __inline                                     
+    109            #define __STATIC_INLINE  static __inline
+    110            #include "cmsis_armcc.h"
+    111          
+    112          /*
+    113           * GNU Compiler
+    114           */
+    115          #elif defined ( __GNUC__ )
+    116          
+    117            #define __ASM            __asm                                      /*!< asm keyword for GNU Compiler          */
+    118            #define __INLINE         inline                                     /*!< inline keyword for GNU Compiler       */
+    119            #define __STATIC_INLINE  static inline
+    120          
+    121          
+    122            #include "cmsis_gcc.h"
+    123          
+    124          
+    125          /*
+    126           * IAR Compiler
+    127           */
+    128          #elif defined ( __ICCARM__ )
+    129          
+    130            #ifndef   __ASM
+    131              #define __ASM                     __asm
+    132            #endif
+    133            #ifndef   __INLINE
+    134              #define __INLINE                  inline
+    135            #endif
+    136            #ifndef   __STATIC_INLINE
+    137              #define __STATIC_INLINE           static inline
+    138            #endif
+    139          
+    140            #include <cmsis_iar.h>
+    141          #endif
+    142          
+    143          extern void xPortSysTickHandler(void);
+    144          
+    145          /* Convert from CMSIS type osPriority to FreeRTOS priority number */
+
+   \                                 In section .text, align 2, keep-with-next
+    146          static unsigned portBASE_TYPE makeFreeRtosPriority (osPriority priority)
+    147          {
+    148            unsigned portBASE_TYPE fpriority = tskIDLE_PRIORITY;
+   \                     makeFreeRtosPriority:
+   \   00000000   0x2100             MOVS     R1,#+0
+    149            
+    150            if (priority != osPriorityError) {
+   \   00000002   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   00000004   0x2884             CMP      R0,#+132
+   \   00000006   0xD002             BEQ.N    ??makeFreeRtosPriority_0
+    151              fpriority += (priority - osPriorityIdle);
+   \   00000008   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   0000000A   0x1CC0             ADDS     R0,R0,#+3
+   \   0000000C   0x1841             ADDS     R1,R0,R1
+    152            }
+    153            
+    154            return fpriority;
+   \                     ??makeFreeRtosPriority_0:
+   \   0000000E   0x0008             MOVS     R0,R1
+   \   00000010   0x4770             BX       LR               ;; return
+    155          }
+    156          
+    157          #if (INCLUDE_uxTaskPriorityGet == 1)
+    158          /* Convert from FreeRTOS priority number to CMSIS type osPriority */
+
+   \                                 In section .text, align 2, keep-with-next
+    159          static osPriority makeCmsisPriority (unsigned portBASE_TYPE fpriority)
+    160          {
+    161            osPriority priority = osPriorityError;
+   \                     makeCmsisPriority:
+   \   00000000   0x2184             MOVS     R1,#+132
+    162            
+    163            if ((fpriority - tskIDLE_PRIORITY) <= (osPriorityRealtime - osPriorityIdle)) {
+   \   00000002   0x2807             CMP      R0,#+7
+   \   00000004   0xD200             BCS.N    ??makeCmsisPriority_0
+    164              priority = (osPriority)((int)osPriorityIdle + (int)(fpriority - tskIDLE_PRIORITY));
+   \   00000006   0x1EC1             SUBS     R1,R0,#+3
+    165            }
+    166            
+    167            return priority;
+   \                     ??makeCmsisPriority_0:
+   \   00000008   0x0008             MOVS     R0,R1
+   \   0000000A   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   0000000C   0x4770             BX       LR               ;; return
+    168          }
+    169          #endif
+    170          
+    171          
+    172          /* Determine whether we are in thread mode or handler mode. */
+
+   \                                 In section .text, align 2, keep-with-next
+    173          static int inHandlerMode (void)
+    174          {
+    175            return __get_IPSR() != 0;
+   \                     inHandlerMode:
+   \   00000000   0xF3EF 0x8005      MRS      R0,IPSR
+   \   00000004   0x2800             CMP      R0,#+0
+   \   00000006   0xD001             BEQ.N    ??inHandlerMode_0
+   \   00000008   0x2001             MOVS     R0,#+1
+   \   0000000A   0xE000             B.N      ??inHandlerMode_1
+   \                     ??inHandlerMode_0:
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \                     ??inHandlerMode_1:
+   \   0000000E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000010   0x4770             BX       LR               ;; return
+    176          }
+    177          
+    178          /*********************** Kernel Control Functions *****************************/
+    179          /**
+    180          * @brief  Initialize the RTOS Kernel for creating objects.
+    181          * @retval status code that indicates the execution status of the function.
+    182          * @note   MUST REMAIN UNCHANGED: \b osKernelInitialize shall be consistent in every CMSIS-RTOS.
+    183          */
+    184          osStatus osKernelInitialize (void);
+    185          
+    186          /**
+    187          * @brief  Start the RTOS Kernel with executing the specified thread.
+    188          * @param  thread_def    thread definition referenced with \ref osThread.
+    189          * @param  argument      pointer that is passed to the thread function as start argument.
+    190          * @retval status code that indicates the execution status of the function
+    191          * @note   MUST REMAIN UNCHANGED: \b osKernelStart shall be consistent in every CMSIS-RTOS.
+    192          */
+
+   \                                 In section .text, align 2, keep-with-next
+    193          osStatus osKernelStart (void)
+    194          {
+   \                     osKernelStart:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    195            vTaskStartScheduler();
+   \   00000002   0x.... 0x....      BL       vTaskStartScheduler
+    196            
+    197            return osOK;
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0xBD02             POP      {R1,PC}          ;; return
+    198          }
+    199          
+    200          /**
+    201          * @brief  Check if the RTOS kernel is already started
+    202          * @param  None
+    203          * @retval (0) RTOS is not started
+    204          *         (1) RTOS is started
+    205          *         (-1) if this feature is disabled in FreeRTOSConfig.h 
+    206          * @note  MUST REMAIN UNCHANGED: \b osKernelRunning shall be consistent in every CMSIS-RTOS.
+    207          */
+
+   \                                 In section .text, align 2, keep-with-next
+    208          int32_t osKernelRunning(void)
+    209          {
+   \                     osKernelRunning:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    210          #if ( ( INCLUDE_xTaskGetSchedulerState == 1 ) || ( configUSE_TIMERS == 1 ) )
+    211            if (xTaskGetSchedulerState() == taskSCHEDULER_NOT_STARTED)
+   \   00000002   0x.... 0x....      BL       xTaskGetSchedulerState
+   \   00000006   0x2801             CMP      R0,#+1
+   \   00000008   0xD101             BNE.N    ??osKernelRunning_0
+    212              return 0;
+   \   0000000A   0x2000             MOVS     R0,#+0
+   \   0000000C   0xE000             B.N      ??osKernelRunning_1
+    213            else
+    214              return 1;
+   \                     ??osKernelRunning_0:
+   \   0000000E   0x2001             MOVS     R0,#+1
+   \                     ??osKernelRunning_1:
+   \   00000010   0xBD02             POP      {R1,PC}          ;; return
+    215          #else
+    216          	return (-1);
+    217          #endif	
+    218          }
+    219          
+    220          #if (defined (osFeature_SysTick)  &&  (osFeature_SysTick != 0))     // System Timer available
+    221          /**
+    222          * @brief  Get the value of the Kernel SysTick timer
+    223          * @param  None
+    224          * @retval None
+    225          * @note   MUST REMAIN UNCHANGED: \b osKernelSysTick shall be consistent in every CMSIS-RTOS.
+    226          */
+
+   \                                 In section .text, align 2, keep-with-next
+    227          uint32_t osKernelSysTick(void)
+    228          {
+   \                     osKernelSysTick:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    229            if (inHandlerMode()) {
+   \   00000002   0x.... 0x....      BL       inHandlerMode
+   \   00000006   0x2800             CMP      R0,#+0
+   \   00000008   0xD002             BEQ.N    ??osKernelSysTick_0
+    230              return xTaskGetTickCountFromISR();
+   \   0000000A   0x.... 0x....      BL       xTaskGetTickCountFromISR
+   \   0000000E   0xE001             B.N      ??osKernelSysTick_1
+    231            }
+    232            else {
+    233              return xTaskGetTickCount();
+   \                     ??osKernelSysTick_0:
+   \   00000010   0x.... 0x....      BL       xTaskGetTickCount
+   \                     ??osKernelSysTick_1:
+   \   00000014   0xBD02             POP      {R1,PC}          ;; return
+    234            }
+    235          }
+    236          #endif    // System Timer available
+    237          /*********************** Thread Management *****************************/
+    238          /**
+    239          * @brief  Create a thread and add it to Active Threads and set it to state READY.
+    240          * @param  thread_def    thread definition referenced with \ref osThread.
+    241          * @param  argument      pointer that is passed to the thread function as start argument.
+    242          * @retval thread ID for reference by other functions or NULL in case of error.
+    243          * @note   MUST REMAIN UNCHANGED: \b osThreadCreate shall be consistent in every CMSIS-RTOS.
+    244          */
+
+   \                                 In section .text, align 2, keep-with-next
+    245          osThreadId osThreadCreate (const osThreadDef_t *thread_def, void *argument)
+    246          {
+   \                     osThreadCreate:
+   \   00000000   0xB53E             PUSH     {R1-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+    247            TaskHandle_t handle;
+    248            
+    249          #if( configSUPPORT_STATIC_ALLOCATION == 1 ) &&  ( configSUPPORT_DYNAMIC_ALLOCATION == 1 )
+    250            if((thread_def->buffer != NULL) && (thread_def->controlblock != NULL)) {
+    251              handle = xTaskCreateStatic((TaskFunction_t)thread_def->pthread,(const portCHAR *)thread_def->name,
+    252                        thread_def->stacksize, argument, makeFreeRtosPriority(thread_def->tpriority),
+    253                        thread_def->buffer, thread_def->controlblock);
+    254            }
+    255            else {
+    256              if (xTaskCreate((TaskFunction_t)thread_def->pthread,(const portCHAR *)thread_def->name,
+    257                        thread_def->stacksize, argument, makeFreeRtosPriority(thread_def->tpriority),
+    258                        &handle) != pdPASS)  {
+    259                return NULL;
+    260              } 
+    261            }
+    262          #elif( configSUPPORT_STATIC_ALLOCATION == 1 )
+    263          
+    264              handle = xTaskCreateStatic((TaskFunction_t)thread_def->pthread,(const portCHAR *)thread_def->name,
+    265                        thread_def->stacksize, argument, makeFreeRtosPriority(thread_def->tpriority),
+    266                        thread_def->buffer, thread_def->controlblock);
+   \   00000006   0xF9B4 0x0008      LDRSH    R0,[R4, #+8]
+   \   0000000A   0x.... 0x....      BL       makeFreeRtosPriority
+   \   0000000E   0x69A1             LDR      R1,[R4, #+24]
+   \   00000010   0x9102             STR      R1,[SP, #+8]
+   \   00000012   0x6961             LDR      R1,[R4, #+20]
+   \   00000014   0x9101             STR      R1,[SP, #+4]
+   \   00000016   0x9000             STR      R0,[SP, #+0]
+   \   00000018   0x002B             MOVS     R3,R5
+   \   0000001A   0x6922             LDR      R2,[R4, #+16]
+   \   0000001C   0x6821             LDR      R1,[R4, #+0]
+   \   0000001E   0x6860             LDR      R0,[R4, #+4]
+   \   00000020   0x.... 0x....      BL       xTaskCreateStatic
+    267          #else
+    268            if (xTaskCreate((TaskFunction_t)thread_def->pthread,(const portCHAR *)thread_def->name,
+    269                             thread_def->stacksize, argument, makeFreeRtosPriority(thread_def->tpriority),
+    270                             &handle) != pdPASS)  {
+    271              return NULL;
+    272            }     
+    273          #endif
+    274            
+    275            return handle;
+   \   00000024   0xBD3E             POP      {R1-R5,PC}       ;; return
+    276          }
+    277          
+    278          /**
+    279          * @brief  Return the thread ID of the current running thread.
+    280          * @retval thread ID for reference by other functions or NULL in case of error.
+    281          * @note   MUST REMAIN UNCHANGED: \b osThreadGetId shall be consistent in every CMSIS-RTOS.
+    282          */
+
+   \                                 In section .text, align 2, keep-with-next
+    283          osThreadId osThreadGetId (void)
+    284          {
+   \                     osThreadGetId:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    285          #if ( ( INCLUDE_xTaskGetCurrentTaskHandle == 1 ) || ( configUSE_MUTEXES == 1 ) )
+    286            return xTaskGetCurrentTaskHandle();
+   \   00000002   0x.... 0x....      BL       xTaskGetCurrentTaskHandle
+   \   00000006   0xBD02             POP      {R1,PC}          ;; return
+    287          #else
+    288          	return NULL;
+    289          #endif
+    290          }
+    291          
+    292          /**
+    293          * @brief  Terminate execution of a thread and remove it from Active Threads.
+    294          * @param   thread_id   thread ID obtained by \ref osThreadCreate or \ref osThreadGetId.
+    295          * @retval  status code that indicates the execution status of the function.
+    296          * @note   MUST REMAIN UNCHANGED: \b osThreadTerminate shall be consistent in every CMSIS-RTOS.
+    297          */
+
+   \                                 In section .text, align 2, keep-with-next
+    298          osStatus osThreadTerminate (osThreadId thread_id)
+    299          {
+    300          #if (INCLUDE_vTaskDelete == 1)
+    301            vTaskDelete(thread_id);
+    302            return osOK;
+    303          #else
+    304            return osErrorOS;
+   \                     osThreadTerminate:
+   \   00000000   0x20FF             MOVS     R0,#+255
+   \   00000002   0x4770             BX       LR               ;; return
+    305          #endif
+    306          }
+    307          
+    308          /**
+    309          * @brief  Pass control to next thread that is in state \b READY.
+    310          * @retval status code that indicates the execution status of the function.
+    311          * @note   MUST REMAIN UNCHANGED: \b osThreadYield shall be consistent in every CMSIS-RTOS.
+    312          */
+
+   \                                 In section .text, align 2, keep-with-next
+    313          osStatus osThreadYield (void)
+    314          {
+    315            taskYIELD();
+   \                     osThreadYield:
+   \   00000000   0x.... 0x....      LDR.W    R0,??DataTable10  ;; 0xe000ed04
+   \   00000004   0xF05F 0x5180      MOVS     R1,#+268435456
+   \   00000008   0x6001             STR      R1,[R0, #+0]
+   \   0000000A   0xF3BF 0x8F4F      DSB      
+   \   0000000E   0xF3BF 0x8F6F      ISB      
+    316            
+    317            return osOK;
+   \   00000012   0x2000             MOVS     R0,#+0
+   \   00000014   0x4770             BX       LR               ;; return
+    318          }
+    319          
+    320          /**
+    321          * @brief   Change priority of an active thread.
+    322          * @param   thread_id     thread ID obtained by \ref osThreadCreate or \ref osThreadGetId.
+    323          * @param   priority      new priority value for the thread function.
+    324          * @retval  status code that indicates the execution status of the function.
+    325          * @note   MUST REMAIN UNCHANGED: \b osThreadSetPriority shall be consistent in every CMSIS-RTOS.
+    326          */
+
+   \                                 In section .text, align 2, keep-with-next
+    327          osStatus osThreadSetPriority (osThreadId thread_id, osPriority priority)
+    328          {
+   \                     osThreadSetPriority:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x0008             MOVS     R0,R1
+    329          #if (INCLUDE_vTaskPrioritySet == 1)
+    330            vTaskPrioritySet(thread_id, makeFreeRtosPriority(priority));
+   \   00000006   0xB200             SXTH     R0,R0            ;; SignExt  R0,R0,#+16,#+16
+   \   00000008   0x.... 0x....      BL       makeFreeRtosPriority
+   \   0000000C   0x0001             MOVS     R1,R0
+   \   0000000E   0x0020             MOVS     R0,R4
+   \   00000010   0x.... 0x....      BL       vTaskPrioritySet
+    331            return osOK;
+   \   00000014   0x2000             MOVS     R0,#+0
+   \   00000016   0xBD10             POP      {R4,PC}          ;; return
+    332          #else
+    333            return osErrorOS;
+    334          #endif
+    335          }
+    336          
+    337          /**
+    338          * @brief   Get current priority of an active thread.
+    339          * @param   thread_id     thread ID obtained by \ref osThreadCreate or \ref osThreadGetId.
+    340          * @retval  current priority value of the thread function.
+    341          * @note   MUST REMAIN UNCHANGED: \b osThreadGetPriority shall be consistent in every CMSIS-RTOS.
+    342          */
+
+   \                                 In section .text, align 2, keep-with-next
+    343          osPriority osThreadGetPriority (osThreadId thread_id)
+    344          {
+   \                     osThreadGetPriority:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    345          #if (INCLUDE_uxTaskPriorityGet == 1)
+    346            if (inHandlerMode())
+   \   00000004   0x.... 0x....      BL       inHandlerMode
+   \   00000008   0x2800             CMP      R0,#+0
+   \   0000000A   0xD005             BEQ.N    ??osThreadGetPriority_0
+    347            {
+    348              return makeCmsisPriority(uxTaskPriorityGetFromISR(thread_id));  
+   \   0000000C   0x0020             MOVS     R0,R4
+   \   0000000E   0x.... 0x....      BL       uxTaskPriorityGetFromISR
+   \   00000012   0x.... 0x....      BL       makeCmsisPriority
+   \   00000016   0xE004             B.N      ??osThreadGetPriority_1
+    349            }
+    350            else
+    351            {  
+    352              return makeCmsisPriority(uxTaskPriorityGet(thread_id));
+   \                     ??osThreadGetPriority_0:
+   \   00000018   0x0020             MOVS     R0,R4
+   \   0000001A   0x.... 0x....      BL       uxTaskPriorityGet
+   \   0000001E   0x.... 0x....      BL       makeCmsisPriority
+   \                     ??osThreadGetPriority_1:
+   \   00000022   0xBD10             POP      {R4,PC}          ;; return
+    353            }
+    354          #else
+    355            return osPriorityError;
+    356          #endif
+    357          }
+    358          
+    359          /*********************** Generic Wait Functions *******************************/
+    360          /**
+    361          * @brief   Wait for Timeout (Time Delay)
+    362          * @param   millisec      time delay value
+    363          * @retval  status code that indicates the execution status of the function.
+    364          */
+
+   \                                 In section .text, align 2, keep-with-next
+    365          osStatus osDelay (uint32_t millisec)
+    366          {
+   \                     osDelay:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    367          #if INCLUDE_vTaskDelay
+    368            TickType_t ticks = millisec / portTICK_PERIOD_MS;
+   \   00000002   0x2101             MOVS     R1,#+1
+   \   00000004   0xFBB0 0xF0F1      UDIV     R0,R0,R1
+    369            
+    370            vTaskDelay(ticks ? ticks : 1);          /* Minimum delay = 1 tick */
+   \   00000008   0x2800             CMP      R0,#+0
+   \   0000000A   0xD100             BNE.N    ??osDelay_0
+   \                     ??osDelay_1:
+   \   0000000C   0x2001             MOVS     R0,#+1
+   \                     ??osDelay_0:
+   \   0000000E   0x.... 0x....      BL       vTaskDelay
+    371            
+    372            return osOK;
+   \   00000012   0x2000             MOVS     R0,#+0
+   \   00000014   0xBD02             POP      {R1,PC}          ;; return
+    373          #else
+    374            (void) millisec;
+    375            
+    376            return osErrorResource;
+    377          #endif
+    378          }
+    379          
+    380          #if (defined (osFeature_Wait)  &&  (osFeature_Wait != 0)) /* Generic Wait available */
+    381          /**
+    382          * @brief  Wait for Signal, Message, Mail, or Timeout
+    383          * @param   millisec  timeout value or 0 in case of no time-out
+    384          * @retval  event that contains signal, message, or mail information or error code.
+    385          * @note   MUST REMAIN UNCHANGED: \b osWait shall be consistent in every CMSIS-RTOS.
+    386          */
+    387          osEvent osWait (uint32_t millisec);
+    388          
+    389          #endif  /* Generic Wait available */
+    390          
+    391          /***********************  Timer Management Functions ***************************/
+    392          /**
+    393          * @brief  Create a timer.
+    394          * @param  timer_def     timer object referenced with \ref osTimer.
+    395          * @param  type          osTimerOnce for one-shot or osTimerPeriodic for periodic behavior.
+    396          * @param  argument      argument to the timer call back function.
+    397          * @retval  timer ID for reference by other functions or NULL in case of error.
+    398          * @note   MUST REMAIN UNCHANGED: \b osTimerCreate shall be consistent in every CMSIS-RTOS.
+    399          */
+
+   \                                 In section .text, align 2, keep-with-next
+    400          osTimerId osTimerCreate (const osTimerDef_t *timer_def, os_timer_type type, void *argument)
+    401          {
+    402          #if (configUSE_TIMERS == 1)
+    403          
+    404          #if( ( configSUPPORT_STATIC_ALLOCATION == 1 ) && ( configSUPPORT_DYNAMIC_ALLOCATION == 1 ) ) 
+    405            if(timer_def->controlblock != NULL) {
+    406              return xTimerCreateStatic((const char *)"",
+    407                                1, // period should be filled when starting the Timer using osTimerStart
+    408                                (type == osTimerPeriodic) ? pdTRUE : pdFALSE,
+    409                                (void *) argument,
+    410                                (TaskFunction_t)timer_def->ptimer,
+    411                                (StaticTimer_t *)timer_def->controlblock);
+    412            }
+    413            else {
+    414              return xTimerCreate((const char *)"",
+    415                                1, // period should be filled when starting the Timer using osTimerStart
+    416                                (type == osTimerPeriodic) ? pdTRUE : pdFALSE,
+    417                                (void *) argument,
+    418                                (TaskFunction_t)timer_def->ptimer);
+    419           }
+    420          #elif( configSUPPORT_STATIC_ALLOCATION == 1 )
+    421            return xTimerCreateStatic((const char *)"",
+    422                                1, // period should be filled when starting the Timer using osTimerStart
+    423                                (type == osTimerPeriodic) ? pdTRUE : pdFALSE,
+    424                                (void *) argument,
+    425                                (TaskFunction_t)timer_def->ptimer,
+    426                                (StaticTimer_t *)timer_def->controlblock);  
+    427          #else
+    428            return xTimerCreate((const char *)"",
+    429                                1, // period should be filled when starting the Timer using osTimerStart
+    430                                (type == osTimerPeriodic) ? pdTRUE : pdFALSE,
+    431                                (void *) argument,
+    432                                (TaskFunction_t)timer_def->ptimer);
+    433          #endif
+    434          
+    435          #else 
+    436          	return NULL;
+   \                     osTimerCreate:
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+    437          #endif
+    438          }
+    439          
+    440          /**
+    441          * @brief  Start or restart a timer.
+    442          * @param  timer_id      timer ID obtained by \ref osTimerCreate.
+    443          * @param  millisec      time delay value of the timer.
+    444          * @retval  status code that indicates the execution status of the function
+    445          * @note   MUST REMAIN UNCHANGED: \b osTimerStart shall be consistent in every CMSIS-RTOS.
+    446          */
+
+   \                                 In section .text, align 2, keep-with-next
+    447          osStatus osTimerStart (osTimerId timer_id, uint32_t millisec)
+    448          {
+    449            osStatus result = osOK;
+   \                     osTimerStart:
+   \   00000000   0x2000             MOVS     R0,#+0
+    450          #if (configUSE_TIMERS == 1)  
+    451            portBASE_TYPE taskWoken = pdFALSE;
+    452            TickType_t ticks = millisec / portTICK_PERIOD_MS;
+    453          
+    454            if (ticks == 0)
+    455              ticks = 1;
+    456              
+    457            if (inHandlerMode()) 
+    458            {
+    459              if (xTimerChangePeriodFromISR(timer_id, ticks, &taskWoken) != pdPASS)
+    460              {
+    461                result = osErrorOS;
+    462              }
+    463              else
+    464              {
+    465                portEND_SWITCHING_ISR(taskWoken);     
+    466              }
+    467            }
+    468            else 
+    469            {
+    470              if (xTimerChangePeriod(timer_id, ticks, 0) != pdPASS)
+    471                result = osErrorOS;
+    472            }
+    473          
+    474          #else 
+    475            result = osErrorOS;
+   \   00000002   0x21FF             MOVS     R1,#+255
+   \   00000004   0x0008             MOVS     R0,R1
+    476          #endif
+    477            return result;
+   \   00000006   0x4770             BX       LR               ;; return
+    478          }
+    479          
+    480          /**
+    481          * @brief  Stop a timer.
+    482          * @param  timer_id      timer ID obtained by \ref osTimerCreate
+    483          * @retval  status code that indicates the execution status of the function.
+    484          * @note   MUST REMAIN UNCHANGED: \b osTimerStop shall be consistent in every CMSIS-RTOS.
+    485          */
+
+   \                                 In section .text, align 2, keep-with-next
+    486          osStatus osTimerStop (osTimerId timer_id)
+    487          {
+    488            osStatus result = osOK;
+   \                     osTimerStop:
+   \   00000000   0x2000             MOVS     R0,#+0
+    489          #if (configUSE_TIMERS == 1)  
+    490            portBASE_TYPE taskWoken = pdFALSE;
+    491          
+    492            if (inHandlerMode()) {
+    493              if (xTimerStopFromISR(timer_id, &taskWoken) != pdPASS) {
+    494                return osErrorOS;
+    495              }
+    496              portEND_SWITCHING_ISR(taskWoken);
+    497            }
+    498            else {
+    499              if (xTimerStop(timer_id, 0) != pdPASS) {
+    500                result = osErrorOS;
+    501              }
+    502            }
+    503          #else 
+    504            result = osErrorOS;
+   \   00000002   0x21FF             MOVS     R1,#+255
+   \   00000004   0x0008             MOVS     R0,R1
+    505          #endif 
+    506            return result;
+   \   00000006   0x4770             BX       LR               ;; return
+    507          }
+    508          
+    509          /**
+    510          * @brief  Delete a timer.
+    511          * @param  timer_id      timer ID obtained by \ref osTimerCreate
+    512          * @retval  status code that indicates the execution status of the function.
+    513          * @note   MUST REMAIN UNCHANGED: \b osTimerDelete shall be consistent in every CMSIS-RTOS.
+    514          */
+
+   \                                 In section .text, align 2, keep-with-next
+    515          osStatus osTimerDelete (osTimerId timer_id)
+    516          {
+    517          osStatus result = osOK;
+   \                     osTimerDelete:
+   \   00000000   0x2000             MOVS     R0,#+0
+    518          
+    519          #if (configUSE_TIMERS == 1)
+    520          
+    521             if (inHandlerMode()) {
+    522               return osErrorISR;
+    523            }
+    524            else { 
+    525              if ((xTimerDelete(timer_id, osWaitForever )) != pdPASS) {
+    526                result = osErrorOS;
+    527              }
+    528            } 
+    529              
+    530          #else 
+    531            result = osErrorOS;
+   \   00000002   0x21FF             MOVS     R1,#+255
+   \   00000004   0x0008             MOVS     R0,R1
+    532          #endif 
+    533           
+    534            return result;
+   \   00000006   0x4770             BX       LR               ;; return
+    535          }
+    536          
+    537          /***************************  Signal Management ********************************/
+    538          /**
+    539          * @brief  Set the specified Signal Flags of an active thread.
+    540          * @param  thread_id     thread ID obtained by \ref osThreadCreate or \ref osThreadGetId.
+    541          * @param  signals       specifies the signal flags of the thread that should be set.
+    542          * @retval previous signal flags of the specified thread or 0x80000000 in case of incorrect parameters.
+    543          * @note   MUST REMAIN UNCHANGED: \b osSignalSet shall be consistent in every CMSIS-RTOS.
+    544          */
+
+   \                                 In section .text, align 2, keep-with-next
+    545          int32_t osSignalSet (osThreadId thread_id, int32_t signal)
+    546          {
+   \                     osSignalSet:
+   \   00000000   0xB53E             PUSH     {R1-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+    547          #if( configUSE_TASK_NOTIFICATIONS == 1 )	
+    548            BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0x9002             STR      R0,[SP, #+8]
+    549            uint32_t ulPreviousNotificationValue = 0;
+   \   0000000A   0x2000             MOVS     R0,#+0
+   \   0000000C   0x9001             STR      R0,[SP, #+4]
+    550            
+    551            if (inHandlerMode())
+   \   0000000E   0x.... 0x....      BL       inHandlerMode
+   \   00000012   0x2800             CMP      R0,#+0
+   \   00000014   0xD01A             BEQ.N    ??osSignalSet_0
+    552            {
+    553              if(xTaskGenericNotifyFromISR( thread_id , (uint32_t)signal, eSetBits, &ulPreviousNotificationValue, &xHigherPriorityTaskWoken ) != pdPASS )
+   \   00000016   0xA802             ADD      R0,SP,#+8
+   \   00000018   0x9000             STR      R0,[SP, #+0]
+   \   0000001A   0xAB01             ADD      R3,SP,#+4
+   \   0000001C   0x2201             MOVS     R2,#+1
+   \   0000001E   0x0029             MOVS     R1,R5
+   \   00000020   0x0020             MOVS     R0,R4
+   \   00000022   0x.... 0x....      BL       xTaskGenericNotifyFromISR
+   \   00000026   0x2801             CMP      R0,#+1
+   \   00000028   0xD002             BEQ.N    ??osSignalSet_1
+    554                return 0x80000000;
+   \   0000002A   0xF05F 0x4000      MOVS     R0,#-2147483648
+   \   0000002E   0xE00C             B.N      ??osSignalSet_2
+    555              
+    556              portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
+   \                     ??osSignalSet_1:
+   \   00000030   0x9802             LDR      R0,[SP, #+8]
+   \   00000032   0x2800             CMP      R0,#+0
+   \   00000034   0xD008             BEQ.N    ??osSignalSet_3
+   \   00000036   0x.... 0x....      LDR.W    R0,??DataTable10  ;; 0xe000ed04
+   \   0000003A   0xF05F 0x5180      MOVS     R1,#+268435456
+   \   0000003E   0x6001             STR      R1,[R0, #+0]
+   \   00000040   0xF3BF 0x8F4F      DSB      
+   \   00000044   0xF3BF 0x8F6F      ISB      
+    557            }  
+    558            else if(xTaskGenericNotify( thread_id , (uint32_t)signal, eSetBits, &ulPreviousNotificationValue) != pdPASS )
+    559              return 0x80000000;
+    560            
+    561            return ulPreviousNotificationValue;
+   \                     ??osSignalSet_3:
+   \   00000048   0x9801             LDR      R0,[SP, #+4]
+   \                     ??osSignalSet_2:
+   \   0000004A   0xBD3E             POP      {R1-R5,PC}       ;; return
+   \                     ??osSignalSet_0:
+   \   0000004C   0xAB01             ADD      R3,SP,#+4
+   \   0000004E   0x2201             MOVS     R2,#+1
+   \   00000050   0x0029             MOVS     R1,R5
+   \   00000052   0x0020             MOVS     R0,R4
+   \   00000054   0x.... 0x....      BL       xTaskGenericNotify
+   \   00000058   0x2801             CMP      R0,#+1
+   \   0000005A   0xD0F5             BEQ.N    ??osSignalSet_3
+   \   0000005C   0xF05F 0x4000      MOVS     R0,#-2147483648
+   \   00000060   0xE7F3             B.N      ??osSignalSet_2
+    562          #else
+    563            (void) thread_id;
+    564            (void) signal;
+    565          
+    566            return 0x80000000; /* Task Notification not supported */ 	
+    567          #endif
+    568          }
+    569          
+    570          /**
+    571          * @brief  Clear the specified Signal Flags of an active thread.
+    572          * @param  thread_id  thread ID obtained by \ref osThreadCreate or \ref osThreadGetId.
+    573          * @param  signals    specifies the signal flags of the thread that shall be cleared.
+    574          * @retval  previous signal flags of the specified thread or 0x80000000 in case of incorrect parameters.
+    575          * @note   MUST REMAIN UNCHANGED: \b osSignalClear shall be consistent in every CMSIS-RTOS.
+    576          */
+    577          int32_t osSignalClear (osThreadId thread_id, int32_t signal);
+    578          
+    579          /**
+    580          * @brief  Wait for one or more Signal Flags to become signaled for the current \b RUNNING thread.
+    581          * @param  signals   wait until all specified signal flags set or 0 for any single signal flag.
+    582          * @param  millisec  timeout value or 0 in case of no time-out.
+    583          * @retval  event flag information or error code.
+    584          * @note   MUST REMAIN UNCHANGED: \b osSignalWait shall be consistent in every CMSIS-RTOS.
+    585          */
+
+   \                                 In section .text, align 2, keep-with-next
+    586          osEvent osSignalWait (int32_t signals, uint32_t millisec)
+    587          {
+   \                     osSignalWait:
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+   \   00000002   0xB084             SUB      SP,SP,#+16
+   \   00000004   0x0004             MOVS     R4,R0
+   \   00000006   0x000D             MOVS     R5,R1
+    588            osEvent ret;
+    589          
+    590          #if( configUSE_TASK_NOTIFICATIONS == 1 )
+    591          	
+    592            TickType_t ticks;
+    593          
+    594            ret.value.signals = 0;  
+   \   00000008   0x2000             MOVS     R0,#+0
+   \   0000000A   0x9001             STR      R0,[SP, #+4]
+    595            ticks = 0;
+   \   0000000C   0x2600             MOVS     R6,#+0
+    596            if (millisec == osWaitForever) {
+   \   0000000E   0xF112 0x0F01      CMN      R2,#+1
+   \   00000012   0xD102             BNE.N    ??osSignalWait_0
+    597              ticks = portMAX_DELAY;
+   \   00000014   0xF05F 0x36FF      MOVS     R6,#-1
+   \   00000018   0xE007             B.N      ??osSignalWait_1
+    598            }
+    599            else if (millisec != 0) {
+   \                     ??osSignalWait_0:
+   \   0000001A   0x2A00             CMP      R2,#+0
+   \   0000001C   0xD005             BEQ.N    ??osSignalWait_1
+    600              ticks = millisec / portTICK_PERIOD_MS;
+   \   0000001E   0x2001             MOVS     R0,#+1
+   \   00000020   0xFBB2 0xF6F0      UDIV     R6,R2,R0
+    601              if (ticks == 0) {
+   \   00000024   0x2E00             CMP      R6,#+0
+   \   00000026   0xD100             BNE.N    ??osSignalWait_1
+    602                ticks = 1;
+   \   00000028   0x2601             MOVS     R6,#+1
+    603              }
+    604            }  
+    605            
+    606            if (inHandlerMode())
+   \                     ??osSignalWait_1:
+   \   0000002A   0x.... 0x....      BL       inHandlerMode
+   \   0000002E   0x2800             CMP      R0,#+0
+   \   00000030   0xD002             BEQ.N    ??osSignalWait_2
+    607            {
+    608              ret.status = osErrorISR;  /*Not allowed in ISR*/
+   \   00000032   0x2082             MOVS     R0,#+130
+   \   00000034   0x9000             STR      R0,[SP, #+0]
+   \   00000036   0xE017             B.N      ??osSignalWait_3
+    609            }
+    610            else
+    611            {
+    612              if(xTaskNotifyWait( 0,(uint32_t) signals, (uint32_t *)&ret.value.signals, ticks) != pdTRUE)
+   \                     ??osSignalWait_2:
+   \   00000038   0x0033             MOVS     R3,R6
+   \   0000003A   0xAA01             ADD      R2,SP,#+4
+   \   0000003C   0x0029             MOVS     R1,R5
+   \   0000003E   0x2000             MOVS     R0,#+0
+   \   00000040   0x.... 0x....      BL       xTaskNotifyWait
+   \   00000044   0x2801             CMP      R0,#+1
+   \   00000046   0xD007             BEQ.N    ??osSignalWait_4
+    613              {
+    614                if(ticks == 0)  ret.status = osOK;
+   \   00000048   0x2E00             CMP      R6,#+0
+   \   0000004A   0xD102             BNE.N    ??osSignalWait_5
+   \   0000004C   0x2000             MOVS     R0,#+0
+   \   0000004E   0x9000             STR      R0,[SP, #+0]
+   \   00000050   0xE00A             B.N      ??osSignalWait_3
+    615                else  ret.status = osEventTimeout;
+   \                     ??osSignalWait_5:
+   \   00000052   0x2040             MOVS     R0,#+64
+   \   00000054   0x9000             STR      R0,[SP, #+0]
+   \   00000056   0xE007             B.N      ??osSignalWait_3
+    616              }
+    617              else if(ret.value.signals < 0)
+   \                     ??osSignalWait_4:
+   \   00000058   0x9801             LDR      R0,[SP, #+4]
+   \   0000005A   0x2800             CMP      R0,#+0
+   \   0000005C   0xD502             BPL.N    ??osSignalWait_6
+    618              {
+    619                ret.status =  osErrorValue;     
+   \   0000005E   0x2086             MOVS     R0,#+134
+   \   00000060   0x9000             STR      R0,[SP, #+0]
+   \   00000062   0xE001             B.N      ??osSignalWait_3
+    620              }
+    621              else  ret.status =  osEventSignal;
+   \                     ??osSignalWait_6:
+   \   00000064   0x2008             MOVS     R0,#+8
+   \   00000066   0x9000             STR      R0,[SP, #+0]
+    622            }
+    623          #else
+    624            (void) signals;
+    625            (void) millisec;
+    626          	
+    627            ret.status =  osErrorOS;	/* Task Notification not supported */
+    628          #endif
+    629            
+    630            return ret;
+   \                     ??osSignalWait_3:
+   \   00000068   0xA800             ADD      R0,SP,#+0
+   \   0000006A   0xC80E             LDM      R0!,{R1-R3}
+   \   0000006C   0xC40E             STM      R4!,{R1-R3}
+   \   0000006E   0x380C             SUBS     R0,R0,#+12
+   \   00000070   0x3C0C             SUBS     R4,R4,#+12
+   \   00000072   0xB004             ADD      SP,SP,#+16
+   \   00000074   0xBD70             POP      {R4-R6,PC}       ;; return
+    631          }
+    632          
+    633          /****************************  Mutex Management ********************************/
+    634          /**
+    635          * @brief  Create and Initialize a Mutex object
+    636          * @param  mutex_def     mutex definition referenced with \ref osMutex.
+    637          * @retval  mutex ID for reference by other functions or NULL in case of error.
+    638          * @note   MUST REMAIN UNCHANGED: \b osMutexCreate shall be consistent in every CMSIS-RTOS.
+    639          */
+
+   \                                 In section .text, align 2, keep-with-next
+    640          osMutexId osMutexCreate (const osMutexDef_t *mutex_def)
+    641          {
+   \                     osMutexCreate:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    642          #if ( configUSE_MUTEXES == 1)
+    643          
+    644          #if( configSUPPORT_STATIC_ALLOCATION == 1 ) && ( configSUPPORT_DYNAMIC_ALLOCATION == 1 )
+    645          
+    646            if (mutex_def->controlblock != NULL) {
+    647              return xSemaphoreCreateMutexStatic( mutex_def->controlblock );
+    648               }
+    649            else {
+    650              return xSemaphoreCreateMutex(); 
+    651            }
+    652          #elif ( configSUPPORT_STATIC_ALLOCATION == 1 )
+    653            return xSemaphoreCreateMutexStatic( mutex_def->controlblock );
+   \   00000002   0x6841             LDR      R1,[R0, #+4]
+   \   00000004   0x2001             MOVS     R0,#+1
+   \   00000006   0x.... 0x....      BL       xQueueCreateMutexStatic
+   \   0000000A   0xBD02             POP      {R1,PC}          ;; return
+    654          #else  
+    655              return xSemaphoreCreateMutex(); 
+    656          #endif
+    657          #else
+    658            return NULL;
+    659          #endif
+    660          }
+    661          
+    662          /**
+    663          * @brief Wait until a Mutex becomes available
+    664          * @param mutex_id      mutex ID obtained by \ref osMutexCreate.
+    665          * @param millisec      timeout value or 0 in case of no time-out.
+    666          * @retval  status code that indicates the execution status of the function.
+    667          * @note   MUST REMAIN UNCHANGED: \b osMutexWait shall be consistent in every CMSIS-RTOS.
+    668          */
+
+   \                                 In section .text, align 2, keep-with-next
+    669          osStatus osMutexWait (osMutexId mutex_id, uint32_t millisec)
+    670          {
+   \                     osMutexWait:
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    671            TickType_t ticks;
+    672            portBASE_TYPE taskWoken = pdFALSE;  
+   \   00000004   0x2000             MOVS     R0,#+0
+   \   00000006   0x9000             STR      R0,[SP, #+0]
+    673            
+    674            
+    675            if (mutex_id == NULL) {
+   \   00000008   0x2C00             CMP      R4,#+0
+   \   0000000A   0xD101             BNE.N    ??osMutexWait_0
+    676              return osErrorParameter;
+   \   0000000C   0x2080             MOVS     R0,#+128
+   \   0000000E   0xE028             B.N      ??osMutexWait_1
+    677            }
+    678            
+    679            ticks = 0;
+   \                     ??osMutexWait_0:
+   \   00000010   0x2500             MOVS     R5,#+0
+    680            if (millisec == osWaitForever) {
+   \   00000012   0xF111 0x0F01      CMN      R1,#+1
+   \   00000016   0xD102             BNE.N    ??osMutexWait_2
+    681              ticks = portMAX_DELAY;
+   \   00000018   0xF05F 0x35FF      MOVS     R5,#-1
+   \   0000001C   0xE007             B.N      ??osMutexWait_3
+    682            }
+    683            else if (millisec != 0) {
+   \                     ??osMutexWait_2:
+   \   0000001E   0x2900             CMP      R1,#+0
+   \   00000020   0xD005             BEQ.N    ??osMutexWait_3
+    684              ticks = millisec / portTICK_PERIOD_MS;
+   \   00000022   0x2001             MOVS     R0,#+1
+   \   00000024   0xFBB1 0xF5F0      UDIV     R5,R1,R0
+    685              if (ticks == 0) {
+   \   00000028   0x2D00             CMP      R5,#+0
+   \   0000002A   0xD100             BNE.N    ??osMutexWait_3
+    686                ticks = 1;
+   \   0000002C   0x2501             MOVS     R5,#+1
+    687              }
+    688            }
+    689            
+    690            if (inHandlerMode()) {
+   \                     ??osMutexWait_3:
+   \   0000002E   0x.... 0x....      BL       inHandlerMode
+   \   00000032   0x2800             CMP      R0,#+0
+   \   00000034   0xD016             BEQ.N    ??osMutexWait_4
+    691              if (xSemaphoreTakeFromISR(mutex_id, &taskWoken) != pdTRUE) {
+   \   00000036   0xAA00             ADD      R2,SP,#+0
+   \   00000038   0x2100             MOVS     R1,#+0
+   \   0000003A   0x0020             MOVS     R0,R4
+   \   0000003C   0x.... 0x....      BL       xQueueReceiveFromISR
+   \   00000040   0x2801             CMP      R0,#+1
+   \   00000042   0xD001             BEQ.N    ??osMutexWait_5
+    692                return osErrorOS;
+   \   00000044   0x20FF             MOVS     R0,#+255
+   \   00000046   0xE00C             B.N      ??osMutexWait_1
+    693              }
+    694          	portEND_SWITCHING_ISR(taskWoken);
+   \                     ??osMutexWait_5:
+   \   00000048   0x9800             LDR      R0,[SP, #+0]
+   \   0000004A   0x2800             CMP      R0,#+0
+   \   0000004C   0xD008             BEQ.N    ??osMutexWait_6
+   \   0000004E   0x.... 0x....      LDR.W    R0,??DataTable10  ;; 0xe000ed04
+   \   00000052   0xF05F 0x5180      MOVS     R1,#+268435456
+   \   00000056   0x6001             STR      R1,[R0, #+0]
+   \   00000058   0xF3BF 0x8F4F      DSB      
+   \   0000005C   0xF3BF 0x8F6F      ISB      
+    695            } 
+    696            else if (xSemaphoreTake(mutex_id, ticks) != pdTRUE) {
+    697              return osErrorOS;
+    698            }
+    699            
+    700            return osOK;
+   \                     ??osMutexWait_6:
+   \   00000060   0x2000             MOVS     R0,#+0
+   \                     ??osMutexWait_1:
+   \   00000062   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+   \                     ??osMutexWait_4:
+   \   00000064   0x2300             MOVS     R3,#+0
+   \   00000066   0x002A             MOVS     R2,R5
+   \   00000068   0x2100             MOVS     R1,#+0
+   \   0000006A   0x0020             MOVS     R0,R4
+   \   0000006C   0x.... 0x....      BL       xQueueGenericReceive
+   \   00000070   0x2801             CMP      R0,#+1
+   \   00000072   0xD0F5             BEQ.N    ??osMutexWait_6
+   \   00000074   0x20FF             MOVS     R0,#+255
+   \   00000076   0xE7F4             B.N      ??osMutexWait_1
+    701          }
+    702          
+    703          /**
+    704          * @brief Release a Mutex that was obtained by \ref osMutexWait
+    705          * @param mutex_id      mutex ID obtained by \ref osMutexCreate.
+    706          * @retval  status code that indicates the execution status of the function.
+    707          * @note   MUST REMAIN UNCHANGED: \b osMutexRelease shall be consistent in every CMSIS-RTOS.
+    708          */
+
+   \                                 In section .text, align 2, keep-with-next
+    709          osStatus osMutexRelease (osMutexId mutex_id)
+    710          {
+   \                     osMutexRelease:
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    711            osStatus result = osOK;
+   \   00000004   0x2500             MOVS     R5,#+0
+    712            portBASE_TYPE taskWoken = pdFALSE;
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0x9000             STR      R0,[SP, #+0]
+    713            
+    714            if (inHandlerMode()) {
+   \   0000000A   0x.... 0x....      BL       inHandlerMode
+   \   0000000E   0x2800             CMP      R0,#+0
+   \   00000010   0xD014             BEQ.N    ??osMutexRelease_0
+    715              if (xSemaphoreGiveFromISR(mutex_id, &taskWoken) != pdTRUE) {
+   \   00000012   0xA900             ADD      R1,SP,#+0
+   \   00000014   0x0020             MOVS     R0,R4
+   \   00000016   0x.... 0x....      BL       xQueueGiveFromISR
+   \   0000001A   0x2801             CMP      R0,#+1
+   \   0000001C   0xD001             BEQ.N    ??osMutexRelease_1
+    716                return osErrorOS;
+   \   0000001E   0x20FF             MOVS     R0,#+255
+   \   00000020   0xE016             B.N      ??osMutexRelease_2
+    717              }
+    718              portEND_SWITCHING_ISR(taskWoken);
+   \                     ??osMutexRelease_1:
+   \   00000022   0x9800             LDR      R0,[SP, #+0]
+   \   00000024   0x2800             CMP      R0,#+0
+   \   00000026   0xD012             BEQ.N    ??osMutexRelease_3
+   \   00000028   0x.... 0x....      LDR.W    R0,??DataTable10  ;; 0xe000ed04
+   \   0000002C   0xF05F 0x5180      MOVS     R1,#+268435456
+   \   00000030   0x6001             STR      R1,[R0, #+0]
+   \   00000032   0xF3BF 0x8F4F      DSB      
+   \   00000036   0xF3BF 0x8F6F      ISB      
+   \   0000003A   0xE008             B.N      ??osMutexRelease_3
+    719            }
+    720            else if (xSemaphoreGive(mutex_id) != pdTRUE) 
+   \                     ??osMutexRelease_0:
+   \   0000003C   0x2300             MOVS     R3,#+0
+   \   0000003E   0x2200             MOVS     R2,#+0
+   \   00000040   0x2100             MOVS     R1,#+0
+   \   00000042   0x0020             MOVS     R0,R4
+   \   00000044   0x.... 0x....      BL       xQueueGenericSend
+   \   00000048   0x2801             CMP      R0,#+1
+   \   0000004A   0xD000             BEQ.N    ??osMutexRelease_3
+    721            {
+    722              result = osErrorOS;
+   \   0000004C   0x25FF             MOVS     R5,#+255
+    723            }
+    724            return result;
+   \                     ??osMutexRelease_3:
+   \   0000004E   0x0028             MOVS     R0,R5
+   \                     ??osMutexRelease_2:
+   \   00000050   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+    725          }
+    726          
+    727          /**
+    728          * @brief Delete a Mutex
+    729          * @param mutex_id  mutex ID obtained by \ref osMutexCreate.
+    730          * @retval  status code that indicates the execution status of the function.
+    731          * @note   MUST REMAIN UNCHANGED: \b osMutexDelete shall be consistent in every CMSIS-RTOS.
+    732          */
+
+   \                                 In section .text, align 2, keep-with-next
+    733          osStatus osMutexDelete (osMutexId mutex_id)
+    734          {
+   \                     osMutexDelete:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    735            if (inHandlerMode()) {
+   \   00000004   0x.... 0x....      BL       inHandlerMode
+   \   00000008   0x2800             CMP      R0,#+0
+   \   0000000A   0xD001             BEQ.N    ??osMutexDelete_0
+    736              return osErrorISR;
+   \   0000000C   0x2082             MOVS     R0,#+130
+   \   0000000E   0xE003             B.N      ??osMutexDelete_1
+    737            }
+    738          
+    739            vQueueDelete(mutex_id);
+   \                     ??osMutexDelete_0:
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0x.... 0x....      BL       vQueueDelete
+    740          
+    741            return osOK;
+   \   00000016   0x2000             MOVS     R0,#+0
+   \                     ??osMutexDelete_1:
+   \   00000018   0xBD10             POP      {R4,PC}          ;; return
+    742          }
+    743          
+    744          /********************  Semaphore Management Functions **************************/
+    745          
+    746          #if (defined (osFeature_Semaphore)  &&  (osFeature_Semaphore != 0))
+    747          
+    748          /**
+    749          * @brief Create and Initialize a Semaphore object used for managing resources
+    750          * @param semaphore_def semaphore definition referenced with \ref osSemaphore.
+    751          * @param count         number of available resources.
+    752          * @retval  semaphore ID for reference by other functions or NULL in case of error.
+    753          * @note   MUST REMAIN UNCHANGED: \b osSemaphoreCreate shall be consistent in every CMSIS-RTOS.
+    754          */
+
+   \                                 In section .text, align 2, keep-with-next
+    755          osSemaphoreId osSemaphoreCreate (const osSemaphoreDef_t *semaphore_def, int32_t count)
+    756          { 
+   \                     osSemaphoreCreate:
+   \   00000000   0xB580             PUSH     {R7,LR}
+    757          #if( configSUPPORT_STATIC_ALLOCATION == 1 ) && ( configSUPPORT_DYNAMIC_ALLOCATION == 1 )
+    758          
+    759            osSemaphoreId sema;
+    760            
+    761            if (semaphore_def->controlblock != NULL){
+    762              if (count == 1) {
+    763                return xSemaphoreCreateBinaryStatic( semaphore_def->controlblock );
+    764              }
+    765              else {
+    766          #if (configUSE_COUNTING_SEMAPHORES == 1 )
+    767                return xSemaphoreCreateCountingStatic( count, count, semaphore_def->controlblock );
+    768          #else
+    769                return NULL;
+    770          #endif
+    771              }
+    772            }
+    773            else {
+    774              if (count == 1) {
+    775                vSemaphoreCreateBinary(sema);
+    776                return sema;
+    777              }
+    778              else {
+    779          #if (configUSE_COUNTING_SEMAPHORES == 1 )	
+    780                return xSemaphoreCreateCounting(count, count);
+    781          #else
+    782                return NULL;
+    783          #endif    
+    784              }
+    785            }
+    786          #elif ( configSUPPORT_STATIC_ALLOCATION == 1 ) // configSUPPORT_DYNAMIC_ALLOCATION == 0
+    787            if(count == 1) {
+   \   00000002   0x2901             CMP      R1,#+1
+   \   00000004   0xD108             BNE.N    ??osSemaphoreCreate_0
+    788              return xSemaphoreCreateBinaryStatic( semaphore_def->controlblock );
+   \   00000006   0x2103             MOVS     R1,#+3
+   \   00000008   0x9100             STR      R1,[SP, #+0]
+   \   0000000A   0x6843             LDR      R3,[R0, #+4]
+   \   0000000C   0x2200             MOVS     R2,#+0
+   \   0000000E   0x2100             MOVS     R1,#+0
+   \   00000010   0x2001             MOVS     R0,#+1
+   \   00000012   0x.... 0x....      BL       xQueueGenericCreateStatic
+   \   00000016   0xE000             B.N      ??osSemaphoreCreate_1
+    789            }
+    790            else
+    791            {
+    792          #if (configUSE_COUNTING_SEMAPHORES == 1 )
+    793                return xSemaphoreCreateCountingStatic( count, count, semaphore_def->controlblock );
+    794          #else
+    795                return NULL;
+   \                     ??osSemaphoreCreate_0:
+   \   00000018   0x2000             MOVS     R0,#+0
+   \                     ??osSemaphoreCreate_1:
+   \   0000001A   0xBD02             POP      {R1,PC}          ;; return
+    796          #endif    
+    797            }
+    798          #else  // configSUPPORT_STATIC_ALLOCATION == 0  && configSUPPORT_DYNAMIC_ALLOCATION == 1
+    799            osSemaphoreId sema;
+    800           
+    801            if (count == 1) {
+    802              vSemaphoreCreateBinary(sema);
+    803              return sema;
+    804            }
+    805            else {
+    806          #if (configUSE_COUNTING_SEMAPHORES == 1 )	
+    807              return xSemaphoreCreateCounting(count, count);
+    808          #else
+    809              return NULL;
+    810          #endif
+    811            }
+    812          #endif
+    813          }
+    814          
+    815          /**
+    816          * @brief Wait until a Semaphore token becomes available
+    817          * @param  semaphore_id  semaphore object referenced with \ref osSemaphore.
+    818          * @param  millisec      timeout value or 0 in case of no time-out.
+    819          * @retval  number of available tokens, or -1 in case of incorrect parameters.
+    820          * @note   MUST REMAIN UNCHANGED: \b osSemaphoreWait shall be consistent in every CMSIS-RTOS.
+    821          */
+
+   \                                 In section .text, align 2, keep-with-next
+    822          int32_t osSemaphoreWait (osSemaphoreId semaphore_id, uint32_t millisec)
+    823          {
+   \                     osSemaphoreWait:
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    824            TickType_t ticks;
+    825            portBASE_TYPE taskWoken = pdFALSE;  
+   \   00000004   0x2000             MOVS     R0,#+0
+   \   00000006   0x9000             STR      R0,[SP, #+0]
+    826            
+    827            
+    828            if (semaphore_id == NULL) {
+   \   00000008   0x2C00             CMP      R4,#+0
+   \   0000000A   0xD101             BNE.N    ??osSemaphoreWait_0
+    829              return osErrorParameter;
+   \   0000000C   0x2080             MOVS     R0,#+128
+   \   0000000E   0xE028             B.N      ??osSemaphoreWait_1
+    830            }
+    831            
+    832            ticks = 0;
+   \                     ??osSemaphoreWait_0:
+   \   00000010   0x2500             MOVS     R5,#+0
+    833            if (millisec == osWaitForever) {
+   \   00000012   0xF111 0x0F01      CMN      R1,#+1
+   \   00000016   0xD102             BNE.N    ??osSemaphoreWait_2
+    834              ticks = portMAX_DELAY;
+   \   00000018   0xF05F 0x35FF      MOVS     R5,#-1
+   \   0000001C   0xE007             B.N      ??osSemaphoreWait_3
+    835            }
+    836            else if (millisec != 0) {
+   \                     ??osSemaphoreWait_2:
+   \   0000001E   0x2900             CMP      R1,#+0
+   \   00000020   0xD005             BEQ.N    ??osSemaphoreWait_3
+    837              ticks = millisec / portTICK_PERIOD_MS;
+   \   00000022   0x2001             MOVS     R0,#+1
+   \   00000024   0xFBB1 0xF5F0      UDIV     R5,R1,R0
+    838              if (ticks == 0) {
+   \   00000028   0x2D00             CMP      R5,#+0
+   \   0000002A   0xD100             BNE.N    ??osSemaphoreWait_3
+    839                ticks = 1;
+   \   0000002C   0x2501             MOVS     R5,#+1
+    840              }
+    841            }
+    842            
+    843            if (inHandlerMode()) {
+   \                     ??osSemaphoreWait_3:
+   \   0000002E   0x.... 0x....      BL       inHandlerMode
+   \   00000032   0x2800             CMP      R0,#+0
+   \   00000034   0xD016             BEQ.N    ??osSemaphoreWait_4
+    844              if (xSemaphoreTakeFromISR(semaphore_id, &taskWoken) != pdTRUE) {
+   \   00000036   0xAA00             ADD      R2,SP,#+0
+   \   00000038   0x2100             MOVS     R1,#+0
+   \   0000003A   0x0020             MOVS     R0,R4
+   \   0000003C   0x.... 0x....      BL       xQueueReceiveFromISR
+   \   00000040   0x2801             CMP      R0,#+1
+   \   00000042   0xD001             BEQ.N    ??osSemaphoreWait_5
+    845                return osErrorOS;
+   \   00000044   0x20FF             MOVS     R0,#+255
+   \   00000046   0xE00C             B.N      ??osSemaphoreWait_1
+    846              }
+    847          	portEND_SWITCHING_ISR(taskWoken);
+   \                     ??osSemaphoreWait_5:
+   \   00000048   0x9800             LDR      R0,[SP, #+0]
+   \   0000004A   0x2800             CMP      R0,#+0
+   \   0000004C   0xD008             BEQ.N    ??osSemaphoreWait_6
+   \   0000004E   0x.... 0x....      LDR.W    R0,??DataTable10  ;; 0xe000ed04
+   \   00000052   0xF05F 0x5180      MOVS     R1,#+268435456
+   \   00000056   0x6001             STR      R1,[R0, #+0]
+   \   00000058   0xF3BF 0x8F4F      DSB      
+   \   0000005C   0xF3BF 0x8F6F      ISB      
+    848            }  
+    849            else if (xSemaphoreTake(semaphore_id, ticks) != pdTRUE) {
+    850              return osErrorOS;
+    851            }
+    852            
+    853            return osOK;
+   \                     ??osSemaphoreWait_6:
+   \   00000060   0x2000             MOVS     R0,#+0
+   \                     ??osSemaphoreWait_1:
+   \   00000062   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+   \                     ??osSemaphoreWait_4:
+   \   00000064   0x2300             MOVS     R3,#+0
+   \   00000066   0x002A             MOVS     R2,R5
+   \   00000068   0x2100             MOVS     R1,#+0
+   \   0000006A   0x0020             MOVS     R0,R4
+   \   0000006C   0x.... 0x....      BL       xQueueGenericReceive
+   \   00000070   0x2801             CMP      R0,#+1
+   \   00000072   0xD0F5             BEQ.N    ??osSemaphoreWait_6
+   \   00000074   0x20FF             MOVS     R0,#+255
+   \   00000076   0xE7F4             B.N      ??osSemaphoreWait_1
+    854          }
+    855          
+    856          /**
+    857          * @brief Release a Semaphore token
+    858          * @param  semaphore_id  semaphore object referenced with \ref osSemaphore.
+    859          * @retval  status code that indicates the execution status of the function.
+    860          * @note   MUST REMAIN UNCHANGED: \b osSemaphoreRelease shall be consistent in every CMSIS-RTOS.
+    861          */
+
+   \                                 In section .text, align 2, keep-with-next
+    862          osStatus osSemaphoreRelease (osSemaphoreId semaphore_id)
+    863          {
+   \                     osSemaphoreRelease:
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    864            osStatus result = osOK;
+   \   00000004   0x2500             MOVS     R5,#+0
+    865            portBASE_TYPE taskWoken = pdFALSE;
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0x9000             STR      R0,[SP, #+0]
+    866            
+    867            
+    868            if (inHandlerMode()) {
+   \   0000000A   0x.... 0x....      BL       inHandlerMode
+   \   0000000E   0x2800             CMP      R0,#+0
+   \   00000010   0xD014             BEQ.N    ??osSemaphoreRelease_0
+    869              if (xSemaphoreGiveFromISR(semaphore_id, &taskWoken) != pdTRUE) {
+   \   00000012   0xA900             ADD      R1,SP,#+0
+   \   00000014   0x0020             MOVS     R0,R4
+   \   00000016   0x.... 0x....      BL       xQueueGiveFromISR
+   \   0000001A   0x2801             CMP      R0,#+1
+   \   0000001C   0xD001             BEQ.N    ??osSemaphoreRelease_1
+    870                return osErrorOS;
+   \   0000001E   0x20FF             MOVS     R0,#+255
+   \   00000020   0xE016             B.N      ??osSemaphoreRelease_2
+    871              }
+    872              portEND_SWITCHING_ISR(taskWoken);
+   \                     ??osSemaphoreRelease_1:
+   \   00000022   0x9800             LDR      R0,[SP, #+0]
+   \   00000024   0x2800             CMP      R0,#+0
+   \   00000026   0xD012             BEQ.N    ??osSemaphoreRelease_3
+   \   00000028   0x.... 0x....      LDR.W    R0,??DataTable10  ;; 0xe000ed04
+   \   0000002C   0xF05F 0x5180      MOVS     R1,#+268435456
+   \   00000030   0x6001             STR      R1,[R0, #+0]
+   \   00000032   0xF3BF 0x8F4F      DSB      
+   \   00000036   0xF3BF 0x8F6F      ISB      
+   \   0000003A   0xE008             B.N      ??osSemaphoreRelease_3
+    873            }
+    874            else {
+    875              if (xSemaphoreGive(semaphore_id) != pdTRUE) {
+   \                     ??osSemaphoreRelease_0:
+   \   0000003C   0x2300             MOVS     R3,#+0
+   \   0000003E   0x2200             MOVS     R2,#+0
+   \   00000040   0x2100             MOVS     R1,#+0
+   \   00000042   0x0020             MOVS     R0,R4
+   \   00000044   0x.... 0x....      BL       xQueueGenericSend
+   \   00000048   0x2801             CMP      R0,#+1
+   \   0000004A   0xD000             BEQ.N    ??osSemaphoreRelease_3
+    876                result = osErrorOS;
+   \   0000004C   0x25FF             MOVS     R5,#+255
+    877              }
+    878            }
+    879            
+    880            return result;
+   \                     ??osSemaphoreRelease_3:
+   \   0000004E   0x0028             MOVS     R0,R5
+   \                     ??osSemaphoreRelease_2:
+   \   00000050   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+    881          }
+    882          
+    883          /**
+    884          * @brief Delete a Semaphore
+    885          * @param  semaphore_id  semaphore object referenced with \ref osSemaphore.
+    886          * @retval  status code that indicates the execution status of the function.
+    887          * @note   MUST REMAIN UNCHANGED: \b osSemaphoreDelete shall be consistent in every CMSIS-RTOS.
+    888          */
+
+   \                                 In section .text, align 2, keep-with-next
+    889          osStatus osSemaphoreDelete (osSemaphoreId semaphore_id)
+    890          {
+   \                     osSemaphoreDelete:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    891            if (inHandlerMode()) {
+   \   00000004   0x.... 0x....      BL       inHandlerMode
+   \   00000008   0x2800             CMP      R0,#+0
+   \   0000000A   0xD001             BEQ.N    ??osSemaphoreDelete_0
+    892              return osErrorISR;
+   \   0000000C   0x2082             MOVS     R0,#+130
+   \   0000000E   0xE003             B.N      ??osSemaphoreDelete_1
+    893            }
+    894          
+    895            vSemaphoreDelete(semaphore_id);
+   \                     ??osSemaphoreDelete_0:
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0x.... 0x....      BL       vQueueDelete
+    896          
+    897            return osOK; 
+   \   00000016   0x2000             MOVS     R0,#+0
+   \                     ??osSemaphoreDelete_1:
+   \   00000018   0xBD10             POP      {R4,PC}          ;; return
+    898          }
+    899          
+    900          #endif    /* Use Semaphores */
+    901          
+    902          /*******************   Memory Pool Management Functions  ***********************/
+    903          
+    904          #if (defined (osFeature_Pool)  &&  (osFeature_Pool != 0)) 
+    905          
+    906          //TODO
+    907          //This is a primitive and inefficient wrapper around the existing FreeRTOS memory management.
+    908          //A better implementation will have to modify heap_x.c!
+    909          
+    910          
+    911          typedef struct os_pool_cb {
+    912            void *pool;
+    913            uint8_t *markers;
+    914            uint32_t pool_sz;
+    915            uint32_t item_sz;
+    916            uint32_t currentIndex;
+    917          } os_pool_cb_t;
+    918          
+    919          
+    920          /**
+    921          * @brief Create and Initialize a memory pool
+    922          * @param  pool_def      memory pool definition referenced with \ref osPool.
+    923          * @retval  memory pool ID for reference by other functions or NULL in case of error.
+    924          * @note   MUST REMAIN UNCHANGED: \b osPoolCreate shall be consistent in every CMSIS-RTOS.
+    925          */
+
+   \                                 In section .text, align 2, keep-with-next
+    926          osPoolId osPoolCreate (const osPoolDef_t *pool_def)
+    927          {
+    928          #if (configSUPPORT_DYNAMIC_ALLOCATION == 1)
+    929            osPoolId thePool;
+    930            int itemSize = 4 * ((pool_def->item_sz + 3) / 4);
+    931            uint32_t i;
+    932            
+    933            /* First have to allocate memory for the pool control block. */
+    934           thePool = pvPortMalloc(sizeof(os_pool_cb_t));
+    935          
+    936            
+    937            if (thePool) {
+    938              thePool->pool_sz = pool_def->pool_sz;
+    939              thePool->item_sz = itemSize;
+    940              thePool->currentIndex = 0;
+    941              
+    942              /* Memory for markers */
+    943              thePool->markers = pvPortMalloc(pool_def->pool_sz);
+    944             
+    945              if (thePool->markers) {
+    946                /* Now allocate the pool itself. */
+    947               thePool->pool = pvPortMalloc(pool_def->pool_sz * itemSize);
+    948                
+    949                if (thePool->pool) {
+    950                  for (i = 0; i < pool_def->pool_sz; i++) {
+    951                    thePool->markers[i] = 0;
+    952                  }
+    953                }
+    954                else {
+    955                  vPortFree(thePool->markers);
+    956                  vPortFree(thePool);
+    957                  thePool = NULL;
+    958                }
+    959              }
+    960              else {
+    961                vPortFree(thePool);
+    962                thePool = NULL;
+    963              }
+    964            }
+    965          
+    966            return thePool;
+    967           
+    968          #else
+    969            return NULL;
+   \                     osPoolCreate:
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+    970          #endif
+    971          }
+    972          
+    973          /**
+    974          * @brief Allocate a memory block from a memory pool
+    975          * @param pool_id       memory pool ID obtain referenced with \ref osPoolCreate.
+    976          * @retval  address of the allocated memory block or NULL in case of no memory available.
+    977          * @note   MUST REMAIN UNCHANGED: \b osPoolAlloc shall be consistent in every CMSIS-RTOS.
+    978          */
+
+   \                                 In section .text, align 2, keep-with-next
+    979          void *osPoolAlloc (osPoolId pool_id)
+    980          {
+   \                     osPoolAlloc:
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    981            int dummy = 0;
+   \   00000004   0x2600             MOVS     R6,#+0
+    982            void *p = NULL;
+   \   00000006   0x2500             MOVS     R5,#+0
+    983            uint32_t i;
+    984            uint32_t index;
+    985            
+    986            if (inHandlerMode()) {
+   \   00000008   0x.... 0x....      BL       inHandlerMode
+   \   0000000C   0x2800             CMP      R0,#+0
+   \   0000000E   0xD009             BEQ.N    ??osPoolAlloc_0
+    987              dummy = portSET_INTERRUPT_MASK_FROM_ISR();
+   \   00000010   0xF3EF 0x8611      MRS      R6,BASEPRI
+   \   00000014   0x2050             MOVS     R0,#+80
+   \   00000016   0xF380 0x8811      MSR      BASEPRI,R0
+   \   0000001A   0xF3BF 0x8F4F      DSB      
+   \   0000001E   0xF3BF 0x8F6F      ISB      
+   \   00000022   0xE001             B.N      ??osPoolAlloc_1
+    988            }
+    989            else {
+    990              vPortEnterCritical();
+   \                     ??osPoolAlloc_0:
+   \   00000024   0x.... 0x....      BL       vPortEnterCritical
+    991            }
+    992            
+    993            for (i = 0; i < pool_id->pool_sz; i++) {
+   \                     ??osPoolAlloc_1:
+   \   00000028   0x2000             MOVS     R0,#+0
+   \   0000002A   0xE000             B.N      ??osPoolAlloc_2
+   \                     ??osPoolAlloc_3:
+   \   0000002C   0x1C40             ADDS     R0,R0,#+1
+   \                     ??osPoolAlloc_2:
+   \   0000002E   0x68A1             LDR      R1,[R4, #+8]
+   \   00000030   0x4288             CMP      R0,R1
+   \   00000032   0xD211             BCS.N    ??osPoolAlloc_4
+    994              index = pool_id->currentIndex + i;
+   \   00000034   0x6921             LDR      R1,[R4, #+16]
+   \   00000036   0x1841             ADDS     R1,R0,R1
+    995              if (index >= pool_id->pool_sz) {
+   \   00000038   0x68A2             LDR      R2,[R4, #+8]
+   \   0000003A   0x4291             CMP      R1,R2
+   \   0000003C   0xD300             BCC.N    ??osPoolAlloc_5
+    996                index = 0;
+   \   0000003E   0x2100             MOVS     R1,#+0
+    997              }
+    998              
+    999              if (pool_id->markers[index] == 0) {
+   \                     ??osPoolAlloc_5:
+   \   00000040   0x6862             LDR      R2,[R4, #+4]
+   \   00000042   0x5C8A             LDRB     R2,[R1, R2]
+   \   00000044   0x2A00             CMP      R2,#+0
+   \   00000046   0xD1F1             BNE.N    ??osPoolAlloc_3
+   1000                pool_id->markers[index] = 1;
+   \   00000048   0x6860             LDR      R0,[R4, #+4]
+   \   0000004A   0x2201             MOVS     R2,#+1
+   \   0000004C   0x540A             STRB     R2,[R1, R0]
+   1001                p = (void *)((uint32_t)(pool_id->pool) + (index * pool_id->item_sz));
+   \   0000004E   0x6820             LDR      R0,[R4, #+0]
+   \   00000050   0x68E2             LDR      R2,[R4, #+12]
+   \   00000052   0xFB02 0x0501      MLA      R5,R2,R1,R0
+   1002                pool_id->currentIndex = index;
+   \   00000056   0x6121             STR      R1,[R4, #+16]
+   1003                break;
+   1004              }
+   1005            }
+   1006            
+   1007            if (inHandlerMode()) {
+   \                     ??osPoolAlloc_4:
+   \   00000058   0x.... 0x....      BL       inHandlerMode
+   \   0000005C   0x2800             CMP      R0,#+0
+   \   0000005E   0xD002             BEQ.N    ??osPoolAlloc_6
+   1008              portCLEAR_INTERRUPT_MASK_FROM_ISR(dummy);
+   \   00000060   0xF386 0x8811      MSR      BASEPRI,R6
+   \   00000064   0xE001             B.N      ??osPoolAlloc_7
+   1009            }
+   1010            else {
+   1011              vPortExitCritical();
+   \                     ??osPoolAlloc_6:
+   \   00000066   0x.... 0x....      BL       vPortExitCritical
+   1012            }
+   1013            
+   1014            return p;
+   \                     ??osPoolAlloc_7:
+   \   0000006A   0x0028             MOVS     R0,R5
+   \   0000006C   0xBD70             POP      {R4-R6,PC}       ;; return
+   1015          }
+   1016          
+   1017          /**
+   1018          * @brief Allocate a memory block from a memory pool and set memory block to zero
+   1019          * @param  pool_id       memory pool ID obtain referenced with \ref osPoolCreate.
+   1020          * @retval  address of the allocated memory block or NULL in case of no memory available.
+   1021          * @note   MUST REMAIN UNCHANGED: \b osPoolCAlloc shall be consistent in every CMSIS-RTOS.
+   1022          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1023          void *osPoolCAlloc (osPoolId pool_id)
+   1024          {
+   \                     osPoolCAlloc:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   1025            void *p = osPoolAlloc(pool_id);
+   \   00000002   0x.... 0x....      BL       osPoolAlloc
+   \   00000006   0x0004             MOVS     R4,R0
+   1026            
+   1027            if (p != NULL)
+   \   00000008   0x2C00             CMP      R4,#+0
+   \   0000000A   0xD004             BEQ.N    ??osPoolCAlloc_0
+   1028            {
+   1029              memset(p, 0, sizeof(pool_id->pool_sz));
+   \   0000000C   0x2204             MOVS     R2,#+4
+   \   0000000E   0x2100             MOVS     R1,#+0
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0x.... 0x....      BL       memset
+   1030            }
+   1031            
+   1032            return p;
+   \                     ??osPoolCAlloc_0:
+   \   00000016   0x0020             MOVS     R0,R4
+   \   00000018   0xBD10             POP      {R4,PC}          ;; return
+   1033          }
+   1034          
+   1035          /**
+   1036          * @brief Return an allocated memory block back to a specific memory pool
+   1037          * @param  pool_id       memory pool ID obtain referenced with \ref osPoolCreate.
+   1038          * @param  block         address of the allocated memory block that is returned to the memory pool.
+   1039          * @retval  status code that indicates the execution status of the function.
+   1040          * @note   MUST REMAIN UNCHANGED: \b osPoolFree shall be consistent in every CMSIS-RTOS.
+   1041          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1042          osStatus osPoolFree (osPoolId pool_id, void *block)
+   1043          {
+   1044            uint32_t index;
+   1045            
+   1046            if (pool_id == NULL) {
+   \                     osPoolFree:
+   \   00000000   0x2800             CMP      R0,#+0
+   \   00000002   0xD101             BNE.N    ??osPoolFree_0
+   1047              return osErrorParameter;
+   \   00000004   0x2080             MOVS     R0,#+128
+   \   00000006   0xE01F             B.N      ??osPoolFree_1
+   1048            }
+   1049            
+   1050            if (block == NULL) {
+   \                     ??osPoolFree_0:
+   \   00000008   0x2900             CMP      R1,#+0
+   \   0000000A   0xD101             BNE.N    ??osPoolFree_2
+   1051              return osErrorParameter;
+   \   0000000C   0x2080             MOVS     R0,#+128
+   \   0000000E   0xE01B             B.N      ??osPoolFree_1
+   1052            }
+   1053            
+   1054            if (block < pool_id->pool) {
+   \                     ??osPoolFree_2:
+   \   00000010   0x6802             LDR      R2,[R0, #+0]
+   \   00000012   0x4291             CMP      R1,R2
+   \   00000014   0xD201             BCS.N    ??osPoolFree_3
+   1055              return osErrorParameter;
+   \   00000016   0x2080             MOVS     R0,#+128
+   \   00000018   0xE016             B.N      ??osPoolFree_1
+   1056            }
+   1057            
+   1058            index = (uint32_t)block - (uint32_t)(pool_id->pool);
+   \                     ??osPoolFree_3:
+   \   0000001A   0x6802             LDR      R2,[R0, #+0]
+   \   0000001C   0x1A89             SUBS     R1,R1,R2
+   1059            if (index % pool_id->item_sz) {
+   \   0000001E   0x68C2             LDR      R2,[R0, #+12]
+   \   00000020   0xFBB1 0xF3F2      UDIV     R3,R1,R2
+   \   00000024   0xFB02 0x1213      MLS      R2,R2,R3,R1
+   \   00000028   0x2A00             CMP      R2,#+0
+   \   0000002A   0xD001             BEQ.N    ??osPoolFree_4
+   1060              return osErrorParameter;
+   \   0000002C   0x2080             MOVS     R0,#+128
+   \   0000002E   0xE00B             B.N      ??osPoolFree_1
+   1061            }
+   1062            index = index / pool_id->item_sz;
+   \                     ??osPoolFree_4:
+   \   00000030   0x68C2             LDR      R2,[R0, #+12]
+   \   00000032   0xFBB1 0xF1F2      UDIV     R1,R1,R2
+   1063            if (index >= pool_id->pool_sz) {
+   \   00000036   0x6882             LDR      R2,[R0, #+8]
+   \   00000038   0x4291             CMP      R1,R2
+   \   0000003A   0xD301             BCC.N    ??osPoolFree_5
+   1064              return osErrorParameter;
+   \   0000003C   0x2080             MOVS     R0,#+128
+   \   0000003E   0xE003             B.N      ??osPoolFree_1
+   1065            }
+   1066            
+   1067            pool_id->markers[index] = 0;
+   \                     ??osPoolFree_5:
+   \   00000040   0x6840             LDR      R0,[R0, #+4]
+   \   00000042   0x2200             MOVS     R2,#+0
+   \   00000044   0x540A             STRB     R2,[R1, R0]
+   1068            
+   1069            return osOK;
+   \   00000046   0x2000             MOVS     R0,#+0
+   \                     ??osPoolFree_1:
+   \   00000048   0x4770             BX       LR               ;; return
+   1070          }
+   1071          
+   1072          
+   1073          #endif   /* Use Memory Pool Management */
+   1074          
+   1075          /*******************   Message Queue Management Functions  *********************/
+   1076          
+   1077          #if (defined (osFeature_MessageQ)  &&  (osFeature_MessageQ != 0)) /* Use Message Queues */
+   1078          
+   1079          /**
+   1080          * @brief Create and Initialize a Message Queue
+   1081          * @param queue_def     queue definition referenced with \ref osMessageQ.
+   1082          * @param  thread_id     thread ID (obtained by \ref osThreadCreate or \ref osThreadGetId) or NULL.
+   1083          * @retval  message queue ID for reference by other functions or NULL in case of error.
+   1084          * @note   MUST REMAIN UNCHANGED: \b osMessageCreate shall be consistent in every CMSIS-RTOS.
+   1085          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1086          osMessageQId osMessageCreate (const osMessageQDef_t *queue_def, osThreadId thread_id)
+   1087          {
+   \                     osMessageCreate:
+   \   00000000   0xB580             PUSH     {R7,LR}
+   1088            (void) thread_id;
+   1089            
+   1090          #if( configSUPPORT_STATIC_ALLOCATION == 1 ) && ( configSUPPORT_DYNAMIC_ALLOCATION == 1 )
+   1091          
+   1092            if ((queue_def->buffer != NULL) && (queue_def->controlblock != NULL)) {
+   1093              return xQueueCreateStatic(queue_def->queue_sz, queue_def->item_sz, queue_def->buffer, queue_def->controlblock);
+   1094            }
+   1095            else {
+   1096              return xQueueCreate(queue_def->queue_sz, queue_def->item_sz);
+   1097            }
+   1098          #elif ( configSUPPORT_STATIC_ALLOCATION == 1 )
+   1099            return xQueueCreateStatic(queue_def->queue_sz, queue_def->item_sz, queue_def->buffer, queue_def->controlblock);
+   \   00000002   0x2100             MOVS     R1,#+0
+   \   00000004   0x9100             STR      R1,[SP, #+0]
+   \   00000006   0x68C3             LDR      R3,[R0, #+12]
+   \   00000008   0x6882             LDR      R2,[R0, #+8]
+   \   0000000A   0x6841             LDR      R1,[R0, #+4]
+   \   0000000C   0x6800             LDR      R0,[R0, #+0]
+   \   0000000E   0x.... 0x....      BL       xQueueGenericCreateStatic
+   \   00000012   0xBD02             POP      {R1,PC}          ;; return
+   1100          #else  
+   1101            return xQueueCreate(queue_def->queue_sz, queue_def->item_sz);
+   1102          #endif
+   1103          }
+   1104          
+   1105          /**
+   1106          * @brief Put a Message to a Queue.
+   1107          * @param  queue_id  message queue ID obtained with \ref osMessageCreate.
+   1108          * @param  info      message information.
+   1109          * @param  millisec  timeout value or 0 in case of no time-out.
+   1110          * @retval status code that indicates the execution status of the function.
+   1111          * @note   MUST REMAIN UNCHANGED: \b osMessagePut shall be consistent in every CMSIS-RTOS.
+   1112          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1113          osStatus osMessagePut (osMessageQId queue_id, uint32_t info, uint32_t millisec)
+   1114          {
+   \                     osMessagePut:
+   \   00000000   0xB532             PUSH     {R1,R4,R5,LR}
+   \   00000002   0xB082             SUB      SP,SP,#+8
+   \   00000004   0x0004             MOVS     R4,R0
+   1115            portBASE_TYPE taskWoken = pdFALSE;
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0x9000             STR      R0,[SP, #+0]
+   1116            TickType_t ticks;
+   1117            
+   1118            ticks = millisec / portTICK_PERIOD_MS;
+   \   0000000A   0x2001             MOVS     R0,#+1
+   \   0000000C   0xFBB2 0xF5F0      UDIV     R5,R2,R0
+   1119            if (ticks == 0) {
+   \   00000010   0x2D00             CMP      R5,#+0
+   \   00000012   0xD100             BNE.N    ??osMessagePut_0
+   1120              ticks = 1;
+   \   00000014   0x2501             MOVS     R5,#+1
+   1121            }
+   1122            
+   1123            if (inHandlerMode()) {
+   \                     ??osMessagePut_0:
+   \   00000016   0x.... 0x....      BL       inHandlerMode
+   \   0000001A   0x2800             CMP      R0,#+0
+   \   0000001C   0xD016             BEQ.N    ??osMessagePut_1
+   1124              if (xQueueSendFromISR(queue_id, &info, &taskWoken) != pdTRUE) {
+   \   0000001E   0x2300             MOVS     R3,#+0
+   \   00000020   0xAA00             ADD      R2,SP,#+0
+   \   00000022   0xA902             ADD      R1,SP,#+8
+   \   00000024   0x0020             MOVS     R0,R4
+   \   00000026   0x.... 0x....      BL       xQueueGenericSendFromISR
+   \   0000002A   0x2801             CMP      R0,#+1
+   \   0000002C   0xD001             BEQ.N    ??osMessagePut_2
+   1125                return osErrorOS;
+   \   0000002E   0x20FF             MOVS     R0,#+255
+   \   00000030   0xE00B             B.N      ??osMessagePut_3
+   1126              }
+   1127              portEND_SWITCHING_ISR(taskWoken);
+   \                     ??osMessagePut_2:
+   \   00000032   0x9800             LDR      R0,[SP, #+0]
+   \   00000034   0x2800             CMP      R0,#+0
+   \   00000036   0xD007             BEQ.N    ??osMessagePut_4
+   \   00000038   0x....             LDR.N    R0,??DataTable10  ;; 0xe000ed04
+   \   0000003A   0xF05F 0x5180      MOVS     R1,#+268435456
+   \   0000003E   0x6001             STR      R1,[R0, #+0]
+   \   00000040   0xF3BF 0x8F4F      DSB      
+   \   00000044   0xF3BF 0x8F6F      ISB      
+   1128            }
+   1129            else {
+   1130              if (xQueueSend(queue_id, &info, ticks) != pdTRUE) {
+   1131                return osErrorOS;
+   1132              }
+   1133            }
+   1134            
+   1135            return osOK;
+   \                     ??osMessagePut_4:
+   \   00000048   0x2000             MOVS     R0,#+0
+   \                     ??osMessagePut_3:
+   \   0000004A   0xBD3E             POP      {R1-R5,PC}       ;; return
+   \                     ??osMessagePut_1:
+   \   0000004C   0x2300             MOVS     R3,#+0
+   \   0000004E   0x002A             MOVS     R2,R5
+   \   00000050   0xA902             ADD      R1,SP,#+8
+   \   00000052   0x0020             MOVS     R0,R4
+   \   00000054   0x.... 0x....      BL       xQueueGenericSend
+   \   00000058   0x2801             CMP      R0,#+1
+   \   0000005A   0xD0F5             BEQ.N    ??osMessagePut_4
+   \   0000005C   0x20FF             MOVS     R0,#+255
+   \   0000005E   0xE7F4             B.N      ??osMessagePut_3
+   1136          }
+   1137          
+   1138          /**
+   1139          * @brief Get a Message or Wait for a Message from a Queue.
+   1140          * @param  queue_id  message queue ID obtained with \ref osMessageCreate.
+   1141          * @param  millisec  timeout value or 0 in case of no time-out.
+   1142          * @retval event information that includes status code.
+   1143          * @note   MUST REMAIN UNCHANGED: \b osMessageGet shall be consistent in every CMSIS-RTOS.
+   1144          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1145          osEvent osMessageGet (osMessageQId queue_id, uint32_t millisec)
+   1146          {
+   \                     osMessageGet:
+   \   00000000   0xB57F             PUSH     {R0-R6,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+   1147            portBASE_TYPE taskWoken;
+   1148            TickType_t ticks;
+   1149            osEvent event;
+   1150            
+   1151            event.def.message_id = queue_id;
+   \   00000006   0x9502             STR      R5,[SP, #+8]
+   1152            event.value.v = 0;
+   \   00000008   0x2000             MOVS     R0,#+0
+   \   0000000A   0x9001             STR      R0,[SP, #+4]
+   1153            
+   1154            if (queue_id == NULL) {
+   \   0000000C   0x2D00             CMP      R5,#+0
+   \   0000000E   0xD107             BNE.N    ??osMessageGet_0
+   1155              event.status = osErrorParameter;
+   \   00000010   0x2080             MOVS     R0,#+128
+   \   00000012   0x9000             STR      R0,[SP, #+0]
+   1156              return event;
+   \   00000014   0xA800             ADD      R0,SP,#+0
+   \   00000016   0xC80E             LDM      R0!,{R1-R3}
+   \   00000018   0xC40E             STM      R4!,{R1-R3}
+   \   0000001A   0x380C             SUBS     R0,R0,#+12
+   \   0000001C   0x3C0C             SUBS     R4,R4,#+12
+   \   0000001E   0xE042             B.N      ??osMessageGet_1
+   1157            }
+   1158            
+   1159            taskWoken = pdFALSE;
+   \                     ??osMessageGet_0:
+   \   00000020   0x2000             MOVS     R0,#+0
+   \   00000022   0x9003             STR      R0,[SP, #+12]
+   1160            
+   1161            ticks = 0;
+   \   00000024   0x2600             MOVS     R6,#+0
+   1162            if (millisec == osWaitForever) {
+   \   00000026   0xF112 0x0F01      CMN      R2,#+1
+   \   0000002A   0xD102             BNE.N    ??osMessageGet_2
+   1163              ticks = portMAX_DELAY;
+   \   0000002C   0xF05F 0x36FF      MOVS     R6,#-1
+   \   00000030   0xE007             B.N      ??osMessageGet_3
+   1164            }
+   1165            else if (millisec != 0) {
+   \                     ??osMessageGet_2:
+   \   00000032   0x2A00             CMP      R2,#+0
+   \   00000034   0xD005             BEQ.N    ??osMessageGet_3
+   1166              ticks = millisec / portTICK_PERIOD_MS;
+   \   00000036   0x2001             MOVS     R0,#+1
+   \   00000038   0xFBB2 0xF6F0      UDIV     R6,R2,R0
+   1167              if (ticks == 0) {
+   \   0000003C   0x2E00             CMP      R6,#+0
+   \   0000003E   0xD100             BNE.N    ??osMessageGet_3
+   1168                ticks = 1;
+   \   00000040   0x2601             MOVS     R6,#+1
+   1169              }
+   1170            }
+   1171            
+   1172            if (inHandlerMode()) {
+   \                     ??osMessageGet_3:
+   \   00000042   0x.... 0x....      BL       inHandlerMode
+   \   00000046   0x2800             CMP      R0,#+0
+   \   00000048   0xD017             BEQ.N    ??osMessageGet_4
+   1173              if (xQueueReceiveFromISR(queue_id, &event.value.v, &taskWoken) == pdTRUE) {
+   \   0000004A   0xAA03             ADD      R2,SP,#+12
+   \   0000004C   0xA901             ADD      R1,SP,#+4
+   \   0000004E   0x0028             MOVS     R0,R5
+   \   00000050   0x.... 0x....      BL       xQueueReceiveFromISR
+   \   00000054   0x2801             CMP      R0,#+1
+   \   00000056   0xD102             BNE.N    ??osMessageGet_5
+   1174                /* We have mail */
+   1175                event.status = osEventMessage;
+   \   00000058   0x2010             MOVS     R0,#+16
+   \   0000005A   0x9000             STR      R0,[SP, #+0]
+   \   0000005C   0xE001             B.N      ??osMessageGet_6
+   1176              }
+   1177              else {
+   1178                event.status = osOK;
+   \                     ??osMessageGet_5:
+   \   0000005E   0x2000             MOVS     R0,#+0
+   \   00000060   0x9000             STR      R0,[SP, #+0]
+   1179              }
+   1180              portEND_SWITCHING_ISR(taskWoken);
+   \                     ??osMessageGet_6:
+   \   00000062   0x9803             LDR      R0,[SP, #+12]
+   \   00000064   0x2800             CMP      R0,#+0
+   \   00000066   0xD019             BEQ.N    ??osMessageGet_7
+   \   00000068   0x....             LDR.N    R0,??DataTable10  ;; 0xe000ed04
+   \   0000006A   0xF05F 0x5180      MOVS     R1,#+268435456
+   \   0000006E   0x6001             STR      R1,[R0, #+0]
+   \   00000070   0xF3BF 0x8F4F      DSB      
+   \   00000074   0xF3BF 0x8F6F      ISB      
+   \   00000078   0xE010             B.N      ??osMessageGet_7
+   1181            }
+   1182            else {
+   1183              if (xQueueReceive(queue_id, &event.value.v, ticks) == pdTRUE) {
+   \                     ??osMessageGet_4:
+   \   0000007A   0x2300             MOVS     R3,#+0
+   \   0000007C   0x0032             MOVS     R2,R6
+   \   0000007E   0xA901             ADD      R1,SP,#+4
+   \   00000080   0x0028             MOVS     R0,R5
+   \   00000082   0x.... 0x....      BL       xQueueGenericReceive
+   \   00000086   0x2801             CMP      R0,#+1
+   \   00000088   0xD102             BNE.N    ??osMessageGet_8
+   1184                /* We have mail */
+   1185                event.status = osEventMessage;
+   \   0000008A   0x2010             MOVS     R0,#+16
+   \   0000008C   0x9000             STR      R0,[SP, #+0]
+   \   0000008E   0xE005             B.N      ??osMessageGet_7
+   1186              }
+   1187              else {
+   1188                event.status = (ticks == 0) ? osOK : osEventTimeout;
+   \                     ??osMessageGet_8:
+   \   00000090   0x2E00             CMP      R6,#+0
+   \   00000092   0xD101             BNE.N    ??osMessageGet_9
+   \   00000094   0x2000             MOVS     R0,#+0
+   \   00000096   0xE000             B.N      ??osMessageGet_10
+   \                     ??osMessageGet_9:
+   \   00000098   0x2040             MOVS     R0,#+64
+   \                     ??osMessageGet_10:
+   \   0000009A   0x9000             STR      R0,[SP, #+0]
+   1189              }
+   1190            }
+   1191            
+   1192            return event;
+   \                     ??osMessageGet_7:
+   \   0000009C   0xA800             ADD      R0,SP,#+0
+   \   0000009E   0xC80E             LDM      R0!,{R1-R3}
+   \   000000A0   0xC40E             STM      R4!,{R1-R3}
+   \   000000A2   0x380C             SUBS     R0,R0,#+12
+   \   000000A4   0x3C0C             SUBS     R4,R4,#+12
+   \                     ??osMessageGet_1:
+   \   000000A6   0xB004             ADD      SP,SP,#+16
+   \   000000A8   0xBD70             POP      {R4-R6,PC}       ;; return
+   1193          }
+   1194          
+   1195          #endif     /* Use Message Queues */
+   1196          
+   1197          /********************   Mail Queue Management Functions  ***********************/
+   1198          #if (defined (osFeature_MailQ)  &&  (osFeature_MailQ != 0))  /* Use Mail Queues */
+   1199          
+   1200          
+   1201          typedef struct os_mailQ_cb {
+   1202            const osMailQDef_t *queue_def;
+   1203            QueueHandle_t handle;
+   1204            osPoolId pool;
+   1205          } os_mailQ_cb_t;
+   1206          
+   1207          /**
+   1208          * @brief Create and Initialize mail queue
+   1209          * @param  queue_def     reference to the mail queue definition obtain with \ref osMailQ
+   1210          * @param   thread_id     thread ID (obtained by \ref osThreadCreate or \ref osThreadGetId) or NULL.
+   1211          * @retval mail queue ID for reference by other functions or NULL in case of error.
+   1212          * @note   MUST REMAIN UNCHANGED: \b osMailCreate shall be consistent in every CMSIS-RTOS.
+   1213          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1214          osMailQId osMailCreate (const osMailQDef_t *queue_def, osThreadId thread_id)
+   1215          {
+   1216          #if (configSUPPORT_DYNAMIC_ALLOCATION == 1)
+   1217            (void) thread_id;
+   1218            
+   1219            osPoolDef_t pool_def = {queue_def->queue_sz, queue_def->item_sz, NULL};
+   1220            
+   1221            /* Create a mail queue control block */
+   1222          
+   1223            *(queue_def->cb) = pvPortMalloc(sizeof(struct os_mailQ_cb));
+   1224          
+   1225            if (*(queue_def->cb) == NULL) {
+   1226              return NULL;
+   1227            }
+   1228            (*(queue_def->cb))->queue_def = queue_def;
+   1229            
+   1230            /* Create a queue in FreeRTOS */
+   1231            (*(queue_def->cb))->handle = xQueueCreate(queue_def->queue_sz, sizeof(void *));
+   1232          
+   1233          
+   1234            if ((*(queue_def->cb))->handle == NULL) {
+   1235              vPortFree(*(queue_def->cb));
+   1236              return NULL;
+   1237            }
+   1238            
+   1239            /* Create a mail pool */
+   1240            (*(queue_def->cb))->pool = osPoolCreate(&pool_def);
+   1241            if ((*(queue_def->cb))->pool == NULL) {
+   1242              //TODO: Delete queue. How to do it in FreeRTOS?
+   1243              vPortFree(*(queue_def->cb));
+   1244              return NULL;
+   1245            }
+   1246            
+   1247            return *(queue_def->cb);
+   1248          #else
+   1249            return NULL;
+   \                     osMailCreate:
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+   1250          #endif
+   1251          }
+   1252          
+   1253          /**
+   1254          * @brief Allocate a memory block from a mail
+   1255          * @param  queue_id      mail queue ID obtained with \ref osMailCreate.
+   1256          * @param  millisec      timeout value or 0 in case of no time-out.
+   1257          * @retval pointer to memory block that can be filled with mail or NULL in case error.
+   1258          * @note   MUST REMAIN UNCHANGED: \b osMailAlloc shall be consistent in every CMSIS-RTOS.
+   1259          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1260          void *osMailAlloc (osMailQId queue_id, uint32_t millisec)
+   1261          {
+   \                     osMailAlloc:
+   \   00000000   0xB580             PUSH     {R7,LR}
+   1262            (void) millisec;
+   1263            void *p;
+   1264            
+   1265            
+   1266            if (queue_id == NULL) {
+   \   00000002   0x2800             CMP      R0,#+0
+   \   00000004   0xD101             BNE.N    ??osMailAlloc_0
+   1267              return NULL;
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0xE002             B.N      ??osMailAlloc_1
+   1268            }
+   1269            
+   1270            p = osPoolAlloc(queue_id->pool);
+   \                     ??osMailAlloc_0:
+   \   0000000A   0x6880             LDR      R0,[R0, #+8]
+   \   0000000C   0x.... 0x....      BL       osPoolAlloc
+   1271            
+   1272            return p;
+   \                     ??osMailAlloc_1:
+   \   00000010   0xBD02             POP      {R1,PC}          ;; return
+   1273          }
+   1274          
+   1275          /**
+   1276          * @brief Allocate a memory block from a mail and set memory block to zero
+   1277          * @param  queue_id      mail queue ID obtained with \ref osMailCreate.
+   1278          * @param  millisec      timeout value or 0 in case of no time-out.
+   1279          * @retval pointer to memory block that can be filled with mail or NULL in case error.
+   1280          * @note   MUST REMAIN UNCHANGED: \b osMailCAlloc shall be consistent in every CMSIS-RTOS.
+   1281          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1282          void *osMailCAlloc (osMailQId queue_id, uint32_t millisec)
+   1283          {
+   \                     osMailCAlloc:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   1284            uint32_t i;
+   1285            void *p = osMailAlloc(queue_id, millisec);
+   \   00000004   0x0020             MOVS     R0,R4
+   \   00000006   0x.... 0x....      BL       osMailAlloc
+   1286            
+   1287            if (p) {
+   \   0000000A   0x2800             CMP      R0,#+0
+   \   0000000C   0xD008             BEQ.N    ??osMailCAlloc_0
+   1288              for (i = 0; i < queue_id->queue_def->item_sz; i++) {
+   \   0000000E   0x2100             MOVS     R1,#+0
+   \   00000010   0xE002             B.N      ??osMailCAlloc_1
+   1289                ((uint8_t *)p)[i] = 0;
+   \                     ??osMailCAlloc_2:
+   \   00000012   0x2200             MOVS     R2,#+0
+   \   00000014   0x540A             STRB     R2,[R1, R0]
+   1290              }
+   \   00000016   0x1C49             ADDS     R1,R1,#+1
+   \                     ??osMailCAlloc_1:
+   \   00000018   0x6822             LDR      R2,[R4, #+0]
+   \   0000001A   0x6852             LDR      R2,[R2, #+4]
+   \   0000001C   0x4291             CMP      R1,R2
+   \   0000001E   0xD3F8             BCC.N    ??osMailCAlloc_2
+   1291            }
+   1292            
+   1293            return p;
+   \                     ??osMailCAlloc_0:
+   \   00000020   0xBD10             POP      {R4,PC}          ;; return
+   1294          }
+   1295          
+   1296          /**
+   1297          * @brief Put a mail to a queue
+   1298          * @param  queue_id      mail queue ID obtained with \ref osMailCreate.
+   1299          * @param  mail          memory block previously allocated with \ref osMailAlloc or \ref osMailCAlloc.
+   1300          * @retval status code that indicates the execution status of the function.
+   1301          * @note   MUST REMAIN UNCHANGED: \b osMailPut shall be consistent in every CMSIS-RTOS.
+   1302          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1303          osStatus osMailPut (osMailQId queue_id, void *mail)
+   1304          {
+   \                     osMailPut:
+   \   00000000   0xB513             PUSH     {R0,R1,R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   1305            portBASE_TYPE taskWoken;
+   1306            
+   1307            
+   1308            if (queue_id == NULL) {
+   \   00000004   0x2C00             CMP      R4,#+0
+   \   00000006   0xD101             BNE.N    ??osMailPut_0
+   1309              return osErrorParameter;
+   \   00000008   0x2080             MOVS     R0,#+128
+   \   0000000A   0xE01B             B.N      ??osMailPut_1
+   1310            }
+   1311            
+   1312            taskWoken = pdFALSE;
+   \                     ??osMailPut_0:
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \   0000000E   0x9000             STR      R0,[SP, #+0]
+   1313            
+   1314            if (inHandlerMode()) {
+   \   00000010   0x.... 0x....      BL       inHandlerMode
+   \   00000014   0x2800             CMP      R0,#+0
+   \   00000016   0xD016             BEQ.N    ??osMailPut_2
+   1315              if (xQueueSendFromISR(queue_id->handle, &mail, &taskWoken) != pdTRUE) {
+   \   00000018   0x2300             MOVS     R3,#+0
+   \   0000001A   0xAA00             ADD      R2,SP,#+0
+   \   0000001C   0xA901             ADD      R1,SP,#+4
+   \   0000001E   0x6860             LDR      R0,[R4, #+4]
+   \   00000020   0x.... 0x....      BL       xQueueGenericSendFromISR
+   \   00000024   0x2801             CMP      R0,#+1
+   \   00000026   0xD001             BEQ.N    ??osMailPut_3
+   1316                return osErrorOS;
+   \   00000028   0x20FF             MOVS     R0,#+255
+   \   0000002A   0xE00B             B.N      ??osMailPut_1
+   1317              }
+   1318              portEND_SWITCHING_ISR(taskWoken);
+   \                     ??osMailPut_3:
+   \   0000002C   0x9800             LDR      R0,[SP, #+0]
+   \   0000002E   0x2800             CMP      R0,#+0
+   \   00000030   0xD007             BEQ.N    ??osMailPut_4
+   \   00000032   0x....             LDR.N    R0,??DataTable10  ;; 0xe000ed04
+   \   00000034   0xF05F 0x5180      MOVS     R1,#+268435456
+   \   00000038   0x6001             STR      R1,[R0, #+0]
+   \   0000003A   0xF3BF 0x8F4F      DSB      
+   \   0000003E   0xF3BF 0x8F6F      ISB      
+   1319            }
+   1320            else {
+   1321              if (xQueueSend(queue_id->handle, &mail, 0) != pdTRUE) { 
+   1322                return osErrorOS;
+   1323              }
+   1324            }
+   1325            
+   1326            return osOK;
+   \                     ??osMailPut_4:
+   \   00000042   0x2000             MOVS     R0,#+0
+   \                     ??osMailPut_1:
+   \   00000044   0xBD16             POP      {R1,R2,R4,PC}    ;; return
+   \                     ??osMailPut_2:
+   \   00000046   0x2300             MOVS     R3,#+0
+   \   00000048   0x2200             MOVS     R2,#+0
+   \   0000004A   0xA901             ADD      R1,SP,#+4
+   \   0000004C   0x6860             LDR      R0,[R4, #+4]
+   \   0000004E   0x.... 0x....      BL       xQueueGenericSend
+   \   00000052   0x2801             CMP      R0,#+1
+   \   00000054   0xD0F5             BEQ.N    ??osMailPut_4
+   \   00000056   0x20FF             MOVS     R0,#+255
+   \   00000058   0xE7F4             B.N      ??osMailPut_1
+   1327          }
+   1328          
+   1329          /**
+   1330          * @brief Get a mail from a queue
+   1331          * @param  queue_id   mail queue ID obtained with \ref osMailCreate.
+   1332          * @param millisec    timeout value or 0 in case of no time-out
+   1333          * @retval event that contains mail information or error code.
+   1334          * @note   MUST REMAIN UNCHANGED: \b osMailGet shall be consistent in every CMSIS-RTOS.
+   1335          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1336          osEvent osMailGet (osMailQId queue_id, uint32_t millisec)
+   1337          {
+   \                     osMailGet:
+   \   00000000   0xB57F             PUSH     {R0-R6,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+   1338            portBASE_TYPE taskWoken;
+   1339            TickType_t ticks;
+   1340            osEvent event;
+   1341            
+   1342            event.def.mail_id = queue_id;
+   \   00000006   0x9503             STR      R5,[SP, #+12]
+   1343            
+   1344            if (queue_id == NULL) {
+   \   00000008   0x2D00             CMP      R5,#+0
+   \   0000000A   0xD107             BNE.N    ??osMailGet_0
+   1345              event.status = osErrorParameter;
+   \   0000000C   0x2080             MOVS     R0,#+128
+   \   0000000E   0x9001             STR      R0,[SP, #+4]
+   1346              return event;
+   \   00000010   0xA801             ADD      R0,SP,#+4
+   \   00000012   0xC80E             LDM      R0!,{R1-R3}
+   \   00000014   0xC40E             STM      R4!,{R1-R3}
+   \   00000016   0x380C             SUBS     R0,R0,#+12
+   \   00000018   0x3C0C             SUBS     R4,R4,#+12
+   \   0000001A   0xE042             B.N      ??osMailGet_1
+   1347            }
+   1348            
+   1349            taskWoken = pdFALSE;
+   \                     ??osMailGet_0:
+   \   0000001C   0x2000             MOVS     R0,#+0
+   \   0000001E   0x9000             STR      R0,[SP, #+0]
+   1350            
+   1351            ticks = 0;
+   \   00000020   0x2600             MOVS     R6,#+0
+   1352            if (millisec == osWaitForever) {
+   \   00000022   0xF112 0x0F01      CMN      R2,#+1
+   \   00000026   0xD102             BNE.N    ??osMailGet_2
+   1353              ticks = portMAX_DELAY;
+   \   00000028   0xF05F 0x36FF      MOVS     R6,#-1
+   \   0000002C   0xE007             B.N      ??osMailGet_3
+   1354            }
+   1355            else if (millisec != 0) {
+   \                     ??osMailGet_2:
+   \   0000002E   0x2A00             CMP      R2,#+0
+   \   00000030   0xD005             BEQ.N    ??osMailGet_3
+   1356              ticks = millisec / portTICK_PERIOD_MS;
+   \   00000032   0x2001             MOVS     R0,#+1
+   \   00000034   0xFBB2 0xF6F0      UDIV     R6,R2,R0
+   1357              if (ticks == 0) {
+   \   00000038   0x2E00             CMP      R6,#+0
+   \   0000003A   0xD100             BNE.N    ??osMailGet_3
+   1358                ticks = 1;
+   \   0000003C   0x2601             MOVS     R6,#+1
+   1359              }
+   1360            }
+   1361            
+   1362            if (inHandlerMode()) {
+   \                     ??osMailGet_3:
+   \   0000003E   0x.... 0x....      BL       inHandlerMode
+   \   00000042   0x2800             CMP      R0,#+0
+   \   00000044   0xD017             BEQ.N    ??osMailGet_4
+   1363              if (xQueueReceiveFromISR(queue_id->handle, &event.value.p, &taskWoken) == pdTRUE) {
+   \   00000046   0xAA00             ADD      R2,SP,#+0
+   \   00000048   0xA902             ADD      R1,SP,#+8
+   \   0000004A   0x6868             LDR      R0,[R5, #+4]
+   \   0000004C   0x.... 0x....      BL       xQueueReceiveFromISR
+   \   00000050   0x2801             CMP      R0,#+1
+   \   00000052   0xD102             BNE.N    ??osMailGet_5
+   1364                /* We have mail */
+   1365                event.status = osEventMail;
+   \   00000054   0x2020             MOVS     R0,#+32
+   \   00000056   0x9001             STR      R0,[SP, #+4]
+   \   00000058   0xE001             B.N      ??osMailGet_6
+   1366              }
+   1367              else {
+   1368                event.status = osOK;
+   \                     ??osMailGet_5:
+   \   0000005A   0x2000             MOVS     R0,#+0
+   \   0000005C   0x9001             STR      R0,[SP, #+4]
+   1369              }
+   1370              portEND_SWITCHING_ISR(taskWoken);
+   \                     ??osMailGet_6:
+   \   0000005E   0x9800             LDR      R0,[SP, #+0]
+   \   00000060   0x2800             CMP      R0,#+0
+   \   00000062   0xD019             BEQ.N    ??osMailGet_7
+   \   00000064   0x....             LDR.N    R0,??DataTable10  ;; 0xe000ed04
+   \   00000066   0xF05F 0x5180      MOVS     R1,#+268435456
+   \   0000006A   0x6001             STR      R1,[R0, #+0]
+   \   0000006C   0xF3BF 0x8F4F      DSB      
+   \   00000070   0xF3BF 0x8F6F      ISB      
+   \   00000074   0xE010             B.N      ??osMailGet_7
+   1371            }
+   1372            else {
+   1373              if (xQueueReceive(queue_id->handle, &event.value.p, ticks) == pdTRUE) {
+   \                     ??osMailGet_4:
+   \   00000076   0x2300             MOVS     R3,#+0
+   \   00000078   0x0032             MOVS     R2,R6
+   \   0000007A   0xA902             ADD      R1,SP,#+8
+   \   0000007C   0x6868             LDR      R0,[R5, #+4]
+   \   0000007E   0x.... 0x....      BL       xQueueGenericReceive
+   \   00000082   0x2801             CMP      R0,#+1
+   \   00000084   0xD102             BNE.N    ??osMailGet_8
+   1374                /* We have mail */
+   1375                event.status = osEventMail;
+   \   00000086   0x2020             MOVS     R0,#+32
+   \   00000088   0x9001             STR      R0,[SP, #+4]
+   \   0000008A   0xE005             B.N      ??osMailGet_7
+   1376              }
+   1377              else {
+   1378                event.status = (ticks == 0) ? osOK : osEventTimeout;
+   \                     ??osMailGet_8:
+   \   0000008C   0x2E00             CMP      R6,#+0
+   \   0000008E   0xD101             BNE.N    ??osMailGet_9
+   \   00000090   0x2000             MOVS     R0,#+0
+   \   00000092   0xE000             B.N      ??osMailGet_10
+   \                     ??osMailGet_9:
+   \   00000094   0x2040             MOVS     R0,#+64
+   \                     ??osMailGet_10:
+   \   00000096   0x9001             STR      R0,[SP, #+4]
+   1379              }
+   1380            }
+   1381            
+   1382            return event;
+   \                     ??osMailGet_7:
+   \   00000098   0xA801             ADD      R0,SP,#+4
+   \   0000009A   0xC80E             LDM      R0!,{R1-R3}
+   \   0000009C   0xC40E             STM      R4!,{R1-R3}
+   \   0000009E   0x380C             SUBS     R0,R0,#+12
+   \   000000A0   0x3C0C             SUBS     R4,R4,#+12
+   \                     ??osMailGet_1:
+   \   000000A2   0xB004             ADD      SP,SP,#+16
+   \   000000A4   0xBD70             POP      {R4-R6,PC}       ;; return
+   1383          }
+   1384          
+   1385          /**
+   1386          * @brief Free a memory block from a mail
+   1387          * @param  queue_id mail queue ID obtained with \ref osMailCreate.
+   1388          * @param  mail     pointer to the memory block that was obtained with \ref osMailGet.
+   1389          * @retval status code that indicates the execution status of the function.
+   1390          * @note   MUST REMAIN UNCHANGED: \b osMailFree shall be consistent in every CMSIS-RTOS.
+   1391          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1392          osStatus osMailFree (osMailQId queue_id, void *mail)
+   1393          {
+   \                     osMailFree:
+   \   00000000   0xB580             PUSH     {R7,LR}
+   1394            if (queue_id == NULL) {
+   \   00000002   0x2800             CMP      R0,#+0
+   \   00000004   0xD101             BNE.N    ??osMailFree_0
+   1395              return osErrorParameter;
+   \   00000006   0x2080             MOVS     R0,#+128
+   \   00000008   0xE002             B.N      ??osMailFree_1
+   1396            }
+   1397            
+   1398            return osPoolFree(queue_id->pool, mail);
+   \                     ??osMailFree_0:
+   \   0000000A   0x6880             LDR      R0,[R0, #+8]
+   \   0000000C   0x.... 0x....      BL       osPoolFree
+   \                     ??osMailFree_1:
+   \   00000010   0xBD02             POP      {R1,PC}          ;; return
+   1399          }
+   1400          #endif  /* Use Mail Queues */
+   1401          
+   1402          /*************************** Additional specific APIs to Free RTOS ************/
+   1403          /**
+   1404          * @brief  Handles the tick increment
+   1405          * @param  none.
+   1406          * @retval none.
+   1407          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1408          void osSystickHandler(void)
+   1409          {
+   \                     osSystickHandler:
+   \   00000000   0xB580             PUSH     {R7,LR}
+   1410          
+   1411          #if (INCLUDE_xTaskGetSchedulerState  == 1 )
+   1412            if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
+   \   00000002   0x.... 0x....      BL       xTaskGetSchedulerState
+   \   00000006   0x2801             CMP      R0,#+1
+   \   00000008   0xD001             BEQ.N    ??osSystickHandler_0
+   1413            {
+   1414          #endif  /* INCLUDE_xTaskGetSchedulerState */  
+   1415              xPortSysTickHandler();
+   \   0000000A   0x.... 0x....      BL       xPortSysTickHandler
+   1416          #if (INCLUDE_xTaskGetSchedulerState  == 1 )
+   1417            }
+   1418          #endif  /* INCLUDE_xTaskGetSchedulerState */  
+   1419          }
+   \                     ??osSystickHandler_0:
+   \   0000000E   0xBD01             POP      {R0,PC}          ;; return
+   1420          
+   1421          #if ( INCLUDE_eTaskGetState == 1 )
+   1422          /**
+   1423          * @brief  Obtain the state of any thread.
+   1424          * @param   thread_id   thread ID obtained by \ref osThreadCreate or \ref osThreadGetId.
+   1425          * @retval  the stae of the thread, states are encoded by the osThreadState enumerated type.
+   1426          */
+   1427          osThreadState osThreadGetState(osThreadId thread_id)
+   1428          {
+   1429            eTaskState ThreadState;
+   1430            osThreadState result;
+   1431            
+   1432            ThreadState = eTaskGetState(thread_id);
+   1433            
+   1434            switch (ThreadState)
+   1435            {
+   1436            case eRunning :
+   1437              result = osThreadRunning;
+   1438              break;
+   1439            case eReady :
+   1440              result = osThreadReady;
+   1441              break;
+   1442            case eBlocked :
+   1443              result = osThreadBlocked;
+   1444              break;
+   1445            case eSuspended :
+   1446              result = osThreadSuspended;
+   1447              break;
+   1448            case eDeleted :
+   1449              result = osThreadDeleted;
+   1450              break;
+   1451            default:
+   1452              result = osThreadError;
+   1453            } 
+   1454            
+   1455            return result;
+   1456          }
+   1457          #endif /* INCLUDE_eTaskGetState */
+   1458          
+   1459          #if (INCLUDE_eTaskGetState == 1)
+   1460          /**
+   1461          * @brief Check if a thread is already suspended or not.
+   1462          * @param thread_id thread ID obtained by \ref osThreadCreate or \ref osThreadGetId.
+   1463          * @retval status code that indicates the execution status of the function.
+   1464          */
+   1465          osStatus osThreadIsSuspended(osThreadId thread_id)
+   1466          {
+   1467            if (eTaskGetState(thread_id) == eSuspended)
+   1468              return osOK;
+   1469            else
+   1470              return osErrorOS;
+   1471          }
+   1472          #endif /* INCLUDE_eTaskGetState */
+   1473          /**
+   1474          * @brief  Suspend execution of a thread.
+   1475          * @param   thread_id   thread ID obtained by \ref osThreadCreate or \ref osThreadGetId.
+   1476          * @retval  status code that indicates the execution status of the function.
+   1477          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1478          osStatus osThreadSuspend (osThreadId thread_id)
+   1479          {
+   \                     osThreadSuspend:
+   \   00000000   0xB580             PUSH     {R7,LR}
+   1480          #if (INCLUDE_vTaskSuspend == 1)
+   1481              vTaskSuspend(thread_id);
+   \   00000002   0x.... 0x....      BL       vTaskSuspend
+   1482            
+   1483            return osOK;
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0xBD02             POP      {R1,PC}          ;; return
+   1484          #else
+   1485            return osErrorResource;
+   1486          #endif
+   1487          }
+   1488          
+   1489          /**
+   1490          * @brief  Resume execution of a suspended thread.
+   1491          * @param   thread_id   thread ID obtained by \ref osThreadCreate or \ref osThreadGetId.
+   1492          * @retval  status code that indicates the execution status of the function.
+   1493          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1494          osStatus osThreadResume (osThreadId thread_id)
+   1495          {
+   \                     osThreadResume:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   1496          #if (INCLUDE_vTaskSuspend == 1)  
+   1497            if(inHandlerMode())
+   \   00000004   0x.... 0x....      BL       inHandlerMode
+   \   00000008   0x2800             CMP      R0,#+0
+   \   0000000A   0xD00D             BEQ.N    ??osThreadResume_0
+   1498            {
+   1499              if (xTaskResumeFromISR(thread_id) == pdTRUE)
+   \   0000000C   0x0020             MOVS     R0,R4
+   \   0000000E   0x.... 0x....      BL       xTaskResumeFromISR
+   \   00000012   0x2801             CMP      R0,#+1
+   \   00000014   0xD10B             BNE.N    ??osThreadResume_1
+   1500              {
+   1501                portYIELD_FROM_ISR(pdTRUE);
+   \   00000016   0x....             LDR.N    R0,??DataTable10  ;; 0xe000ed04
+   \   00000018   0xF05F 0x5180      MOVS     R1,#+268435456
+   \   0000001C   0x6001             STR      R1,[R0, #+0]
+   \   0000001E   0xF3BF 0x8F4F      DSB      
+   \   00000022   0xF3BF 0x8F6F      ISB      
+   \   00000026   0xE002             B.N      ??osThreadResume_1
+   1502              }
+   1503            }
+   1504            else
+   1505            {
+   1506              vTaskResume(thread_id);
+   \                     ??osThreadResume_0:
+   \   00000028   0x0020             MOVS     R0,R4
+   \   0000002A   0x.... 0x....      BL       vTaskResume
+   1507            }
+   1508            return osOK;
+   \                     ??osThreadResume_1:
+   \   0000002E   0x2000             MOVS     R0,#+0
+   \   00000030   0xBD10             POP      {R4,PC}          ;; return
+   1509          #else
+   1510            return osErrorResource;
+   1511          #endif
+   1512          }
+   1513          
+   1514          /**
+   1515          * @brief  Suspend execution of a all active threads.
+   1516          * @retval  status code that indicates the execution status of the function.
+   1517          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1518          osStatus osThreadSuspendAll (void)
+   1519          {
+   \                     osThreadSuspendAll:
+   \   00000000   0xB580             PUSH     {R7,LR}
+   1520            vTaskSuspendAll();
+   \   00000002   0x.... 0x....      BL       vTaskSuspendAll
+   1521            
+   1522            return osOK;
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0xBD02             POP      {R1,PC}          ;; return
+   1523          }
+   1524          
+   1525          /**
+   1526          * @brief  Resume execution of a all suspended threads.
+   1527          * @retval  status code that indicates the execution status of the function.
+   1528          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1529          osStatus osThreadResumeAll (void)
+   1530          {
+   \                     osThreadResumeAll:
+   \   00000000   0xB580             PUSH     {R7,LR}
+   1531            if (xTaskResumeAll() == pdTRUE)
+   \   00000002   0x.... 0x....      BL       xTaskResumeAll
+   \   00000006   0x2801             CMP      R0,#+1
+   \   00000008   0xD101             BNE.N    ??osThreadResumeAll_0
+   1532              return osOK;
+   \   0000000A   0x2000             MOVS     R0,#+0
+   \   0000000C   0xE000             B.N      ??osThreadResumeAll_1
+   1533            else
+   1534              return osErrorOS;
+   \                     ??osThreadResumeAll_0:
+   \   0000000E   0x20FF             MOVS     R0,#+255
+   \                     ??osThreadResumeAll_1:
+   \   00000010   0xBD02             POP      {R1,PC}          ;; return
+   1535            
+   1536          }
+   1537          
+   1538          /**
+   1539          * @brief  Delay a task until a specified time
+   1540          * @param   PreviousWakeTime   Pointer to a variable that holds the time at which the 
+   1541          *          task was last unblocked. PreviousWakeTime must be initialised with the current time
+   1542          *          prior to its first use (PreviousWakeTime = osKernelSysTick() )
+   1543          * @param   millisec    time delay value
+   1544          * @retval  status code that indicates the execution status of the function.
+   1545          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1546          osStatus osDelayUntil (uint32_t *PreviousWakeTime, uint32_t millisec)
+   1547          {
+   \                     osDelayUntil:
+   \   00000000   0xB580             PUSH     {R7,LR}
+   1548          #if INCLUDE_vTaskDelayUntil
+   1549            TickType_t ticks = (millisec / portTICK_PERIOD_MS);
+   \   00000002   0x2201             MOVS     R2,#+1
+   \   00000004   0xFBB1 0xF1F2      UDIV     R1,R1,R2
+   1550            vTaskDelayUntil((TickType_t *) PreviousWakeTime, ticks ? ticks : 1);
+   \   00000008   0x2900             CMP      R1,#+0
+   \   0000000A   0xD100             BNE.N    ??osDelayUntil_0
+   \                     ??osDelayUntil_1:
+   \   0000000C   0x2101             MOVS     R1,#+1
+   \                     ??osDelayUntil_0:
+   \   0000000E   0x.... 0x....      BL       vTaskDelayUntil
+   1551            
+   1552            return osOK;
+   \   00000012   0x2000             MOVS     R0,#+0
+   \   00000014   0xBD02             POP      {R1,PC}          ;; return
+   1553          #else
+   1554            (void) millisec;
+   1555            (void) PreviousWakeTime;
+   1556            
+   1557            return osErrorResource;
+   1558          #endif
+   1559          }
+   1560          
+   1561          /**
+   1562          * @brief   Abort the delay for a specific thread
+   1563          * @param   thread_id   thread ID obtained by \ref osThreadCreate or \ref osThreadGetId   
+   1564          * @retval  status code that indicates the execution status of the function.
+   1565          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1566          osStatus osAbortDelay(osThreadId thread_id)
+   1567          {
+   1568          #if INCLUDE_xTaskAbortDelay
+   1569            
+   1570            xTaskAbortDelay(thread_id);
+   1571            
+   1572            return osOK;
+   1573          #else
+   1574            (void) thread_id;
+   1575            
+   1576            return osErrorResource;
+   \                     osAbortDelay:
+   \   00000000   0x2081             MOVS     R0,#+129
+   \   00000002   0x4770             BX       LR               ;; return
+   1577          #endif
+   1578          }
+   1579          
+   1580          /**
+   1581          * @brief   Lists all the current threads, along with their current state 
+   1582          *          and stack usage high water mark.
+   1583          * @param   buffer   A buffer into which the above mentioned details
+   1584          *          will be written
+   1585          * @retval  status code that indicates the execution status of the function.
+   1586          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1587          osStatus osThreadList (uint8_t *buffer)
+   1588          {
+   1589          #if ( ( configUSE_TRACE_FACILITY == 1 ) && ( configUSE_STATS_FORMATTING_FUNCTIONS == 1 ) )
+   1590            vTaskList((char *)buffer);
+   1591          #endif
+   1592            return osOK;
+   \                     osThreadList:
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+   1593          }
+   1594          
+   1595          /**
+   1596          * @brief  Receive an item from a queue without removing the item from the queue.
+   1597          * @param  queue_id  message queue ID obtained with \ref osMessageCreate.
+   1598          * @param  millisec  timeout value or 0 in case of no time-out.
+   1599          * @retval event information that includes status code.
+   1600          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1601          osEvent osMessagePeek (osMessageQId queue_id, uint32_t millisec)
+   1602          {
+   \                     osMessagePeek:
+   \   00000000   0xB53E             PUSH     {R1-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x0008             MOVS     R0,R1
+   1603            TickType_t ticks;
+   1604            osEvent event;
+   1605            
+   1606            event.def.message_id = queue_id;
+   \   00000006   0x9002             STR      R0,[SP, #+8]
+   1607            
+   1608            if (queue_id == NULL) {
+   \   00000008   0x2800             CMP      R0,#+0
+   \   0000000A   0xD107             BNE.N    ??osMessagePeek_0
+   1609              event.status = osErrorParameter;
+   \   0000000C   0x2080             MOVS     R0,#+128
+   \   0000000E   0x9000             STR      R0,[SP, #+0]
+   1610              return event;
+   \   00000010   0xA800             ADD      R0,SP,#+0
+   \   00000012   0xC80E             LDM      R0!,{R1-R3}
+   \   00000014   0xC40E             STM      R4!,{R1-R3}
+   \   00000016   0x380C             SUBS     R0,R0,#+12
+   \   00000018   0x3C0C             SUBS     R4,R4,#+12
+   \   0000001A   0xE023             B.N      ??osMessagePeek_1
+   1611            }
+   1612            
+   1613            ticks = 0;
+   \                     ??osMessagePeek_0:
+   \   0000001C   0x2500             MOVS     R5,#+0
+   1614            if (millisec == osWaitForever) {
+   \   0000001E   0xF112 0x0F01      CMN      R2,#+1
+   \   00000022   0xD102             BNE.N    ??osMessagePeek_2
+   1615              ticks = portMAX_DELAY;
+   \   00000024   0xF05F 0x35FF      MOVS     R5,#-1
+   \   00000028   0xE007             B.N      ??osMessagePeek_3
+   1616            }
+   1617            else if (millisec != 0) {
+   \                     ??osMessagePeek_2:
+   \   0000002A   0x2A00             CMP      R2,#+0
+   \   0000002C   0xD005             BEQ.N    ??osMessagePeek_3
+   1618              ticks = millisec / portTICK_PERIOD_MS;
+   \   0000002E   0x2101             MOVS     R1,#+1
+   \   00000030   0xFBB2 0xF5F1      UDIV     R5,R2,R1
+   1619              if (ticks == 0) {
+   \   00000034   0x2D00             CMP      R5,#+0
+   \   00000036   0xD100             BNE.N    ??osMessagePeek_3
+   1620                ticks = 1;
+   \   00000038   0x2501             MOVS     R5,#+1
+   1621              }
+   1622            }
+   1623            
+   1624            if (xQueuePeek(queue_id, &event.value.v, ticks) == pdTRUE) 
+   \                     ??osMessagePeek_3:
+   \   0000003A   0x2301             MOVS     R3,#+1
+   \   0000003C   0x002A             MOVS     R2,R5
+   \   0000003E   0xA901             ADD      R1,SP,#+4
+   \   00000040   0x.... 0x....      BL       xQueueGenericReceive
+   \   00000044   0x2801             CMP      R0,#+1
+   \   00000046   0xD102             BNE.N    ??osMessagePeek_4
+   1625            {
+   1626              /* We have mail */
+   1627              event.status = osEventMessage;
+   \   00000048   0x2010             MOVS     R0,#+16
+   \   0000004A   0x9000             STR      R0,[SP, #+0]
+   \   0000004C   0xE005             B.N      ??osMessagePeek_5
+   1628            }
+   1629            else 
+   1630            {
+   1631              event.status = (ticks == 0) ? osOK : osEventTimeout;
+   \                     ??osMessagePeek_4:
+   \   0000004E   0x2D00             CMP      R5,#+0
+   \   00000050   0xD101             BNE.N    ??osMessagePeek_6
+   \   00000052   0x2000             MOVS     R0,#+0
+   \   00000054   0xE000             B.N      ??osMessagePeek_7
+   \                     ??osMessagePeek_6:
+   \   00000056   0x2040             MOVS     R0,#+64
+   \                     ??osMessagePeek_7:
+   \   00000058   0x9000             STR      R0,[SP, #+0]
+   1632            }
+   1633            
+   1634            return event;
+   \                     ??osMessagePeek_5:
+   \   0000005A   0xA800             ADD      R0,SP,#+0
+   \   0000005C   0xC80E             LDM      R0!,{R1-R3}
+   \   0000005E   0xC40E             STM      R4!,{R1-R3}
+   \   00000060   0x380C             SUBS     R0,R0,#+12
+   \   00000062   0x3C0C             SUBS     R4,R4,#+12
+   \                     ??osMessagePeek_1:
+   \   00000064   0xBD3E             POP      {R1-R5,PC}       ;; return
+   1635          }
+   1636          
+   1637          /**
+   1638          * @brief  Get the number of messaged stored in a queue.
+   1639          * @param  queue_id  message queue ID obtained with \ref osMessageCreate.
+   1640          * @retval number of messages stored in a queue.
+   1641          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1642          uint32_t osMessageWaiting(osMessageQId queue_id)
+   1643          {
+   \                     osMessageWaiting:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   1644            if (inHandlerMode()) {
+   \   00000004   0x.... 0x....      BL       inHandlerMode
+   \   00000008   0x2800             CMP      R0,#+0
+   \   0000000A   0xD003             BEQ.N    ??osMessageWaiting_0
+   1645              return uxQueueMessagesWaitingFromISR(queue_id);
+   \   0000000C   0x0020             MOVS     R0,R4
+   \   0000000E   0x.... 0x....      BL       uxQueueMessagesWaitingFromISR
+   \   00000012   0xE002             B.N      ??osMessageWaiting_1
+   1646            }
+   1647            else
+   1648            {
+   1649              return uxQueueMessagesWaiting(queue_id);
+   \                     ??osMessageWaiting_0:
+   \   00000014   0x0020             MOVS     R0,R4
+   \   00000016   0x.... 0x....      BL       uxQueueMessagesWaiting
+   \                     ??osMessageWaiting_1:
+   \   0000001A   0xBD10             POP      {R4,PC}          ;; return
+   1650            }
+   1651          }
+   1652          
+   1653          /**
+   1654          * @brief  Get the available space in a message queue.
+   1655          * @param  queue_id  message queue ID obtained with \ref osMessageCreate.
+   1656          * @retval available space in a message queue.
+   1657          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1658          uint32_t osMessageAvailableSpace(osMessageQId queue_id)  
+   1659          {
+   \                     osMessageAvailableSpace:
+   \   00000000   0xB580             PUSH     {R7,LR}
+   1660            return uxQueueSpacesAvailable(queue_id);
+   \   00000002   0x.... 0x....      BL       uxQueueSpacesAvailable
+   \   00000006   0xBD02             POP      {R1,PC}          ;; return
+   1661          }
+   1662          
+   1663          /**
+   1664          * @brief Delete a Message Queue
+   1665          * @param  queue_id  message queue ID obtained with \ref osMessageCreate.
+   1666          * @retval  status code that indicates the execution status of the function.
+   1667          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1668          osStatus osMessageDelete (osMessageQId queue_id)
+   1669          {
+   \                     osMessageDelete:
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   1670            if (inHandlerMode()) {
+   \   00000004   0x.... 0x....      BL       inHandlerMode
+   \   00000008   0x2800             CMP      R0,#+0
+   \   0000000A   0xD001             BEQ.N    ??osMessageDelete_0
+   1671              return osErrorISR;
+   \   0000000C   0x2082             MOVS     R0,#+130
+   \   0000000E   0xE003             B.N      ??osMessageDelete_1
+   1672            }
+   1673          
+   1674            vQueueDelete(queue_id);
+   \                     ??osMessageDelete_0:
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0x.... 0x....      BL       vQueueDelete
+   1675          
+   1676            return osOK; 
+   \   00000016   0x2000             MOVS     R0,#+0
+   \                     ??osMessageDelete_1:
+   \   00000018   0xBD10             POP      {R4,PC}          ;; return
+   1677          }
+   1678          
+   1679          /**
+   1680          * @brief  Create and Initialize a Recursive Mutex
+   1681          * @param  mutex_def     mutex definition referenced with \ref osMutex.
+   1682          * @retval  mutex ID for reference by other functions or NULL in case of error..
+   1683          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1684          osMutexId osRecursiveMutexCreate (const osMutexDef_t *mutex_def)
+   1685          {
+   1686          #if (configUSE_RECURSIVE_MUTEXES == 1)
+   1687          #if( configSUPPORT_STATIC_ALLOCATION == 1 ) && ( configSUPPORT_DYNAMIC_ALLOCATION == 1 )
+   1688          
+   1689            if (mutex_def->controlblock != NULL){
+   1690              return xSemaphoreCreateRecursiveMutexStatic( mutex_def->controlblock );
+   1691            }
+   1692            else {
+   1693              return xSemaphoreCreateRecursiveMutex();
+   1694            }
+   1695          #elif ( configSUPPORT_STATIC_ALLOCATION == 1 )
+   1696            return xSemaphoreCreateRecursiveMutexStatic( mutex_def->controlblock );
+   1697          #else 
+   1698            return xSemaphoreCreateRecursiveMutex();
+   1699          #endif
+   1700          #else
+   1701            return NULL;
+   \                     osRecursiveMutexCreate:
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+   1702          #endif	
+   1703          }
+   1704          
+   1705          /**
+   1706          * @brief  Release a Recursive Mutex
+   1707          * @param   mutex_id      mutex ID obtained by \ref osRecursiveMutexCreate.
+   1708          * @retval  status code that indicates the execution status of the function.
+   1709          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1710          osStatus osRecursiveMutexRelease (osMutexId mutex_id)
+   1711          {
+   1712          #if (configUSE_RECURSIVE_MUTEXES == 1)
+   1713            osStatus result = osOK;
+   1714           
+   1715            if (xSemaphoreGiveRecursive(mutex_id) != pdTRUE) 
+   1716            {
+   1717              result = osErrorOS;
+   1718            }
+   1719            return result;
+   1720          #else
+   1721          	return osErrorResource;
+   \                     osRecursiveMutexRelease:
+   \   00000000   0x2081             MOVS     R0,#+129
+   \   00000002   0x4770             BX       LR               ;; return
+   1722          #endif
+   1723          }
+   1724          
+   1725          /**
+   1726          * @brief  Release a Recursive Mutex
+   1727          * @param   mutex_id    mutex ID obtained by \ref osRecursiveMutexCreate.
+   1728          * @param millisec      timeout value or 0 in case of no time-out.
+   1729          * @retval  status code that indicates the execution status of the function.
+   1730          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1731          osStatus osRecursiveMutexWait (osMutexId mutex_id, uint32_t millisec)
+   1732          {
+   1733          #if (configUSE_RECURSIVE_MUTEXES == 1)
+   1734            TickType_t ticks;
+   1735            
+   1736            if (mutex_id == NULL)
+   1737            {
+   1738              return osErrorParameter;
+   1739            }
+   1740            
+   1741            ticks = 0;
+   1742            if (millisec == osWaitForever) 
+   1743            {
+   1744              ticks = portMAX_DELAY;
+   1745            }
+   1746            else if (millisec != 0) 
+   1747            {
+   1748              ticks = millisec / portTICK_PERIOD_MS;
+   1749              if (ticks == 0) 
+   1750              {
+   1751                ticks = 1;
+   1752              }
+   1753            }
+   1754            
+   1755            if (xSemaphoreTakeRecursive(mutex_id, ticks) != pdTRUE) 
+   1756            {
+   1757              return osErrorOS;
+   1758            }
+   1759            return osOK;
+   1760          #else
+   1761          	return osErrorResource;
+   \                     osRecursiveMutexWait:
+   \   00000000   0x2081             MOVS     R0,#+129
+   \   00000002   0x4770             BX       LR               ;; return
+   1762          #endif
+   1763          }
+   1764          
+   1765          /**
+   1766          * @brief  Returns the current count value of a counting semaphore
+   1767          * @param  semaphore_id  semaphore_id ID obtained by \ref osSemaphoreCreate.
+   1768          * @retval  count value
+   1769          */
+
+   \                                 In section .text, align 2, keep-with-next
+   1770          uint32_t osSemaphoreGetCount(osSemaphoreId semaphore_id)
+   1771          {
+   \                     osSemaphoreGetCount:
+   \   00000000   0xB580             PUSH     {R7,LR}
+   1772            return uxSemaphoreGetCount(semaphore_id);
+   \   00000002   0x.... 0x....      BL       uxQueueMessagesWaiting
+   \   00000006   0xBD02             POP      {R1,PC}          ;; return
+   1773          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10:
+   \   00000000   0xE000ED04         DC32     0xe000ed04
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  inHandlerMode
+        0  makeCmsisPriority
+        0  makeFreeRtosPriority
+        8  memset
+              8 -> __aeabi_memset
+        0  osAbortDelay
+        8  osDelay
+              8 -> vTaskDelay
+        8  osDelayUntil
+              8 -> vTaskDelayUntil
+        8  osKernelRunning
+              8 -> xTaskGetSchedulerState
+        8  osKernelStart
+              8 -> vTaskStartScheduler
+        8  osKernelSysTick
+              8 -> inHandlerMode
+              8 -> xTaskGetTickCount
+              8 -> xTaskGetTickCountFromISR
+        8  osMailAlloc
+              8 -> osPoolAlloc
+        8  osMailCAlloc
+              8 -> osMailAlloc
+        0  osMailCreate
+        8  osMailFree
+              8 -> osPoolFree
+       32  osMailGet
+             32 -> inHandlerMode
+             32 -> xQueueGenericReceive
+             32 -> xQueueReceiveFromISR
+       16  osMailPut
+             16 -> inHandlerMode
+             16 -> xQueueGenericSend
+             16 -> xQueueGenericSendFromISR
+        8  osMessageAvailableSpace
+              8 -> uxQueueSpacesAvailable
+        8  osMessageCreate
+              8 -> xQueueGenericCreateStatic
+        8  osMessageDelete
+              8 -> inHandlerMode
+              8 -> vQueueDelete
+       32  osMessageGet
+             32 -> inHandlerMode
+             32 -> xQueueGenericReceive
+             32 -> xQueueReceiveFromISR
+       24  osMessagePeek
+             24 -> xQueueGenericReceive
+       24  osMessagePut
+             24 -> inHandlerMode
+             24 -> xQueueGenericSend
+             24 -> xQueueGenericSendFromISR
+        8  osMessageWaiting
+              8 -> inHandlerMode
+              8 -> uxQueueMessagesWaiting
+              8 -> uxQueueMessagesWaitingFromISR
+        8  osMutexCreate
+              8 -> xQueueCreateMutexStatic
+        8  osMutexDelete
+              8 -> inHandlerMode
+              8 -> vQueueDelete
+       16  osMutexRelease
+             16 -> inHandlerMode
+             16 -> xQueueGenericSend
+             16 -> xQueueGiveFromISR
+       16  osMutexWait
+             16 -> inHandlerMode
+             16 -> xQueueGenericReceive
+             16 -> xQueueReceiveFromISR
+       16  osPoolAlloc
+             16 -> inHandlerMode
+             16 -> vPortEnterCritical
+             16 -> vPortExitCritical
+        8  osPoolCAlloc
+              8 -> memset
+              8 -> osPoolAlloc
+        0  osPoolCreate
+        0  osPoolFree
+        0  osRecursiveMutexCreate
+        0  osRecursiveMutexRelease
+        0  osRecursiveMutexWait
+        8  osSemaphoreCreate
+              8 -> xQueueGenericCreateStatic
+        8  osSemaphoreDelete
+              8 -> inHandlerMode
+              8 -> vQueueDelete
+        8  osSemaphoreGetCount
+              8 -> uxQueueMessagesWaiting
+       16  osSemaphoreRelease
+             16 -> inHandlerMode
+             16 -> xQueueGenericSend
+             16 -> xQueueGiveFromISR
+       16  osSemaphoreWait
+             16 -> inHandlerMode
+             16 -> xQueueGenericReceive
+             16 -> xQueueReceiveFromISR
+       24  osSignalSet
+             24 -> inHandlerMode
+             24 -> xTaskGenericNotify
+             24 -> xTaskGenericNotifyFromISR
+       32  osSignalWait
+             32 -> inHandlerMode
+             32 -> xTaskNotifyWait
+        8  osSystickHandler
+              8 -> xPortSysTickHandler
+              8 -> xTaskGetSchedulerState
+       24  osThreadCreate
+             24 -> makeFreeRtosPriority
+             24 -> xTaskCreateStatic
+        8  osThreadGetId
+              8 -> xTaskGetCurrentTaskHandle
+        8  osThreadGetPriority
+              8 -> inHandlerMode
+              8 -> makeCmsisPriority
+              8 -> uxTaskPriorityGet
+              8 -> uxTaskPriorityGetFromISR
+        0  osThreadList
+        8  osThreadResume
+              8 -> inHandlerMode
+              8 -> vTaskResume
+              8 -> xTaskResumeFromISR
+        8  osThreadResumeAll
+              8 -> xTaskResumeAll
+        8  osThreadSetPriority
+              8 -> makeFreeRtosPriority
+              8 -> vTaskPrioritySet
+        8  osThreadSuspend
+              8 -> vTaskSuspend
+        8  osThreadSuspendAll
+              8 -> vTaskSuspendAll
+        0  osThreadTerminate
+        0  osThreadYield
+        0  osTimerCreate
+        0  osTimerDelete
+        0  osTimerStart
+        0  osTimerStop
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable10
+      18  inHandlerMode
+      14  makeCmsisPriority
+      18  makeFreeRtosPriority
+      20  memset
+       4  osAbortDelay
+      22  osDelay
+      22  osDelayUntil
+      18  osKernelRunning
+      10  osKernelStart
+      22  osKernelSysTick
+      18  osMailAlloc
+      34  osMailCAlloc
+       4  osMailCreate
+      18  osMailFree
+     166  osMailGet
+      90  osMailPut
+       8  osMessageAvailableSpace
+      20  osMessageCreate
+      26  osMessageDelete
+     170  osMessageGet
+     102  osMessagePeek
+      96  osMessagePut
+      28  osMessageWaiting
+      12  osMutexCreate
+      26  osMutexDelete
+      82  osMutexRelease
+     120  osMutexWait
+     110  osPoolAlloc
+      26  osPoolCAlloc
+       4  osPoolCreate
+      74  osPoolFree
+       4  osRecursiveMutexCreate
+       4  osRecursiveMutexRelease
+       4  osRecursiveMutexWait
+      28  osSemaphoreCreate
+      26  osSemaphoreDelete
+       8  osSemaphoreGetCount
+      82  osSemaphoreRelease
+     120  osSemaphoreWait
+      98  osSignalSet
+     118  osSignalWait
+      16  osSystickHandler
+      38  osThreadCreate
+       8  osThreadGetId
+      36  osThreadGetPriority
+       4  osThreadList
+      50  osThreadResume
+      18  osThreadResumeAll
+      24  osThreadSetPriority
+      10  osThreadSuspend
+      10  osThreadSuspendAll
+       4  osThreadTerminate
+      22  osThreadYield
+       4  osTimerCreate
+       8  osTimerDelete
+       8  osTimerStart
+       8  osTimerStop
+
+ 
+ 2 166 bytes in section .text
+ 
+ 2 146 bytes of CODE memory (+ 20 bytes shared)
+
+Errors: none
+Warnings: 1

@@ -1,0 +1,265 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  03:21:40 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\FreeModbus\modb #
+#                    us\functions\mbfuncinput.c                               #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\FreeModbus\mod #
+#                    bus\functions\mbfuncinput.c" -D USE_FULL_LL_DRIVER -D    #
+#                    USE_HAL_DRIVER -D STM32F103xB -lC "D:\projects\задания   #
+#                    от работодателя\ЭМИС\EWARM\mb_v1.0/List\" -o             #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    Obj\" --no_cse --no_unroll --no_inline --no_code_motion  #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files\IAR Systems\Embedded     #
+#                    Workbench 6.0\arm\INC\c\DLib_Config_Full.h" -I           #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\mbfuncinput.lst                                      #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\mbfuncinput.o                                         #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\FreeModbus\modbus\functions\mbfuncinput.c
+      1          /* 
+      2           * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
+      3           * Copyright (c) 2006 Christian Walter <wolti@sil.at>
+      4           * All rights reserved.
+      5           *
+      6           * Redistribution and use in source and binary forms, with or without
+      7           * modification, are permitted provided that the following conditions
+      8           * are met:
+      9           * 1. Redistributions of source code must retain the above copyright
+     10           *    notice, this list of conditions and the following disclaimer.
+     11           * 2. Redistributions in binary form must reproduce the above copyright
+     12           *    notice, this list of conditions and the following disclaimer in the
+     13           *    documentation and/or other materials provided with the distribution.
+     14           * 3. The name of the author may not be used to endorse or promote products
+     15           *    derived from this software without specific prior written permission.
+     16           *
+     17           * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+     18           * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+     19           * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+     20           * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+     21           * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+     22           * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+     23           * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+     24           * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+     25           * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+     26           * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     27           *
+     28           * File: $Id: mbfuncinput.c,v 1.10 2007/09/12 10:15:56 wolti Exp $
+     29           */
+     30          
+     31          /* ----------------------- System includes ----------------------------------*/
+     32          #include "stdlib.h"
+     33          #include "string.h"
+     34          
+     35          /* ----------------------- Platform includes --------------------------------*/
+     36          #include "port.h"
+     37          
+     38          /* ----------------------- Modbus includes ----------------------------------*/
+     39          #include "mb.h"
+     40          #include "mbframe.h"
+     41          #include "mbproto.h"
+     42          #include "mbconfig.h"
+     43          
+     44          /* ----------------------- Defines ------------------------------------------*/
+     45          #define MB_PDU_FUNC_READ_ADDR_OFF           ( MB_PDU_DATA_OFF )
+     46          #define MB_PDU_FUNC_READ_REGCNT_OFF         ( MB_PDU_DATA_OFF + 2 )
+     47          #define MB_PDU_FUNC_READ_SIZE               ( 4 )
+     48          #define MB_PDU_FUNC_READ_REGCNT_MAX         ( 0x007D )
+     49          
+     50          #define MB_PDU_FUNC_READ_RSP_BYTECNT_OFF    ( MB_PDU_DATA_OFF )
+     51          
+     52          /* ----------------------- Static functions ---------------------------------*/
+     53          eMBException    prveMBError2Exception( eMBErrorCode eErrorCode );
+     54          
+     55          /* ----------------------- Start implementation -----------------------------*/
+     56          #if MB_FUNC_READ_INPUT_ENABLED > 0
+     57          
+
+   \                                 In section .text, align 2, keep-with-next
+     58          eMBException
+     59          eMBFuncReadInputRegister( UCHAR * pucFrame, USHORT * usLen )
+     60          {
+   \                     eMBFuncReadInputRegister:
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+   \   00000002   0x000C             MOVS     R4,R1
+     61              USHORT          usRegAddress;
+     62              USHORT          usRegCount;
+     63              UCHAR          *pucFrameCur;
+     64          
+     65              eMBException    eStatus = MB_EX_NONE;
+   \   00000004   0x2500             MOVS     R5,#+0
+     66              eMBErrorCode    eRegStatus;
+     67          
+     68              if( *usLen == ( MB_PDU_FUNC_READ_SIZE + MB_PDU_SIZE_MIN ) )
+   \   00000006   0x8821             LDRH     R1,[R4, #+0]
+   \   00000008   0x2905             CMP      R1,#+5
+   \   0000000A   0xD131             BNE.N    ??eMBFuncReadInputRegister_0
+     69              {
+     70                  usRegAddress = ( USHORT )( pucFrame[MB_PDU_FUNC_READ_ADDR_OFF] << 8 );
+   \   0000000C   0x7841             LDRB     R1,[R0, #+1]
+   \   0000000E   0x0209             LSLS     R1,R1,#+8
+     71                  usRegAddress |= ( USHORT )( pucFrame[MB_PDU_FUNC_READ_ADDR_OFF + 1] );
+   \   00000010   0x7882             LDRB     R2,[R0, #+2]
+   \   00000012   0x4311             ORRS     R1,R2,R1
+     72                  usRegAddress++;
+   \   00000014   0x1C49             ADDS     R1,R1,#+1
+     73          
+     74                  usRegCount = ( USHORT )( pucFrame[MB_PDU_FUNC_READ_REGCNT_OFF] << 8 );
+   \   00000016   0x78C2             LDRB     R2,[R0, #+3]
+   \   00000018   0x0216             LSLS     R6,R2,#+8
+     75                  usRegCount |= ( USHORT )( pucFrame[MB_PDU_FUNC_READ_REGCNT_OFF + 1] );
+   \   0000001A   0x7902             LDRB     R2,[R0, #+4]
+   \   0000001C   0x4316             ORRS     R6,R2,R6
+     76          
+     77                  /* Check if the number of registers to read is valid. If not
+     78                   * return Modbus illegal data value exception. 
+     79                   */
+     80                  if( ( usRegCount >= 1 )
+     81                      && ( usRegCount < MB_PDU_FUNC_READ_REGCNT_MAX ) )
+   \   0000001E   0x1E72             SUBS     R2,R6,#+1
+   \   00000020   0xB292             UXTH     R2,R2            ;; ZeroExt  R2,R2,#+16,#+16
+   \   00000022   0x2A7C             CMP      R2,#+124
+   \   00000024   0xD222             BCS.N    ??eMBFuncReadInputRegister_1
+     82                  {
+     83                      /* Set the current PDU data pointer to the beginning. */
+     84                      pucFrameCur = &pucFrame[MB_PDU_FUNC_OFF];
+     85                      *usLen = MB_PDU_FUNC_OFF;
+   \   00000026   0x2200             MOVS     R2,#+0
+   \   00000028   0x8022             STRH     R2,[R4, #+0]
+     86          
+     87                      /* First byte contains the function code. */
+     88                      *pucFrameCur++ = MB_FUNC_READ_INPUT_REGISTER;
+   \   0000002A   0x2204             MOVS     R2,#+4
+   \   0000002C   0x7002             STRB     R2,[R0, #+0]
+   \   0000002E   0x1C40             ADDS     R0,R0,#+1
+     89                      *usLen += 1;
+   \   00000030   0x8822             LDRH     R2,[R4, #+0]
+   \   00000032   0x1C52             ADDS     R2,R2,#+1
+   \   00000034   0x8022             STRH     R2,[R4, #+0]
+     90          
+     91                      /* Second byte in the response contain the number of bytes. */
+     92                      *pucFrameCur++ = ( UCHAR )( usRegCount * 2 );
+   \   00000036   0x0032             MOVS     R2,R6
+   \   00000038   0xB2D2             UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+   \   0000003A   0x0052             LSLS     R2,R2,#+1
+   \   0000003C   0x7002             STRB     R2,[R0, #+0]
+   \   0000003E   0x1C40             ADDS     R0,R0,#+1
+     93                      *usLen += 1;
+   \   00000040   0x8822             LDRH     R2,[R4, #+0]
+   \   00000042   0x1C52             ADDS     R2,R2,#+1
+   \   00000044   0x8022             STRH     R2,[R4, #+0]
+     94          
+     95                      eRegStatus =
+     96                          eMBRegInputCB( pucFrameCur, usRegAddress, usRegCount );
+   \   00000046   0x0032             MOVS     R2,R6
+   \   00000048   0xB292             UXTH     R2,R2            ;; ZeroExt  R2,R2,#+16,#+16
+   \   0000004A   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
+   \   0000004C   0x.... 0x....      BL       eMBRegInputCB
+     97          
+     98                      /* If an error occured convert it into a Modbus exception. */
+     99                      if( eRegStatus != MB_ENOERR )
+   \   00000050   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000052   0x2800             CMP      R0,#+0
+   \   00000054   0xD004             BEQ.N    ??eMBFuncReadInputRegister_2
+    100                      {
+    101                          eStatus = prveMBError2Exception( eRegStatus );
+   \   00000056   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000058   0x.... 0x....      BL       prveMBError2Exception
+   \   0000005C   0x0005             MOVS     R5,R0
+   \   0000005E   0xE008             B.N      ??eMBFuncReadInputRegister_3
+    102                      }
+    103                      else
+    104                      {
+    105                          *usLen += usRegCount * 2;
+   \                     ??eMBFuncReadInputRegister_2:
+   \   00000060   0x8820             LDRH     R0,[R4, #+0]
+   \   00000062   0xB2B6             UXTH     R6,R6            ;; ZeroExt  R6,R6,#+16,#+16
+   \   00000064   0xEB10 0x0046      ADDS     R0,R0,R6, LSL #+1
+   \   00000068   0x8020             STRH     R0,[R4, #+0]
+   \   0000006A   0xE002             B.N      ??eMBFuncReadInputRegister_3
+    106                      }
+    107                  }
+    108                  else
+    109                  {
+    110                      eStatus = MB_EX_ILLEGAL_DATA_VALUE;
+   \                     ??eMBFuncReadInputRegister_1:
+   \   0000006C   0x2503             MOVS     R5,#+3
+   \   0000006E   0xE000             B.N      ??eMBFuncReadInputRegister_3
+    111                  }
+    112              }
+    113              else
+    114              {
+    115                  /* Can't be a valid read input register request because the length
+    116                   * is incorrect. */
+    117                  eStatus = MB_EX_ILLEGAL_DATA_VALUE;
+   \                     ??eMBFuncReadInputRegister_0:
+   \   00000070   0x2503             MOVS     R5,#+3
+    118              }
+    119              return eStatus;
+   \                     ??eMBFuncReadInputRegister_3:
+   \   00000072   0x0028             MOVS     R0,R5
+   \   00000074   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000076   0xBD70             POP      {R4-R6,PC}       ;; return
+    120          }
+    121          
+    122          #endif
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       16  eMBFuncReadInputRegister
+             16 -> eMBRegInputCB
+             16 -> prveMBError2Exception
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+     120  eMBFuncReadInputRegister
+
+ 
+ 120 bytes in section .text
+ 
+ 120 bytes of CODE memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,44 @@
+#ifndef __hw_config_H
+#define __hw_config_H
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
+#include "FreeRTOS.h"
+#include "task.h"
+#include "cmsis_os.h"   
+   
+#define TRUE                     1
+#define FALSE                    0
+   
+#define DEBUG                
+   
+#define usedADC                       ADC1   // used ADC
+#define mbTimer                       TIM1   // MODBUS delay timer
+#define adcTimer                      TIM3   // ADC sampling rate Timer
+#define mbUART                        USART1 // MODBUS UART
+   
+#define flPageSize                    1024
+#define flMemBaseAddress              0x08000000
+#define flLastPageAddress             flMemBaseAddress + (64*flPageSize) 
+              
+#define mbHoldingReg1HIGH             flMemBaseAddress + (62*flPageSize)   //62 page 
+#define mbHoldingReg1LOW              flMemBaseAddress + (62*flPageSize)+ 2   
+#define mbHoldingReg2HIGH             flMemBaseAddress + (61*flPageSize)   //61 page
+#define mbHoldingReg2LOW             flMemBaseAddress + (61*flPageSize)+ 2   
+#define flReservPage                  flMemBaseAddress + (60*flPageSize)   //60 page 
+   
+#define mbBaudRate                    9600//115200
+#define mbUART_RX_BUFFER_SIZE         256
+#define mbUART_RX_BUFFER_SIZE_MASK    ((mbUART_RX_BUFFER_SIZE) - 1)
+   
+#define TEST_Pin LL_GPIO_PIN_7
+#define TEST_GPIO_Port GPIOB
+   
+#define ENTER_CRITICAL_SECTION()      taskENTER_CRITICAL() 
+#define EXIT_CRITICAL_SECTION()       taskEXIT_CRITICAL()
+
+#ifdef __cplusplus
+}
+#endif
+#endif /*__hw_config_H */

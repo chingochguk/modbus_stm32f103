@@ -1,0 +1,254 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.30.1.53127/W32 for ARM     27/Aug/2018  06:15:49 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  D:\projects\задания от работодателя\ЭМИС\Src\gpio.c      #
+#    Command line =  "D:\projects\задания от работодателя\ЭМИС\Src\gpio.c"    #
+#                    -D USE_FULL_LL_DRIVER -D USE_HAL_DRIVER -D STM32F103xB   #
+#                    -lC "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM\mb_v1.0/List\" -o                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/ #
+#                    Obj\" --no_cse --no_unroll --no_inline --no_code_motion  #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files\IAR Systems\Embedded     #
+#                    Workbench 6.0\arm\INC\c\DLib_Config_Full.h" -I           #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Inc\" #
+#                     -I "D:\projects\задания от                              #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc\" -I "D:\projects\задания от                         #
+#                    работодателя\ЭМИС\EWARM/../Drivers/STM32F1xx_HAL_Driver/ #
+#                    Inc/Legacy\" -I "D:\projects\задания от                  #
+#                    работодателя\ЭМИС\EWARM/../Middlewares/Third_Party/FreeR #
+#                    TOS/Source/portable/IAR/ARM_CM3\" -I                     #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Device/ST/STM32F1xx/Include\" -I                #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/include\" -I          #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Middl #
+#                    ewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\" -I       #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../Drive #
+#                    rs/CMSIS/Include\" -I "D:\projects\задания от            #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus\" -I               #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus\" -I "D:\projects\задания от                #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/rtu\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/ascii\" -I "D:\projects\задания от          #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/tcp\" -I    #
+#                    "D:\projects\задания от работодателя\ЭМИС\EWARM/../FreeM #
+#                    odbus/modbus/functions\" -I "D:\projects\задания от      #
+#                    работодателя\ЭМИС\EWARM/../FreeModbus/modbus/include\"   #
+#                    -I "D:\projects\задания от работодателя\ЭМИС\EWARM/../Fr #
+#                    eeModbus/port\" -Ol                                      #
+#    List file    =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/L #
+#                    ist\gpio.lst                                             #
+#    Object file  =  D:\projects\задания от работодателя\ЭМИС\EWARM\mb_v1.0/O #
+#                    bj\gpio.o                                                #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\projects\задания от работодателя\ЭМИС\Src\gpio.c
+      1          /**
+      2            ******************************************************************************
+      3            * File Name          : gpio.c
+      4            * Description        : This file provides code for the configuration
+      5            *                      of all used GPIO pins.
+      6            ******************************************************************************
+      7            * This notice applies to any and all portions of this file
+      8            * that are not between comment pairs USER CODE BEGIN and
+      9            * USER CODE END. Other portions of this file, whether 
+     10            * inserted by the user or by software development tools
+     11            * are owned by their respective copyright owners.
+     12            *
+     13            * Copyright (c) 2018 STMicroelectronics International N.V. 
+     14            * All rights reserved.
+     15            *
+     16            * Redistribution and use in source and binary forms, with or without 
+     17            * modification, are permitted, provided that the following conditions are met:
+     18            *
+     19            * 1. Redistribution of source code must retain the above copyright notice, 
+     20            *    this list of conditions and the following disclaimer.
+     21            * 2. Redistributions in binary form must reproduce the above copyright notice,
+     22            *    this list of conditions and the following disclaimer in the documentation
+     23            *    and/or other materials provided with the distribution.
+     24            * 3. Neither the name of STMicroelectronics nor the names of other 
+     25            *    contributors to this software may be used to endorse or promote products 
+     26            *    derived from this software without specific written permission.
+     27            * 4. This software, including modifications and/or derivative works of this 
+     28            *    software, must execute solely and exclusively on microcontroller or
+     29            *    microprocessor devices manufactured by or for STMicroelectronics.
+     30            * 5. Redistribution and use of this software other than as permitted under 
+     31            *    this license is void and will automatically terminate your rights under 
+     32            *    this license. 
+     33            *
+     34            * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+     35            * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+     36            * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+     37            * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+     38            * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+     39            * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+     40            * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+     41            * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+     42            * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+     43            * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+     44            * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+     45            * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     46            *
+     47            ******************************************************************************
+     48            */
+     49          
+     50          /* Includes ------------------------------------------------------------------*/
+     51          #include "gpio.h"
+
+  /**
+    ^
+"D:\projects\задания от работодателя\ЭМИС\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h",1  Warning[Pa050]: 
+          non-native end of line sequence detected (this diagnostic is only
+          issued once)
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_APB2_GRP1_EnableClock(uint32_t)
+   \                     LL_APB2_GRP1_EnableClock:
+   \   00000000   0xB081             SUB      SP,SP,#+4
+   \   00000002   0x....             LDR.N    R1,??DataTable1  ;; 0x40021018
+   \   00000004   0x6809             LDR      R1,[R1, #+0]
+   \   00000006   0x4301             ORRS     R1,R0,R1
+   \   00000008   0x....             LDR.N    R2,??DataTable1  ;; 0x40021018
+   \   0000000A   0x6011             STR      R1,[R2, #+0]
+   \   0000000C   0x....             LDR.N    R1,??DataTable1  ;; 0x40021018
+   \   0000000E   0x6809             LDR      R1,[R1, #+0]
+   \   00000010   0x4008             ANDS     R0,R0,R1
+   \   00000012   0x9000             STR      R0,[SP, #+0]
+   \   00000014   0x9800             LDR      R0,[SP, #+0]
+   \   00000016   0xB001             ADD      SP,SP,#+4
+   \   00000018   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void LL_GPIO_ResetOutputPin(GPIO_TypeDef *, uint32_t)
+   \                     LL_GPIO_ResetOutputPin:
+   \   00000000   0xF3C1 0x210F      UBFX     R1,R1,#+8,#+16
+   \   00000004   0x6141             STR      R1,[R0, #+20]
+   \   00000006   0x4770             BX       LR               ;; return
+     52          /* USER CODE BEGIN 0 */
+     53          
+     54          /* USER CODE END 0 */
+     55          
+     56          /*----------------------------------------------------------------------------*/
+     57          /* Configure GPIO                                                             */
+     58          /*----------------------------------------------------------------------------*/
+     59          /* USER CODE BEGIN 1 */
+     60          
+     61          /* USER CODE END 1 */
+     62          
+     63          /** Configure pins as 
+     64                  * Analog 
+     65                  * Input 
+     66                  * Output
+     67                  * EVENT_OUT
+     68                  * EXTI
+     69          */
+
+   \                                 In section .text, align 2, keep-with-next
+     70          void MX_GPIO_Init(void)
+     71          {
+   \                     MX_GPIO_Init:
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB085             SUB      SP,SP,#+20
+     72          
+     73            LL_GPIO_InitTypeDef GPIO_InitStruct;
+     74          
+     75            /* GPIO Ports Clock Enable */
+     76            LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOD);
+   \   00000004   0x2020             MOVS     R0,#+32
+   \   00000006   0x.... 0x....      BL       LL_APB2_GRP1_EnableClock
+     77            LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA);
+   \   0000000A   0x2004             MOVS     R0,#+4
+   \   0000000C   0x.... 0x....      BL       LL_APB2_GRP1_EnableClock
+     78            LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOB);
+   \   00000010   0x2008             MOVS     R0,#+8
+   \   00000012   0x.... 0x....      BL       LL_APB2_GRP1_EnableClock
+     79          
+     80            /**/
+     81            LL_GPIO_ResetOutputPin(TEST_GPIO_Port, TEST_Pin);
+   \   00000016   0xF248 0x0180      MOVW     R1,#+32896
+   \   0000001A   0x....             LDR.N    R0,??DataTable1_1  ;; 0x40010c00
+   \   0000001C   0x.... 0x....      BL       LL_GPIO_ResetOutputPin
+     82          
+     83            /**/
+     84            GPIO_InitStruct.Pin = TEST_Pin;
+   \   00000020   0xF248 0x0080      MOVW     R0,#+32896
+   \   00000024   0x9000             STR      R0,[SP, #+0]
+     85            GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
+   \   00000026   0x2001             MOVS     R0,#+1
+   \   00000028   0x9001             STR      R0,[SP, #+4]
+     86            GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
+   \   0000002A   0x2002             MOVS     R0,#+2
+   \   0000002C   0x9002             STR      R0,[SP, #+8]
+     87            GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+   \   0000002E   0x2000             MOVS     R0,#+0
+   \   00000030   0x9003             STR      R0,[SP, #+12]
+     88            LL_GPIO_Init(TEST_GPIO_Port, &GPIO_InitStruct);
+   \   00000032   0xA900             ADD      R1,SP,#+0
+   \   00000034   0x....             LDR.N    R0,??DataTable1_1  ;; 0x40010c00
+   \   00000036   0x.... 0x....      BL       LL_GPIO_Init
+     89          
+     90          }
+   \   0000003A   0xB005             ADD      SP,SP,#+20
+   \   0000003C   0xBD00             POP      {PC}             ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1:
+   \   00000000   0x40021018         DC32     0x40021018
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_1:
+   \   00000000   0x40010C00         DC32     0x40010c00
+     91          
+     92          /* USER CODE BEGIN 2 */
+     93          
+     94          /* USER CODE END 2 */
+     95          
+     96          /**
+     97            * @}
+     98            */
+     99          
+    100          /**
+    101            * @}
+    102            */
+    103          
+    104          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        4  LL_APB2_GRP1_EnableClock
+        0  LL_GPIO_ResetOutputPin
+       24  MX_GPIO_Init
+             24 -> LL_APB2_GRP1_EnableClock
+             24 -> LL_GPIO_Init
+             24 -> LL_GPIO_ResetOutputPin
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable1
+       4  ??DataTable1_1
+      26  LL_APB2_GRP1_EnableClock
+       8  LL_GPIO_ResetOutputPin
+      62  MX_GPIO_Init
+
+ 
+ 104 bytes in section .text
+ 
+ 104 bytes of CODE memory
+
+Errors: none
+Warnings: 1
